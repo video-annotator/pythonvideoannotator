@@ -6,7 +6,7 @@ The software is a standalone application written in python, which intend to prov
 
 It was initially developed in collaboration with the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) to correct the result of a Computer Vision software to track flies in an arena.
 
-Later was modified to become more generic.
+Later was modified to become more generic, and extensible.
 
 ### Developers
 
@@ -23,14 +23,10 @@ The application was developed and tested with Ubuntu 12.04 and 14.
 ### Dependencies
 
 * Python 2.7
-* PyQt4
-	```sudo apt-get install pyqt4-dev-tools python-qt4 python-qt4-gl```
-* Numpy
-	```sudo apt-get install python-numpy```
-* PyOpenGL
-	```sudo pip install pyopengl```
-* Python OpenCV
-	```sudo apt-get install python-opencv```
+* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4 python-qt4-gl```
+* Numpy: ```sudo apt-get install python-numpy```
+* PyOpenGL: ```sudo pip install pyopengl```
+* Python OpenCV: ```sudo apt-get install python-opencv```
 
 ### Running
 

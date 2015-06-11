@@ -32,7 +32,7 @@ class ControlEventTimeline(ControlBase):
         self.addPopupMenuOption("-")
         self.addPopupSubMenuOption("Import/Export", {'Export to CSV': self.__export, 'Import to CSV': self.__import })
         self.addPopupMenuOption("-")
-        self.addPopupSubMenuOption("Clean", {'Current line': self.__cleanLine, 'Everything': self.__clean })
+        self.addPopupSubMenuOption("Clean", {'Current line': self.__cleanLine, 'Everything': self.__clean, 'Charts': self.__cleanCharts })
 
     def initControl(self):
         self._form = QtGui.QWidget()
@@ -50,6 +50,7 @@ class ControlEventTimeline(ControlBase):
 
         # The timeline widget
         widget = TimelineWidget()
+        widget._scroll = scrollarea
         # widget.setMinimumHeight(54)
         scrollarea.setWidget(widget)
 
@@ -257,6 +258,13 @@ class ControlEventTimeline(ControlBase):
             "Are you sure you want to clean all the events?", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes: self._time.cleanLine()
+
+    def __cleanCharts(self):
+        reply = QtGui.QMessageBox.question(self._form, 'Confirm',
+            "Are you sure you want to clean all the charts?", QtGui.QMessageBox.Yes |
+            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes: self._time.cleanCharts()
+
 
     def __clean(self):
         reply = QtGui.QMessageBox.question(self._form, 'Confirm',

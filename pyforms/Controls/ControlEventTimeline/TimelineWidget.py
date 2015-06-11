@@ -2,6 +2,7 @@ from PyQt4 import QtGui, QtCore
 
 from TimelinePointer import TimelinePointer
 from TimelineDelta import TimelineDelta
+from TimelineChart import TimelineChart
 
 
 class TimelineWidget(QtGui.QWidget):
@@ -13,6 +14,7 @@ class TimelineWidget(QtGui.QWidget):
 
     def __init__(self, *args, **kwargs):
         super(TimelineWidget, self).__init__(*args, **kwargs)
+
         # self.setFocusPolicy(QtCore.Qt.StrongFocus)
         #self.grabKeyboard()
         self.setMouseTracking(True)
@@ -24,11 +26,14 @@ class TimelineWidget(QtGui.QWidget):
         palette.setColor(self.backgroundRole(), QtCore.Qt.white)
         self.setPalette(palette)
 
+        self._chartsColors = [ 
+            QtGui.QColor(255,0,0), QtGui.QColor(0,255,0), 
+            QtGui.QColor(0,0,255), QtGui.QColor(255,255,0), 
+            QtGui.QColor(255,0,255), QtGui.QColor(0,255,255)
+        ]
+        self._charts = []
         self._data = []
-        self._graphData = []
-        self._graphMax = None
-        self._graphMin = None
-
+        
         self._scale = 1.0
         self._lastMouseY = None
 
@@ -66,6 +71,10 @@ class TimelineWidget(QtGui.QWidget):
     #### HELPERS/FUNCTIONS ###############################################################
     ######################################################################################
 
+    def x2frame(self, x): return int(x/self._scale)
+
+    def frame2x(self, frame): return int(frame*self._scale)
+
     def removeSelected(self):
         if self._selected != None and not self._selected.lock:
             self._data.remove(self._selected)
@@ -89,40 +98,43 @@ class TimelineWidget(QtGui.QWidget):
             if col.collide(x, y): return col
         return None
 
-    def __drawTrackLines(self, painter):
+    def __drawTrackLines(self, painter, start, end):
+        #Draw only from pixel start to end
         painter.setPen(QtCore.Qt.DashLine)
-        # painter.setPen(QtCore.Qt.white)
         painter.setOpacity(0.3)
-        #Draw lines
-        for track in range(0,self.numberoftracks+1): y = (track*34)+18; painter.drawLine( 0, y, self.width(), y )
-        #Draw scale values
-        for x in range(0, self.width(), 100):
+        #Draw horizontal lines
+        for track in range(0,self.numberoftracks+1): y = (track*34)+18; painter.drawLine( start, y, end, y )
+        
+        #Draw vertical lines
+        for x in range(start - (start % 100), end, 100):
             painter.drawLine( x, 20, x, self.height() ); string = "%d" % ( x/self._scale );
             boundtext = painter.boundingRect( QtCore.QRectF(), string )
             painter.drawText( x-boundtext.width()/2, 15, string )
         painter.setOpacity(1.0)
 
+
     def __drawTrackLabels(self, painter):
         painter.setPen(QtCore.Qt.black)
         painter.setOpacity(0.5)
-        for key, value in self._tracks_info.items():
 
-            text = value[0]
-            x0 = self.visibleRegion().boundingRect().x()
-            xmax = self.visibleRegion().boundingRect().width()
+        for key, value in self._tracks_info.items():
+            text    = value[0]
+            x0      = self.visibleRegion().boundingRect().x()
+            xmax    = self.visibleRegion().boundingRect().width()
             text_length = painter.fontMetrics().width(text)
-            x = 10 #x0 + (xmax - text_length) - 30
-            y = (key * 34) + 30
+            x       = 10
+            y       = (key * 34) + 30
             painter.drawText(x, y, text)
             #self.update()
         painter.setOpacity(1.0)
 
-    def importchart_csv(self, csvfileobject):
-        del self._graphData[:]
 
-        self._graphMax = None
-        self._graphMin = None
-        for row in csvfileobject: self._graphData.append(map(float, row))
+
+
+    def importchart_csv(self, csvfileobject):
+        chart = TimelineChart(self, csvfileobject, color=self._chartsColors[len(self._charts)])
+        self._charts.append(chart)
+        
 
     def import_csv(self, csvfileobject):
         """
@@ -247,8 +259,13 @@ class TimelineWidget(QtGui.QWidget):
     #         self._data.append(time)
     #         self._update_tracks_info()
 
+    def cleanCharts(self):
+        self._charts=[]
+        self.repaint()
+
     def clean(self):
         self._data=[]
+        self._charts=[]
         self._selected=None
         self._n_tracks=1
         self._update_tracks_info()
@@ -362,42 +379,22 @@ class TimelineWidget(QtGui.QWidget):
         painter.setRenderHint(QtGui.QPainter.Antialiasing)
         painter.setFont(QtGui.QFont('Decorative', 8))
 
-        if self._graphMin==None and len(self._graphData)>0:
-            self._graphData = sorted(self._graphData)
-            self._graphMin, self._graphMax = self._graphData[0][1], self._graphData[-1][1]
+        start   = self._scroll.horizontalScrollBar().sliderPosition()
+        end     = start + self.parent().width() + 50
 
-        if self._graphMin!=None:
-            painter.setPen(QtGui.QColor(255, 0, 0))
-            painter.setOpacity(0.5)
-            height = self.height()
-            maxHeight = height//2
-            for (x,y), (xx,yy) in zip(self._graphData[1:], self._graphData):
-                if x!=None: 
-                    y  = (y*maxHeight)//self._graphMax
-                    yy = (yy*maxHeight)//self._graphMax
-                    painter.drawLine(xx * self._scale, height-yy, x * self._scale, height-y );
-            painter.setOpacity(1.0)
-        
-        self.__drawTrackLines(painter)
-        painter.setPen(QtGui.QColor(255, 255, 255))
+        #Draw graphs #####################################################################
+        if len(self._charts)>0: 
+            painter.setPen(QtCore.Qt.black)
+            middle = self.height()//2
+            painter.setOpacity(0.1)
+            painter.drawLine(start, middle, end, middle)
 
+        for chart in self._charts:  chart.draw(painter, start, end, 0, self.height())
+        #End draw graph ##################################################################
 
+        self.__drawTrackLines(painter, start, end)
         # Draw track labels
         self.__drawTrackLabels(painter)
-
-        # Draw track selected indicator
-        """
-        if self._creating_event:
-            track_indicator_color = QtGui.QColor(255, 0, 0)
-        else:
-            track_indicator_color = QtGui.QColor(0, 255, 0)
-        painter.setPen(track_indicator_color)
-        painter.setBrush(track_indicator_color)
-        x0 = self.visibleRegion().boundingRect().x()
-        xmax = self.visibleRegion().boundingRect().width()
-        x = x0 + xmax - 10
-        y = (self._selected_track * 34) + 30
-        painter.drawEllipse(QtCore.QPoint(x, y), 3, 3)"""
 
         # Draw delta bars
         for time in self._data:
@@ -617,9 +614,25 @@ class TimelineWidget(QtGui.QWidget):
     ######################################################################################
 
     @property
+    def scroll(self): return self._scroll.horizontalScrollBar()
+
+    @property
     def position(self): return self._pointer._position
     @position.setter
-    def position(self, value): self._pointer._position = value; self.repaint()
+    def position(self, value): 
+        self._pointer._position = value;
+        #################################################################################
+        #Check if the player position is inside the scroll
+        #if is not in, update the scroll position
+        playerPos   = self.frame2x(value)
+        scrollLimit = self._scroll.horizontalScrollBar().sliderPosition()+self.parent().width()-50
+        if playerPos>scrollLimit:
+            newPos = playerPos - self.parent().width() + 50
+            self._scroll.horizontalScrollBar().setSliderPosition(newPos)
+        #################################################################################
+        self.repaint()
+
+        
 
     @property
     def scale(self): return self._scale
@@ -643,23 +656,9 @@ class TimelineWidget(QtGui.QWidget):
 
     # Video playback properties
     @property
-    def isPlaying(self):
-        return self._video_playing
+    def isPlaying(self): return self._video_playing
 
     @property
-    def fps(self):
-        return self._video_fps
+    def fps(self): return self._video_fps
     @fps.setter
-    def fps(self, value):
-        self._video_fps = value
-
-
-
-
-
-
-
-
-
-
-
+    def fps(self, value): self._video_fps = value

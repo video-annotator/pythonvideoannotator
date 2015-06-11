@@ -50,6 +50,13 @@ class VideoAnnotationEditor(BaseWidget):
 
         # Experiment related information
 
+        
+        #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.04.21_12.51/2013 04 21 12 51_Entrada (1).MP4'
+        #with open('/home/ricardo/Downloads/velocities.csv', 'rb') as csvfile:
+        #    import csv
+        #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        #    self._time._time.importchart_csv(spamreader)
+
 
 
     ######################################################################################

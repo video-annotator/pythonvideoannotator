@@ -31,22 +31,14 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
 
         self.initForm()
 
-        # RICARDO TESTING VIDEOS
-        #self._video.value = "/home/ricardo/Desktop/animal4_10hz_5sec_25mW_new3_2015-03-16-174109-0000.avi"
-        #self._filename.value = "/home/ricardo/Downloads/MA_1_mtout.csv"
-
-        # HUGO TESTING VIDEOS
-        # self._video.value = "/home/hugo/subversion_data/20140527_wt-CS-virgin_1_2014-05-27-095957-0000.avi"
-        # self._filename.value = "/home/hugo/subversion_data/20140527_wt-CS-virgin_1_2014-05-27-095957-0000_mtout.csv"
-
         # Experiment related information
 
-        self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.04.21_12.51/2013 04 21 12 51_Entrada (1).MP4'
-        with open('/home/ricardo/Downloads/velocities.csv', 'rb') as csvfile:
-            import csv
-            spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-            self._time._time.importchart_csv(spamreader)
-        self._data = TrackingDataFile('/home/ricardo/Downloads/2013 04 21 12 51 (2)_version_08.06.2015.csv')
+        #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.04.21_12.51/2013 04 21 12 51_Entrada (1).MP4'
+        #with open('/home/ricardo/Downloads/velocities.csv', 'rb') as csvfile:
+        #    import csv
+        #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        #    self._time._time.importchart_csv(spamreader)
+        #self._data = TrackingDataFile('/home/ricardo/Downloads/2013 04 21 12 51 (2)_version_08.06.2015.csv')
 
 
    

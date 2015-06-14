@@ -27,8 +27,9 @@ The application was developed and tested with Ubuntu 12.04 and 14.
 * Numpy: ```sudo apt-get install python-numpy```
 * PyOpenGL: ```sudo pip install pyopengl```
 * Python OpenCV: ```sudo apt-get install python-opencv```
+* Scipy: sudo apt-get install python-scipy
 
-### Running
+### Run
 
 From the Terminal run:
 

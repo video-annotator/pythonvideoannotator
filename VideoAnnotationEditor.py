@@ -33,12 +33,13 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
 
         # Experiment related information
 
+        #self._video.value = '/home/ricardo/Downloads/apt_13.avi'
         #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.04.21_12.51/2013 04 21 12 51_Entrada (1).MP4'
         #with open('/home/ricardo/Downloads/velocities.csv', 'rb') as csvfile:
         #    import csv
         #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         #    self._time._time.importchart_csv(spamreader)
-        #self._data = TrackingDataFile('/home/ricardo/Downloads/2013 04 21 12 51 (2)_version_08.06.2015.csv')
+        #self._data = TrackingDataFile('/home/ricardo/Desktop/positions.csv')
 
 
    

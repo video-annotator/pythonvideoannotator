@@ -3,7 +3,7 @@ import Utils.tools as tools
 from scipy.interpolate import interp1d
 
 
-def interpolatePositions(values, begin, end):
+def interpolatePositions(values, begin, end, interpolationMode=None):
 	computed_time = np.array(range(begin, end+1))
 	frames 		= []
 	measures_x 	= []
@@ -18,9 +18,13 @@ def interpolatePositions(values, begin, end):
 	frames 		= np.array(frames)
 	measures_x 	= np.array(measures_x)
 	measures_y 	= np.array(measures_y)
-	kind = 'slinear'
-	if len(frames)==3: kind = 'quadratic'
-	if len(frames)>=4: kind = 'cubic'
+
+	if interpolationMode==None:
+		kind = 'slinear'
+		if len(frames)==3: kind = 'quadratic'
+		if len(frames)>=4: kind = 'cubic'
+	else:
+		kind = interpolationMode
 
 	
 	cubic_interp  = interp1d(frames, measures_x, kind=kind)
@@ -100,15 +104,15 @@ class TrackingDataFile:
 		for index in range(begin+1, end):
 			if index<=len(self._data): self._data[index] = None
 
-	def interpolateRange(self, begin, end):
+	def interpolateRange(self, begin, end, interpolationMode=None):
 		positions = []
 		for i, data in enumerate(self._data[begin:end+1]):
 			if data!=None: positions.append([i+begin, data.position])
 
-		positions = interpolatePositions(positions, begin, end)
+		positions = interpolatePositions(positions, begin, end, interpolationMode)
 
 		for frame, (x,y) in positions:
-			row = [frame,0,0,0,x,y]
+			row = [frame,x,y]
 			self._data[frame] = TrackingValue(row)
 		
 
@@ -123,10 +127,11 @@ class TrackingDataFile:
 					spamwriter.writerow([data.frame, data.position[0], data.position[1]])
 
 	def setPosition(self, index, x, y):
-		if index<len(self._data):
+		#add positions in case they do not exists
+		if index>=len(self._data):
 			for i in range(len(self._data), index+1): self._data.append(None)
 
-		row = [index,0,0,0,x,y]
+		row = [index,x,y]
 		self._data[index] = TrackingValue(row)
 
 
@@ -140,7 +145,7 @@ class TrackingDataFile:
 
 
 	def __getitem__(self, index):
-		if index<=len(self._data):
+		if index<len(self._data):
 			return self._data[index]
 		else:
 			return None

@@ -5,7 +5,7 @@ from PyQt4.QtOpenGL import QGLWidget
 from PyQt4 import QtCore
 import OpenGL.GL  as GL
 import OpenGL.GLU as GLU
-import cv2
+import cv2, math
 from PyQt4.QtGui import QApplication
 
 
@@ -235,6 +235,18 @@ class VideoGLWidget(QGLWidget):
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
+        # Control video playback using the space bar to Play/Pause
+        if event.key() == QtCore.Qt.Key_Space: self._control.pausePlay()
+        # Jumps 1 frame forward
+        if event.key() == QtCore.Qt.Key_D:
+            self._control.video_index += 1
+            self._control.updateFrame()
+
+        # Jumps 1 frame backwards
+        if event.key() == QtCore.Qt.Key_A:
+            self._control.video_index -= 1
+            self._control.updateFrame()
+
         self.onKeyRelease(event)
 
     def onDoubleClick(self, event, x, y): pass
@@ -272,6 +284,7 @@ class ControlPlayer(ControlBase):
         control_path = tools.getFileInSameDirectory(__file__, "video.ui")
         self._form = uic.loadUi(control_path)
         self._videoWidget = VideoGLWidget()
+        self._videoWidget._control = self
         self._form.videoLayout.addWidget(self._videoWidget)
         self._form.videoHideMarkers.clicked.connect(self.videoHideMarkers_clicked)
         self._form.videoPlay.clicked.connect(self.videoPlay_clicked)
@@ -356,6 +369,17 @@ class ControlPlayer(ControlBase):
             print "VIDEO STOPPED"
             self._timer.stop()
 
+    def pausePlay(self):
+        if not self._form.videoPlay.isChecked():
+            self._form.videoPlay.setChecked(True)
+            timeout_interval = (1000 / self._videoFPS)
+            print "VIDEO PLAYING @", self._videoFPS, "FPS"
+            self._timer.start(timeout_interval)
+        else:
+            self._form.videoPlay.setChecked(False)
+            print "VIDEO STOPPED"
+            self._timer.stop()
+
     def videoFPS_valueChanged(self):
         """Get FPS rate from loaded video."""
         self._videoFPS = self._form.videoFPS.value()
@@ -380,7 +404,7 @@ class ControlPlayer(ControlBase):
 
 
     def convertFrameToTime(self, frame):
-        currentMilliseconds = (frame / self._value.get(cv2.cv.CV_CAP_PROP_FPS) ) * 1000
+        currentMilliseconds = (frame / self.fps ) * 1000
         totalseconds = int(currentMilliseconds/1000)
         minutes = int(totalseconds / 60)
         seconds = totalseconds - (minutes*60)
@@ -503,6 +527,8 @@ class ControlPlayer(ControlBase):
     @fps.setter
     def fps(self, value):
         self._videoFPS = value
+        if math.isnan(self._videoFPS): self._videoFPS = 15.0
+
 
     @property 
     def show_markers(self): return self._draw_on_video

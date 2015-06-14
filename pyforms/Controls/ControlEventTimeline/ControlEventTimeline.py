@@ -89,9 +89,12 @@ class ControlEventTimeline(ControlBase):
         # slider_vlayout.addWidget(slider)
         # slider_vlayout.addLayout(slider_hlayout)
         # hlayout.addLayout(slider_vlayout)
+        self._zoomLabel = QtGui.QLabel("100%")
+        hlayout.addWidget(self._zoomLabel)
         hlayout.addWidget(slider_label_zoom_out)
         hlayout.addWidget(slider)
         hlayout.addWidget(slider_label_zoom_in)
+
 
 
         # Import/Export Buttons
@@ -283,6 +286,7 @@ class ControlEventTimeline(ControlBase):
         scale = 0.1 * value
         self._time.setMinimumWidth(scale * self._max)
         self._time.scale = scale
+        self._zoomLabel.setText( str( value*10 ).zfill(3)+"%" )
 
 
     def __scrollAreaKeyReleaseEvent(self, event):

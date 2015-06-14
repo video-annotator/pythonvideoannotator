@@ -45,6 +45,7 @@ class VideoGLWidget(QGLWidget):
         self._mouseRightDown = False
 
         self._mouseStartDragPoint = None
+        self._helpText = None #Message to show on the left corner of the screen
 
         self.setMinimumHeight(100)
 
@@ -82,6 +83,7 @@ class VideoGLWidget(QGLWidget):
         GL.glMatrixMode(GL.GL_MODELVIEW)
         GL.glLoadIdentity()
 
+        
         translateX = ( len(self.texture) * self._width ) / 2
 
         if len(self.texture) > 0:
@@ -118,6 +120,11 @@ class VideoGLWidget(QGLWidget):
                 winY = float(viewport[3] - self._mouseY)
                 winZ = GL.glReadPixels(winX, winY, 1, 1, GL.GL_DEPTH_COMPONENT, GL.GL_FLOAT)
                 self._glX, self._glY, self._glZ = GLU.gluUnProject( winX, winY, winZ[0][0], modelview, projection, viewport)
+        
+        if self._helpText!=None: 
+            self.qglColor(QtCore.Qt.white)
+            self.renderText( 4,15, self._helpText)
+
 
 
     def reset(self):
@@ -180,7 +187,7 @@ class VideoGLWidget(QGLWidget):
         self._mouseY = event.y()
         self.repaint()
         if hasattr(self, 'imgWidth'):
-            self.onDoubleClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgHeight) )
+            self.onDoubleClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth) )
 
     def mouseReleaseEvent(self, event):
         self._mouseDown = False
@@ -194,7 +201,7 @@ class VideoGLWidget(QGLWidget):
 
         if event.button()==1:
             if hasattr(self, 'imgWidth') and self._mouseLeftDown:
-                self.onEndDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgHeight) ) )
+                self.onEndDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth) ) )
             self._mouseLeftDown = False
 
     def mousePressEvent(self, event):
@@ -207,7 +214,7 @@ class VideoGLWidget(QGLWidget):
         self.repaint()
 
         if hasattr(self, 'imgWidth'):
-            self.onClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgHeight) )
+            self.onClick(event, (self._glX-self._x)*float(self.imgWidth), (self._height-self._glY+self._y)*float(self.imgWidth) )
 
 
         if event.button()==1:
@@ -224,7 +231,7 @@ class VideoGLWidget(QGLWidget):
         self._mouseY = event.y()
         self.repaint()
         if self._mouseLeftDown and self._mouseDown:
-            self.onDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgHeight) ) )
+            self.onDrag( self._mouseStartDragPoint, ( (self._glX - self._x)*float(self.imgWidth), (self._height-self._glY + self._y)*float(self.imgWidth) ) )
 
     def keyReleaseEvent(self, event):
         super(QGLWidget, self).keyReleaseEvent(event)
@@ -278,6 +285,7 @@ class ControlPlayer(ControlBase):
         self._currentFrame = None
         self._draw_on_video = True  # Controls if anything is drawn on the video
         self._videoFPS = None  # Sets the FPS rate at which the video is played
+        
 
 
     @property
@@ -499,3 +507,7 @@ class ControlPlayer(ControlBase):
     @property 
     def show_markers(self): return self._draw_on_video
 
+    @property
+    def helpText(self): return self._videoWidget._helpText
+    @fps.setter
+    def helpText(self, value): self._videoWidget._helpText = value

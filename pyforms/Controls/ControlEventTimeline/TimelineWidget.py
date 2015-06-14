@@ -28,8 +28,8 @@ class TimelineWidget(QtGui.QWidget):
 
         self._chartsColors = [ 
             QtGui.QColor(255,0,0), QtGui.QColor(0,255,0), 
-            QtGui.QColor(0,0,255), QtGui.QColor(255,255,0), 
-            QtGui.QColor(255,0,255), QtGui.QColor(0,255,255)
+            QtGui.QColor(0,0,255), QtGui.QColor(100,100,0), 
+            QtGui.QColor(100,0,100), QtGui.QColor(0,100,100)
         ]
         self._charts = []
         self._data = []
@@ -454,14 +454,28 @@ class TimelineWidget(QtGui.QWidget):
             self.fpsChangeEvent()
             self.repaint()
 
+        # Jumps 20 seconds forward
+        if event.key() == QtCore.Qt.Key_C:
+            self._pointer.position += 10*self.fps
+            self.__checkPositionIsVisible(self.position)
+            self.repaint()
+
+        # Jumps 20 seconds backwards
+        if event.key() == QtCore.Qt.Key_Z:
+            self._pointer.position -= 10*self.fps
+            self.__checkPositionIsVisible(self.position)
+            self.repaint()
+
         # Jumps 1 frame forward
         if event.key() == QtCore.Qt.Key_D:
             self._pointer.position += 1
+            self.__checkPositionIsVisible(self.position)
             self.repaint()
 
         # Jumps 1 frame backwards
         if event.key() == QtCore.Qt.Key_A:
             self._pointer.position -= 1
+            self.__checkPositionIsVisible(self.position)
             self.repaint()
 
         if self._selected is not None:
@@ -613,6 +627,16 @@ class TimelineWidget(QtGui.QWidget):
     #### PROPERTIES ######################################################################
     ######################################################################################
 
+    def __checkPositionIsVisible(self, value):
+        playerPos   = self.frame2x(value)
+        scrollLimit = self._scroll.horizontalScrollBar().sliderPosition()+self.parent().width()-50
+        if playerPos>scrollLimit:
+            newPos = playerPos - self.parent().width() + 50
+            self._scroll.horizontalScrollBar().setSliderPosition(newPos)
+        if playerPos<self._scroll.horizontalScrollBar().sliderPosition():
+            self._scroll.horizontalScrollBar().setSliderPosition(playerPos)
+
+
     @property
     def scroll(self): return self._scroll.horizontalScrollBar()
 
@@ -624,11 +648,7 @@ class TimelineWidget(QtGui.QWidget):
         #################################################################################
         #Check if the player position is inside the scroll
         #if is not in, update the scroll position
-        playerPos   = self.frame2x(value)
-        scrollLimit = self._scroll.horizontalScrollBar().sliderPosition()+self.parent().width()-50
-        if playerPos>scrollLimit:
-            newPos = playerPos - self.parent().width() + 50
-            self._scroll.horizontalScrollBar().setSliderPosition(newPos)
+        self.__checkPositionIsVisible(value)
         #################################################################################
         self.repaint()
 

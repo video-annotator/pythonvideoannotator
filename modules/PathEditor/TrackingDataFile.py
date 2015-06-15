@@ -1,7 +1,7 @@
 import csv, cv2, math, numpy as np
 import Utils.tools as tools
 from scipy.interpolate import interp1d
-
+from TrackingRow import TrackingRow
 
 def interpolatePositions(values, begin, end, interpolationMode=None):
 	computed_time = np.array(range(begin, end+1))
@@ -37,39 +37,8 @@ def interpolatePositions(values, begin, end, interpolationMode=None):
 		results.append( [frame, (x,y)] )
 	return results
 
-class TrackingValue(object):
-	def __init__(self, row):
-		self.row 	= row
-		self._index	= None
-
-	@property
-	def row(self):
-	    return [ self._frame, self._position[0], self._position[1] ]
-
-	@row.setter
-	def row(self, row):
-		self._frame 	= int(float(row[0]))
-		self._position 	= int(float(row[1])), int(float(row[2]))
-
-	@property
-	def frame(self): return self._frame
-
-	@property
-	def position(self): return self._position
 
 
-	def drawCircle(self, frame):
-		cv2.circle(frame, self.position, 20, (255,255,255), 4, lineType=cv2.CV_AA)
-		cv2.circle(frame, self.position, 20, (50,50,255), 1, lineType=cv2.CV_AA)
-
-		cv2.putText(frame, str(self._frame), self._position, cv2.FONT_HERSHEY_PLAIN, 1.0, (0,0,0), thickness=2, lineType=cv2.CV_AA)
-		cv2.putText(frame, str(self._frame), self._position, cv2.FONT_HERSHEY_PLAIN, 1.0, (255,255,255), thickness=1, lineType=cv2.CV_AA)
-
-	def draw(self, frame):
-		cv2.circle(frame, self.position, 5, (255,255,255), -1, lineType=cv2.CV_AA)
-		cv2.circle(frame, self.position, 3, (255,0,255), -1, lineType=cv2.CV_AA)
-
-	def collide(self, x, y): return tools.lin_dist(self.position, (x,y))<20
 
 
 
@@ -81,15 +50,14 @@ class TrackingDataFile:
 
 	def __init__(self, filename=None):
 		self._data = []
-
-		if filename!=None: self.importCSV(filename)
+		if filename!=None and filename!='': self.importCSV(filename)
 
 	def importCSV(self, filename):
 		with open(filename, 'rb') as csvfile:
 			data = []
 			spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
 			for i, row in enumerate(spamreader):
-				rowdata = TrackingValue(row)
+				rowdata = TrackingRow(row)
 
 				#If the first frame is not 0 then insert none values until the first frame with the position
 				if len(data)==0 and rowdata.frame>0:  data = [None for i in range(rowdata.frame)]
@@ -113,7 +81,7 @@ class TrackingDataFile:
 
 		for frame, (x,y) in positions:
 			row = [frame,x,y]
-			self._data[frame] = TrackingValue(row)
+			self._data[frame] = TrackingRow(row)
 		
 
 	
@@ -132,7 +100,7 @@ class TrackingDataFile:
 			for i in range(len(self._data), index+1): self._data.append(None)
 
 		row = [index,x,y]
-		self._data[index] = TrackingValue(row)
+		self._data[index] = TrackingRow(row)
 
 
 	def select(self, index, x, y):

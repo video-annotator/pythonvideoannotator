@@ -15,7 +15,7 @@ class VideoAnnotationTimeline(object):
 		self._time.pointerChanged   = self.__time_changed
 		self._time.isPlaying		= self.__timeline_play_video
 		self._time.fpsChanged	    = self.__timeline_fps_changed
-		self._time.getExportFilename= self.__createFilename2Export
+		#self._time.getExportFilename= self.__createFilename2Export
 		
 		super(VideoAnnotationTimeline,self).initForm()
 

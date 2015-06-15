@@ -92,7 +92,7 @@ class TrackingDataFile:
 			#spamwriter.writerow(['Frame','Name','pos X','pos Y','head X','head Y','tail X','tail Y'])
 			for data in self._data:
 				if data!=None:
-					spamwriter.writerow([data.frame, data.position[0], data.position[1]])
+					spamwriter.writerow(data.row)
 
 	def setPosition(self, index, x, y):
 		#add positions in case they do not exists

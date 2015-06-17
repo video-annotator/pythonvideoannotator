@@ -32,12 +32,13 @@ class TimelineChart(object):
 		end   = self._widget.x2frame(right)
 		end   = self._dataSize if end>self._dataSize else end
 
+		diff = self._graphMax - self._graphMin
 		for pos1, pos2 in zip(self._data[start+1:end], self._data[start:end]):
 			if pos1 and pos2: 
 				x,y   = pos1
 				xx,yy = pos2
-				y  = maxHeight - (y*maxHeight)  // self._graphMax
-				yy = maxHeight - (yy*maxHeight) // self._graphMax
+				y  = maxHeight - (y*maxHeight)  // diff
+				yy = maxHeight - (yy*maxHeight) // diff
 
 				painter.drawLine(self._widget.frame2x(xx), yy, self._widget.frame2x(x), y );
 

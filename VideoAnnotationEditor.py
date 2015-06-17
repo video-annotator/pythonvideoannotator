@@ -34,12 +34,16 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
         # Experiment related information
 
         #self._video.value = '/home/ricardo/Downloads/apt_13.avi'
-        #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.04.21_12.51/2013 04 21 12 51_Entrada (1).MP4'
-        #with open('/home/ricardo/Downloads/velocities.csv', 'rb') as csvfile:
+        #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.03.16_12.18/2013 03 16 12 18_Cascata.MP4'
+        #with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/total_velocities.csv', 'rb') as csvfile:
         #    import csv
         #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         #    self._time._time.importchart_csv(spamreader)
-        #self._data = TrackingDataFile('/home/ricardo/Desktop/positions.csv')
+        #with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/3dpositions_z.csv', 'rb') as csvfile:
+        #    import csv
+        #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        #    self._time._time.importchart_csv(spamreader)
+        #self._data = TrackingDataFile('/home/ricardo/Downloads/2013.03.16_12.18/Camera2_corrected.csv')
 
 
    

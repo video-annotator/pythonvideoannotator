@@ -2,11 +2,8 @@
 
 The software is a standalone application written in python, which intend to provide a GUI for users to take notes of events occurred in the videos.
 
-### Initial propose
+[![Video](/docs/video.png)](https://www.youtube.com/watch?v=IE_mtCHc9bQ)
 
-It was initially developed in collaboration with the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) to correct the result of a Computer Vision software to track flies in an arena.
-
-Later was modified to become more generic, and extensible.
 
 ### Developers
 
@@ -36,3 +33,8 @@ From the Terminal run:
 ```
 python VideoAnnotationEditor.py
 ```
+
+
+### Collaboration
+
+This project was initially developed in collaboration with the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) to correct the result of a Computer Vision software to track flies in an arena

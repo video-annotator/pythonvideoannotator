@@ -1,10 +1,10 @@
 #! /usr/bin/python
 from __init__ import *
 import os, cv2
-from PyQt4 import QtCore, QtGui
-from modules.PathEditor.TrackingDataFile import TrackingDataFile
+from PyQt4                                        import QtCore, QtGui
+from modules.PathEditor.TrackingDataFile          import TrackingDataFile
 from modules.PathEditor.VideoAnnotationPathEditor import VideoAnnotationPathEditor
-from modules.Timeline.VideoAnnotationTimeline import VideoAnnotationTimeline
+from modules.Timeline.VideoAnnotationTimeline     import VideoAnnotationTimeline
 
 class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, BaseWidget):
     """Application form"""
@@ -29,22 +29,24 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
                 }
             ]
 
-        self.initForm()
-
+        
         # Experiment related information
 
-        #self._video.value = '/home/ricardo/Downloads/apt_13.avi'
+        #self._video.value = '/home/ricardo/Downloads/output/apt_82_mtout_copy.avi'
         #self._video.value = '/home/ricardo/subversion/MEShTracker/Dolphin/DOLPHINS/New Videos/2013.03.16_12.18/2013 03 16 12 18_Cascata.MP4'
-        #with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/total_velocities.csv', 'rb') as csvfile:
-        #    import csv
-        #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        #    self._time._time.importchart_csv(spamreader)
-        #with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/3dpositions_z.csv', 'rb') as csvfile:
-        #    import csv
-        #    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        #    self._time._time.importchart_csv(spamreader)
+        """
+        with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/total_velocities.csv', 'rb') as csvfile:
+            import csv
+            spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            self._time._time.importchart_csv(spamreader)
+        with open('/home/ricardo/subversion/opencsp/applications/dolphin3Dposition/output/3dpositions_z.csv', 'rb') as csvfile:
+            import csv
+            spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            self._time._time.importchart_csv(spamreader)"""
         #self._data = TrackingDataFile('/home/ricardo/Downloads/2013.03.16_12.18/Camera2_corrected.csv')
+        
 
+        #self._video.value = '/home/ricardo/Desktop/GOPR0444.MP4'
 
    
     ######################################################################################
@@ -57,9 +59,9 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
 
         # Update fps info on timeline
         self._time._time._video_fps = self._player.fps
-        self._time._time._video_fps_min = self._player._form.videoFPS.minimum()
-        self._time._time._video_fps_max = self._player._form.videoFPS.maximum()
-        self._time._time._video_fps_inc = self._player._form.videoFPS.singleStep()
+        self._time._time._video_fps_min = self._player.videoFPS.minimum()
+        self._time._time._video_fps_max = self._player.videoFPS.maximum()
+        self._time._time._video_fps_inc = self._player.videoFPS.singleStep()
 
 
 

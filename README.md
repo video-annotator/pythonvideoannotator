@@ -24,7 +24,8 @@ The application was developed and tested with Ubuntu 12.04 and 14.
 * Numpy: ```sudo apt-get install python-numpy```
 * PyOpenGL: ```sudo pip install pyopengl```
 * Python OpenCV: ```sudo apt-get install python-opencv```
-* Scipy: sudo apt-get install python-scipy
+* Scipy: ```sudo apt-get install python-scipy```
+* PyForms: ```sudo pip install git+git://github.com/UmSenhorQualquer/pyforms.git```
 
 ### Run
 

@@ -13,6 +13,8 @@ The software is a standalone application written in python, which intend to prov
 
 ![Video annotator screenshot](/docs/screencapture.png?raw=true "Screen")
 
+![Video annotator screenshot](/docs/screenshot.png?raw=true "Screen")
+
 ## Installation & Running
 
 The application was developed and tested with Ubuntu 12.04 and 14.

@@ -1,5 +1,4 @@
 import csv, cv2, math, numpy as np
-import Utils.tools as tools
 from scipy.interpolate import interp1d
 from TrackingRow import TrackingRow
 

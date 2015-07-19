@@ -35,7 +35,7 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
             ]
 
         
-
+        
    
     ######################################################################################
     #### EVENTS ##########################################################################

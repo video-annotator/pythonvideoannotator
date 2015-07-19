@@ -12,4 +12,6 @@ from pyforms.Controls.ControlFile import ControlFile
 from pyforms.Controls.ControlEventTimeline import ControlEventTimeline
 from pyforms.Controls.ControlCheckBox import ControlCheckBox
 from pyforms.Controls.ControlList import ControlList
+from pyforms.Controls.ControlDockWidget           import ControlDockWidget
 import pyforms.standaloneManager as app
+

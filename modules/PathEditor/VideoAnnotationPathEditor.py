@@ -153,7 +153,8 @@ class VideoAnnotationPathEditor(object):
 		Function called before render each frame
 		"""
 		index = self._player.video_index
-		if self._update_time: self._time.value = index
+		if self._update_time: 
+			self._time.value = index
 
 		# Draw the current blobs position
 		if self._player.isPainted and len(self._data)>0: 

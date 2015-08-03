@@ -1,6 +1,7 @@
 import cv2
 from PyQt4 import QtCore, QtGui
 from TrackingDataFile import TrackingDataFile, interpolatePositions
+from modules.PathEditor.ChooseColumnsWindow import ChooseColumnsWindow
 
 class VideoAnnotationPathEditor(object):
 
@@ -16,6 +17,9 @@ class VideoAnnotationPathEditor(object):
 		self._interpolationMode = None
 		self._DEFAULT_HELP_MSG = 'Click in the tracked points to select. Use the Control key for multiple selection.'
 
+		self._fileSetupWindow = ChooseColumnsWindow()
+		self._fileSetupWindow.loadFileEvent = self.__load_tracking_file
+
 	def initForm(self):
 		#Add the options to the player popup menu
 		self._player.addPopupSubMenuOption('Path', 
@@ -27,8 +31,10 @@ class VideoAnnotationPathEditor(object):
 
 		self.mainmenu.append(
 				{ 'Path': [
-						{'Import': self.__open_tracking_file},
-						{'Export': self.__save_tracking_file},
+						{'Import': self.__import_tracking_file},
+						{'Export as': self.__export_tracking_file},
+						'-',
+						{'Save changes': self.__save_tracking_file},
 						'-',
 						{'Edit': self.__editPath},
 						{'Interpolate': self.__interpolatePathPoints},
@@ -59,18 +65,25 @@ class VideoAnnotationPathEditor(object):
 			self.__calculateTmpInterpolation()
 			self._player.refresh()
 
-	def __open_tracking_file(self):
-		csvfilename = QtGui.QFileDialog.getOpenFileName(parent=self,
-			caption="Import annotations file",
-			directory="",
-			filter="*.csv",
-			options=QtGui.QFileDialog.DontUseNativeDialog)
+	def __import_tracking_file(self):
+		self._fileSetupWindow.show()
 
-		if csvfilename!=None: 
-			self._data = TrackingDataFile(csvfilename)
+	def __load_tracking_file(self):
+		if self._fileSetupWindow.filename!=None:
+			
+			separator = self._fileSetupWindow.separator
+			frame = self._fileSetupWindow.frameColumn
+			x 	  = self._fileSetupWindow.xColumn
+			y 	  = self._fileSetupWindow.yColumn
+			z 	  = self._fileSetupWindow.zColumn
+
+			self._data = TrackingDataFile(self._fileSetupWindow.filename, separator, frame, x, y, z)
 			self._player.helpText = self._DEFAULT_HELP_MSG
 
-	def __save_tracking_file(self):
+			self._fileSetupWindow.close()
+
+
+	def __export_tracking_file(self):
 		csvfilename = QtGui.QFileDialog.getSaveFileName(parent=self,
 			caption="Save file",
 			directory="",
@@ -79,6 +92,18 @@ class VideoAnnotationPathEditor(object):
 
 		if csvfilename!=None and self._data!=None: self._data.exportCSV(csvfilename)
 
+	def __save_tracking_file(self):
+		csvfilename = self._fileSetupWindow.filename
+		if csvfilename!='' and csvfilename!=None and self._data!=None:
+
+			reply = QtGui.QMessageBox.question(self, 'Please confirm',
+				"Are you sure you want to replace the file {0}?".format(csvfilename), 
+				QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+
+			if reply == QtGui.QMessageBox.Yes: self._data.exportCSV(csvfilename)
+
+		else:
+			QtGui.QMessageBox.about(self, "No file imported", "No file imported yet.")
 
 
 	def __deletePath(self):
@@ -143,7 +168,7 @@ class VideoAnnotationPathEditor(object):
 		positions = []
 		for i in range(begin, end+1):
 			data = self._data[i]
-			if data!=None: positions.append([i, data.position])
+			if data!=None and data.position!=None: positions.append([i, data.position])
 		positions    = interpolatePositions(positions, begin, end, interpolationMode=self._interpolationMode)
 		self._points = [pos for frame, pos in positions]
 
@@ -159,7 +184,10 @@ class VideoAnnotationPathEditor(object):
 		# Draw the current blobs position
 		if self._player.isPainted and len(self._data)>0: 
 			v = self._data[index]
-			if v: v.draw(frame)
+
+			if v: 
+				v.draw(frame)
+				#if len(v.position)==3: self._player.point = v.position
 
 		#Draw the selected blobs
 		for item in self._selectedItems: item.drawCircle(frame)
@@ -171,7 +199,7 @@ class VideoAnnotationPathEditor(object):
 			for i in range(start, end-1):
 				v1 = self._data[i]
 				v2 = self._data[i+1]
-				if v1!=None and v2!=None:
+				if v1!=None and v2!=None and v2.position!=None and v1.position!=None:
 					cv2.line( frame, v1.position, v2.position, (0,0,255), 1 )
 
 		#Draw a temporary path

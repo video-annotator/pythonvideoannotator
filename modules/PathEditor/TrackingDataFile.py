@@ -47,15 +47,26 @@ def interpolatePositions(values, begin, end, interpolationMode=None):
 
 class TrackingDataFile:
 
-	def __init__(self, filename=None):
+	def __init__(self, filename=None, separator=',', frameCol=0, xCol=1, yCol=2, zCol=None):
 		self._data = []
+
+		TrackingRow.FRAME_COL = frameCol
+		TrackingRow.X_COL 	  = xCol
+		TrackingRow.Y_COL 	  = yCol
+		TrackingRow.Z_COL 	  = zCol
+
+
+		self._separator 	= separator
 		if filename!=None and filename!='': self.importCSV(filename)
 
 	def importCSV(self, filename):
 		with open(filename, 'rb') as csvfile:
+			spamreader = csv.reader(csvfile, delimiter=self._separator, quotechar='"')
 			data = []
-			spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+			
 			for i, row in enumerate(spamreader):
+				if TrackingRow.TOTAL_COLS<len(row): TrackingRow.TOTAL_COLS = len(row)
+
 				rowdata = TrackingRow(row)
 
 				#If the first frame is not 0 then insert none values until the first frame with the position
@@ -66,28 +77,36 @@ class TrackingDataFile:
 
 				data.append(rowdata)
 			self._data = data
+
 			
 	def deleteRange(self, begin, end):
 		for index in range(begin+1, end):
-			if index<=len(self._data): self._data[index] = None
+			if index<=len(self._data) and self._data[index]!=None:
+				self._data[index].position = None
 
 	def interpolateRange(self, begin, end, interpolationMode=None):
 		positions = []
 		for i, data in enumerate(self._data[begin:end+1]):
-			if data!=None: positions.append([i+begin, data.position])
+			if data!=None and data.position!=None: positions.append([i+begin, data.position])
 
 		positions = interpolatePositions(positions, begin, end, interpolationMode)
 
-		for frame, (x,y) in positions:
-			row = [frame,x,y]
-			self._data[frame] = TrackingRow(row)
+		for frame, pos in positions:
+			if self._data[frame]!=None:
+				self._data[frame].position = pos
+			else:
+				v 					= TrackingRow()
+				v.frame 			= frame
+				v.position 			= pos
+				self._data[frame] 	= v
+
 		
 
 	
 
 	def exportCSV(self, filename):
 		with open(filename, 'wb') as csvfile:
-			spamwriter = csv.writer(csvfile, delimiter=',',quotechar='"')
+			spamwriter = csv.writer(csvfile, delimiter=self._separator)
 			#spamwriter.writerow(['Frame','Name','pos X','pos Y','head X','head Y','tail X','tail Y'])
 			for data in self._data:
 				if data!=None:
@@ -98,8 +117,16 @@ class TrackingDataFile:
 		if index>=len(self._data):
 			for i in range(len(self._data), index+1): self._data.append(None)
 
-		row = [index,x,y]
-		self._data[index] = TrackingRow(row)
+		if self._data[index]==None:
+			v 					= TrackingRow()
+			v.frame 			= index
+			v.position 			= (x,y)
+			self._data[index] 	= v
+		else:
+			v = self._data[index]
+			v.position 			= (x,y)
+			
+		
 
 
 	def select(self, index, x, y):

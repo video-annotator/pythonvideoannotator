@@ -33,8 +33,6 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
                     ]
                 }
             ]
-
-        
         
    
     ######################################################################################

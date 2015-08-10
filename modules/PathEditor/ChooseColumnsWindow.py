@@ -15,12 +15,12 @@ class ChooseColumnsWindow(BaseWidget):
 		self._frameCol = ControlNumber('Frame column', 0, 0, 100)
 		self._xCol = ControlNumber('X column', 1, 0, 100)
 		self._yCol = ControlNumber('Y column', 2, 0, 100)
-		self._showZ = ControlCheckBox('Import Z value')
-		self._zCol 	= ControlNumber('Z column', 0, 0, 100)
+		self._showZ = ControlCheckBox('Import Z value')			# Not being used yet
+		self._zCol 	= ControlNumber('Z column', 0, 0, 100)		# Not being used yet
 		self._filePreview = ControlList('Preview')
 		self._loadButton = ControlButton('Load')
 
-		self._formset = [ '_filename',('_separator','_frameCol', '_xCol', '_yCol','_showZ','_zCol','_loadButton'), '_filePreview' ]
+		self._formset = [ '_filename',('_separator','_frameCol', '_xCol', '_yCol','_loadButton'), '_filePreview' ]
 		self._separator.changed = self.__refreshPreview
 		self._filename.changed = self.__refreshPreview
 

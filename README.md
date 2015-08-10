@@ -1,6 +1,13 @@
 # Python Video Annotator
 
-The software is a standalone application written in python, which intend to provide a GUI for users to take notes of events occurred in the videos.
+The software is a standalone application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos.
+
+Features:
+* Timeline for video navigation.
+* Multiple events edition in the timeline.
+* Graphs visualization over time.
+* Objects tracking path edition.
+
 
 [![Video](/docs/video.png)](https://www.youtube.com/watch?v=IE_mtCHc9bQ)
 

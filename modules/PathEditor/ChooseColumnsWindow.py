@@ -89,4 +89,4 @@ class ChooseColumnsWindow(BaseWidget):
 ##################################################################################################################
 
 #Execute the application
-if __name__ == "__main__":	 app.startApp( ChooseColumnsWindow )
+if __name__ == "__main__":	 pyforms.startApp( ChooseColumnsWindow )

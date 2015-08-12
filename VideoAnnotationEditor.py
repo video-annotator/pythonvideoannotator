@@ -73,4 +73,4 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
 
 
 
-if __name__ == "__main__":  app.startApp(VideoAnnotationEditor)
+if __name__ == "__main__":  pyforms.startApp(VideoAnnotationEditor)

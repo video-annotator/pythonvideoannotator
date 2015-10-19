@@ -32,6 +32,8 @@ class Stats(BaseWidget):
 
         self.__load_events()
 
+        self.setMinimumWidth(800)
+        self.setMinimumHeight(600)
     
         
     def __load_events(self):
@@ -151,17 +153,15 @@ class Stats(BaseWidget):
 
             framesBin       = self._nframes.value
             totalFrames     = int(self._bounds.value[1]+1)
-            
-
 
             for j, label in enumerate(events_to_include):
                 with open(os.path.join(directory, '{0}.csv'.format(label)), 'wb') as csvfile:
 
-                    spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                    spamwriter.writerow(['Event', 'start', 'end', 'duration in frames'])
-                    for i in range(0,totalFrames, framesBin):
+                    spamwriter = csv.writer(csvfile, delimiter=' ',quoting=csv.QUOTE_MINIMAL)
+                    spamwriter.writerow(['Period','event', 'start frame', 'end frame', 'duration in frames'])
+                    for k,i in enumerate(range(0,totalFrames, framesBin)):
                         count = sum(self._duration[label][i:i+framesBin])
-                        if count>0: spamwriter.writerow([label, i, i+framesBin, count])
+                        if count>0: spamwriter.writerow([k,label, i, i+framesBin, count])
                         self._progress.value = i+self._bounds.value[1]*j
 
 

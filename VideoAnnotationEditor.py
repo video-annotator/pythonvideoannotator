@@ -5,9 +5,10 @@ from PyQt4                                        import QtCore, QtGui
 from modules.PathEditor.TrackingDataFile          import TrackingDataFile
 from modules.PathEditor.VideoAnnotationPathEditor import VideoAnnotationPathEditor
 from modules.Timeline.VideoAnnotationTimeline     import VideoAnnotationTimeline
+from modules.events_statistics.events_statistics  import EventsStatistics
 
 
-class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, BaseWidget):
+class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAnnotationTimeline, BaseWidget):
     """Application form"""
 
     def __init__(self):
@@ -27,12 +28,14 @@ class VideoAnnotationEditor(VideoAnnotationPathEditor, VideoAnnotationTimeline, 
         self._player.processFrame   = self.process_frame
         self._player.onClick        = self.onPlayerClick
         
-        self.mainmenu = [
+        self.mainmenu.insert(0,
                 { 'File': [
                         {'Exit': exit}
                     ]
                 }
-            ]
+            )
+
+        #self._video.value = '/home/ricardo/Desktop/animal4_10hz_5sec_25mW_new3_2015-03-16-174109-0000.avi'
         
     ######################################################################################
     #### EVENTS ##########################################################################

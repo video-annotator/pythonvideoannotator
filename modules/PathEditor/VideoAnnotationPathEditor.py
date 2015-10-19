@@ -20,15 +20,6 @@ class VideoAnnotationPathEditor(object):
 		self._fileSetupWindow = ChooseColumnsWindow()
 		self._fileSetupWindow.loadFileEvent = self.__load_tracking_file
 
-	def initForm(self):
-		#Add the options to the player popup menu
-		self._player.addPopupSubMenuOption('Path', 
-			{
-				'Delete':           self.__deletePath, 
-				'Edit':             self.__editPath,
-				'Interpolate':      self.__interpolatePathPoints
-			})
-
 		self.mainmenu.append(
 				{ 'Path': [
 						{'Import': self.__import_tracking_file},
@@ -44,6 +35,17 @@ class VideoAnnotationPathEditor(object):
 					]
 				}
 			)
+
+	def initForm(self):
+		#Add the options to the player popup menu
+		self._player.addPopupSubMenuOption('Path', 
+			{
+				'Delete':           self.__deletePath, 
+				'Edit':             self.__editPath,
+				'Interpolate':      self.__interpolatePathPoints
+			})
+
+		
 
 		super(VideoAnnotationPathEditor,self).initForm()
 

@@ -66,16 +66,16 @@ class TrackingRow(object):
 
 	def drawCircle(self, frame):
 		if self.position!=None:
-			cv2.circle(frame, self.position[:2], 20, (255,255,255), 4, lineType=cv2.CV_AA)
-			cv2.circle(frame, self.position[:2], 20, (50,50,255), 1, lineType=cv2.CV_AA)
+			cv2.circle(frame, self.position[:2], 20, (255,255,255), 4, lineType=cv2.LINE_AA)
+			cv2.circle(frame, self.position[:2], 20, (50,50,255), 1, lineType=cv2.LINE_AA)
 
-			cv2.putText(frame, str(self._frame), self._position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (0,0,0), thickness=2, lineType=cv2.CV_AA)
-			cv2.putText(frame, str(self._frame), self._position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (255,255,255), thickness=1, lineType=cv2.CV_AA)
+			cv2.putText(frame, str(self._frame), self._position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (0,0,0), thickness=2, lineType=cv2.LINE_AA)
+			cv2.putText(frame, str(self._frame), self._position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (255,255,255), thickness=1, lineType=cv2.LINE_AA)
 
 	def draw(self, frame):
 		if self.position!=None:
-			cv2.circle(frame, self.position[:2], 5, (255,255,255), -1, lineType=cv2.CV_AA)
-			cv2.circle(frame, self.position[:2], 3, (255,0,255), -1, lineType=cv2.CV_AA)
+			cv2.circle(frame, self.position[:2], 5, (255,255,255), -1, lineType=cv2.LINE_AA)
+			cv2.circle(frame, self.position[:2], 3, (255,0,255), -1, lineType=cv2.LINE_AA)
 
 	def collide(self, x, y): 
 		if self.position==None: return False

@@ -1,6 +1,6 @@
 from __init__ import *
-import numpy as np
-from PyQt4 import QtCore
+import numpy as np, csv, os
+from PyQt4 import QtCore, QtGui
 
 class Stats(BaseWidget):
     
@@ -9,25 +9,30 @@ class Stats(BaseWidget):
         self._parent = parent
 
         self._bounds          = ControlBoundingSlider('Frames range', 1, 100, horizontal=True) 
-        self._nframes         = ControlNumber('Merge the events in a group of n frames', 1)
+        self._nframes         = ControlNumber('Merge in a group of', 1)
         self._analyseButton   = ControlButton('Calculate graphs')
         self._events          = ControlCheckBoxList()
         self._graph           = ControlVisVis('Graph')
         self._showTotalCounts = ControlCheckBox('Show total events counting')
         self._showEvtsCounts  = ControlCheckBox('Show events counting', True)
         self._progress        = ControlProgress()
+        self._exportDurations = ControlButton('Export durations')
 
         self._formset = [
-            (' ','_showEvtsCounts','|','_showTotalCounts','|','_nframes','_analyseButton'),
+            (' ','_showEvtsCounts','|','_showTotalCounts','|','_nframes','_analyseButton','_exportDurations'),
             '_bounds', 
-            {'a:Graph':['_graph'], 'b:Events selection':['_events']}, 
+            {   'a:Graph':['_graph'],
+                'c:Events selection':['_events']   }, 
             '_progress'
         ]
 
         self._analyseButton.value = self.__generate_graph
+        self._exportDurations.value = self.__export_durations
         self._progress.hide()
 
         self.__load_events()
+
+    
         
     def __load_events(self):
         """
@@ -63,13 +68,17 @@ class Stats(BaseWidget):
         
         self.__generate_graph()
 
-    def __generate_graph(self):
+
+    def __do_the_calculations(self):
+        self._values2display = []
+        self._legends        = []
+        self._duration       = {}
+
         events_to_include = self._events.value
 
         #If no events are selected, clean the graph and exit the function 
         if  len(events_to_include)==0 or \
             (not self._showTotalCounts.value and not self._showEvtsCounts.value): 
-            self._graph.value = []
             return
 
         self._progress.min = 0
@@ -80,15 +89,15 @@ class Stats(BaseWidget):
 
         framesBin       = self._nframes.value
         totalFrames     = int(self._bounds.value[1]+1)
-
         #Stores the counting related to a all the events
         totalcounts     = np.array([0 for x in range( totalFrames )]) 
-
         #Stores the counting related each event
         counts          = {} 
+        
 
         for label in events_to_include: 
-            counts[label] = np.array([0 for x in range( totalFrames )])
+            counts[label]   = np.array([0 for x in range( totalFrames )])
+            self._duration[label] = np.array([0 for x in range( totalFrames )])
 
         
         for i in range(0,totalFrames):
@@ -105,27 +114,65 @@ class Stats(BaseWidget):
 
                     lowerBound = i - (i % framesBin)
                     upperBound = lowerBound + framesBin
-                    totalcounts[lowerBound:upperBound]+=1
-                    counts[event][lowerBound:upperBound]+=1
-
+                    totalcounts[lowerBound:upperBound] += 1
+                    counts[event][lowerBound:upperBound] += 1
+                    
                     events_counted.append(j)
-            
-        values2display = []
-        legends        = []
 
+                if start<=i and end>=i and (event in events_to_include):
+                    self._duration[event][i] += 1
+
+    
+        
+        
         if self._showTotalCounts.value:
-            values2display.append(totalcounts)
-            legends.append('All selected events')
+            self._values2display.append(totalcounts)
+            self._legends.append('All selected events')
 
         if self._showEvtsCounts.value:
             for label, values in counts.items():
-                legends.append(label)
-                values2display.append(values)
-
-        self._graph.value  = values2display
-        self._graph.legend = legends
+                self._legends.append(label)
+                self._values2display.append(values)
 
         self._progress.hide()
+
+
+    def __export_durations(self):
+        directory = str(QtGui.QFileDialog.getExistingDirectory(self, "Select directory to save the data"))
+        if directory!='':
+            self.__do_the_calculations()
+
+            events_to_include = self._events.value
+
+            self._progress.min = 0
+            self._progress.max = self._bounds.value[1]*len(events_to_include)
+            self._progress.value = 0
+            self._progress.show()
+
+            framesBin       = self._nframes.value
+            totalFrames     = int(self._bounds.value[1]+1)
+            
+
+
+            for j, label in enumerate(events_to_include):
+                with open(os.path.join(directory, '{0}.csv'.format(label)), 'wb') as csvfile:
+
+                    spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    spamwriter.writerow(['Event', 'start', 'end', 'duration in frames'])
+                    for i in range(0,totalFrames, framesBin):
+                        count = sum(self._duration[label][i:i+framesBin])
+                        if count>0: spamwriter.writerow([label, i, i+framesBin, count])
+                        self._progress.value = i+self._bounds.value[1]*j
+
+
+
+
+
+    def __generate_graph(self):
+        self.__do_the_calculations()
+
+        self._graph.value   = self._values2display
+        self._graph.legends = self._legends
         
         
 if __name__ == "__main__":  pyforms.startApp(Stats)

@@ -9,7 +9,8 @@ class Stats(BaseWidget):
         self._parent = parent
 
         self._bounds          = ControlBoundingSlider('Frames range', 1, 100, horizontal=True) 
-        self._nframes         = ControlNumber('Merge in a group of', 1)
+        self._nframes         = ControlNumber('Merge in a group of', 1800)
+        self._videofsp        = ControlNumber('FPS', 30.0)
         self._analyseButton   = ControlButton('Calculate graphs')
         self._events          = ControlCheckBoxList()
         self._graph           = ControlVisVis('Graph')
@@ -19,7 +20,7 @@ class Stats(BaseWidget):
         self._exportDurations = ControlButton('Export durations')
 
         self._formset = [
-            (' ','_showEvtsCounts','|','_showTotalCounts','|','_nframes','_analyseButton','_exportDurations'),
+            (' ','_showEvtsCounts','|','_showTotalCounts','|','_nframes','_videofsp','_analyseButton','_exportDurations'),
             '_bounds', 
             {   'a:Graph':['_graph'],
                 'c:Events selection':['_events']   }, 
@@ -158,10 +159,11 @@ class Stats(BaseWidget):
                 with open(os.path.join(directory, '{0}.csv'.format(label)), 'wb') as csvfile:
 
                     spamwriter = csv.writer(csvfile, delimiter=' ',quoting=csv.QUOTE_MINIMAL)
-                    spamwriter.writerow(['Period','event', 'start frame', 'end frame', 'duration in frames'])
+                    spamwriter.writerow(['Period','event','start frame','end frame','duration in frames', 'duration in seconds'])
                     for k,i in enumerate(range(0,totalFrames, framesBin)):
-                        count = sum(self._duration[label][i:i+framesBin])
-                        if count>0: spamwriter.writerow([k,label, i, i+framesBin, count])
+                        count = sum( self._duration[label][i:i+framesBin] )
+                        time = float(count) / float(self._videofsp.value)
+                        if count>0: spamwriter.writerow([k,label, i, i+framesBin, count, time])
                         self._progress.value = i+self._bounds.value[1]*j
 
 

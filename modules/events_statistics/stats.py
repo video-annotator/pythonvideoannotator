@@ -189,7 +189,7 @@ class Stats(BaseWidget):
                     spamwriter.writerow([label])
                     events_occur = self.__find_occurrences(self._duration[label])
                     for k, i in enumerate(range(0, totalFrames, framesBin)):
-                        groups = self.__event_groups_in_frames_threshold(events_occur, i + framesBin)
+                        groups = self.__event_groups_in_frames_threshold(events_occur, i, i + framesBin)
                         groups_count = len(groups)
                         frames_count = sum(self._duration[label][i:i + framesBin])
                         # frames_count = sum(list(len(group) for group in groups))
@@ -214,7 +214,7 @@ class Stats(BaseWidget):
 
         return list(k for k, i in enumerate(events) if i)  # all indexes of 1
 
-    def __event_groups_in_frames_threshold(self, events_occur, frames_threshold_last_index):
+    def __event_groups_in_frames_threshold(self, events_occur, frames_threshold_first_index, frames_threshold_last_index):
         """
         Returns list with events occurrences (groups)
         e.g. 
@@ -232,7 +232,7 @@ class Stats(BaseWidget):
             prev = i
         final.append(events_occur[last:])
 
-        return list(occur for occur in final if occur[0] <= frames_threshold_last_index)
+        return list(occur for occur in final if occur[0] >= frames_threshold_first_index and occur[0] <= frames_threshold_last_index)
 
     def __generate_graph(self):
         self.__do_the_calculations()

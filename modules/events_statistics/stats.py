@@ -173,32 +173,49 @@ class Stats(BaseWidget):
 
             events_to_include = self._events.value
 
+            print(self.__find_occurrences(self._duration["START"]))
+            print(self.__find_occurrences(self._duration["END"]))
+
+            # these are special point events, we don't care duration and ocurrences
+            events_to_include.remove("START")
+            events_to_include.remove("END")
+
+            experiment_start_frame_idx = self.__find_occurrences(self._duration["START"])[0]
+            experiment_end_frame_idx = self.__find_occurrences(self._duration["END"])[0]
+
             self._progress.min = 0
             self._progress.max = self._bounds.value[1] * len(events_to_include)
             self._progress.value = 0
             self._progress.show()
 
-            framesBin = self._nframes.value
+            framesBin = self._nframes.value  # e.g. 1800 if we want separation in minutes and have 30fps
             totalFrames = int(self._bounds.value[1] + 1)
+            #totalFrames = int((experiment_end_time - experiment_start_time) + 1)
 
             with open(os.path.join(directory, 'totals.csv'), 'wb') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-                spamwriter.writerow(['Period', 'event', 'start frame', 'end frame', 'duration in frames', 'duration in seconds', 'occurrences per frame threshold'])
 
                 for j, label in enumerate(events_to_include):
                     spamwriter.writerow([label])
+                    spamwriter.writerow(['Period', ' Duration (s)', ' Total', ' Occurrences'])
                     events_occur = self.__find_occurrences(self._duration[label])
-                    for k, i in enumerate(range(0, totalFrames, framesBin)):
-                        groups = self.__event_groups_in_frames_threshold(events_occur, i, i + framesBin)
+                    for k, frame_idx in enumerate(range(experiment_start_frame_idx, experiment_end_frame_idx, framesBin)):
+                        groups = self.__event_groups_in_frames_threshold(events_occur, frame_idx, frame_idx + framesBin)
                         groups_count = len(groups)
-                        frames_count = sum(self._duration[label][i:i + framesBin])
+                        frames_count = sum(self._duration[label][frame_idx:frame_idx + framesBin])
+                        groups_start_times_str = " ".join([format(((group[0] - experiment_start_frame_idx) / float(framesBin)), ".2f") for group in groups])
                         # frames_count = sum(list(len(group) for group in groups))
                         time = float(frames_count) / float(self._videofsp.value)
                         if frames_count > 0:
-                            spamwriter.writerow([k, label, i, i + framesBin, frames_count, "{0:.2f}".format(time), groups_count])
+                            # spamwriter.writerow([k, label, i, i + framesBin, frames_count, "{0:.2f}".format(time), groups_count])
+                            # spamwriter.writerow(["{period:6}".format(period=k), "{start_second:11}".format(start_second=groups_start_times), "{start_second:15}".format(start_second=i), "{0:13.2f}".format(time), "{count:12}".format(count=groups_count)])
+
+                            spamwriter.writerow(["{period:6}".format(period=k), "{0:13.2f}".format(time), "{count:6}".format(count=groups_count), "{occur:15}".format(occur=groups_start_times_str)])
                         else:
-                            spamwriter.writerow([k, label, i, i + framesBin, 0, 0, 0])
-                        self._progress.value = i + self._bounds.value[1] * j
+                            # spamwriter.writerow([k, label, i, i + framesBin, 0, 0, 0])
+                            # spamwriter.writerow(["{period:6}".format(period=k), "{start_second:11}".format(start_second=groups_start_times), "{start_second:15}".format(start_second=i), "{dur:13.2f}".format(dur=0), "{count:12}".format(count=0)])
+                            spamwriter.writerow(["{period:6}".format(period=k), "{dur:13.2f}".format(dur=0), "{count:6}".format(count=0), "{:15}".format("--")])
+                        self._progress.value = frame_idx + self._bounds.value[1] * j
 
                     spamwriter.writerow([])
                     spamwriter.writerow([])

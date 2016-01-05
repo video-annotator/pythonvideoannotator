@@ -1,12 +1,14 @@
 #! /usr/bin/python
-from __init__ import *
-import os
-import cv2
-from PyQt4 import QtCore, QtGui
-from modules.PathEditor.TrackingDataFile import TrackingDataFile
-from modules.PathEditor.VideoAnnotationPathEditor import VideoAnnotationPathEditor
-from modules.Timeline.VideoAnnotationTimeline import VideoAnnotationTimeline
-from modules.events_statistics.events_statistics import EventsStatistics
+from pyforms import BaseWidget
+from pyforms.Controls import ControlPlayer
+from pyforms.Controls import ControlFile
+from pyforms.Controls import ControlEventTimeline
+from pyforms.Controls import ControlDockWidget
+import pyforms
+
+from pythonvideoannotator.modules.PathEditor.VideoAnnotationPathEditor import VideoAnnotationPathEditor
+from pythonvideoannotator.modules.Timeline.VideoAnnotationTimeline import VideoAnnotationTimeline
+from pythonvideoannotator.modules.events_statistics.events_statistics import EventsStatistics
 
 
 def Exit():
@@ -39,9 +41,6 @@ class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAn
                              ]
                              }
                              )
-
-        #self._video.value = '/home/ricardo/Desktop/animal4_10hz_5sec_25mW_new3_2015-03-16-174109-0000.avi'
-        self._video.value = '/Volumes/SEAGATE/champalimaud/diana_costa/Rat_1_2/input/Rat_1_2_s.avi'
 
     ######################################################################################
     #### EVENTS ##########################################################################

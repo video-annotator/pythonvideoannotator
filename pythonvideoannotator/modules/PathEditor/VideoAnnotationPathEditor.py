@@ -1,7 +1,7 @@
 import cv2
 from PyQt4 import QtCore, QtGui
-from modules.PathEditor.TrackingDataFile import TrackingDataFile, interpolatePositions
-from modules.PathEditor.ChooseColumnsWindow import ChooseColumnsWindow
+from pythonvideoannotator.modules.PathEditor.TrackingDataFile import TrackingDataFile, interpolatePositions
+from pythonvideoannotator.modules.PathEditor.ChooseColumnsWindow import ChooseColumnsWindow
 
 
 class VideoAnnotationPathEditor(object):

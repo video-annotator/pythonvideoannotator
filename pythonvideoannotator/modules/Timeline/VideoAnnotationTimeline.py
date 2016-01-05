@@ -1,5 +1,4 @@
-import cv2
-from PyQt4 import QtCore, QtGui
+import os
 
 
 class VideoAnnotationTimeline(object):

@@ -1,8 +1,18 @@
-from __init__ import *
+from pyforms import BaseWidget
+from pyforms.Controls import ControlProgress
+from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlCheckBox
+from pyforms.Controls import ControlVisVis
+from pyforms.Controls import ControlNumber
+from pyforms.Controls import ControlBoundingSlider
+from pyforms.Controls import ControlCheckBoxList
+import pyforms
+
+
 import numpy as np
 import csv
 import os
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtGui
 
 
 class Stats(BaseWidget):

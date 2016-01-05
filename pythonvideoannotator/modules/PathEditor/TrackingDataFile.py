@@ -1,13 +1,11 @@
 import csv
-import cv2
-import math
 import numpy as np
 from scipy.interpolate import interp1d
-from modules.PathEditor.TrackingRow import TrackingRow
+from pythonvideoannotator.modules.PathEditor.TrackingRow import TrackingRow
 
 
 def interpolatePositions(values, begin, end, interpolationMode=None):
-    computed_time = np.array(range(begin, end + 1))
+    computed_time = np.array(range(begin, end + 1))  # pylint: disable=no-member
     frames = []
     measures_x = []
     measures_y = []
@@ -18,9 +16,9 @@ def interpolatePositions(values, begin, end, interpolationMode=None):
         measures_x.append(x)
         measures_y.append(y)
 
-    frames = np.array(frames)
-    measures_x = np.array(measures_x)
-    measures_y = np.array(measures_y)
+    frames = np.array(frames)  # pylint: disable=no-member
+    measures_x = np.array(measures_x)  # pylint: disable=no-member
+    measures_y = np.array(measures_y)  # pylint: disable=no-member
 
     if interpolationMode == None:
         kind = 'slinear'

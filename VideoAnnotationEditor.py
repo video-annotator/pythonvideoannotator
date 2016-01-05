@@ -9,6 +9,10 @@ from modules.Timeline.VideoAnnotationTimeline import VideoAnnotationTimeline
 from modules.events_statistics.events_statistics import EventsStatistics
 
 
+def Exit():
+    exit()
+
+
 class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAnnotationTimeline, BaseWidget):
     """Application form"""
 
@@ -31,7 +35,7 @@ class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAn
 
         self.mainmenu.insert(0,
                              {'File': [
-                                 {'Exit': exit}
+                                 {'Exit': Exit}
                              ]
                              }
                              )

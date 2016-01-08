@@ -11,7 +11,7 @@ set JUPYTER_DATA_DIR=%WINPYDIR%\..\settings
 
 set PROJECTNAME="pythonVideoAnnotator"
 set BUILDSETTINGSDIR="%WORKSPACE%\build_settings\win"
-set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\main.py"
+set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\__main__.py"
 set BUILDOUTDIR="%WORKSPACE%\build"
 set DISTOUTDIR="%WORKSPACE%\dist"
 
@@ -25,6 +25,6 @@ echo %DISTOUTDIR%
 @RD /S /Q %BUILDOUTDIR%
 @RD /S /Q %DISTOUTDIR%
 
-rem python setup.py sdist
+python setup.py sdist
 
 pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico --onefile %MAINSCRIPT%

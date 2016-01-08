@@ -16,6 +16,7 @@ Features:
 
 * Ricardo Ribeiro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 * Hugo Cachitas working - collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
+* Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
 
 ![Video annotator screenshot](/docs/screencapture.png?raw=true "Screen")
@@ -24,7 +25,7 @@ Features:
 
 ## Installation & Running
 
-The application was developed and tested with Ubuntu 12.04 and 14.
+The application was developed and tested with Ubuntu 12.04 and 14, OSX El Capitan, Windows 7.
 
 ### Dependencies
 
@@ -41,7 +42,7 @@ The application was developed and tested with Ubuntu 12.04 and 14.
 From the Terminal run:
 
 ```
-python VideoAnnotationEditor.py
+python -m pythonvideoannotator
 ```
 
 

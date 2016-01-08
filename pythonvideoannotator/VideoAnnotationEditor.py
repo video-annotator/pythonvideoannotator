@@ -14,6 +14,10 @@ from pythonvideoannotator.modules.events_statistics.events_statistics import Eve
 def Exit():
     exit()
 
+def start():
+    pyforms.startApp(VideoAnnotationEditor)
+
+
 
 class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAnnotationTimeline, BaseWidget):
     """Application form"""
@@ -71,4 +75,4 @@ class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAn
 
 
 if __name__ == "__main__":
-    pyforms.startApp(VideoAnnotationEditor)
+    pass

@@ -182,16 +182,18 @@ class Stats(BaseWidget):
             self.__do_the_calculations()
 
             events_to_include = self._events.value
+            all_periods_ordered_by_time = sorted(self._get_all_periods(), key=lambda x: x._begin)
 
-            print(self.__find_occurrences(self._duration["START"]))
-            print(self.__find_occurrences(self._duration["END"]))
+            # these are special point events to mark experiment start and end
+            experiment_start_frame_idx = int(all_periods_ordered_by_time[0].begin)
+            experiment_end_frame_idx = int(all_periods_ordered_by_time[-1].begin)
 
-            # these are special point events, we don't care duration and ocurrences
-            events_to_include.remove("START")
-            events_to_include.remove("END")
-
-            experiment_start_frame_idx = self.__find_occurrences(self._duration["START"])[0]
-            experiment_end_frame_idx = self.__find_occurrences(self._duration["END"])[0]
+            try:
+                # these are special point events to mark experiment start and end
+                events_to_include.remove(all_periods_ordered_by_time[0]._title)
+                events_to_include.remove(all_periods_ordered_by_time[-1].title)
+            except Exception as err:
+                print("Warning: {0}".format(str(err)))
 
             self._progress.min = 0
             self._progress.max = self._bounds.value[1] * len(events_to_include)
@@ -208,7 +210,7 @@ class Stats(BaseWidget):
                 for j, label in enumerate(events_to_include):
                     spamwriter.writerow([label])
                     spamwriter.writerow(['Period', ' Duration (s)', ' Total', ' Occurrences'])
-                    events_occur = self.__find_occurrences(self._duration[label])
+                    events_occur = self._find_occurrences(self._duration[label])
                     for k, frame_idx in enumerate(range(experiment_start_frame_idx, experiment_end_frame_idx, framesBin)):
                         groups = self.__event_groups_in_frames_threshold(events_occur, frame_idx, frame_idx + framesBin)
                         groups_count = len(groups)
@@ -230,7 +232,7 @@ class Stats(BaseWidget):
                     spamwriter.writerow([])
                     spamwriter.writerow([])
 
-    def __find_occurrences(self, events):
+    def _find_occurrences(self, events):
         """ 
         Returns list with indexes of where value is equal to 1
         In other words, indexes represent frames that correspond to event occurrences
@@ -266,6 +268,14 @@ class Stats(BaseWidget):
 
         self._graph.value = self._values2display
         self._graph.legends = self._legends
+
+    def _get_all_periods(self):
+        self._time = self._parent
+        res = []
+        for track in self._time.tracks:
+            for delta in track._periods:
+                res.append(delta)
+        return res
 
 
 if __name__ == "__main__":

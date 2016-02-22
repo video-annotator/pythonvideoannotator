@@ -1,6 +1,5 @@
-@echo off
-set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10.3-PythonVideoAnnotator\python-2.7.10
-set WINPYVER=2.7.10.3
+set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10\python-2.7.10
+set WINPYVER=2.7.10
 set HOME=%WINPYDIR%\..\settings
 set WINPYARCH="WIN32"
 
@@ -27,4 +26,4 @@ echo %DISTOUTDIR%
 
 python setup.py sdist
 
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico --onefile %MAINSCRIPT%
+pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico %MAINSCRIPT%

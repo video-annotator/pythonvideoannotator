@@ -14,16 +14,22 @@ set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\__main__.py"
 set BUILDOUTDIR="%WORKSPACE%\build"
 set DISTOUTDIR="%WORKSPACE%\dist"
 
-echo %PROJECTNAME%
-echo %BUILDSETTINGSDIR%
-echo %WORKSPACE%
-echo %MAINSCRIPT%
-echo %BUILDOUTDIR%
-echo %DISTOUTDIR%
+rem echo %PROJECTNAME%
+rem echo %BUILDSETTINGSDIR%
+rem echo %WORKSPACE%
+rem echo %MAINSCRIPT%
+rem echo %BUILDOUTDIR%
+rem echo %DISTOUTDIR%
 
 @RD /S /Q %BUILDOUTDIR%
 @RD /S /Q %DISTOUTDIR%
 
-python setup.py sdist
+pip uninstall -y pyforms
+
+pip install https://github.com/UmSenhorQualquer/pyforms/archive/master.zip
+
+pip show pyforms
+
+rem echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
 
 pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico %MAINSCRIPT%

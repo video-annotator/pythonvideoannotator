@@ -13,3 +13,4 @@ pyControlGUI.egg-info/*
 **/*.out
 **/*.sc
 org.eclipse.core.resources.prefs
+.pydevproject

@@ -1,6 +1,5 @@
-@echo off
-set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10.3-PythonVideoAnnotator\python-2.7.10
-set WINPYVER=2.7.10.3
+set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10\python-2.7.10
+set WINPYVER=2.7.10
 set HOME=%WINPYDIR%\..\settings
 set WINPYARCH="WIN32"
 
@@ -15,16 +14,24 @@ set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\__main__.py"
 set BUILDOUTDIR="%WORKSPACE%\build"
 set DISTOUTDIR="%WORKSPACE%\dist"
 
-echo %PROJECTNAME%
-echo %BUILDSETTINGSDIR%
-echo %WORKSPACE%
-echo %MAINSCRIPT%
-echo %BUILDOUTDIR%
-echo %DISTOUTDIR%
+rem echo %PROJECTNAME%
+rem echo %BUILDSETTINGSDIR%
+rem echo %WORKSPACE%
+rem echo %MAINSCRIPT%
+rem echo %BUILDOUTDIR%
+rem echo %DISTOUTDIR%
 
 @RD /S /Q %BUILDOUTDIR%
 @RD /S /Q %DISTOUTDIR%
 
-python setup.py sdist
+pip uninstall -y pyforms
 
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico --onefile %MAINSCRIPT%
+pip install https://github.com/UmSenhorQualquer/pyforms/archive/master.zip
+
+pip show pyforms
+
+rem echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
+
+pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico %MAINSCRIPT%
+
+python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"

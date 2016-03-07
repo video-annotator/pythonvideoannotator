@@ -1,3 +1,3 @@
-# pyforms import app settings dinamically so we need to inform pyinstaller
+# pyforms import app settings.py dinamically so we need to inform pyinstaller
 
 hiddenimports = ['pythonvideoannotator.settings']

@@ -1,5 +1,5 @@
-set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10\python-2.7.10
-set WINPYVER=2.7.10
+set WINPYDIR=C:\Users\swp\Python\WinPython-32bit-2.7.10.3\python-2.7.10
+set WINPYVER=2.7.10.3
 set HOME=%WINPYDIR%\..\settings
 set WINPYARCH="WIN32"
 
@@ -32,8 +32,9 @@ pip show pyforms
 
 rem echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
 
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico --onefile %MAINSCRIPT%
+pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico --onefile %MAINSCRIPT%
 
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\mouse.ico %MAINSCRIPT%
+pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico %MAINSCRIPT%
 
-python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"
+
+rem python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"

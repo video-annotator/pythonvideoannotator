@@ -15,22 +15,24 @@ __updated__ = "2016-02-25"
 from setuptools import setup, find_packages
 import re
 
-version = ''
-with open('pycontrolgui/__init__.py', 'r') as fd:
-    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-                        fd.read(), re.MULTILINE).group(1)
+with open('pythonvideoannotator/__init__.py', 'r') as fd:
+    __version__     = eval(fd.readline().split('=')[1])
+    __author__      = eval(fd.readline().split('=')[1])
+    __credits__     = eval(fd.readline().split('=')[1])
+    __license__     = eval(fd.readline().split('=')[1])
+    __maintainer__  = eval(fd.readline().split('=')[1])
+    __email__       = eval(fd.readline().split('=')[1])
+    __status__      = eval(fd.readline().split('=')[1])
 
-if not version:
-    raise RuntimeError('Cannot find version information')
 
 setup(
 
     name='pythonVideoAnnotator',
-    version=version,
+    version=__version__,
     description=""" Python Video Annotator is a standalone application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos. """,
-    author='Ricardo Ribeiro',
-    author_email='rribeiro@neuro.fchampalimaud.org',
-    license='MIT',
+    author=__author__,
+    author_email=__email__,
+    license=__license__,
     url='https://github.com/UmSenhorQualquer/pythonVideoAnnotator',
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples', 'deploy', 'reports']),
     install_requires=[

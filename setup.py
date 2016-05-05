@@ -71,7 +71,7 @@ setup(
     url='https://github.com/UmSenhorQualquer/pythonVideoAnnotator',
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples', 'deploy', 'reports']),
     install_requires=[
-        'pyforms == 0.1.4.dev7'
+        'pyforms == 0.1.4.dev10'
     ],
     entry_points={
         'console_scripts': [

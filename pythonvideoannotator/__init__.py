@@ -13,3 +13,4 @@ __version__ = "1.0.0.dev1"
 __maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
 __email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ = "Development"
+

@@ -15,10 +15,23 @@ __updated__ = "2016-02-25"
 from setuptools import setup, find_packages
 import re
 
-version = ''
 with open('pycontrolgui/__init__.py', 'r') as fd:
-    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-                        fd.read(), re.MULTILINE).group(1)
+    try:
+        __version__ = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', fd.read(), re.MULTILINE).group(1)
+    except:
+        __version__ = '0.0'
+    try:
+        author_line = re.search(r'^__author__\s*=\s*(.+)', fd.read(), re.MULTILINE).group(1)
+        __author__ = eval(fd.readline().split('=')[1])
+    except:
+    __credits__ = eval(fd.readline().split('=')[1])
+    __license__ = eval(fd.readline().split('=')[1])
+    __maintainer__ = eval(fd.readline().split('=')[1])
+    __email__ = eval(fd.readline().split('=')[1])
+    __status__ = eval(fd.readline().split('=')[1])
+
+
+    __maintainer__\s*=\s*(.+)
 
 if not version:
     raise RuntimeError('Cannot find version information')

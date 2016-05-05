@@ -34,4 +34,7 @@ rem echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --
 
 pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico --onefile %MAINSCRIPT%
 
-rem python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"
+pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico %MAINSCRIPT%
+
+
+python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"

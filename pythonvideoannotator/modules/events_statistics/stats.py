@@ -246,11 +246,12 @@ class Stats(BaseWidget):
 
     def __event_groups_in_frames_threshold(self, events_occur, frames_threshold_first_index, frames_threshold_last_index):
         """
-        Returns list with events occurrences (groups)
+        Returns list with events occurrences (groups) starting at frames_threshold_first_index, and before frames_threshold_last_index
         e.g. 
-        events_occur = [1, 2, 4, 5, 6, 8, 11, 12, 13, 14, 15, 16, 17, 18]
+        events_occur = [1, 2, 4, 5, 6, 8, 11, 12, 13, 14, 15, 16]
+        frames_threshold_first_index = 5
         frames_threshold_last_index = 15 
-        returns [[1, 2], [4, 5, 6], [8], [11, 12, 13, 14, 15, 16, 17, 18]]
+        returns [[8], [11, 12, 13, 14, 15, 16]
         """
         prev = events_occur[0]
         last = 0
@@ -262,7 +263,7 @@ class Stats(BaseWidget):
             prev = i
         final.append(events_occur[last:])
 
-        return list(occur for occur in final if occur[0] >= frames_threshold_first_index and occur[0] <= frames_threshold_last_index)
+        return list(occur for occur in final if occur[0] >= frames_threshold_first_index and occur[0] < frames_threshold_last_index)
 
     def __generate_graph(self):
         self.__do_the_calculations()

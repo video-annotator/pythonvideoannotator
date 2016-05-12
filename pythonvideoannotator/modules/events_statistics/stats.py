@@ -211,7 +211,8 @@ class Stats(BaseWidget):
                     spamwriter.writerow([label])
                     spamwriter.writerow(['Period', ' Duration (s)', ' Total', ' Occurrences'])
                     events_occur = self._find_occurrences(self._duration[label])
-                    for k, frame_idx in enumerate(range(experiment_start_frame_idx, experiment_end_frame_idx, framesBin)):
+                    for k, frame_idx in enumerate(range(experiment_start_frame_idx, experiment_end_frame_idx, int(framesBin))):
+				
                         groups = self.__event_groups_in_frames_threshold(events_occur, frame_idx, frame_idx + framesBin)
                         groups_count = len(groups)
                         frames_count = sum(self._duration[label][frame_idx:frame_idx + framesBin])

@@ -5,7 +5,7 @@
 
 """
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 __author__ = ["Ricardo Ribeiro", "Carlos Mao de Ferro", "Hugo Cachitas"]
 __credits__ = ["Ricardo Ribeiro", "Carlos Mao de Ferro", "Hugo Cachitas"]
 __license__ = "Attribution-NonCommercial-ShareAlike 4.0 International"

@@ -1,30 +1,19 @@
-# !/usr/bin/python3
+# !/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-""" pyControlGUI
-
-"""
+SETTINGS_PRIORITY = 10
 
 import logging
 
-__author__ = "Ricardo Ribeiro"
-__copyright__ = "Copyright 2016 Champalimaud Foundation"
-__credits__ = "Ricardo Ribeiro"
-__license__ = "MIT"
-__maintainer__ = ["Ricardo Ribeiro", "Carlos Mão de Ferro"]
-__email__ = ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
-__status__ = "Development"
-
-LOG_FILENAME = "pythonvideoannotator"
-
-APP_NAME = "pythonvideoannotator"
+APP_LOG_FILENAME = 'pythonvideoannotator.log'
 APP_LOG_HANDLER_FILE_LEVEL = logging.DEBUG
 APP_LOG_HANDLER_CONSOLE_LEVEL = logging.INFO
 
-WINDOW_SIZE = [50, 50, 800, 600]
-LOAD_PROJECT_ON_STARTUP = False
+PYFORMS_LOG_HANDLER_FILE_LEVEL = logging.DEBUG
+PYFORMS_LOG_HANDLER_CONSOLE_LEVEL = logging.INFO
 
-try:
-    from myconf import *
-except:
-    pass
+SAVED_VIDEO_FILE_PATH = ""
+SAVED_GRAPH_FILE_PATH = ""
+SAVED_BONSAI_FILE_PATH = ""
+
+GENERIC_EDITOR_WINDOW_GEOMETRY = 100, 100, 800, 600

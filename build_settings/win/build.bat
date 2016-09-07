@@ -28,17 +28,26 @@ set BUILDSETTINGSDIR="%WORKSPACE%\build_settings\win"
 set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\__main__.py"
 set BUILDOUTDIR="%WORKSPACE%\build"
 set DISTOUTDIR="%WORKSPACE%\dist"
+set "ICONNAME=cf_icon_128x128.ico"
+
+python setup.py --version 	> software_version.txt
+"C:\Program Files\Git\bin\git.exe" rev-list  --all --count > git_version.txt
+SET /p DEV_VERSION= < software_version.txt
+SET /p GIT_VERSION= < git_version.txt
+SET DEV_VERSION=%DEV_VERSION%_git%GIT_VERSION%_build%BUILD_NUMBER%
+DEL software_version.txt
+DEL git_version.txt
 
 :: clean workspace
 @RD /S /Q %BUILDOUTDIR%
 @RD /S /Q %DISTOUTDIR%
 
 :: echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
-
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico --onefile %MAINSCRIPT%
-
-pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\cf_icon_128x128.ico %MAINSCRIPT%
-
+IF /I "%GIT_BRANCH%" EQU "master" (
+	pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir --onefile  --noconsole "%MAINSCRIPT%"
+) ELSE (
+	pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onedir --onefile "%MAINSCRIPT%"
+)
 
 :: python %WINPYDIR%\Scripts\zip.py "%WORKSPACE%\dist\pythonVideoAnnotator" "%WORKSPACE%\dist\pythonVideoAnnotator.zip"
 

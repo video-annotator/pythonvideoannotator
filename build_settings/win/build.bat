@@ -23,14 +23,14 @@ set "JUPYTER_DATA_DIR=%WINPYDIR%\..\settings"
 echo "PYTHON VERSION:"
 python --version
 
-set PROJECTNAME="pythonVideoAnnotator"
-set BUILDSETTINGSDIR="%WORKSPACE%\build_settings\win"
-set MAINSCRIPT="%WORKSPACE%\pythonvideoannotator\__main__.py"
-set BUILDOUTDIR="%WORKSPACE%\build"
-set DISTOUTDIR="%WORKSPACE%\dist"
+set "PROJECTNAME=pythonVideoAnnotator"
+set "BUILDSETTINGSDIR=%WORKSPACE%\build_settings\win"
+set "MAINSCRIPT=%WORKSPACE%\pythonvideoannotator\__main__.py"
+set "BUILDOUTDIR=%WORKSPACE%\build"
+set "DISTOUTDIR=%WORKSPACE%\dist"
 set "ICONNAME=cf_icon_128x128.ico"
 
-python setup.py --version 	> software_version.txt
+python setup.py --version > software_version.txt
 "C:\Program Files\Git\bin\git.exe" rev-list  --all --count > git_version.txt
 SET /p DEV_VERSION= < software_version.txt
 SET /p GIT_VERSION= < git_version.txt

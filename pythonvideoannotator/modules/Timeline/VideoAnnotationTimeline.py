@@ -41,7 +41,7 @@ class VideoAnnotationTimeline(object):
         # Flag to avoid recursive position change, between the player and the timeline
         self._update_time = False
         self._player.video_index = self._time.value
-        self._player.updateFrame()
+        self._player.update_frame()
         self._update_time = True
 
     def __timeline_play_video(self):

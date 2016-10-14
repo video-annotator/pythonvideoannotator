@@ -122,7 +122,7 @@ class TrackingDataFile:
             v.position = (x, y)
 
     def select(self, index, x, y):
-        if index <= len(self._data):
+        if index <= len(self._data) and index>=0:
             item = self._data[index]
             if item != None and item.collide(x, y):
                 return item

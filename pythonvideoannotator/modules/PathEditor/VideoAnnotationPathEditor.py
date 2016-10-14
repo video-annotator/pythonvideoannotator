@@ -46,6 +46,7 @@ class VideoAnnotationPathEditor(object):
                                                'Interpolate': self.__interpolatePathPoints
                                            })
 
+        
         super(VideoAnnotationPathEditor, self).initForm()
 
     def __setInterpolationType(self):
@@ -85,7 +86,7 @@ class VideoAnnotationPathEditor(object):
             z = self._fileSetupWindow.zColumn
 
             self._data = TrackingDataFile(self._fileSetupWindow.filename, separator, frame, x, y, z)
-            self._player.helpText = self._DEFAULT_HELP_MSG
+            self._player.help_text = self._DEFAULT_HELP_MSG
 
             self._fileSetupWindow.close()
 
@@ -225,8 +226,8 @@ class VideoAnnotationPathEditor(object):
     def pathEditMode(self, value):
         self._pathEditMode = value
         if value:
-            self._player.helpText = 'Path edit mode: Contruct the path by selecting a pixel per frame.'
+            self._player.help_text = 'Click to set a point'
         else:
-            self._player.helpText = self._DEFAULT_HELP_MSG
+            self._player.help_text = self._DEFAULT_HELP_MSG
             self._points = []
         self._player.refresh()

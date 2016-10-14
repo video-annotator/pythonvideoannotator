@@ -21,4 +21,4 @@ GENERIC_EDITOR_WINDOW_GEOMETRY = 100, 100, 800, 600
 
 
 
-VIDEO_FILE_PATH = 'C:/Users/swp/Downloads/Ai35_3_Ai35xa2aCre14Hz_35ms_Lside_Lp_7.1_smt_out (1).avi'
+#VIDEO_FILE_PATH = 'C:/Users/swp/Downloads/Ai35_3_Ai35xa2aCre14Hz_35ms_Lside_Lp_7.1_smt_out (1).avi'

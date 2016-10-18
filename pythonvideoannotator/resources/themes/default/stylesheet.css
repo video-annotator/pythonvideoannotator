@@ -1,9 +1,14 @@
 
-QMainWindow{
+
+QMainWindow, QWidget{
 	background-color: white;
 	font-size: 11pt;
 	line-height: 18px;
 	color: #333;
+}
+
+QMenuBar{
+	background-color: none;
 }
 
 [accessibleName="BaseWidget"]{

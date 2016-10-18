@@ -13,6 +13,7 @@ from pysettings import conf;
 
 conf += 'pythonvideoannotator.settings'
 
+
 # load the user settings in case the file exists
 try:
 	import user_settings

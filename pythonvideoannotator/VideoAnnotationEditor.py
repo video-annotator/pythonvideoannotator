@@ -23,6 +23,9 @@ class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAn
 	"""Application form"""
 
 	def __init__(self):
+		global conf;
+		conf += 'pythonvideoannotator.resources'  # Resources can only be loaded after pyqt is running
+
 		super(VideoAnnotationEditor, self).__init__('Video annotation editor')
 
 		self._video = ControlFile('Video')
@@ -41,13 +44,15 @@ class VideoAnnotationEditor(EventsStatistics, VideoAnnotationPathEditor, VideoAn
 		self._time.key_release_event = self.__time_key_release_event
 
 		self.mainmenu.insert(0,
-		                     {'File': [
-			                     {'Exit': Exit}
-		                     ]
-		                     }
-		                     )
+			{'File': [ {'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} ]}
+		)
+
+		
+	def initForm(self):
+		super(VideoAnnotationEditor, self).initForm()
 
 		if conf.VIDEO_FILE_PATH: self._video.value = conf.VIDEO_FILE_PATH
+		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
 
 	######################################################################################
 	#### EVENTS ##########################################################################

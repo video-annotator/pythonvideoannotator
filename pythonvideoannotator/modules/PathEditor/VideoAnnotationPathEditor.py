@@ -1,4 +1,5 @@
 import cv2
+from pysettings import conf
 from PyQt4 import QtCore, QtGui
 from pythonvideoannotator.modules.PathEditor.TrackingDataFile import TrackingDataFile, interpolatePositions
 from pythonvideoannotator.modules.PathEditor.ChooseColumnsWindow import ChooseColumnsWindow
@@ -23,16 +24,16 @@ class VideoAnnotationPathEditor(object):
 
         self.mainmenu.append(
             {'Path': [
-                {'Import': self.__import_tracking_file},
-                {'Export as': self.__export_tracking_file},
+                {'Import': self.__import_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_IMPORT},
+                {'Export as': self.__export_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT},
                 '-',
-                {'Save changes': self.__save_tracking_file},
+                {'Save changes': self.__save_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT},
                 '-',
-                {'Edit': self.__editPath},
-                {'Interpolate': self.__interpolatePathPoints},
-                {'Interpolation mode': self.__setInterpolationType},
+                {'Edit': self.__editPath, 'icon': conf.ANNOTATOR_ICON_EDIT},
+                {'Interpolate': self.__interpolatePathPoints, 'icon': conf.ANNOTATOR_ICON_EXIT},
+                {'Interpolation mode': self.__setInterpolationType, 'icon': conf.ANNOTATOR_ICON_EXIT},
                 '-',
-                {'Delete': self.__deletePath}
+                {'Delete': self.__deletePath, 'icon': conf.ANNOTATOR_ICON_EXIT}
             ]
             }
         )

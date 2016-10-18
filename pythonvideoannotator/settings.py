@@ -21,8 +21,8 @@ GENERIC_EDITOR_WINDOW_GEOMETRY = 2000, 100, 800, 600
 
 
 
-VIDEO_FILE_PATH = '/home/ricardo/Downloads/Group1.avi'
-CHART_FILE_PATH = '/home/ricardo/Desktop/01Apollo201403210900/01Apollo201403210900_out.csv', 0, 1
+#VIDEO_FILE_PATH = '/home/ricardo/Downloads/Group1.avi'
+#CHART_FILE_PATH = '/home/ricardo/Desktop/01Apollo201403210900/01Apollo201403210900_out.csv', 0, 1
 
 
 PYFORMS_STYLESHEET = os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet.css')

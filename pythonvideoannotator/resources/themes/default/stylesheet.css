@@ -1,15 +1,20 @@
 
 
-QMainWindow, QWidget{
+QMainWindow, QDialog, QFrame{
 	background-color: white;
 	font-size: 11pt;
 	line-height: 18px;
 	color: #333;
 }
-
+/*
 QMenuBar{
 	background-color: none;
-}
+	font-size: none;
+	line-height: none;
+	color: none;
+}*/
+
+
 
 [accessibleName="BaseWidget"]{
 	background-color: white;
@@ -42,10 +47,6 @@ QComboBox QAbstractItemView{
 	margin: 0px;
 }
 
-QSplitter{
-	background-color: #CACBCD;	
-	color: #CACBCD;
-}
 
 QPushButton{
 	background-color: #E0E1E2;

@@ -30,10 +30,10 @@ class VideoAnnotationPathEditor(object):
                 {'Save changes': self.__save_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT},
                 '-',
                 {'Edit': self.__editPath, 'icon': conf.ANNOTATOR_ICON_EDIT},
-                {'Interpolate': self.__interpolatePathPoints, 'icon': conf.ANNOTATOR_ICON_EXIT},
-                {'Interpolation mode': self.__setInterpolationType, 'icon': conf.ANNOTATOR_ICON_EXIT},
+                {'Interpolate': self.__interpolatePathPoints, 'icon': conf.ANNOTATOR_ICON_INTERPOLATE},
+                {'Interpolation mode': self.__setInterpolationType, 'icon': conf.ANNOTATOR_ICON_INTERPOLATION_SETTINGS},
                 '-',
-                {'Delete': self.__deletePath, 'icon': conf.ANNOTATOR_ICON_EXIT}
+                {'Delete': self.__deletePath, 'icon': conf.ANNOTATOR_ICON_DELETE}
             ]
             }
         )

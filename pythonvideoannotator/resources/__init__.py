@@ -25,5 +25,8 @@ PYFORMS_ICON_EVENTTIMELINE_EXPORT = QtGui.QIcon(path('export.png'))
 PYFORMS_ICON_FILE_OPEN = QtGui.QIcon(path('link.png'))
 
 
-ANNOTATOR_ICON_EXIT = QtGui.QIcon(path('exit.png'))
-ANNOTATOR_ICON_EDIT = QtGui.QIcon(path('edit.png'))
+ANNOTATOR_ICON_EXIT 	= QtGui.QIcon(path('exit.png'))
+ANNOTATOR_ICON_EDIT 	= QtGui.QIcon(path('edit.png'))
+ANNOTATOR_ICON_DELETE 	= QtGui.QIcon(path('delete.png'))
+ANNOTATOR_ICON_INTERPOLATE 	= QtGui.QIcon(path('interpolate.png'))
+ANNOTATOR_ICON_INTERPOLATION_SETTINGS 	= QtGui.QIcon(path('settings.png'))

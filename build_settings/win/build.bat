@@ -46,14 +46,18 @@ DEL git_version.txt
 :: echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
 IF %COMPILE_2_FOLDER% EQU true (
 	IF /I "%GIT_BRANCH%" EQU "master" (
+		echo pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir --noconsole "%MAINSCRIPT%"
 		pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir --noconsole "%MAINSCRIPT%"
 	) ELSE (
+		echo pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onedir "%MAINSCRIPT%"
 		pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onedir "%MAINSCRIPT%"
 	)
 ) ELSE (
 	IF /I "%GIT_BRANCH%" EQU "master" (
+		echo pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onefile --noconsole "%MAINSCRIPT%"
 		pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onefile --noconsole "%MAINSCRIPT%"
 	) ELSE (
+		echo pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onefile "%MAINSCRIPT%"
 		pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onefile "%MAINSCRIPT%"
 	)
 )
@@ -68,5 +72,5 @@ c:\curl\curl.exe --progress-bar --netrc-file c:\curl_auth\bitbucket_auth.txt -X 
 ::c:\curl\curl.exe --progress-bar --netrc-file c:\curl_auth\bitbucket_auth.txt -X POST https://api.bitbucket.org/2.0/repositories/fchampalimaud/pythonvideoannotator/downloads -F files=@"%WORKSPACE%\dist\%PROJECTNAME%_v%DEV_VERSION%_DEV.zip" > curl_output.log
 
 ) ELSE (
-echo "Skipping upload to SourceForge"
+	echo "Skipping upload to SourceForge"
 )

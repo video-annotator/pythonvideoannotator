@@ -1,30 +1,29 @@
 import os
 
 
-class VideoAnnotationTimeline(object):
+class Module(object):
 
-    def __init__(self, title):
+    def __init__(self):
         """
         This implements the Path edition functionality
         """
-        super(VideoAnnotationTimeline, self).__init__(title)
+        super(Module, self).__init__()
         self._update_time = True  # Use to avoid double video jump 2 frame trigger
 
     def initForm(self):
         self._time.pointerChanged = self.__time_changed
-        self._time.isPlaying = self.__timeline_play_video
-        self._time.fpsChanged = self.__timeline_fps_changed
+        self._time.isPlaying      = self.__timeline_play_video
+        self._time.fpsChanged     = self.__timeline_fps_changed
         #self._time.getExportFilename= self.__createFilename2Export
 
-        super(VideoAnnotationTimeline, self).initForm()
+        super(Module, self).initForm()
 
     ######################################################################################
     #### HELPERS #########################################################################
     ######################################################################################
 
     def __createFilename2Export(self, nameformat="%s_events.csv"):
-        if self._filename.value == '':
-            return 'untitled.csv'
+        if self._filename.value == '': return 'untitled.csv'
         filepath = os.path.dirname(self._filename.value)
         filename = os.path.basename(self._filename.value)
         name, ext = os.path.splitext(filename)
@@ -61,3 +60,8 @@ class VideoAnnotationTimeline(object):
         """Function called when the FPS rate is changed by the timeline."""
         self._player._form.videoFPS.setValue(self._time._time.fps)
         self._player.videoFPS_valueChanged()
+
+    def process_frame(self, frame): 
+        if self._update_time: self._time.value = self._player.video_index
+
+        return super(Module, self).process_frame(frame)

@@ -1,17 +1,17 @@
 import cv2
 from pysettings import conf
 from PyQt4 import QtCore, QtGui
-from pythonvideoannotator.modules.PathEditor.TrackingDataFile import TrackingDataFile, interpolatePositions
-from pythonvideoannotator.modules.PathEditor.ChooseColumnsWindow import ChooseColumnsWindow
+from pythonvideoannotator.modules.patheditor.TrackingDataFile import TrackingDataFile, interpolatePositions
+from pythonvideoannotator.modules.patheditor.ChooseColumnsWindow import ChooseColumnsWindow
 
 
-class VideoAnnotationPathEditor(object):
+class Module(object):
 
-    def __init__(self, title):
+    def __init__(self):
         """
         This implements the Path edition functionality
         """
-        super(VideoAnnotationPathEditor, self).__init__(title)
+        super(Module, self).__init__()
         self._selectedItems = []  # Stores the selected tracked objects
         self._data = TrackingDataFile()  # Stores the tracked path
         self._points = []  # Temporary points. Draw in blue
@@ -48,7 +48,7 @@ class VideoAnnotationPathEditor(object):
                                            })
 
         
-        super(VideoAnnotationPathEditor, self).initForm()
+        super(Module, self).initForm()
 
     def __setInterpolationType(self):
         items = ("Auto", "Linear", "Quadratic", "Cubic")
@@ -156,6 +156,7 @@ class VideoAnnotationPathEditor(object):
             else:
                 self._selectedItems = []  # No object selected: remove previous selections
             self._selectedItems = sorted(self._selectedItems, key=lambda x: x.frame)
+            self._player.refresh()
 
         if event.button() == 1 and self._pathEditMode:
             self._data.setPosition(self._player.video_index, x, y)
@@ -185,8 +186,6 @@ class VideoAnnotationPathEditor(object):
         Function called before render each frame
         """
         index = self._player.video_index
-        if self._update_time:
-            self._time.value = index
 
         # Draw the current blobs position
         if self._player.isPainted and len(self._data) > 0:

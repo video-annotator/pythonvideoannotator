@@ -1,7 +1,7 @@
 import csv
 import numpy as np
 from scipy.interpolate import interp1d
-from pythonvideoannotator.modules.PathEditor.TrackingRow import TrackingRow
+from pythonvideoannotator.modules.patheditor.TrackingRow import TrackingRow
 
 
 def interpolatePositions(values, begin, end, interpolationMode=None):

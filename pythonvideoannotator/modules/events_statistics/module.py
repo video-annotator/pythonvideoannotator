@@ -1,10 +1,10 @@
 from pythonvideoannotator.modules.events_statistics.stats import Stats
 
 
-class EventsStatistics(object):
+class Module(object):
 
-    def __init__(self, title):
-        super(EventsStatistics, self).__init__(title)
+    def __init__(self):
+        super(Module, self).__init__()
 
         self.mainmenu.append(
             {'Statistics': [
@@ -13,6 +13,4 @@ class EventsStatistics(object):
             }
         )
 
-    def __open_events_statistics_window(self):
-        win = Stats(self._time, parentWindow=self)
-        win.show()
+    def __open_events_statistics_window(self): Stats(self._time, parentWindow=self).show()

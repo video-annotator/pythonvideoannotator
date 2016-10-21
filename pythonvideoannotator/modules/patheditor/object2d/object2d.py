@@ -1,54 +1,28 @@
 import csv
-import numpy as np
-from scipy.interpolate import interp1d
-from pythonvideoannotator.modules.patheditor.TrackingRow import TrackingRow
+from pythonvideoannotator.modules.patheditor.object2d.moment import Moment
+
+from pyforms import BaseWidget
+from pyforms.Controls import ControlButton
 
 
-def interpolatePositions(values, begin, end, interpolationMode=None):
-    computed_time = np.array(range(begin, end + 1))  # pylint: disable=no-member
-    frames = []
-    measures_x = []
-    measures_y = []
-
-    for i, pos in values:
-        x, y = pos
-        frames.append(i)
-        measures_x.append(x)
-        measures_y.append(y)
-
-    frames = np.array(frames)  # pylint: disable=no-member
-    measures_x = np.array(measures_x)  # pylint: disable=no-member
-    measures_y = np.array(measures_y)  # pylint: disable=no-member
-
-    if interpolationMode == None:
-        kind = 'slinear'
-        if len(frames) == 3:
-            kind = 'quadratic'
-        if len(frames) >= 4:
-            kind = 'cubic'
-    else:
-        kind = interpolationMode
-
-    cubic_interp = interp1d(frames, measures_x, kind=kind)
-    measures_x = cubic_interp(computed_time)
-    cubic_interp = interp1d(frames, measures_y, kind=kind)
-    measures_y = cubic_interp(computed_time)
-
-    results = []
-    for frame, x, y in zip(range(begin, end + 1), measures_x, measures_y):
-        results.append([frame, (x, y)])
-    return results
 
 
-class TrackingDataFile:
+
+class Object2d(BaseWidget):
 
     def __init__(self, filename=None, separator=',', frameCol=0, xCol=1, yCol=2, zCol=None):
+        super(Object2d, self).__init__('2D Object')
+
+        self._mark_pto_btn = ControlButton('Mark point')
+
+        self._formset   = [ '_mark_pto_btn' ]
+
         self._data = []
 
-        TrackingRow.FRAME_COL = frameCol
-        TrackingRow.X_COL = xCol
-        TrackingRow.Y_COL = yCol
-        TrackingRow.Z_COL = zCol
+        Moment.FRAME_COL = frameCol
+        Moment.X_COL = xCol
+        Moment.Y_COL = yCol
+        Moment.Z_COL = zCol
 
         self._separator = separator
         if filename != None and filename != '':
@@ -60,10 +34,10 @@ class TrackingDataFile:
             data = []
 
             for i, row in enumerate(spamreader):
-                if TrackingRow.TOTAL_COLS < len(row):
-                    TrackingRow.TOTAL_COLS = len(row)
+                if Moment.TOTAL_COLS < len(row):
+                    Moment.TOTAL_COLS = len(row)
 
-                rowdata = TrackingRow(row)
+                rowdata = Moment(row)
 
                 # If the first frame is not 0 then insert none values until the first frame with the position
                 if len(data) == 0 and rowdata.frame > 0:
@@ -93,7 +67,7 @@ class TrackingDataFile:
             if self._data[frame] != None:
                 self._data[frame].position = pos
             else:
-                v = TrackingRow()
+                v = Moment()
                 v.frame = frame
                 v.position = pos
                 self._data[frame] = v
@@ -113,7 +87,7 @@ class TrackingDataFile:
                 self._data.append(None)
 
         if self._data[index] == None:
-            v = TrackingRow()
+            v = Moment()
             v.frame = index
             v.position = (x, y)
             self._data[index] = v

@@ -1,9 +1,11 @@
 import cv2
 from pysettings import conf
 from PyQt4 import QtCore, QtGui
-from pythonvideoannotator.modules.patheditor.TrackingDataFile import TrackingDataFile, interpolatePositions
-from pythonvideoannotator.modules.patheditor.ChooseColumnsWindow import ChooseColumnsWindow
-
+from pythonvideoannotator.modules.patheditor.object2d.object2d              import Object2d
+from pythonvideoannotator.modules.patheditor.ChooseColumnsWindow            import ChooseColumnsWindow
+from pythonvideoannotator.modules.patheditor.objects_window                 import ObjectsWindow
+from pythonvideoannotator.modules.patheditor.object2d.interpolation         import interpolate_positions
+from pyforms.Controls import ControlDockWidget
 
 class Module(object):
 
@@ -12,8 +14,15 @@ class Module(object):
         This implements the Path edition functionality
         """
         super(Module, self).__init__()
+
+
+        self._right_docker          = ControlDockWidget(side=ControlDockWidget.SIDE_RIGHT)        
+        self._right_docker.value    = self._objects_window = ObjectsWindow(parent=self)
+        #self._right_docker.hide()
+
+        
         self._selectedItems = []  # Stores the selected tracked objects
-        self._data = TrackingDataFile()  # Stores the tracked path
+        self._data = Object2d()  # Stores the tracked path
         self._points = []  # Temporary points. Draw in blue
         self._pathEditMode = False  # Path edit mode flag
         self._interpolationMode = None
@@ -24,6 +33,7 @@ class Module(object):
 
         self.mainmenu.append(
             {'Path': [
+                {'Show objects': self._right_docker.show },
                 {'Import': self.__import_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_IMPORT},
                 {'Export as': self.__export_tracking_file, 'icon': conf.PYFORMS_ICON_EVENTTIMELINE_EXPORT},
                 '-',
@@ -46,9 +56,9 @@ class Module(object):
                                                'Edit': self.__editPath,
                                                'Interpolate': self.__interpolatePathPoints
                                            })
-
         
         super(Module, self).initForm()
+
 
     def __setInterpolationType(self):
         items = ("Auto", "Linear", "Quadratic", "Cubic")
@@ -178,7 +188,7 @@ class Module(object):
             data = self._data[i]
             if data != None and data.position != None:
                 positions.append([i, data.position])
-        positions = interpolatePositions(positions, begin, end, interpolationMode=self._interpolationMode)
+        positions = interpolate_positions(positions, begin, end, interpolationMode=self._interpolationMode)
         self._points = [pos for frame, pos in positions]
 
     def process_frame(self, frame):

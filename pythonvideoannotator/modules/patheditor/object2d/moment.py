@@ -2,7 +2,7 @@ import math
 import cv2
 
 
-class TrackingRow(object):
+class Moment(object):
 
     FRAME_COL = 0
     X_COL = 1

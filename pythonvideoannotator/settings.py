@@ -21,12 +21,10 @@ SAVED_GRAPH_FILE_PATH = ""
 SAVED_BONSAI_FILE_PATH = ""
 
 MAIN_WINDOW_GEOMETRY = 100, 200, 800, 600
-
-
+MAIN_WINDOW_GEOMETRY = 1600, 200, 800, 600
 
 VIDEO_FILE_PATH = '/home/ricardo/Desktop/Exemplo-1.ogv'
 #CHART_FILE_PATH = '/home/ricardo/Desktop/01Apollo201403210900/01Apollo201403210900_out.csv', 0, 1
-
 
 PYFORMS_STYLESHEET 			= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet.css')
 PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet_darwin.css')

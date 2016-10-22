@@ -11,12 +11,15 @@ class Module(object):
 		"""
 		super(Module, self).__init__()
 
-		self._window = TrackingWindow()
+
+		self._window = TrackingWindow(self)
 
 		self.mainmenu.append(
 			{'Tracking': [
 					{'Open tracking': self._window.show },
 			]}
 		)
+
+	
 
 

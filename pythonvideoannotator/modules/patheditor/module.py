@@ -37,3 +37,5 @@ class Module(object):
 		self._objects_window.draw(frame)
 		return frame
 
+	@property
+	def objects(self): return self._objects_window.objects

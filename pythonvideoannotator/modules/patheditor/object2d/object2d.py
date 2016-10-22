@@ -11,11 +11,13 @@ from pythonvideoannotator.modules.patheditor.object2d.interpolation import inter
 class Object2d(BaseWidget):
 
 	def __init__(self, 
+		name=None,
 		parent=None, 	filename=None, 	sep=',', 
 		frameCol=0, 	xCol=1, 		yCol=2, 	zCol=None
 	):
 		
 		super(Object2d, self).__init__('2D Object')
+		self._name 		= name
 		self._parent 	= parent
 		self._path 	 	= [] #path of the object
 		self._tmp_path 	= [] #store a temporary path to pre-visualize de interpolation
@@ -297,4 +299,7 @@ class Object2d(BaseWidget):
 
 	@property
 	def mainwindow(self): return self._parent.mainwindow
+
+	@property
+	def name(self): return self._name
 	

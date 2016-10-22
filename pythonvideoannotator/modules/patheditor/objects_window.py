@@ -80,9 +80,10 @@ class ObjectsWindow(BaseWidget):
 			y 			= self._csvparser_win.yColumn
 			z 			= self._csvparser_win.zColumn
 
-			obj = Object2d(self, self._csvparser_win.filename, separator, frame, x, y, z)
+			name = os.path.basename( self._csvparser_win.filename )
+			obj = Object2d(name, self, self._csvparser_win.filename, separator, frame, x, y, z)
 			self._csvparser_win.close()
-			self._objects += [ os.path.basename( self._csvparser_win.filename ) ]
+			self._objects += [ name ]
 			self._objs.append( obj )
 
 
@@ -92,8 +93,9 @@ class ObjectsWindow(BaseWidget):
 			self._details.value.show()
 		
 	def __add_object(self):
-		self._objects += ['New object {0}'.format(len(self._objects.value))]
-		obj = Object2d(parent=self)
+		name = 'New object {0}'.format(len(self._objects.value))
+		self._objects += [name]
+		obj = Object2d(name, parent=self)
 		self._objs.append( obj )
 		
 		return obj
@@ -115,3 +117,6 @@ class ObjectsWindow(BaseWidget):
 
 	@property
 	def mainwindow(self): return self._parent
+
+	@property
+	def objects(self): return self._objs

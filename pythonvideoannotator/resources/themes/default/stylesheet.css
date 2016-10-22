@@ -61,6 +61,12 @@ QPushButton:hover{
 	background-color: #CACBCD;	
 }
 
+QPushButton:checked{
+	background-color: #2185D0;
+	color: white;
+	border: 1px solid #999;
+}
+
 
 
 QTreeWidget{

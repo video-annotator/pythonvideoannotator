@@ -27,7 +27,7 @@ class VideoAnnotationEditor(BaseWidget):
 		self._formset 	= ['_video', '_player']
 
 		self._dock.value 				= self._time
-		self._video.changed 			= self.__video_changed
+		self._video.changed 			= self.video_changed_evt
 		self._player.processFrame 		= self.process_frame
 		self._player.onClick 			= self.onPlayerClick
 		self._time.key_release_event 	= self.__time_key_release_event
@@ -47,7 +47,7 @@ class VideoAnnotationEditor(BaseWidget):
 	#### EVENTS ##########################################################################
 	######################################################################################
 
-	def __video_changed(self):
+	def video_changed_evt(self):
 		self._player.value 	= self._video.value
 		self._time.max 		= self._player.max
 

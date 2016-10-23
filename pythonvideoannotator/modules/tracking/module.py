@@ -20,6 +20,9 @@ class Module(object):
 			]}
 		)
 
+	def video_changed_evt(self):
+		super(Module, self).video_changed_evt()
+		self._window.video_filename = self._video.value
 	
 
 

@@ -33,7 +33,14 @@ class VideoAnnotationEditor(BaseWidget):
 		self._time.key_release_event 	= self.__time_key_release_event
 
 		self.mainmenu.insert(0,
-			{'File': [ {'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} ]}
+			{'File': [
+				{'Open': Exit, 'icon': conf.ANNOTATOR_ICON_OPEN},
+				'-',
+				{'Save': Exit, 'icon': conf.ANNOTATOR_ICON_SAVE},
+				{'Save as': Exit, 'icon': conf.ANNOTATOR_ICON_SAVE},
+				'-',
+				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
+			]}
 		)
 
 		
@@ -42,6 +49,24 @@ class VideoAnnotationEditor(BaseWidget):
 
 		if conf.VIDEO_FILE_PATH: self._video.value = conf.VIDEO_FILE_PATH
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
+
+	######################################################################################
+	#### IO FUNCTIONS ####################################################################
+	######################################################################################
+
+	def save(self, data):
+		pass
+
+	def load(self, data):
+		pass
+
+		
+
+	def save_project(self, project_path):
+		pass
+
+	def load_project(self, project_path):
+		pass
 
 	######################################################################################
 	#### EVENTS ##########################################################################

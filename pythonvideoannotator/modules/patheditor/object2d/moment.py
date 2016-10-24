@@ -51,6 +51,8 @@ class Moment(object):
     @frame.setter
     def frame(self, value): self._frame = value
 
+    
+
     @property
     def position(self): return self._position
 

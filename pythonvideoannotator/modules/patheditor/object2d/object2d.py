@@ -198,13 +198,17 @@ class Object2d(BaseWidget):
 			v = self._path[index]
 			v.position = (x, y)
 
-	def select(self, index, x, y):
+	def select_moment(self, index, x, y):
 		if index <= len(self._path) and index>=0:
 			item = self._path[index]
 			if item != None and item.collide(x, y):
 				return item
 		return None
 
+	def get_moment(self, index):
+		if index < len(self._path) and index>=0:
+			return self._path[index]
+		return None
 	
 
 	
@@ -217,12 +221,13 @@ class Object2d(BaseWidget):
 		if event.button() == 1:
 			frame_index = self.mainwindow._player.video_index
 
+
 			if self._mark_pto_btn.checked:
-				self.set_position(frame_index, x, y)
+				self.set_position(frame_index if frame_index>=0 else 0, x, y)
 				self._mark_pto_btn.checked = False
 
 			else:
-				selected = self.select(frame_index, x, y)
+				selected = self.select_moment(frame_index, x, y)
 				if selected != None:
 					modifier = int(event.modifiers())
 					# If the control button is pressed will add the blob to the previous selections

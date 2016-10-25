@@ -6,10 +6,12 @@ from pyforms import BaseWidget
 from PyQt4 import QtGui, QtCore
 from pythonvideoannotator.utils.tools import list_folders_in_path
 from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlTree
 from pyforms.Controls import ControlList
 from pyforms.Controls import ControlEmptyWidget
 from send2trash import send2trash
 from pyforms.dialogs  import CsvParserDialog
+
 
 from pythonvideoannotator.modules.patheditor.object2d.object2d import Object2d
 
@@ -20,17 +22,25 @@ class ObjectsWindow(BaseWidget):
 		super(ObjectsWindow, self).__init__('Objects window', parentWindow=parent)
 		self._parent = parent
 
-		self._objects 		= ControlList('', plusFunction=self.__add_object, minusFunction=self.__remove_object)
+		self._objects 		= ControlTree('')
+		self._addobj 		= ControlButton('Add object')
+		self._removeobj 	= ControlButton('Remove object')
 		self._details 		= ControlEmptyWidget('Details')
-		self._formset 		= ['_objects', '_details']
+		self._formset 		= [
+			'_objects', 
+			('_addobj', '_removeobj'),
+			'_details'
+		]
 
 
+		self._objects.showHeader = False
 		self._csvparser_win = CsvParserDialog(self)
 		self._csvparser_win.zField.hide()
 		self._csvparser_win.loadFileEvent 	= self.__import_file_evt
 
 		self._objects.itemSelectionChanged 	= self.__object_itemSelectionChanged
-		
+		self._addobj.value = self.__add_object
+		self._removeobj.value = self.__remove_object
 
 		self._objects.addPopupMenuOption('Import', self._csvparser_win.show)
 		self._objects.addPopupMenuOption('-')
@@ -39,6 +49,11 @@ class ObjectsWindow(BaseWidget):
 
 		self._objs = []
 		
+	def initForm(self):
+		super(ObjectsWindow, self).initForm()
+		self._objects.iconsize = 36,36
+		
+
 
 	def __export_tracking_file(self):
 		if self._objects.mouseSelectedRowIndex is not None:
@@ -89,13 +104,14 @@ class ObjectsWindow(BaseWidget):
 
 	def __object_itemSelectionChanged(self):
 		if self._objects.mouseSelectedRowIndex is not None:
-			self._details.value = self._objs[ self._objects.mouseSelectedRowIndex ]
+			self._details.value = self._objects.selectedItem.obj
 			self._details.value.show()
 
 	def create_object(self, name):
-		obj = Object2d(name, parent=self)
-		self._objs.append( obj )
-		self._objects += [name]
+		obj 	 = Object2d(name, parent=self)
+		obj.item = self._objects.createChild( name, icon=conf.ANNOTATOR_ICON_OBJECT )
+		item = self._objects.createChild( 'datasets', icon=conf.ANNOTATOR_ICON_DATASETS,parent=obj.item )
+		obj.item.obj = obj
 
 		self._parent.add_object_evt(obj)
 		return obj
@@ -106,26 +122,26 @@ class ObjectsWindow(BaseWidget):
 
 	def __remove_object(self):
 		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objs.pop( self._objects.mouseSelectedRowIndex )
-			self._parent.remove_object_evt(obj, self._objects.mouseSelectedRowIndex )
+			self._parent.remove_object_evt(self._objects.selectedItem.obj, self._objects.mouseSelectedRowIndex )
 			self._objects -= -1
 
 
 	def on_click(self, event, x, y):
 		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objs[ self._objects.mouseSelectedRowIndex]
+			obj = self._objects.selectedItem.obj
 			obj.on_click(event, x, y)
 
 	def draw(self, frame):
 		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objs[ self._objects.mouseSelectedRowIndex]
+			obj = self._objects.selectedItem.obj
 			obj.draw(frame)
 
 	@property
 	def mainwindow(self): return self._parent
 
 	@property
-	def objects(self): return self._objs
+	def objects(self): 
+		return [item.obj for item in self._objects.value]
 
 	######################################################################################
 	#### IO FUNCTIONS ####################################################################

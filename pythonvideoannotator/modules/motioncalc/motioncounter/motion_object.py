@@ -1,6 +1,4 @@
 import csv, cv2, os, numpy as np
-from flies_motion_quantifier import tools
-from scipy.ndimage.filters import gaussian_filter
 
 class MotionObject(object):
 

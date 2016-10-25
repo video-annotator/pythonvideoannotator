@@ -25,4 +25,17 @@ class Module(object):
 		self._window.video_filename = self._video.value
 	
 
+	
+	######################################################################################
+	#### IO FUNCTIONS ####################################################################
+	######################################################################################
 
+	
+	def save(self, data, project_path=None):
+		data = super(Module, self).save(data, project_path)
+		data['tracking-settings'] = self._window.save({})
+		return data
+
+	def load(self, data, project_path=None):
+		super(Module, self).load(data, project_path)
+		if 'tracking-settings' in data: self._window.load(data['tracking-settings'])

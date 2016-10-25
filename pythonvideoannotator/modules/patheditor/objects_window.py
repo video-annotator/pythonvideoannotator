@@ -4,11 +4,11 @@ import os
 from pysettings import conf
 from pyforms import BaseWidget
 from PyQt4 import QtGui, QtCore
-
+from pythonvideoannotator.utils.tools import list_folders_in_path
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlList
 from pyforms.Controls import ControlEmptyWidget
-
+from send2trash import send2trash
 from pyforms.dialogs  import CsvParserDialog
 
 from pythonvideoannotator.modules.patheditor.object2d.object2d import Object2d
@@ -91,18 +91,24 @@ class ObjectsWindow(BaseWidget):
 		if self._objects.mouseSelectedRowIndex is not None:
 			self._details.value = self._objs[ self._objects.mouseSelectedRowIndex ]
 			self._details.value.show()
+
+	def create_object(self, name):
+		obj = Object2d(name, parent=self)
+		self._objs.append( obj )
+		self._objects += [name]
+
+		self._parent.add_object_evt(obj)
+		return obj
 		
 	def __add_object(self):
 		name = 'New object {0}'.format(len(self._objects.value))
-		self._objects += [name]
-		obj = Object2d(name, parent=self)
-		self._objs.append( obj )
-		
-		return obj
+		return self.create_object(name)
 
 	def __remove_object(self):
-		self._objs.pop( self._objects.mouseSelectedRowIndex )
-		self._objects -= -1
+		if self._objects.mouseSelectedRowIndex is not None:
+			obj = self._objs.pop( self._objects.mouseSelectedRowIndex )
+			self._parent.remove_object_evt(obj, self._objects.mouseSelectedRowIndex )
+			self._objects -= -1
 
 
 	def on_click(self, event, x, y):
@@ -120,3 +126,23 @@ class ObjectsWindow(BaseWidget):
 
 	@property
 	def objects(self): return self._objs
+
+	######################################################################################
+	#### IO FUNCTIONS ####################################################################
+	######################################################################################
+
+	def save(self, data, objects_path=None):
+		for obj in self.objects: obj.save(data, objects_path)
+
+		#remove from the setups directory the unused setup files
+		paths = [os.path.join(objects_path, o.name) for o in self.objects]
+		for path in list_folders_in_path(objects_path):
+			if path not in paths: send2trash(path)
+
+		return data
+
+	def load(self, data, objects_path=None):
+		for object_path in list_folders_in_path(objects_path):
+			name = os.path.basename(object_path)
+			obj = self.create_object(name)
+			obj.load(data, object_path)

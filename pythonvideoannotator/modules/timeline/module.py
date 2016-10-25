@@ -1,5 +1,5 @@
 import os
-
+from pythonvideoannotator.utils.tools import list_files_in_path
 
 class Module(object):
 
@@ -65,3 +65,28 @@ class Module(object):
         if self._update_time: self._time.value = self._player.video_index
 
         return super(Module, self).process_frame(frame)
+
+
+
+    ######################################################################################
+    #### IO FUNCTIONS ####################################################################
+    ######################################################################################
+
+    
+    def save(self, data, project_path=None):
+        data = super(Module,self).save(data, project_path)
+        charts_path = os.path.join(project_path, 'charts')
+        if not os.path.exists(charts_path): os.makedirs(charts_path)
+
+        for chart in self._time.charts:
+            chart_path = os.path.join(charts_path, chart.name+'.csv')
+            chart.export_2_file(chart_path)
+
+        return data
+
+    def load(self, data, project_path=None):
+        super(Module,self).load(data, project_path)
+        charts_path = os.path.join(project_path, 'charts')
+        
+        for chart_path in list_files_in_path(charts_path):
+            self._time.import_chart_file(chart_path, ignore_rows=1)

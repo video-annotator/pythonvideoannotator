@@ -1,5 +1,6 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
+import os, json
 from pysettings import conf
 from pyforms import BaseWidget
 from PyQt4 import QtGui, QtCore
@@ -34,14 +35,16 @@ class VideoAnnotationEditor(BaseWidget):
 
 		self.mainmenu.insert(0,
 			{'File': [
-				{'Open': Exit, 'icon': conf.ANNOTATOR_ICON_OPEN},
+				{'Open': self.__open_project_evt, 'icon': conf.ANNOTATOR_ICON_OPEN},
 				'-',
-				{'Save': Exit, 'icon': conf.ANNOTATOR_ICON_SAVE},
-				{'Save as': Exit, 'icon': conf.ANNOTATOR_ICON_SAVE},
+				{'Save': self.__save_project_evt , 'icon': conf.ANNOTATOR_ICON_SAVE},
+				{'Save as': self.__save_project_as_evt, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
 				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
 			]}
 		)
+
+		self._current_project_path = None
 
 		
 	def initForm(self):
@@ -54,23 +57,47 @@ class VideoAnnotationEditor(BaseWidget):
 	#### IO FUNCTIONS ####################################################################
 	######################################################################################
 
-	def save(self, data):
-		pass
+	def save(self, data, project_path=None):
+		data['video-filename'] = self._video.value
+		return data
 
-	def load(self, data):
-		pass
+	def load(self, data, project_path=None):
+		if data.get('video-filename', None):
+			self._video.value = data.get('video-filename', None)
 
+	def save_project(self, project_path=None):
+		if project_path is None:
+			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
 		
+		if project_path is not None:
+			project_filename = os.path.join(str(project_path), 'project.json')
+			data = self.save({}, str(project_path))
+			with open(project_filename, 'w') as outfile:
+				json.dump(data, outfile)
 
-	def save_project(self, project_path):
-		pass
+			self._current_project_path = str(project_path)
 
-	def load_project(self, project_path):
-		pass
+	def load_project(self, project_path=None):
+		if project_path is None:
+			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
+		if project_path is not None:
+			project_filename = os.path.join(str(project_path), 'project.json')
+			with open(project_filename, 'r') as outfile:
+				data = json.load(outfile)
+			self.load(data, str(project_path))
+			self._current_project_path = str(project_path)
+			
+
 
 	######################################################################################
 	#### EVENTS ##########################################################################
 	######################################################################################
+
+	def __open_project_evt(self): self.load_project()
+
+	def __save_project_evt(self): self.save_project(self._current_project_path)
+
+	def __save_project_as_evt(self): self.save_project()
 
 	def video_changed_evt(self):
 		self._player.value 	= self._video.value

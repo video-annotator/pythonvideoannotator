@@ -1,6 +1,7 @@
-import cv2
+import cv2, os
 from pysettings import conf
 from PyQt4 import QtCore, QtGui
+from pythonvideoannotator.utils.tools import list_folders_in_path
 from pythonvideoannotator.modules.patheditor.object2d.object2d              import Object2d
 from pythonvideoannotator.modules.patheditor.ChooseColumnsWindow            import ChooseColumnsWindow
 from pythonvideoannotator.modules.patheditor.objects_window                 import ObjectsWindow
@@ -37,5 +38,32 @@ class Module(object):
 		self._objects_window.draw(frame)
 		return frame
 
+	def add_object_evt(self, obj):
+		pass
+
+	def remove_object_evt(self, obj, i):
+		pass
+
+
 	@property
 	def objects(self): return self._objects_window.objects
+
+	######################################################################################
+	#### IO FUNCTIONS ####################################################################
+	######################################################################################
+
+	
+	def save(self, data, project_path=None):
+		data = super(Module, self).save(data, project_path)
+		
+		objects_path = os.path.join(project_path, 'objects')
+		if not os.path.exists(objects_path): os.makedirs(objects_path)
+		
+		return self._objects_window.save(data, objects_path)
+
+
+	def load(self, data, project_path=None):
+		data = super(Module, self).load(data, project_path)
+
+		objects_path = os.path.join(project_path, 'objects')
+		self._objects_window.load(data, objects_path)

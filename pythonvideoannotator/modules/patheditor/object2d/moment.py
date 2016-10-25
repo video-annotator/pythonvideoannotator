@@ -83,3 +83,14 @@ class Moment(object):
         if self.position == None:
             return False
         return math.sqrt((self.position[0] - x)**2 + (self.position[1] - y)**2) < 20
+
+    @property
+    def tolist(self):
+        res = [self.frame]
+        res+= list(self.position) if self.position is not None else [None, None] 
+        return res
+
+    @tolist.setter
+    def tolist(self, value):
+        self.frame = int(value[0])
+        self.position = int(value[1]), int(value[2])

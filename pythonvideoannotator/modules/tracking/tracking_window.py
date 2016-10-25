@@ -43,8 +43,6 @@ class TrackingWindow(BaseWidget):
 		]
 
 
-		
-
 		self._filter 				= SimpleImageFilterWorkflow(video=self.mainwindow._video.value)
 		self._filter_panel.value 	= self._filter
 		self._apply.value			= self.__apply_evt
@@ -52,6 +50,9 @@ class TrackingWindow(BaseWidget):
 		self._save_btn.value		= self.__save_btn_evt
 
 		self._progress.hide()
+
+
+	
 
 	###########################################################################
 	### IO FUNCTIONS ##########################################################
@@ -177,8 +178,6 @@ class TrackingWindow(BaseWidget):
 		self._objects.clear()
 		for obj in self.mainwindow.objects: self._objects += (obj.name, False)
 
-		
-		
 
 
 if __name__ == '__main__': 

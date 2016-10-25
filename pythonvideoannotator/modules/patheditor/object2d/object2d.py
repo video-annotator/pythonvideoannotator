@@ -1,4 +1,4 @@
-import csv, cv2
+import csv, cv2, os
 from pyforms import BaseWidget
 from PyQt4 import QtCore, QtGui
 from pyforms.Controls import ControlButton
@@ -307,4 +307,38 @@ class Object2d(BaseWidget):
 
 	@property
 	def name(self): return self._name
-	
+	@name.setter
+	def name(self, value): self._name = value
+
+	######################################################################################
+	#### IO FUNCTIONS ####################################################################
+	######################################################################################
+
+	def save(self, data, project_path=None):
+		object_path = os.path.join(project_path, self.name)
+		if not os.path.exists(object_path): os.makedirs(object_path)
+		
+		dataset_file = os.path.join(object_path, 'object2d_dataset.cvs')
+		with open(dataset_file, 'w') as outfile:
+			outfile.write(';'.join(['frame','x','y'])+'\n' )
+			for i, moment in enumerate(self._path):
+				if moment is None:
+					outfile.write(';'.join(map(str, [i])) )
+				else:
+					outfile.write(';'.join(map(str, moment.tolist)) )
+				outfile.write('\n')
+
+		return data
+
+	def load(self, data, object_path=None):
+		dataset_file = os.path.join(object_path, 'object2d_dataset.cvs')
+		with open(dataset_file, 'r') as infile:
+			infile.readline()
+			for line in infile:
+				values = line.split(';')
+				if len(values)>1:
+					moment = Moment()
+					moment.tolist = line.split(';')
+					self._path.append(moment)
+				else:
+					self._path.append(None)

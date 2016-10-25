@@ -24,13 +24,14 @@ MAIN_WINDOW_GEOMETRY = 100, 200, 800, 600
 #MAIN_WINDOW_GEOMETRY = 2400, 200, 800, 600
 
 
-VIDEO_FILE_PATH = '/home/ricardo/Downloads/fc2_save_2013-10-29-124117-0001.avi'
-VIDEO_FILE_PATH = 'C:/Users/swp/Downloads/fc2_save_2013-10-29-124117-0001.avi'
+#VIDEO_FILE_PATH = '/home/ricardo/Downloads/fc2_save_2013-10-29-124117-0001.avi'
+#VIDEO_FILE_PATH = 'C:/Users/swp/Downloads/fc2_save_2013-10-29-124117-0001.avi'
 #CHART_FILE_PATH = '/home/ricardo/Desktop/01Apollo201403210900/01Apollo201403210900_out.csv', 0, 1
 
 PYFORMS_STYLESHEET 			= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet.css')
 PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet_darwin.css')
 
+MODULES += 'pythonvideoannotator.modules.motioncalc'
 MODULES += 'pythonvideoannotator.modules.timeline'
 MODULES += 'pythonvideoannotator.modules.events_statistics'
 MODULES += 'pythonvideoannotator.modules.patheditor'

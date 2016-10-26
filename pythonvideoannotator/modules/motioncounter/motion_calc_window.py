@@ -20,14 +20,18 @@ class MotionCalcWindow(BaseWidget):
 		self._usecircle  	= ControlCheckBox('Image filters')
 		self._radius 		= ControlSlider('Radius', 30, 1, 200)
 		self._apply  		= ControlButton('Apply')
+		self._progress  	= ControlProgress('Progress')
 
 		self._formset = [
 			'_player',
 			'=',
 			('_usecircle', '_radius'),
 			'_objects',
-			'_apply'
+			'_apply',
+			'_progress'
 		]
+
+		self._progress.hide()
 
 	@property
 	def video_filename(self): return None

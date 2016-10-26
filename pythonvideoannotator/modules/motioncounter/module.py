@@ -1,6 +1,6 @@
 import cv2
 from pysettings import conf
-from pythonvideoannotator.modules.motioncalc.motioncounter.motion_counter import MotionCounter
+from pythonvideoannotator.modules.motioncounter.motioncounter.motion_counter import MotionCounter
 
 
 class Module(object):

@@ -13,11 +13,14 @@ class MotionObject(object):
 		self.threshold 	= 5
 		self.radius 	= 30
 
+	def create_motion_tree_nodes(self): self._object2D.create_motion_tree_nodes()
 
 	def position(self, index):
 		m = self._object2D[index]
 		return m.position if m else None
 
+	def set_motion(self, index, value):
+		self._object2D[index].motion = value
 
 	def init(self):
 		self._last_img  	= None
@@ -26,7 +29,7 @@ class MotionObject(object):
 
 	def process(self, index, frame):
 		pos = self.position(index)
-		if pos is None: return
+		if pos is None: return None
 		x,y		= pos
 		cutx 	= int(round(x-self._radius))
 		cuty 	= int(round(y-self._radius))
@@ -57,6 +60,7 @@ class MotionObject(object):
 		self._motion.append( np.sum(diff) )
 		self._last_img 	= small_masked
 		
+		return self._motion[-1]
 		
 
 

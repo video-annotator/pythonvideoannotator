@@ -8,7 +8,8 @@ from pyforms.Controls 	 import ControlSlider
 from pyforms.Controls 	 import ControlCheckBox
 from pyforms.Controls 	 import ControlText
 from pyforms.Controls 	 import ControlCheckBoxList
-from pythonvideoannotator.modules.motioncalc.motioncounter.motion_object import MotionObject
+from pyforms.Controls 	 import ControlProgress
+from pythonvideoannotator.modules.motioncounter.motioncounter.motion_object import MotionObject
 from PyQt4 import QtGui
 
 
@@ -26,12 +27,17 @@ class MotionCounter(BaseWidget):
 		self._show_diff			= ControlCheckBox('Show diffs boxes')
 		self._threshold_slider	= ControlSlider('Threshold', 5, 1, 255)
 		self._radius_slider		= ControlSlider('Radius', 30, 1, 200)
+		self._apply  			= ControlButton('Apply')
+		self._progress  		= ControlProgress('Progress')
+
 		
 		self._formset = [
 			'_objects',
 			'=',
 			('_threshold_slider', '_radius_slider', '_show_diff'),
-			'_player'
+			'_player',
+			'_apply',
+			'_progress'
 		]
 
 		self._player.processFrame 	= self.__process_frame
@@ -39,11 +45,34 @@ class MotionCounter(BaseWidget):
 		self._threshold_slider.changed 	= self.__threshold_changed_event
 		self._radius_slider.changed 	= self.__radius_changed_event
 		self._objects.changed 			= self.__objects_changed_evt
+		self._apply.value 				= self.__apply_btn_evt
+
+		self._progress.hide()
 
 		self._objects_dict = {}
 		self._selected_objs = []
 
+	def __apply_btn_evt(self):
+		self._player.video_index = 0
+		cap = self._player.value
 
+		self._progress.value = 0
+		self._progress.max = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+		self._progress.show()
+
+		for obj in self.objects: obj.create_motion_tree_nodes()
+		
+		while True:
+			res, frame = cap.read()
+			if not res: break
+
+			index = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+			for obj in self.objects:
+				motion = obj.process(index, frame)
+				if motion is not None: obj.set_motion(index, motion)
+			self._progress.value = index
+	
+		self._progress.hide()
 
 	def __objects_changed_evt(self):
 		self._selected_objs = [MotionObject(self._objects_dict[name]) for name in self._objects.value]

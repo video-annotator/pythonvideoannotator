@@ -1,0 +1,1 @@
+from pythonvideoannotator.modules.patheditor.objects.objects_io import ObjectsIO as Objects

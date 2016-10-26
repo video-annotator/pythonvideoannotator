@@ -2,9 +2,7 @@ import cv2, os
 from pysettings import conf
 from PyQt4 import QtCore, QtGui
 from pythonvideoannotator.utils.tools import list_folders_in_path
-from pythonvideoannotator.modules.patheditor.object2d.object2d              import Object2d
-from pythonvideoannotator.modules.patheditor.ChooseColumnsWindow            import ChooseColumnsWindow
-from pythonvideoannotator.modules.patheditor.objects_window                 import ObjectsWindow
+from pythonvideoannotator.modules.patheditor.objects import Objects
 
 from pyforms.Controls import ControlDockWidget
 
@@ -17,7 +15,7 @@ class Module(object):
 		super(Module, self).__init__()
 
 		self._right_docker          = ControlDockWidget('Objects list',side=ControlDockWidget.SIDE_RIGHT)        
-		self._right_docker.value    = self._objects_window = ObjectsWindow(parent=self)
+		self._right_docker.value    = self._objects_window = Objects(parent=self)
 		#self._right_docker.hide()
 
 		
@@ -35,14 +33,15 @@ class Module(object):
 		"""
 		Function called before render each frame
 		"""
-		self._objects_window.draw(frame)
+		self._objects_window.draw(frame, self._player.video_index)
 		return frame
 
-	def add_object_evt(self, obj):
-		pass
+	def add_object_evt(self, obj): pass
 
-	def remove_object_evt(self, obj, i):
-		pass
+	def remove_object_evt(self, obj, i): pass
+
+	def add_chart(self, name, data):  self._time.add_chart(name, data)
+
 
 
 	@property

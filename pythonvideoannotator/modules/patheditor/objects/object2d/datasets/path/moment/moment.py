@@ -1,7 +1,6 @@
 import math
 import cv2
 
-
 class Moment(object):
 
     FRAME_COL = 0
@@ -10,7 +9,10 @@ class Moment(object):
     Z_COL = None
     TOTAL_COLS = 3
 
-    def __init__(self, row=None): self.row = row
+    def __init__(self, row=None): 
+        self.row            = row
+        self.velocity       = None
+        self.acceleration   = None
 
     @property
     def row(self):
@@ -87,10 +89,14 @@ class Moment(object):
     @property
     def tolist(self):
         res = [self.frame]
-        res+= list(self.position) if self.position is not None else [None, None] 
+        res+= list(self.position) if self.position is not None else [None, None]
+        res+= list(self.velocity) if self.velocity is not None else [None, None]
+        res+= list(self.acceleration) if self.acceleration is not None else [None, None]
         return res
 
     @tolist.setter
     def tolist(self, value):
-        self.frame = int(value[0])
-        self.position = int(value[1]), int(value[2])
+        self.frame          = int(value[0])
+        self.position       = int(value[1]), int(value[2])
+        self.velocity       = int(value[3]), int(value[4])
+        self.acceleration   = int(value[5]), int(value[6])

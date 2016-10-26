@@ -4,7 +4,7 @@ from PyQt4 import QtCore, QtGui
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlCombo
 from pyforms.Controls import ControlLabel
-from pythonvideoannotator.modules.patheditor.objects.object2d.datasets.path.path_io import PathIO
+from pythonvideoannotator.models.objects.object2d.datasets.path.path_io import PathIO
 
 
 class PathGUI(PathIO, BaseWidget):
@@ -55,10 +55,16 @@ class PathGUI(PathIO, BaseWidget):
 
 
 	def __create_tree_nodes(self):
+
 		self.treenode = self.tree.createChild(self.name, icon=conf.ANNOTATOR_ICON_PATH, parent=self.parent_treenode )
+		self.tree.addPopupMenuOption(
+			label='Remove', 
+			functionAction=self.__remove_path_dataset, 
+			item=self.treenode, icon=conf.ANNOTATOR_ICON_DELETE
+		)
 		
 
-		self.treenode_pos = self.tree.createChild('position', icon=conf.ANNOTATOR_ICON_PATH, parent=self.treenode )
+		self.treenode_pos = self.tree.createChild('position', icon=conf.ANNOTATOR_ICON_POSITION, parent=self.treenode )
 		x_treenode = self.tree.createChild('x', icon=conf.ANNOTATOR_ICON_X, parent=self.treenode_pos )
 		y_treenode = self.tree.createChild('y', icon=conf.ANNOTATOR_ICON_Y, parent=self.treenode_pos )
 		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_pos_x_to_timeline_evt, item=x_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
@@ -81,10 +87,10 @@ class PathGUI(PathIO, BaseWidget):
 		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_absacc_to_timeline_evt, item=absa_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
 		
 
-		y_treenode.obj = x_treenode.obj = self.treenode_pos.obj = \
-		absv_treenode.obj = vy_treenode.obj = vx_treenode.obj = self.treenode_vel.obj = \
-		absa_treenode.obj = ay_treenode.obj = ax_treenode.obj = self.treenode_acc.obj = \
-		self.treenode.obj = self
+		y_treenode.win = x_treenode.win = self.treenode_pos.win = \
+		absv_treenode.win = vy_treenode.win = vx_treenode.win = self.treenode_vel.win = \
+		absa_treenode.win = ay_treenode.win = ax_treenode.win = self.treenode_acc.win = \
+		self.treenode.win = self
 		
 
 	def create_motion_tree_nodes(self):
@@ -94,13 +100,18 @@ class PathGUI(PathIO, BaseWidget):
 		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
 		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_variation_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
 		
-		self.treenode_motion.obj = variation_treenode.obj = self
+		self.treenode_motion.win = variation_treenode.win = self
 
 
 	######################################################################
 	### GUI EVENTS #######################################################
 	######################################################################
 
+	def __remove_path_dataset(self):
+		item = self.tree.selectedItem
+		if item is not None: 
+			self.mainwindow.remove_dataset_evt(item.win)
+			self.parent_treenode.removeChild(item)
 
 	def __send_motion_to_timeline_evt(self):
 		pass

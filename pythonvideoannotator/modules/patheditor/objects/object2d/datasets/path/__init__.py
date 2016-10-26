@@ -1,1 +1,0 @@
-from pythonvideoannotator.modules.patheditor.objects.object2d.datasets.path.path_gui import PathGUI as Path

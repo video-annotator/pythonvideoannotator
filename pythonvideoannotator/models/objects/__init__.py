@@ -1,0 +1,1 @@
+from pythonvideoannotator.models.objects.objects_io import ObjectsIO as Objects

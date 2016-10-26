@@ -23,13 +23,14 @@ class Module(object):
 		self._motion_window.video_filename = self._video.value
 
 
-	def add_object_evt(self, obj):
-		super(Module, self).add_object_evt(obj)
-		self._motion_window.add_object_evt(obj)
 
-	def remove_object_evt(self, obj, i):
-		super(Module, self).remove_object_evt(obj, i)
-		self._motion_window.remove_object_evt(obj, i)
+	def add_dataset_evt(self, dataset):
+		super(Module, self).add_dataset_evt(dataset)
+		self._motion_window.add_dataset_evt(dataset)
+
+	def remove_dataset_evt(self, dataset):
+		super(Module, self).remove_dataset_evt(dataset)
+		self._motion_window.remove_dataset_evt(dataset)
 
 
 	######################################################################################

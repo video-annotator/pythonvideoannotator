@@ -1,6 +1,6 @@
 import os
-from pythonvideoannotator.modules.patheditor.objects.object2d.datasets.path.path_base import PathBase
-from pythonvideoannotator.modules.patheditor.objects.object2d.datasets.path.moment import Moment
+from pythonvideoannotator.models.objects.object2d.datasets.path.path_base import PathBase
+from pythonvideoannotator.models.objects.object2d.datasets.path.moment import Moment
 
 class PathIO(PathBase):
 
@@ -8,11 +8,9 @@ class PathIO(PathBase):
 	#### IO FUNCTIONS ####################################################################
 	######################################################################################
 
-	def save(self, data, project_path=None):
-		object_path = os.path.join(project_path, self.name)
-		if not os.path.exists(object_path): os.makedirs(object_path)
+	def save(self, data, datasets_path=None):
 		
-		dataset_file = os.path.join(object_path, 'object2d_dataset.cvs')
+		dataset_file = os.path.join(datasets_path, 'path-{0}.cvs'.format(self.name))
 		with open(dataset_file, 'w') as outfile:
 			outfile.write(';'.join(['frame','x','y'])+'\n' )
 			for i, moment in enumerate(self._path):
@@ -24,8 +22,8 @@ class PathIO(PathBase):
 
 		return data
 
-	def load(self, data, object_path=None):
-		dataset_file = os.path.join(object_path, 'object2d_dataset.cvs')
+	def load(self, data, dataset_file=None):
+		
 		with open(dataset_file, 'r') as infile:
 			infile.readline()
 			for line in infile:
@@ -35,9 +33,6 @@ class PathIO(PathBase):
 					self.set_position(values[0], values[1], values[2])
 				else:
 					self._path.append(None)
-
-
-
 
 
 	def import_csv(self, filename, sep=',', frameCol=0, xCol=1,	yCol=2, zCol=None):

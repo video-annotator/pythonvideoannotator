@@ -11,7 +11,7 @@ from pyforms.Controls 	 import ControlCheckBoxList
 from pyforms.Controls 	 import ControlProgress
 from pythonvideoannotator.modules.motioncounter.motioncounter.motion_object import MotionObject
 from PyQt4 import QtGui
-
+from pythonvideoannotator.models.objects.object2d.datasets.path import Path
 
 class MotionCounter(BaseWidget):
 
@@ -49,7 +49,7 @@ class MotionCounter(BaseWidget):
 
 		self._progress.hide()
 
-		self._objects_dict = {}
+		self._objects_list  = []
 		self._selected_objs = []
 
 	def __apply_btn_evt(self):
@@ -88,13 +88,16 @@ class MotionCounter(BaseWidget):
 	def objects(self, value):  self._objects.value = value
 	
 
-	def add_object_evt(self, obj): 			
-		self._objects+= [obj.name, True]
-		self._objects_dict[obj.name] = obj
-		self.__objects_changed_evt()
-		
-	def remove_object_evt(self, obj, i): 
-		self._objects-= i
+	def add_dataset_evt(self, dataset):
+		if isinstance(dataset, Path):
+			self._objects += [dataset, True]
+			#self._objects_list.append(dataset)
+
+	def remove_dataset_evt(self, dataset):
+		if isinstance(dataset, Path):
+			self._objects -= dataset
+
+	
 		
 
 	def __process_frame(self, frame):

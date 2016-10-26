@@ -1,6 +1,6 @@
 import cv2
-from pythonvideoannotator.modules.patheditor.objects.object2d.utils.interpolation import interpolate_positions
-from pythonvideoannotator.modules.patheditor.objects.object2d.datasets.path.moment import Moment
+from pythonvideoannotator.models.objects.object2d.utils.interpolation import interpolate_positions
+from pythonvideoannotator.models.objects.object2d.datasets.path.moment import Moment
 
 class PathBase(object):
 
@@ -19,6 +19,7 @@ class PathBase(object):
 
 	def __len__(self): 				return len(self._path)
 	def __getitem__(self, index): 	return self._path[index] if index<len(self) else None
+	def __str__(self):				return "{0} - {1}".format(self._object2d.name, self.name)
 
 	######################################################################
 	### DATA MODIFICATION AND ACCESS #####################################

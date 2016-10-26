@@ -12,8 +12,8 @@ from pyforms.Controls import ControlEmptyWidget
 from send2trash import send2trash
 from pyforms.dialogs  import CsvParserDialog
 
-from pythonvideoannotator.modules.patheditor.objects.objects_gui import ObjectsGUI
-from pythonvideoannotator.modules.patheditor.objects.object2d import Object2d
+from pythonvideoannotator.models.objects.objects_gui import ObjectsGUI
+from pythonvideoannotator.models.objects.object2d import Object2d
 
 class ObjectsIO(ObjectsGUI):
 

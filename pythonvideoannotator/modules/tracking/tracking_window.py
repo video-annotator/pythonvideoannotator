@@ -42,6 +42,8 @@ class TrackingWindow(BaseWidget):
 			'_progress'
 		]
 
+		self.load_order = ['_start', '_end', '_filter_panel']
+
 
 		self._filter 				= SimpleImageFilterWorkflow(video=self.mainwindow._video.value)
 		self._filter_panel.value 	= self._filter
@@ -62,6 +64,12 @@ class TrackingWindow(BaseWidget):
 	###########################################################################
 	### INTERFACE FUNCTIONS ###################################################
 	###########################################################################
+
+	def add_dataset_evt(self, dataset):
+		self._objects+= [dataset, True]
+
+	def remove_dataset_evt(self, dataset):
+		self._objects -= dataset
 
 	def __save_btn_evt(self):
 		data = self.save({})
@@ -97,6 +105,7 @@ class TrackingWindow(BaseWidget):
 		self._progress.show()
 
 		objects = self.objects
+		
 
 		paths = None
 		
@@ -169,15 +178,10 @@ class TrackingWindow(BaseWidget):
 
 		
 	@property
-	def objects(self):
-		return [self.mainwindow.objects[i] for i in range(self._objects.count)]
+	def objects(self): return self._objects.value
 			
 		
-	def show(self):
-		super(TrackingWindow, self).show()
-		self._objects.clear()
-		for obj in self.mainwindow.objects: self._objects += (obj.name, False)
-
+	
 
 
 if __name__ == '__main__': 

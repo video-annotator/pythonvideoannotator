@@ -13,7 +13,7 @@ from send2trash import send2trash
 from pyforms.dialogs  import CsvParserDialog
 
 
-from pythonvideoannotator.modules.patheditor.objects.object2d import Object2d
+from pythonvideoannotator.models.objects.object2d import Object2d
 
 class ObjectsGUI(BaseWidget):
 	"""Application form"""
@@ -130,12 +130,12 @@ class ObjectsGUI(BaseWidget):
 
 	def player_on_click(self, event, x, y):
 		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objects.selectedItem.obj
+			obj = self._objects.selectedItem.win
 			obj.on_click(event, x, y)
 
 	def draw(self, frame, frame_index):
 		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objects.selectedItem.obj
+			obj = self._objects.selectedItem.win
 			obj.draw(frame, frame_index)
 
 	######################################################################################
@@ -146,4 +146,4 @@ class ObjectsGUI(BaseWidget):
 	def mainwindow(self): 	return self._parent
 
 	@property
-	def objects(self):  	return [item.obj for item in self._objects.value]
+	def objects(self):  	return [item.win for item in self._objects.value]

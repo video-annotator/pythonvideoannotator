@@ -22,7 +22,7 @@ except ImportError as err:
 	logging.getLogger().critical(str(err), exc_info=True)
 	exit("Could not load pysettings! Is it installed?")
 
-from pythonvideoannotator.modules import AppClass
+from pythonvideoannotator.modules import VideoAnnotator
 
 # setup different loggers but output to single file
 loggingbootstrap.create_double_logger("pythonvideoannotator", conf.APP_LOG_HANDLER_CONSOLE_LEVEL, conf.APP_LOG_FILENAME,
@@ -30,7 +30,7 @@ loggingbootstrap.create_double_logger("pythonvideoannotator", conf.APP_LOG_HANDL
 
 
 
-def start(): pyforms.startApp(AppClass, conf.MAIN_WINDOW_GEOMETRY)
+def start(): pyforms.startApp(VideoAnnotator, conf.MAIN_WINDOW_GEOMETRY)
 
 
 if __name__ == '__main__': start()

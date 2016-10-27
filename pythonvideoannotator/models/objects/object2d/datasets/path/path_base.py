@@ -5,8 +5,7 @@ from pythonvideoannotator.models.objects.object2d.datasets.path.moment import Mo
 class PathBase(object):
 
 	def __init__(self, object2d):
-
-		self._object2d  = object2d
+		self.object2d   = object2d
 		self._name 		= 'Path'
 		self._path 	 	= [] #path of the object
 		self._tmp_path 	= [] #store a temporary path to pre-visualize de interpolation
@@ -59,7 +58,9 @@ class PathBase(object):
 		self._tmp_path = []
 
 
-	
+	def get_position(self, index): 
+		return self._path[index] if self._path[index] is not None else None
+
 	def set_position(self, index, x, y):
 		# add positions in case they do not exists
 		if index >= len(self._path):
@@ -142,6 +143,11 @@ class PathBase(object):
 
 	@property
 	def interpolation_mode(self): return 'Auto'
+
+	@property
+	def object2d(self): return self._object2d
+	@object2d.setter
+	def object2d(self,value): self._object2d = value
 
 	@property
 	def name(self): return self._name

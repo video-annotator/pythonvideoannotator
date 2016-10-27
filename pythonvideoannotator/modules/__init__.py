@@ -1,8 +1,8 @@
 from pysettings import conf
-from pythonvideoannotator.modules.base_app import VideoAnnotationEditor as App
+from pythonvideoannotator.modules.base_videoannotator import BaseVideoAnnotator
 
-AppClass = type(
-	'VideoAnnotationEditor',
-	tuple(conf.MODULES.find_class('module.Module') + [App]),
+VideoAnnotator = type(
+	'VideoAnnotator',
+	tuple(conf.MODULES.find_class('module.Module') + [BaseVideoAnnotator]),
 	{}
 )

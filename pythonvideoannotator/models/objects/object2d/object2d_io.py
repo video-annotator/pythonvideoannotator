@@ -29,5 +29,4 @@ class Object2dIO(Object2dBase):
 			if dataset_type=='path':
 				dataset = self.create_path_dataset()
 				dataset.name = name[:-4]
-				print name[:-4]
 				dataset.load(data, dataset_path)

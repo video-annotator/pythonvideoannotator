@@ -22,14 +22,12 @@ class ObjectsGUI(BaseWidget):
 		super(ObjectsGUI, self).__init__('Objects window', parentWindow=parent)
 		self._parent = parent
 
-		self._objects 		= ControlTree('')
+		self._tree 			= ControlTree('')
 		self._addobj 		= ControlButton('Add object')
 		self._removeobj 	= ControlButton('Remove object')
-		self._details 		= ControlEmptyWidget('Details')
 		self._formset 		= [
-			'_objects', 
-			('_addobj', '_removeobj'),
-			'_details'
+			'_tree', 
+			('_addobj', '_removeobj'),			
 		]
 
 		
@@ -39,15 +37,15 @@ class ObjectsGUI(BaseWidget):
 		self._csvparser_win.loadFileEvent = self.__import_file_evt
 
 		## set controls ##########################################################
-		self._objects.showHeader 			= False
-		self._objects.itemSelectionChanged 	= self.__object_itemSelectionChanged
+		self._tree.showHeader 			= False
+		self._tree.itemSelectionChanged 	= self.__object_itemSelectionChanged
 		self._addobj.value 					= self.__add_object
 		self._removeobj.value 				= self.__remove_object
 
-		self._objects.addPopupMenuOption('Import', self._csvparser_win.show)
-		self._objects.addPopupMenuOption('-')
-		self._objects.addPopupMenuOption('Save', self.__save_tracking_file)
-		self._objects.addPopupMenuOption('Save as', self.__export_tracking_file)
+		self._tree.addPopupMenuOption('Import', self._csvparser_win.show)
+		self._tree.addPopupMenuOption('-')
+		self._tree.addPopupMenuOption('Save', self.__save_tracking_file)
+		self._tree.addPopupMenuOption('Save as', self.__export_tracking_file)
 
 
 	######################################################################################
@@ -55,8 +53,10 @@ class ObjectsGUI(BaseWidget):
 	######################################################################################
 
 	def create_object(self, name):
-		obj2d = Object2d(name, parent=self)
+		obj2d = Object2d(self)
+		obj2d.name = name
 		self.mainwindow.add_object_evt(obj2d)
+
 		return obj2d
 		
 
@@ -66,8 +66,8 @@ class ObjectsGUI(BaseWidget):
 	######################################################################################
 
 	def __export_tracking_file(self):
-		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objs[ self._objects.mouseSelectedRowIndex ]
+		if self._tree.mouseSelectedRowIndex is not None:
+			obj = self._objs[ self._tree.mouseSelectedRowIndex ]
 
 			csvfilename = QtGui.QFileDialog.getSaveFileName(parent=self,
 															caption="Save file",
@@ -79,8 +79,8 @@ class ObjectsGUI(BaseWidget):
 				obj.export_csv(csvfilename)
 
 	def __save_tracking_file(self):
-		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objs[ self._objects.mouseSelectedRowIndex ]
+		if self._tree.mouseSelectedRowIndex is not None:
+			obj = self._objs[ self._tree.mouseSelectedRowIndex ]
 
 			csvfilename = obj.filename
 			if csvfilename != '' and csvfilename != None and obj != None:
@@ -106,36 +106,47 @@ class ObjectsGUI(BaseWidget):
 			obj = Object2d(name, self)
 			obj.import_csv(self._csvparser_win.filename, separator, frame, x, y, z)
 			self._csvparser_win.close()
-			self._objects += [ name ]
+			self._tree += [ name ]
 
 
 	def __object_itemSelectionChanged(self):
-		if self._objects.mouseSelectedRowIndex is not None and hasattr(self._objects.selectedItem,'win'):
-			self._details.value = self._objects.selectedItem.win
-			self._details.value.show()
+		if self._tree.mouseSelectedRowIndex is not None and hasattr(self._tree.selectedItem,'win'):
+			self.mainwindow.details = self._tree.selectedItem.win
+			self.mainwindow.details.show()
+				
+			
+				
 
 	def __add_object(self):
-		name = 'New object {0}'.format(len(self._objects.value))
-		return self.create_object(name)
+		name = 'New object {0}'.format(len(self._tree.value))
+		obj2d = self.create_object(name)
+		obj2d.create_path_dataset()
+		
+		return obj2d
 
 	def __remove_object(self):
-		if self._objects.mouseSelectedRowIndex is not None:
-			self._parent.remove_object_evt(self._objects.selectedItem.win, self._objects.mouseSelectedRowIndex )
-			self._objects -= -1
+		if self._tree.mouseSelectedRowIndex is not None:
 
+			if isinstance(self._tree.selectedItem.win, Object2d):
+				self.mainwindow.remove_object_evt(self._tree.selectedItem.win)
+				self._tree -= self._tree.selectedItem.win.treenode
+			else:
+				self.mainwindow.remove_object_evt(self._tree.selectedItem.object2d)
+				self._tree -= self._tree.selectedItem.object2d.treenode
+			
 	
 	######################################################################################
 	#### PUBLIC FUNCTIONS ################################################################
 	######################################################################################
 
 	def player_on_click(self, event, x, y):
-		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objects.selectedItem.win
+		if self._tree.mouseSelectedRowIndex is not None:
+			obj = self._tree.selectedItem.win
 			obj.on_click(event, x, y)
 
 	def draw(self, frame, frame_index):
-		if self._objects.mouseSelectedRowIndex is not None:
-			obj = self._objects.selectedItem.win
+		if self._tree.mouseSelectedRowIndex is not None:
+			obj = self._tree.selectedItem.win
 			obj.draw(frame, frame_index)
 
 	######################################################################################
@@ -146,4 +157,7 @@ class ObjectsGUI(BaseWidget):
 	def mainwindow(self): 	return self._parent
 
 	@property
-	def objects(self):  	return [item.win for item in self._objects.value]
+	def tree(self): 	return self._tree
+
+	@property
+	def objects(self):  	return [item.win for item in self._tree.value]

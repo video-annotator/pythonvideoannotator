@@ -5,57 +5,46 @@ from PyQt4 import QtCore, QtGui
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlCombo
 from pyforms.Controls import ControlLabel
+from pyforms.Controls import ControlText
 from pythonvideoannotator.models.objects.object2d.object2d_io import Object2dIO
 
 
 class Object2dGUI(Object2dIO, BaseWidget):
 
-	def __init__(self, name=None,parent=None):
-		BaseWidget.__init__(self, '2D Object', parentWindow=parent)
-		Object2dIO.__init__(self, name)
-		self._parent = parent
+	def __init__(self, objects_set):
+		BaseWidget.__init__(self, '2D Object', parentWindow=objects_set)
+		Object2dIO.__init__(self, objects_set)
 
-		self.__create_tree_nodes()
+		self._name = ControlText('Name')
 
-	def create_path_dataset(self): 
-		path = super(Object2dGUI, self).create_path_dataset()
-		self.mainwindow.add_dataset_evt(path)
-		return path
+		self._formset = ['_name']
+
+		self._name.changed = self.__name_changed_evt
+
 	
 
 	######################################################################
-	### AUX FUNCTIONS ####################################################
+	### EVENTS ###########################################################
 	######################################################################
 
-	def __create_tree_nodes(self):
-		self.treenode = self.tree.createChild(self.name, icon=conf.ANNOTATOR_ICON_OBJECT )
-		self.tree.addPopupMenuOption(
-			label='Create a path dataset', 
-			functionAction=self.create_path_dataset, 
-			item=self.treenode, icon=conf.ANNOTATOR_ICON_TIMELINE
-		)
-		self.treenode.win = self
-		
-		
-		
-	
+	def __name_changed_evt(self):
+		self._name_changed_activated = True
+		self.name = self._name.value
+		del self._name_changed_activated
 
-	def create_motion_tree_nodes(self):
-		
-		self.treenode_motion = self.tree.createChild('Motion', icon=conf.ANNOTATOR_ICON_PATH, parent=self.treenode )
-		variation_treenode 	 = self.tree.createChild('x', icon=conf.ANNOTATOR_ICON_X, parent=self.treenode_motion )
-		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
-		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_variation_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
-		
-		self.treenode_motion.obj = variation_treenode.obj = self
-
+	def name_updated(self, newname): pass
 
 	######################################################################
 	### PROPERTIES #######################################################
 	######################################################################
 
 	@property
-	def mainwindow(self): return self._parent.mainwindow
+	def mainwindow(self): return self.objects_set.mainwindow
 
-	@property 
-	def tree(self): return self._parent._objects
+	@property
+	def name(self): return self._name.value
+	@name.setter
+	def name(self, value):
+		if not hasattr(self, '_name_changed_activated'): self._name.value = value
+		if hasattr(self, 'treenode'): self.treenode.setText(0,value)
+		self.name_updated(value)

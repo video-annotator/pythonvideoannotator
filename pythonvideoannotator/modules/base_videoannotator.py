@@ -12,19 +12,19 @@ from pyforms.Controls import ControlDockWidget
 
 def Exit(): exit()
 
-class VideoAnnotationEditor(BaseWidget):
+class BaseVideoAnnotator(BaseWidget):
 	"""Application form"""
 
 	def __init__(self):
 		global conf;
 		conf += 'pythonvideoannotator.resources'  # Resources can only be loaded after pyqt is running
 
-		super(VideoAnnotationEditor, self).__init__('Video annotation editor')
+		super(BaseVideoAnnotator, self).__init__('Video annotation editor')
 
 		self._video 	= ControlFile('Video')
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')
-		self._dock 		= ControlDockWidget("Timeline", side='bottom')
+		self._dock 		= ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
 		self._formset 	= ['_video', '_player']
 
 		self._dock.value 				= self._time
@@ -41,14 +41,17 @@ class VideoAnnotationEditor(BaseWidget):
 				{'Save as': self.__save_project_as_evt, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
 				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
-			]}
+			] }
+		)
+		self.mainmenu.insert(1,
+			{'Modules': []}
 		)
 
 		self._current_project_path = None
 
 		
 	def initForm(self):
-		super(VideoAnnotationEditor, self).initForm()
+		super(BaseVideoAnnotator, self).initForm()
 
 		if conf.VIDEO_FILE_PATH: self._video.value = conf.VIDEO_FILE_PATH
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)

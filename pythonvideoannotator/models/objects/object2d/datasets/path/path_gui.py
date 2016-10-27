@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlCombo
 from pyforms.Controls import ControlLabel
+from pyforms.Controls import ControlText
 from pythonvideoannotator.models.objects.object2d.datasets.path.path_io import PathIO
 
 
@@ -13,8 +14,15 @@ class PathGUI(PathIO, BaseWidget):
 		BaseWidget.__init__(self, '2D Object', parentWindow=object2d)
 		PathIO.__init__(self, object2d)
 
-		self.__create_tree_nodes()
+		self._name = ControlText('Name')
+		
 
+		self.__create_tree_nodes()
+		self._name.changed 				 = self.__name_changed_evt
+
+
+
+		
 		self._mark_pto_btn 	  	  = ControlButton('Mark point', checkable=True)
 		self._del_path_btn 	  	  = ControlButton('Delete path')
 		self._interpolation_title = ControlLabel('Interpolation')
@@ -22,6 +30,7 @@ class PathGUI(PathIO, BaseWidget):
 		self._interpolate_btn 	  = ControlButton('Apply')
 
 		self._formset = [ 
+			'_name',
 			'_mark_pto_btn',
 			'_del_path_btn',
 			'_interpolation_title',
@@ -45,8 +54,9 @@ class PathGUI(PathIO, BaseWidget):
 		self._del_path_btn.value 		 = self.__del_path_btn_evt
 		self._interpolation_mode.changed = self.__interpolation_mode_changed_evt
 		self._interpolate_btn.value 	 = self.__interpolate_btn_evt
+		self._name.changed 				 = self.__name_changed_evt
 
-
+		
 
 	######################################################################
 	### AUX FUNCTIONS ####################################################
@@ -91,21 +101,23 @@ class PathGUI(PathIO, BaseWidget):
 		absv_treenode.win = vy_treenode.win = vx_treenode.win = self.treenode_vel.win = \
 		absa_treenode.win = ay_treenode.win = ax_treenode.win = self.treenode_acc.win = \
 		self.treenode.win = self
+
+		y_treenode.object2d = x_treenode.object2d = self.treenode_pos.object2d = \
+		absv_treenode.object2d = vy_treenode.object2d = vx_treenode.object2d = self.treenode_vel.object2d = \
+		absa_treenode.object2d = ay_treenode.object2d = ax_treenode.object2d = self.treenode_acc.object2d = \
+		self.treenode.object2d = self.object2d
 		
 
-	def create_motion_tree_nodes(self):
-		
-		self.treenode_motion = self.tree.createChild('Motion', icon=conf.ANNOTATOR_ICON_PATH, parent=self.treenode )
-		variation_treenode 	 = self.tree.createChild('x', icon=conf.ANNOTATOR_ICON_X, parent=self.treenode_motion )
-		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
-		self.tree.addPopupMenuOption(label='View on the timeline', functionAction=self.__send_motion_variation_to_timeline_evt, item=variation_treenode, icon=conf.ANNOTATOR_ICON_TIMELINE)
-		
-		self.treenode_motion.win = variation_treenode.win = self
-
+	
 
 	######################################################################
 	### GUI EVENTS #######################################################
 	######################################################################
+
+	def __name_changed_evt(self):
+		self._name_changed_activated = True
+		self.name = self._name.value
+		del self._name_changed_activated
 
 	def __remove_path_dataset(self):
 		item = self.tree.selectedItem
@@ -113,11 +125,7 @@ class PathGUI(PathIO, BaseWidget):
 			self.mainwindow.remove_dataset_evt(item.win)
 			self.parent_treenode.removeChild(item)
 
-	def __send_motion_to_timeline_evt(self):
-		pass
 
-	def __send_motion_variation_to_timeline_evt(self):
-		pass
 
 	def __send_pos_x_to_timeline_evt(self):
 		data = [(i,m.position[0]) for i, m in enumerate(self._path) if m is not None]
@@ -187,7 +195,7 @@ class PathGUI(PathIO, BaseWidget):
 			QtGui.QMessageBox.about(self, "Error", "You need to select 2 frames.")
 
 
-
+	def name_updated(self, newname): pass
 	
 	
 	######################################################################
@@ -257,3 +265,12 @@ class PathGUI(PathIO, BaseWidget):
 
 	@property 
 	def parent_treenode(self):  return self._object2d.treenode
+
+
+	@property
+	def name(self): return self._name.value
+	@name.setter
+	def name(self, value):
+		if not hasattr(self, '_name_changed_activated'): self._name.value = value
+		if hasattr(self, 'treenode'): self.treenode.setText(0,value)
+		self.name_updated(value)

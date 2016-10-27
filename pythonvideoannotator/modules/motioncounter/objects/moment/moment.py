@@ -1,4 +1,0 @@
-
-class Moment(object):
-
-	pass

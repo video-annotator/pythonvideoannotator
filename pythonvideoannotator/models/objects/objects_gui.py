@@ -27,7 +27,7 @@ class ObjectsGUI(BaseWidget):
 		self._removeobj 	= ControlButton('Remove object')
 		self._formset 		= [
 			'_tree', 
-			('_addobj', '_removeobj'),			
+			('_addobj', '_removeobj'),
 		]
 
 		
@@ -41,6 +41,9 @@ class ObjectsGUI(BaseWidget):
 		self._tree.itemSelectionChanged 	= self.__object_itemSelectionChanged
 		self._addobj.value 					= self.__add_object
 		self._removeobj.value 				= self.__remove_object
+
+		self._addobj.icon = conf.ANNOTATOR_ICON_ADD
+		self._removeobj.icon = conf.ANNOTATOR_ICON_REMOVE
 
 		self._tree.addPopupMenuOption('Import', self._csvparser_win.show)
 		self._tree.addPopupMenuOption('-')
@@ -64,6 +67,7 @@ class ObjectsGUI(BaseWidget):
 	######################################################################################
 	#### GUI EVENTS ######################################################################
 	######################################################################################
+
 
 	def __export_tracking_file(self):
 		if self._tree.mouseSelectedRowIndex is not None:

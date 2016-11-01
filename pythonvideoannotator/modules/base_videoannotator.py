@@ -33,6 +33,8 @@ class BaseVideoAnnotator(BaseWidget):
 		self._player.onClick 			= self.onPlayerClick
 		self._time.key_release_event 	= self.__time_key_release_event
 
+		self.load_order = ['_video']
+
 		self.mainmenu.insert(0,
 			{'File': [
 				{'Open': self.__open_project_evt, 'icon': conf.ANNOTATOR_ICON_OPEN},

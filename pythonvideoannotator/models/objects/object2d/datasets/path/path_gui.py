@@ -1,3 +1,4 @@
+import math
 from pysettings import conf
 from pyforms import BaseWidget
 from PyQt4 import QtCore, QtGui
@@ -24,6 +25,7 @@ class PathGUI(PathIO, BaseWidget):
 
 		
 		self._mark_pto_btn 	  	  = ControlButton('Mark point', checkable=True)
+		self._sel_pto_btn 	  	  = ControlButton('Select point')
 		self._del_path_btn 	  	  = ControlButton('Delete path')
 		self._interpolation_title = ControlLabel('Interpolation')
 		self._interpolation_mode  = ControlCombo('Mode')
@@ -31,10 +33,11 @@ class PathGUI(PathIO, BaseWidget):
 
 		self._formset = [ 
 			'_name',
-			'_mark_pto_btn',
+			('_mark_pto_btn','_sel_pto_btn'),
 			'_del_path_btn',
 			'_interpolation_title',
-			('_interpolation_mode','_interpolate_btn')			
+			('_interpolation_mode','_interpolate_btn'),
+			' '
 		]
 
 
@@ -50,12 +53,17 @@ class PathGUI(PathIO, BaseWidget):
 		self._interpolation_mode.hide()
 		self._interpolation_title.hide()
 
+		self._del_path_btn.icon = conf.ANNOTATOR_ICON_DELETEPATH
+		self._interpolate_btn.icon = conf.ANNOTATOR_ICON_INTERPOLATE
+		self._mark_pto_btn.icon = conf.ANNOTATOR_ICON_MARKPLACE
+		self._sel_pto_btn.icon = conf.ANNOTATOR_ICON_SELECTPOINT
+
 		#### set events #################################################
 		self._del_path_btn.value 		 = self.__del_path_btn_evt
 		self._interpolation_mode.changed = self.__interpolation_mode_changed_evt
 		self._interpolate_btn.value 	 = self.__interpolate_btn_evt
 		self._name.changed 				 = self.__name_changed_evt
-
+		self._sel_pto_btn.value			 = self.__sel_pto_btn_evt
 		
 
 	######################################################################
@@ -114,6 +122,28 @@ class PathGUI(PathIO, BaseWidget):
 	### GUI EVENTS #######################################################
 	######################################################################
 
+	def __sel_pto_btn_evt(self):
+		if self.mainwindow._player.video_index<0:return 
+		self._sel_pts.append( self.mainwindow._player.video_index)
+		#store a temporary path for interpolation visualization
+		if len(self._sel_pts) == 2: 
+			#########################################################
+			#In case 2 frames are selected, draw the temporary path##
+			#########################################################
+			self.calculate_tmp_interpolation()
+			self._interpolate_btn.show()
+			self._interpolation_mode.show()
+			self._interpolation_title.show()
+			self._del_path_btn.show()
+			#########################################################
+		else:
+			self._interpolate_btn.hide()
+			self._interpolation_mode.hide()
+			self._interpolation_title.hide()
+			self._del_path_btn.hide()
+			self._tmp_path = []
+		self.mainwindow._player.refresh()
+
 	def __name_changed_evt(self):
 		self._name_changed_activated = True
 		self.name = self._name.value
@@ -128,40 +158,48 @@ class PathGUI(PathIO, BaseWidget):
 
 
 	def __send_pos_x_to_timeline_evt(self):
-		data = [(i,m.position[0]) for i, m in enumerate(self._path) if m is not None]
+		data = [(i,self.get_position(i)[0]) for i in range(len(self)) if self.get_position(i) is not None]
 		self.mainwindow.add_chart('{0} x position'.format(self.name), data)
 
 	def __send_pos_y_to_timeline_evt(self):
-		data = [(i,m.position[1]) for i, m in enumerate(self._path) if m is not None]
+		data = [(i,self.get_position(i)[1]) for i in range(len(self)) if self.get_position(i) is not None]
 		self.mainwindow.add_chart('{0} y position'.format(self.name), data)
 
 	####################################################################
 
 	def __send_vel_x_to_timeline_evt(self):
-		data = [(i,m.velocity[0]) for i, m in enumerate(self._path) if m is not None and m.velocity is not None]
+		data = [(i,self.get_velocity(i)[0]) for i in range(len(self)) if self.get_velocity(i) is not None]
 		self.mainwindow.add_chart('{0} x position'.format(self.name), data)
 
 	def __send_vel_y_to_timeline_evt(self):
-		data = [(i,m.velocity[1]) for i, m in enumerate(self._path) if m is not None and m.velocity is not None]
+		data = [(i,self.get_velocity(i)[1]) for i in range(len(self)) if self.get_velocity(i) is not None]
 		self.mainwindow.add_chart('{0} y position'.format(self.name), data)
 
 	def __send_absvel_to_timeline_evt(self):
-		data = [(i,(m.velocity[1]**2+m.velocity[0]**2)**0.5) for i, m in enumerate(self._path) if m is not None and m.velocity is not None]
+		data = []
+		for i in range(len(self)):
+			vel = self.get_velocity(i)
+			if vel is not None:
+				data.append([i, math.sqrt(vel[1]**2+vel[0]**2)])
 		self.mainwindow.add_chart('{0} absolute velocity'.format(self.name), data)
 
 
 	####################################################################
 
 	def __send_acc_x_to_timeline_evt(self):
-		data = [(i,m.acceleration[0]) for i, m in enumerate(self._path) if m is not None and m.acceleration is not None]
+		data = [(i,self.get_acceleration(i)[0]) for i in range(len(self)) if self.get_acceleration(i) is not None]
 		self.mainwindow.add_chart('{0} x position'.format(self.name), data)
 
 	def __send_acc_y_to_timeline_evt(self):
-		data = [(i,m.acceleration[1]) for i, m in enumerate(self._path) if m is not None and m.acceleration is not None]
+		data = [(i,self.get_acceleration(i)[1]) for i in range(len(self)) if self.get_acceleration(i) is not None]
 		self.mainwindow.add_chart('{0} y position'.format(self.name), data)
 
 	def __send_absacc_to_timeline_evt(self):
-		data = [(i,(m.acceleration[1]**2+m.acceleration[0]**2)**0.5) for i, m in enumerate(self._path) if m is not None and m.acceleration is not None]
+		data = []
+		for i in range(len(self)):
+			vel = self.get_acceleration(i)
+			if vel is not None:
+				data.append([i,math.sqrt(vel[1]**2+vel[0]**2)])
 		self.mainwindow.add_chart('{0} absolute acceleration'.format(self.name), data)
 
 
@@ -171,7 +209,7 @@ class PathGUI(PathIO, BaseWidget):
 		#store a temporary path for interpolation visualization
 		if len(self._sel_pts) == 2:
 			mode = None if self._interpolation_mode.value=='Auto' else self._interpolation_mode.value		 #store a temporary path for interpolation visualization
-			self.interpolate_range( self._sel_pts[0].frame, self._sel_pts[1].frame, interpolation_mode=mode)
+			self.interpolate_range( self._sel_pts[0], self._sel_pts[1], interpolation_mode=mode)
 			self.mainwindow._player.refresh()
 		else:
 			QtGui.QMessageBox.about(self, "Error", "You need to select 2 frames.")
@@ -188,7 +226,7 @@ class PathGUI(PathIO, BaseWidget):
 			reply = QtGui.QMessageBox.question(self, 'Confirmation',
 											   "Are you sure you want to delete this path?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 			if reply == QtGui.QMessageBox.Yes: #store a temporary path for interpolation visualization
-				start, end = self._sel_pts[0].frame, self._sel_pts[1].frame
+				start, end = self._sel_pts[0], self._sel_pts[1]
 				self.delete_range(start + 1, end)
 				self.mainwindow._player.refresh()
 		else:
@@ -212,22 +250,24 @@ class PathGUI(PathIO, BaseWidget):
 				self.set_position(frame_index if frame_index>=0 else 0, x, y)
 				self._mark_pto_btn.checked = False
 			else:
-				selected = self.select_moment(frame_index, x, y)
-				if selected != None:
+				position = self.get_position(frame_index)
+				if position is not None:
 					modifier = int(event.modifiers())
+
 					# If the control button is pressed will add the blob to the previous selections
 					if modifier == QtCore.Qt.ControlModifier:
-						if selected not in self._sel_pts: #store a temporary path for interpolation visualization
-							self._sel_pts.append(selected)
+						if frame_index not in self._sel_pts: #store a temporary path for interpolation visualization
+							self._sel_pts.append(frame_index)
+							
 						else:
 							# Remove the blob in case it was selected before #store a temporary path for interpolation visualization
-							self._sel_pts.remove(selected)
+							self._sel_pts.remove(frame_index)
 					else:
 						# The control key was not pressed so will select only one #store a temporary path for interpolation visualization
-						self._sel_pts =[selected]
+						self._sel_pts =[frame_index]
 				else: #store a temporary path for interpolation visualization
 					self._sel_pts =[]  # No object selected: remove previous selections #store a temporary path for interpolation visualization
-				self._sel_pts =sorted(self._sel_pts, key=lambda x: x.frame)
+				self._sel_pts =sorted(self._sel_pts)
 
  			#store a temporary path for interpolation visualization
 			if len(self._sel_pts) == 2: 
@@ -245,6 +285,7 @@ class PathGUI(PathIO, BaseWidget):
 				self._interpolation_mode.hide()
 				self._interpolation_title.hide()
 				self._del_path_btn.hide()
+				self._tmp_path = []
 				
 			
 			self.mainwindow._player.refresh()

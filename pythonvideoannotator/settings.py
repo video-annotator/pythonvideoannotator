@@ -34,6 +34,6 @@ PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','th
 MODULES += 'pythonvideoannotator_module_motioncounter'
 MODULES += 'pythonvideoannotator_module_tracking'
 MODULES += 'pythonvideoannotator_module_timeline'
-MODULES += 'pythonvideoannotator_module_eventsstats'
+#MODULES += 'pythonvideoannotator_module_eventsstats'
 MODULES += 'pythonvideoannotator_module_patheditor'
 

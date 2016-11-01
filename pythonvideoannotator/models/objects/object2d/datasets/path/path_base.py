@@ -1,6 +1,6 @@
-import cv2
+import cv2, math
 from pythonvideoannotator.models.objects.object2d.utils.interpolation import interpolate_positions
-from pythonvideoannotator.models.objects.object2d.datasets.path.moment import Moment
+
 
 class PathBase(object):
 
@@ -26,39 +26,37 @@ class PathBase(object):
 
 	def calculate_tmp_interpolation(self): 
 		#store a temporary path to visualize the interpolation 
-		begin 		= self._sel_pts[0].frame
-		end 		= self._sel_pts[1].frame
-		positions 	= []
-		for i in range(begin, end + 1):
-			moment = self[i]
-			if moment != None and moment.position != None: positions.append([i, moment.position])
-		positions = interpolate_positions(positions, begin, end, interpolation_mode=self.interpolation_mode)
+		begin 		= self._sel_pts[0]
+		end 		= self._sel_pts[1]
+		positions 	= [[i, self.get_position(i)] for i in range(begin, end + 1) if self.get_position(i) is not None]
+		positions   = interpolate_positions(positions, begin, end, interpolation_mode=self.interpolation_mode)
 		self._tmp_path = [pos for frame, pos in positions]
 
 	def delete_range(self, begin, end):
 		for index in range(begin + 1, end):
-			if index <= len(self._path) and self._path[index] != None:
-				self._path[index].position = None
+			if index <= len(self._path) and self._path[index] != None: self._path[index] = None
 
 	def interpolate_range(self, begin, end, interpolation_mode=None):
-		positions = []
-		for i, data in enumerate(self._path[begin:end + 1]):
-			if data != None and data.position != None:
-				positions.append([i + begin, data.position])
-
+		positions = [[i, self.get_position(i)] for i in range(begin, end+1) if self.get_position(i) is not None]
 		positions = interpolate_positions(positions, begin, end, interpolation_mode)
-
-		for frame, pos in positions:
-			if self._path[frame] != None:
-				self._path[frame].position = pos
-			else:
-				self._path[frame] = v = Moment()
-				v.frame 	= frame
-				v.position 	= pos
+		for frame, pos in positions: self.set_position(frame, pos[0], pos[1])
 		self._tmp_path = []
 
+	def get_velocity(self, index):
+		p1 = self.get_position(index)
+		p2 = self.get_position(index-1)
+		if p1 is None or p2 is None: return None
+		return p2[0]-p1[0], p2[1]-p1[1]
+		
 
-	def get_position(self, index): 
+	def get_acceleration(self, index):
+		v1 = self.get_velocity(index)
+		v2 = self.get_velocity(index-1)
+		if v1 is None or v2 is None: return None
+		return v2[0]-v1[0], v2[1]-v1[1]
+
+	def get_position(self, index):
+		if index<0 or index>=len(self._path): return None
 		return self._path[index] if self._path[index] is not None else None
 
 	def set_position(self, index, x, y):
@@ -67,66 +65,52 @@ class PathBase(object):
 			for i in range(len(self._path), index + 1): self._path.append(None)
 
 		# create a new moment in case it does not exists
-		if self._path[index] == None: self._path[index] = m = Moment(); m.frame = index
-
-		# update the position
-		m = self._path[index]; m.position = (x, y)
-
-		# check if the previous moment is set and update the velocity and acceleration
-		if index>0:
-			pm = self._path[index-1]
-			if pm is not None:
-				m.velocity = pm.position[0]-m.position[0], pm.position[1]-m.position[1]
-				if pm.velocity is not None:
-					m.acceleration = pm.velocity[0]-m.velocity[0], pm.velocity[1]-m.velocity[1]
-
-		# update velocity and acceleration of the next moment
-		if index<(len(self._path)-1):
-			nm = self._path[index+1]
-			if nm is not None:
-				nm.velocity = m.position[0]-nm.position[0], m.position[1]-nm.position[1]
-				if m.velocity is not None:
-					nm.acceleration = m.velocity[0]-nm.velocity[0], m.velocity[1]-nm.velocity[1]
+		self._path[index] = int(round(x)),int(round(y))
 			
 
-	def find_moment(self, index, x, y):
-		if index <= len(self._path) and index>=0:
-			item = self._path[index]
-			if item != None and item.collide(x, y):
-				return item
-		return None
-
-	def get_moment(self, index):
-		if index < len(self._path) and index>=0:
-			return self._path[index]
-		return None
-	
+	def collide_with_position(self, index, x, y, radius=20):
+		p1 = self.get_position(index)
+		if p1 is None: return False
+		return math.sqrt((p1[0] - x)**2 + (p1[1] - y)**2) < radius
 	
 	######################################################################
 	### VIDEO EVENTS #####################################################
 	######################################################################
 
+	def draw_circle(self, frame, frame_index):
+		position = self.get_position(frame_index)
+		if position != None:
+			cv2.circle(frame, position[:2], 20, (255, 255, 255), 4, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+			cv2.circle(frame, position[:2], 20, (50, 50, 255), 1, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+
+			cv2.putText(frame, str(frame_index), position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (0, 0, 0), thickness=2, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+			cv2.putText(frame, str(frame_index), position[:2], cv2.FONT_HERSHEY_PLAIN, 1.0, (255, 255, 255), thickness=1, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+
+	def draw_position(self, frame, frame_index):
+		position = self.get_position(frame_index)
+
+		if position != None:
+			cv2.circle(frame, position[:2], 5, (255, 255, 255), -1, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+			cv2.circle(frame, position[:2], 3, (255, 0, 255), -1, lineType=cv2.LINE_AA)  # pylint: disable=no-member
+
+
 	def draw(self, frame, frame_index):
 
-		# Draw the current blobs position
-		if len(self) > 0:
-
-			v = self[frame_index]
-			if v: v.draw(frame)
+		self.draw_position(frame, frame_index)
 
 		# Draw the selected blobs
 		for item in self._sel_pts: #store a temporary path for interpolation visualization
-			item.drawCircle(frame)
+			self.draw_circle(frame, item)
 
 		# Draw the selected path #store a temporary path for interpolation visualization
 		if 1 <= len(self._sel_pts) == 2: #store a temporary path for interpolation visualization
-			start = self._sel_pts[0].frame #store a temporary path for interpolation visualization
-			end = frame_index if len(self._sel_pts)==1 else self._sel_pts[1].frame
+			start = self._sel_pts[0] #store a temporary path for interpolation visualization
+			end = frame_index if len(self._sel_pts)==1 else self._sel_pts[1]
 			for i in range(start, end - 1):
 				v1 = self[i]
 				v2 = self[i + 1]
-				if v1 != None and v2 != None and v2.position != None and v1.position != None:
-					cv2.line(frame, v1.position, v2.position, (0, 0, 255), 1)
+				if v1 != None and v2 != None:
+					cv2.line(frame, v1, v2, (0, 0, 255), 1)
 
 		# Draw a temporary path
 		for i in range(len(self._tmp_path) - 1):
@@ -142,7 +126,7 @@ class PathBase(object):
 	######################################################################
 
 	@property
-	def interpolation_mode(self): return 'Auto'
+	def interpolation_mode(self): return None
 
 	@property
 	def object2d(self): return self._object2d

@@ -17,7 +17,7 @@ class Object2dGUI(Object2dIO, BaseWidget):
 
 		self._name = ControlText('Name')
 
-		self._formset = ['_name']
+		self._formset = ['_name', ' ']
 
 		self._name.changed = self.__name_changed_evt
 
@@ -26,6 +26,9 @@ class Object2dGUI(Object2dIO, BaseWidget):
 	######################################################################
 	### EVENTS ###########################################################
 	######################################################################
+
+	def on_click(self, event, x, y):
+		pass
 
 	def __name_changed_evt(self):
 		self._name_changed_activated = True

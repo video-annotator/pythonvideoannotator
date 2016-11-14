@@ -15,3 +15,5 @@ pyControlGUI.egg-info/*
 org.eclipse.core.resources.prefs
 .pydevproject
 user_settings.py
+build_settings/osx/build
+build_settings/osx/dist

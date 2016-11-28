@@ -16,6 +16,8 @@ PYFORMS_LOG_HANDLER_CONSOLE_LEVEL = logging.INFO
 
 VIDEO_FILE_PATH = None
 CHART_FILE_PATH = None
+PROJECT_PATH    = None
+PROJECT_PATH    = 'projecto'
 
 SAVED_GRAPH_FILE_PATH = ""
 SAVED_BONSAI_FILE_PATH = ""
@@ -31,9 +33,10 @@ MAIN_WINDOW_GEOMETRY = 2400, 200, 800, 600
 PYFORMS_STYLESHEET 			= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet.css')
 PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet_darwin.css')
 
-MODULES += 'pythonvideoannotator_module_motioncounter'
-MODULES += 'pythonvideoannotator_module_tracking'
-MODULES += 'pythonvideoannotator_module_timeline'
+#MODULES += 'pythonvideoannotator_module_motioncounter'
 #MODULES += 'pythonvideoannotator_module_eventsstats'
+#MODULES += 'pythonvideoannotator_module_regionsfilter'
+#MODULES += 'pythonvideoannotator_module_tracking'
+MODULES += 'pythonvideoannotator_module_timeline'
 MODULES += 'pythonvideoannotator_module_patheditor'
 

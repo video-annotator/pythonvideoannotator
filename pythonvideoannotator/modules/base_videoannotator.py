@@ -21,19 +21,17 @@ class BaseVideoAnnotator(BaseWidget):
 
 		super(BaseVideoAnnotator, self).__init__('Video annotation editor')
 
-		self._video 	= ControlFile('Video')
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')
 		self._dock 		= ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
-		self._formset 	= ['_video', '_player']
+		self.formset 	= ['_player']
 
 		self._dock.value 				= self._time
-		self._video.changed 			= self.video_changed_evt
-		self._player.processFrame 		= self.process_frame
-		self._player.onClick 			= self.onPlayerClick
+		self._player.process_frame_event = self.process_frame
+		self._player.on_click_event		= self.onPlayerClick
 		self._time.key_release_event 	= self.__time_key_release_event
 
-		self.load_order = ['_video']
+		self.load_order = []
 
 		self.mainmenu.insert(0,
 			{'File': [
@@ -45,30 +43,34 @@ class BaseVideoAnnotator(BaseWidget):
 				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
 			] }
 		)
-		self.mainmenu.insert(1,
-			{'Modules': []}
-		)
+		self.mainmenu.insert(1, {'Modules': []} )
 
 		self._current_project_path = None
 
-		
-	def initForm(self):
-		super(BaseVideoAnnotator, self).initForm()
+	######################################################################################
+	#### FUNCTIONS #######################################################################
+	######################################################################################
 
-		if conf.VIDEO_FILE_PATH: self._video.value = conf.VIDEO_FILE_PATH
+		
+	def init_form(self):
+		super(BaseVideoAnnotator, self).init_form()
+
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
+
+		if conf.PROJECT_PATH: self.load_project(conf.PROJECT_PATH)
+
+
+	def video_added_event(self, video): pass
 
 	######################################################################################
 	#### IO FUNCTIONS ####################################################################
 	######################################################################################
 
 	def save(self, data, project_path=None):
-		data['video-filename'] = self._video.value
 		return data
 
 	def load(self, data, project_path=None):
-		if data.get('video-filename', None):
-			self._video.value = data.get('video-filename', None)
+		pass
 
 	def save_project(self, project_path=None):
 		if project_path is None:
@@ -104,16 +106,13 @@ class BaseVideoAnnotator(BaseWidget):
 
 	def __save_project_as_evt(self): self.save_project()
 
-	def video_changed_evt(self):
-		self._player.value 	= self._video.value
-		self._time.max 		= self._player.max
-
+	
 	def __time_key_release_event(self, event):
 		"""
 		Control video playback using the space bar to Play/Pause
 		"""
 		if event.key() == QtCore.Qt.Key_Space:
-			self._video.stop() if self._video.is_playing else self._video.play()
+			self._player.stop() if self._player.is_playing else _player._video.play()
 		
 
 	def onPlayerClick(self, event, x, y):
@@ -128,3 +127,21 @@ class BaseVideoAnnotator(BaseWidget):
 		Function called before render each frame
 		"""
 		return frame
+
+	@property
+	def timeline(self): return self._time
+
+	@property
+	def player(self): return self._player
+	
+	@property
+	def video(self): return self._player.value
+	@video.setter
+	def video(self, value): 
+		self._player.value 		= value
+		self._player.enabled 	= value is not None
+		if value:
+			self._time.max = self._player.max
+
+	@property
+	def project(self): return self._project

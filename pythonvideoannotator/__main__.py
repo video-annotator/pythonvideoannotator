@@ -30,7 +30,7 @@ loggingbootstrap.create_double_logger("pythonvideoannotator", conf.APP_LOG_HANDL
 
 
 
-def start(): pyforms.startApp(VideoAnnotator, conf.MAIN_WINDOW_GEOMETRY)
+def start(): pyforms.start_app(VideoAnnotator, conf.MAIN_WINDOW_GEOMETRY)
 
 
 if __name__ == '__main__': start()

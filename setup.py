@@ -18,7 +18,6 @@ requirements = [
 ]
 
 setup(
-
 	name='pythonVideoAnnotator',
 	version=version,
 	description=""" Python Video Annotator is a standalone application written in python, which provides a GUI for users to analyze and to take notes of events occurred in the videos. """,

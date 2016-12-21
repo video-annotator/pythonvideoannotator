@@ -9,7 +9,7 @@ theme_dir: cinder
 repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 
 pages:
-- Home: docs/index.md
+- Home: index.md
 
 #extra_css:
 #    - css/extra.css

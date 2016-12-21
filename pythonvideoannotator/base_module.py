@@ -1,6 +1,6 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
-import os, json
+import os
 from pysettings import conf
 from pyforms import BaseWidget
 from PyQt4 import QtGui, QtCore
@@ -24,12 +24,13 @@ class BaseModule(BaseWidget):
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')
 		self._dock 		= ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
+
 		self.formset 	= ['_player']
 
 		self._dock.value 					= self._time
-		self._player.process_frame_event 	= self.process_frame
+		self._player.process_frame_event 	= self.process_frame_evt
 		self._player.on_click_event			= self.on_player_click_evt
-		self._time.key_release_event 		= self.__time_key_release_event
+		self._time.key_release_event 		= self.__timeline_key_release_event
 
 		self.load_order = []
 
@@ -44,8 +45,6 @@ class BaseModule(BaseWidget):
 			] }
 		)
 		self.mainmenu.insert(1, {'Modules': []} )
-
-		self._current_project_path = None
 
 	######################################################################################
 	#### FUNCTIONS #######################################################################
@@ -65,34 +64,20 @@ class BaseModule(BaseWidget):
 	#### IO FUNCTIONS ####################################################################
 	######################################################################################
 
-	def save(self, data, project_path=None):
-		return data
+	def save(self, data, project_path=None): return data
 
-	def load(self, data, project_path=None):
-		pass
+	def load(self, data, project_path=None): pass
 
 	def save_project(self, project_path=None):
 		if project_path is None:
 			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
-		
-		if project_path is not None:
-			project_filename = os.path.join(str(project_path), 'project.json')
-			data = self.save({}, str(project_path))
-			
-			with open(project_filename, 'w') as outfile:
-				json.dump(data, outfile)
-
-			self._current_project_path = str(project_path)
+		self.save({}, project_path)
 
 	def load_project(self, project_path=None):
 		if project_path is None:
 			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
-		if project_path is not None:
-			project_filename = os.path.join(str(project_path), 'project.json')
-			with open(project_filename, 'r') as outfile:
-				data = json.load(outfile)
-			self.load(data, str(project_path))
-			self._current_project_path = str(project_path)
+		if project_path is not None: self.load({}, project_path)
+
 
 
 	######################################################################################
@@ -104,9 +89,8 @@ class BaseModule(BaseWidget):
 	def __save_project_evt(self): self.save_project(self._current_project_path)
 
 	def __save_project_as_evt(self): self.save_project()
-
 	
-	def __time_key_release_event(self, event):
+	def __timeline_key_release_event(self, event):
 		"""
 		Control video playback using the space bar to Play/Pause
 		"""
@@ -121,11 +105,15 @@ class BaseModule(BaseWidget):
 		super(VideoAnnotationEditor, self).on_player_click_evt(event, x, y)
 		self._player.refresh()
 
-	def process_frame(self, frame):
+	def process_frame_evt(self, frame):
 		"""
 		Function called before render each frame
 		"""
 		return frame
+
+	######################################################################################
+	#### PROPERTIES ######################################################################
+	######################################################################################
 
 	@property
 	def timeline(self): return self._time

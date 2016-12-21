@@ -21,3 +21,11 @@ except:
 	pass
 ####################################################
 ####################################################
+
+from pythonvideoannotator.base_module import BaseModule
+
+VideoAnnotator = type(
+	'VideoAnnotator',
+	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),
+	{}
+)

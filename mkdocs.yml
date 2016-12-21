@@ -9,11 +9,14 @@ theme_dir: cinder
 repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 
 pages:
-- Home: index.md
-- Contributing: 
-  - For developers: contributing/index.md
-  - Models: contributing/models.md
-
+- Home: 'index.md'
+- Architecture for developers: 
+  - 'Module': 'base_module.md'
+  - utils:
+    - 'dyn_list': 'utils/dyn_list.md'
+    - 'tools': 'utils/tools.md'
+  - 'Contributing': 'contributing/index.md'
+  
 #extra_css:
 #    - css/extra.css
 

@@ -1,4 +1,4 @@
-# Models
+# Model
 
 | Name | Description |
 |---|---|

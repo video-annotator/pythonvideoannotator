@@ -3,7 +3,6 @@ site_url: https://pythonvideoannotator.readthedocs.io/
 site_description: GUI for analyse and annotation of events occurred in the videos.
 site_author: Champalimaud Foundation
 
-#theme: cinder
 theme_dir: cinder
 
 repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
@@ -11,19 +10,12 @@ repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 pages:
 - Home: 'index.md'
 - Architecture for developers: 
-  - 'Module': 'base_module.md'
-  - utils:
-    - 'dyn_list': 'utils/dyn_list.md'
-    - 'tools': 'utils/tools.md'
-  - 'Contributing': 'contributing/index.md'
-  
-#extra_css:
-#    - css/extra.css
-
-#markdown_extensions:
-#    - toc:
-#        permalink: 
-#    - admonition:
+	- 'Architecture basics': 'architecture_basics.md'
+	- Packages and modules:
+		- 'BaseModule': 'packages_and_modules/base_module.md'
+		- utils:
+			- 'dyn_list': 'packages_and_modules/utils/dyn_list.md'
+			- 'tools': 'packages_and_modules/utils/tools.md'
+	- 'Contributing': 'contributing/index.md'
 
 copyright: Copyright &copy; 2016 <a href="/release-notes/">Champalimaud Foundation</a>, Maintained by the <a href="/about/release-notes/#maintenance-team">Scientific Software Platform</a>.
-#google_analytics: ['UA-27795084-5', 'mkdocs.org']

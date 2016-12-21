@@ -10,7 +10,9 @@ repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 
 pages:
 - Home: index.md
-- Contributing: contributing/index.md
+- Contributing: 
+  - For developers: contributing/index.md
+  - Models: contributing/models.md
 
 #extra_css:
 #    - css/extra.css

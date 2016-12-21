@@ -4,7 +4,7 @@ site_description: GUI for analyse and annotation of events occurred in the video
 site_author: Champalimaud Foundation
 
 #theme: cinder
-theme_dir: docs/cinder
+theme_dir: cinder
 
 repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 

@@ -9,6 +9,7 @@ from pyforms.Controls import ControlFile
 from pyforms.Controls import ControlEventTimeline
 from pyforms.Controls import ControlDockWidget
 
+from pythonvideoannotator_models_gui.models import Project
 
 def Exit(): exit()
 
@@ -20,6 +21,8 @@ class BaseModule(BaseWidget):
 		conf += 'pythonvideoannotator.resources'  # Resources can only be loaded after pyqt is running
 
 		super(BaseModule, self).__init__('Video annotation editor')
+		
+		self._project = Project(parent=self)
 
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')
@@ -28,18 +31,18 @@ class BaseModule(BaseWidget):
 		self.formset 	= ['_player']
 
 		self._dock.value 					= self._time
-		self._player.process_frame_event 	= self.process_frame_evt
-		self._player.on_click_event			= self.on_player_click_evt
+		self._player.process_frame_event 	= self.process_frame_event
+		self._player.on_click_event			= self.on_player_click_event
 		self._time.key_release_event 		= self.__timeline_key_release_event
 
 		self.load_order = []
 
 		self.mainmenu.insert(0,
 			{'File': [
-				{'Open': self.__open_project_evt, 'icon': conf.ANNOTATOR_ICON_OPEN},
+				{'Open': self.__open_project_event, 'icon': conf.ANNOTATOR_ICON_OPEN},
 				'-',
-				{'Save': self.__save_project_evt , 'icon': conf.ANNOTATOR_ICON_SAVE},
-				{'Save as': self.__save_project_as_evt, 'icon': conf.ANNOTATOR_ICON_SAVE},
+				{'Save': self.__save_project_event , 'icon': conf.ANNOTATOR_ICON_SAVE},
+				{'Save as': self.__save_project_as_event, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
 				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
 			] }
@@ -57,8 +60,6 @@ class BaseModule(BaseWidget):
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
 		if conf.PROJECT_PATH: self.load_project(conf.PROJECT_PATH)
 
-
-	def video_added_evt(self, video): pass
 
 	######################################################################################
 	#### IO FUNCTIONS ####################################################################
@@ -84,11 +85,34 @@ class BaseModule(BaseWidget):
 	#### EVENTS ##########################################################################
 	######################################################################################
 
-	def __open_project_evt(self): self.load_project()
+	def on_player_click_event(self, event, x, y):
+		"""
+		Code to select a blob with the mouse
+		"""
+		super(VideoAnnotationEditor, self).on_player_click_event(event, x, y)
+		self._player.refresh()
 
-	def __save_project_evt(self): self.save_project(self._current_project_path)
+	def process_frame_event(self, frame):
+		"""
+		Function called before render each frame
+		"""
+		return frame
 
-	def __save_project_as_evt(self): self.save_project()
+	def added_video_event(self, video):		pass
+	def removed_video_event(self, video): 	pass
+	
+	def added_object_event(self, obj): 		pass
+	def removed_object_event(self, obj): 	pass
+
+	def added_dataset_event(self, dataset): pass
+	def removed_dataset_event(self, dataset):pass
+
+
+	def __open_project_event(self): self.load_project()
+
+	def __save_project_event(self): self.save_project()
+
+	def __save_project_as_event(self): self.save_project()
 	
 	def __timeline_key_release_event(self, event):
 		"""
@@ -98,18 +122,8 @@ class BaseModule(BaseWidget):
 			self._player.stop() if self._player.is_playing else _player._video.play()
 		
 
-	def on_player_click_evt(self, event, x, y):
-		"""
-		Code to select a blob with the mouse
-		"""
-		super(VideoAnnotationEditor, self).on_player_click_evt(event, x, y)
-		self._player.refresh()
 
-	def process_frame_evt(self, frame):
-		"""
-		Function called before render each frame
-		"""
-		return frame
+
 
 	######################################################################################
 	#### PROPERTIES ######################################################################

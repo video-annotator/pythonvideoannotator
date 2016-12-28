@@ -61,29 +61,54 @@ If the project_path parameter is **None** it will open a dialog for the user to 
 ## **Events**
 ***************************
 
-### video_added_evt(video)
+### added_video_event(video)
 
 Function called when a new video is added to the project.
 This functions is used to update the interface.
 
-### on_player_click_evt(event, x, y)
+### removed_video_event(video)
+
+Function called when a new video is removed from the project.
+This functions is used to update the interface.
+
+### added_object_event(obj)
+
+Function called when a new object is added to a video.
+This functions is used to update the interface.
+
+### removed_object_event(obj)
+
+Function called when a new video is removed from a video.
+This functions is used to update the interface.
+
+### added_dataset_event(dataset)
+
+Function called when a new video is added to an object.
+This functions is used to update the interface.
+
+### removed_dataset_event(dataset)
+
+Function called when a new video is removed from an object.
+This functions is used to update the interface.
+
+### on_player_click_event(event, x, y)
 
 Function called whenever the mouse press click in the player image.
 
-### process_frame_evt(frame)
+### process_frame_event(frame)
 
 Function called before a frame is rendered into the player.
 Should return the frame to render or a list of frames.
 
-### \_\_open_project_evt()
+### \_\_open_project_event()
 
 Function called by the main menu option, "Open project".
 
-### \_\_save_project_evt()
+### \_\_save_project_event()
 
 Function called by the main menu option, "Save project".
 
-### \_\_save_project_as_evt()
+### \_\_save_project_as_event()
 
 Function called by the main menu option, "Open project as".
 	

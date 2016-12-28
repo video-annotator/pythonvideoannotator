@@ -23,7 +23,7 @@ SAVED_GRAPH_FILE_PATH = ""
 SAVED_BONSAI_FILE_PATH = ""
 
 MAIN_WINDOW_GEOMETRY = 100, 200, 800, 600
-MAIN_WINDOW_GEOMETRY = 2400, 200, 800, 600
+MAIN_WINDOW_GEOMETRY = 1700, 50, 1400, 1000
 
 
 #VIDEO_FILE_PATH = '/home/ricardo/Downloads/fc2_save_2013-10-29-124117-0001.avi'
@@ -36,6 +36,8 @@ PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','th
 #MODULES += 'pythonvideoannotator_module_motioncounter'
 #MODULES += 'pythonvideoannotator_module_eventsstats'
 #MODULES += 'pythonvideoannotator_module_regionsfilter'
+
+MODULES += 'pythonvideoannotator_module_contoursimages'
 MODULES += 'pythonvideoannotator_module_tracking'
 MODULES += 'pythonvideoannotator_module_timeline'
 MODULES += 'pythonvideoannotator_module_patheditor'

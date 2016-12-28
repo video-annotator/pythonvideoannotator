@@ -21,7 +21,8 @@ QMenuBar{
 }
 
 
-QLabel[accessibleName="ControlText-label"],QLabel[accessibleName="ControlCombo-label"]{
+QLabel[accessibleName="ControlText-label"],QLabel[accessibleName="ControlCombo-label"],
+QLabel[accessibleName="ControlNumber-label"], QLabel[accessibleName="ControlSlider-label"]{
 	max-width: 100000000px;
 	min-width: 100px;
 }

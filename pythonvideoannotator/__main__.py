@@ -10,9 +10,6 @@ except ImportError as err:
 	logging.getLogger().critical(str(err), exc_info=True)
 	exit("Could not load pyforms! Is it installed?")
 
-loggingbootstrap.create_double_logger("pyforms", logging.DEBUG, 'pythonvideoannotator.log',
-                                      logging.DEBUG)
-
 try:
 	from pysettings import conf
 	# Initiating logging for pysettings. It has to be initiated manually here because we don't know yet
@@ -26,7 +23,8 @@ from pythonvideoannotator import VideoAnnotator
 
 # setup different loggers but output to single file
 loggingbootstrap.create_double_logger("pythonvideoannotator", conf.APP_LOG_HANDLER_CONSOLE_LEVEL, conf.APP_LOG_FILENAME,
-                                      conf.APP_LOG_HANDLER_FILE_LEVEL)
+									  conf.APP_LOG_HANDLER_FILE_LEVEL)
+
 
 
 

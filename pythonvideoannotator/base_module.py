@@ -44,7 +44,7 @@ class BaseModule(BaseWidget):
 				{'Save': self.__save_project_event , 'icon': conf.ANNOTATOR_ICON_SAVE},
 				{'Save as': self.__save_project_as_event, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
-				{'Exit': Exit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
+				{'Exit': QtGui.qApp.quit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
 			] }
 		)
 		self.mainmenu.insert(1, {'Modules': []} )

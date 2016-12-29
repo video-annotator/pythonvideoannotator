@@ -2,6 +2,7 @@
 
 hiddenimports = [
 	'pythonvideoannotator.settings',
+	'pythonvideoannotator_models_gui.settings',
 	'pythonvideoannotator_module_contoursimages',	
 	'pythonvideoannotator_module_contoursimages.settings',
 	'pythonvideoannotator_module_tracking',

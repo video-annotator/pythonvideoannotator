@@ -62,3 +62,5 @@ ANNOTATOR_ICON_ASPECT_RATIO 	= QtGui.QIcon(path('aspect-ratio.png'))
 ANNOTATOR_ICON_INFO 	= QtGui.QIcon(path('info.png'))
 ANNOTATOR_ICON_ANGLE 	= QtGui.QIcon(path('angle.png'))
 ANNOTATOR_ICON_POINT 	= QtGui.QIcon(path('point.png'))
+
+ANNOTATOR_ICON_PICTURE	= QtGui.QIcon(path('picture.png'))

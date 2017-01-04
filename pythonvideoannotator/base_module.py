@@ -77,7 +77,7 @@ class BaseModule(BaseWidget):
 	def load_project(self, project_path=None):
 		if project_path is None:
 			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
-		if project_path is not None: self.load({}, project_path)
+		if project_path is not None: self.load({}, str(project_path) )
 
 
 
@@ -106,6 +106,9 @@ class BaseModule(BaseWidget):
 
 	def added_dataset_event(self, dataset): pass
 	def removed_dataset_event(self, dataset):pass
+
+	def added_images_event(self, dataset): pass
+	def removed_images_event(self, dataset):pass
 
 
 	def __open_project_event(self): self.load_project()

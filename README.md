@@ -1,5 +1,8 @@
 # Python Video Annotator
 
+[Binary downloads](https://bitbucket.org/fchampalimaud/pythonvideoannotator/downloads)
+
+
 The software is a standalone application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos.
 
 Features:

@@ -2,11 +2,11 @@
 
 name: python-video-annotator-env # this is just a name for the environment
 dependencies:
-  - sphinx_bootstrap_theme
   - python=2.7
   - pyqt=4
   - numpy
   - pip:
+      - sphinx_bootstrap_theme
       - sphinx
       - recommonmark
       - https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip

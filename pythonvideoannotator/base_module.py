@@ -45,9 +45,10 @@ class BaseModule(BaseWidget):
 				{'Save as': self.__save_project_as_event, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
 				{'Exit': QtGui.qApp.quit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
-			] }
+			] }			
 		)
 		self.mainmenu.insert(1, {'Modules': []} )
+		self.mainmenu.insert(2, {'Windows': []} )
 
 	######################################################################################
 	#### FUNCTIONS #######################################################################
@@ -72,12 +73,16 @@ class BaseModule(BaseWidget):
 	def save_project(self, project_path=None):
 		if project_path is None:
 			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
-		self.save({}, project_path)
+
+		if project_path is not None and str(project_path)!='':
+			project_path = str(project_path)
+			self.save({}, project_path)
 
 	def load_project(self, project_path=None):
 		if project_path is None:
 			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
-		if project_path is not None: self.load({}, str(project_path) )
+		if project_path is not None and str(project_path)!='':
+			self.load({}, str(project_path) )
 
 
 
@@ -98,17 +103,6 @@ class BaseModule(BaseWidget):
 		"""
 		return frame
 
-	def added_video_event(self, video):		pass
-	def removed_video_event(self, video): 	pass
-	
-	def added_object_event(self, obj): 		pass
-	def removed_object_event(self, obj): 	pass
-
-	def added_dataset_event(self, dataset): pass
-	def removed_dataset_event(self, dataset):pass
-
-	def added_images_event(self, dataset): pass
-	def removed_images_event(self, dataset):pass
 
 
 	def __open_project_event(self): self.load_project()

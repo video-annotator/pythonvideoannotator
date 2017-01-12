@@ -64,3 +64,10 @@ ANNOTATOR_ICON_ANGLE 	= QtGui.QIcon(path('angle.png'))
 ANNOTATOR_ICON_POINT 	= QtGui.QIcon(path('point.png'))
 
 ANNOTATOR_ICON_PICTURE	= QtGui.QIcon(path('picture.png'))
+ANNOTATOR_ICON_SMOOTH	= QtGui.QIcon(path('smooth.png'))
+ANNOTATOR_ICON_NEW	= QtGui.QIcon(path('new.png'))
+ANNOTATOR_ICON_IMAGE	= QtGui.QIcon(path('image.png'))
+
+ANNOTATOR_ICON_BACKGROUND	= QtGui.QIcon(path('background.png'))
+ANNOTATOR_ICON_MOVIE	= QtGui.QIcon(path('movie.png'))
+ANNOTATOR_ICON_MOVIES	= QtGui.QIcon(path('movies.png'))

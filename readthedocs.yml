@@ -1,0 +1,4 @@
+# readthedocs.yml
+
+conda:
+    file: docs/environment.yml

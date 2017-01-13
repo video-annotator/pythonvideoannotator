@@ -7,7 +7,7 @@ dependencies:
   - sphinx=1.5.1
   - numpy
   - pip:
-      - sphinx_bootstrap_theme
       - sphinx=1.5.1
+      - sphinx_bootstrap_theme
       - recommonmark
       - https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip

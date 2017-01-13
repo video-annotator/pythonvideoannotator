@@ -31,14 +31,14 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages']
+	'sphinx.ext.doctest',
+	'sphinx.ext.intersphinx',
+	'sphinx.ext.todo',
+	'sphinx.ext.coverage',
+	'sphinx.ext.mathjax',
+	'sphinx.ext.ifconfig',
+	'sphinx.ext.viewcode',
+	'sphinx.ext.githubpages']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -105,6 +105,10 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_context = {
+	'css_files': ['_static/custom.css'],
+}
+
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -115,29 +119,29 @@ htmlhelp_basename = 'PythonVideoAnnotatordoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
+	# The paper size ('letterpaper' or 'a4paper').
+	#
+	# 'papersize': 'letterpaper',
 
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
+	# The font size ('10pt', '11pt' or '12pt').
+	#
+	# 'pointsize': '10pt',
 
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
+	# Additional stuff for the LaTeX preamble.
+	#
+	# 'preamble': '',
 
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
+	# Latex figure (float) alignment
+	#
+	# 'figure_align': 'htbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PythonVideoAnnotator.tex', u'PythonVideoAnnotator Documentation',
-     u'Ricardo Jorge Vieira Ribeiro', 'manual'),
+	(master_doc, 'PythonVideoAnnotator.tex', u'PythonVideoAnnotator Documentation',
+	 u'Ricardo Jorge Vieira Ribeiro', 'manual'),
 ]
 
 
@@ -146,8 +150,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pythonvideoannotator', u'PythonVideoAnnotator Documentation',
-     [author], 1)
+	(master_doc, 'pythonvideoannotator', u'PythonVideoAnnotator Documentation',
+	 [author], 1)
 ]
 
 
@@ -157,9 +161,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PythonVideoAnnotator', u'PythonVideoAnnotator Documentation',
-     author, 'PythonVideoAnnotator', 'One line description of project.',
-     'Miscellaneous'),
+	(master_doc, 'PythonVideoAnnotator', u'PythonVideoAnnotator Documentation',
+	 author, 'PythonVideoAnnotator', 'One line description of project.',
+	 'Miscellaneous'),
 ]
 
 
@@ -206,65 +210,65 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.
 html_theme_options = {
-    # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "Home",
+	# Navigation bar title. (Default: ``project`` value)
+	'navbar_title': "Home",
 
-    # Tab name for entire site. (Default: "Site")
-    'navbar_site_name': "Home",
+	# Tab name for entire site. (Default: "Site")
+	'navbar_site_name': "Home",
 
-    # A list of tuples containing pages or urls to link to.
-    # Valid tuples should be in the following forms:
-    #    (name, page)                 # a link to a page
-    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
-    #    (name, "http://example.com", True) # arbitrary absolute url
-    # Note the "1" or "True" value above as the third argument to indicate
-    # an arbitrary url.
-    #'navbar_links': [
-    #    ("Examples", "examples"),
-    #    ("Link", "http://example.com", True),
-    #],
+	# A list of tuples containing pages or urls to link to.
+	# Valid tuples should be in the following forms:
+	#    (name, page)                 # a link to a page
+	#    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+	#    (name, "http://example.com", True) # arbitrary absolute url
+	# Note the "1" or "True" value above as the third argument to indicate
+	# an arbitrary url.
+	#'navbar_links': [
+	#    ("Examples", "examples"),
+	#    ("Link", "http://example.com", True),
+	#],
 
-    # Render the next and previous page links in navbar. (Default: true)
-    'navbar_sidebarrel': False,
+	# Render the next and previous page links in navbar. (Default: true)
+	'navbar_sidebarrel': False,
 
-    # Render the current pages TOC in the navbar. (Default: true)
-    'navbar_pagenav': False,
+	# Render the current pages TOC in the navbar. (Default: true)
+	'navbar_pagenav': False,
 
-    # Tab name for the current pages TOC. (Default: "Page")
-    'navbar_pagenav_name': "Page",
+	# Tab name for the current pages TOC. (Default: "Page")
+	'navbar_pagenav_name': "Page",
 
-    # Global TOC depth for "site" navbar tab. (Default: 1)
-    # Switching to -1 shows all levels.
-    'globaltoc_depth': -1,
+	# Global TOC depth for "site" navbar tab. (Default: 1)
+	# Switching to -1 shows all levels.
+	'globaltoc_depth': -1,
 
-    # Include hidden TOCs in Site navbar?
-    #
-    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
-    # non-hidden ``toctree`` directives in the same page, or else the build
-    # will break.
-    #
-    # Values: "true" (default) or "false"
-    'globaltoc_includehidden': "true",
+	# Include hidden TOCs in Site navbar?
+	#
+	# Note: If this is "false", you cannot have mixed ``:hidden:`` and
+	# non-hidden ``toctree`` directives in the same page, or else the build
+	# will break.
+	#
+	# Values: "true" (default) or "false"
+	'globaltoc_includehidden': "true",
 
-    # HTML navbar class (Default: "navbar") to attach to <div> element.
-    # For black navbar, do "navbar navbar-inverse"
-    'navbar_class': "navbar navbar-inverse",
+	# HTML navbar class (Default: "navbar") to attach to <div> element.
+	# For black navbar, do "navbar navbar-inverse"
+	'navbar_class': "navbar navbar-inverse",
 
-    # Fix navigation bar to top of page?
-    # Values: "true" (default) or "false"
-    'navbar_fixed_top': "true",
+	# Fix navigation bar to top of page?
+	# Values: "true" (default) or "false"
+	'navbar_fixed_top': "true",
 
-    # Location of link to source.
-    # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "footer",
+	# Location of link to source.
+	# Options are "nav" (default), "footer" or anything else to exclude.
+	'source_link_position': "footer",
 
-    # Bootswatch (http://bootswatch.com/) theme.
-    #
-    # Options are nothing (default) or the name of a valid theme
-    # such as "amelia" or "cosmo".
-    'bootswatch_theme': "united",
+	# Bootswatch (http://bootswatch.com/) theme.
+	#
+	# Options are nothing (default) or the name of a valid theme
+	# such as "amelia" or "cosmo".
+	'bootswatch_theme': "united",
 
-    # Choose Bootstrap version.
-    # Values: "3" (default) or "2" (in quotes)
-    'bootstrap_version': "3",
+	# Choose Bootstrap version.
+	# Values: "3" (default) or "2" (in quotes)
+	'bootstrap_version': "3",
 }

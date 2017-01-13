@@ -13,11 +13,11 @@
 PYTHON VIDEO ANNOTATOR
 ================================================
 
-|
-
-The python video annotator is a graphical application written in python, to take events notes and do analyses on videos.
-
-|
+| 
+| The python video annotator is a graphical application written in python, to analyse videos and mark events notes and it was developed with the aim of helping neuroscience and ethology researchers indentifing animals behaviours based on the information extracted from the video.
+| 
+| Paths, contours and outputs of external devices, like accelerometers, sound recorders, pokes, pressure devices and other sensors can be combined to find classes of events to identify behaviours.
+| 
 
 .. raw:: html
 
@@ -25,16 +25,75 @@ The python video annotator is a graphical application written in python, to take
 	<iframe width="100%" height="315" src="https://www.youtube.com/embed/IE_mtCHc9bQ?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=0&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
 	</center>
 
-|
+.. container:: separator
+	
+	.
 
-* Organize multiple videos on a project tree.
-* Associate metadata to each video on the project tree.
-* Annotate events and navigate in the videos with with the timeline bar.
-* Compare data overtime with graphs draw over the timeline.
-* Projects and videos data organized on a intuitive directories structure, and files saved on open formats like json and csv, for grant the portability of data.
-* Multiple plugins to track objects, and analyse metadata data.
+.. container:: left-text
 
-|
+	.. image:: _static/index/project.png
+		:align: left
+		:class: left-image
+	|
+	|
+	|
+	|
+	| Organize your data and work on multiple videos at the same time with the project tree.
+	|
+	| Import the output of your scripts, third party applications or external devices, into your project and follow its changes over the time.
+	|
+	| On each video you may have associated objects that you can track and compare properties.
+
+
+.. container:: right-text
+
+	| Navigate in the video, annotate and modify events with the timeline bar.
+	|
+	| Plot the data on the timeline to compare values over the time.
+
+	.. image:: _static/index/timeline_small.png
+		:class: right-image
+
+
+.. container:: clear-line
+	
+	.
+
+
+.. container:: right-text
+
+	.. image:: _static/index/project-directories-tree.png
+		:align: left
+
+	| Access and modify easily the data with the open formats.
+	| 
+	| The project data is organized in a intuitive structure, and files are saved with open formats like json and csv to grarantee you the portability of the data.
+	|
+	| Modify the project structure by moving the folders around with your filesystem manager.
+
+.. container:: left-text
+
+	| The python video annotator is plugins based which allow to toggle the activation of the ones that are already included or add new ones developed by you.
+	|
+	| Validate automatically tracking mistakes and correct them using the tracking modules or the manual correction.
+	
+	.. image:: _static/index/background-calculator.gif
+
+	.. image:: _static/index/player.png
+		:class: paddingleft18
+
+	| Visualize the tracking information directly on the video player, smooth paths, calculate the videos' backgrounds and much more ...
+
+	
+
+
+.. container:: clear-line
+	
+	.
+
+.. container:: separator
+	
+	.
 
 Downloads
 -------------------

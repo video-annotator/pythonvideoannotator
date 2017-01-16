@@ -59,7 +59,9 @@ class BaseModule(BaseWidget):
 		super(BaseModule, self).init_form()
 
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
-		if conf.PROJECT_PATH: self.load_project(conf.PROJECT_PATH)
+		if conf.PROJECT_PATH: 
+			self.load_project(conf.PROJECT_PATH)
+			
 
 
 	######################################################################################

@@ -22,7 +22,7 @@ PYTHON VIDEO ANNOTATOR
 .. raw:: html
 
 	<center>
-	<iframe width="100%" height="315" src="https://www.youtube.com/embed/9C4Zr8fhqFo?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=0&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
+	<iframe width="100%" height="315" src="https://www.youtube.com/embed/9C4Zr8fhqFo?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
 	</center>
 
 .. container:: separator

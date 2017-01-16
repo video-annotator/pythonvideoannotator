@@ -5,7 +5,7 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   	user-docs/index
 
 
 |
@@ -34,6 +34,7 @@ PYTHON VIDEO ANNOTATOR
 	.. image:: _static/index/project.png
 		:align: left
 		:class: left-image
+	
 	|
 	|
 	|

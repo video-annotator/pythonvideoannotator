@@ -32,7 +32,7 @@ class BaseModule(BaseWidget):
 
 		self._dock.value 					= self._time
 		self._player.process_frame_event 	= self.process_frame_event
-		self._player.on_click_event			= self.on_player_click_event
+		self._player.click_event			= self.on_player_click_event
 		self._time.key_release_event 		= self.__timeline_key_release_event
 
 		self.load_order = []

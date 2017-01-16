@@ -4,8 +4,9 @@
    contain the root `toctree` directive.
 
 .. toctree::
-   :maxdepth: 2
-   	user-docs/index
+	:maxdepth: 2
+	
+	user-docs/index
 
 
 |

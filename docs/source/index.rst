@@ -5,9 +5,6 @@
 
 .. toctree::
 	:maxdepth: 2
-	
-	user-docs/index
-
 
 |
 

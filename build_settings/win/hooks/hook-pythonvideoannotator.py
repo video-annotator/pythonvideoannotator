@@ -16,6 +16,8 @@ hiddenimports = [
 + collect_submodules('pythonvideoannotator_module_smoothpaths') \
 + collect_submodules('pythonvideoannotator_module_createpaths') \
 + collect_submodules('pythonvideoannotator_module_motioncounter') \
++ collect_submodules('pythonvideoannotator_module_distances') \
++ collect_submodules('pythonvideoannotator_module_pathmap') \
 + collect_submodules('mcvapi') \
 + collect_submodules('mcvgui') \
 + collect_submodules('geometry_designer') \

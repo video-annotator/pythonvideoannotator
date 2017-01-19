@@ -80,7 +80,8 @@ QTreeWidget::item
 }
 
 QPlainTextEdit{
-	border: none;
+	border: 1px solid lightgray;
+	border-radius: 5px;
 }
 
 

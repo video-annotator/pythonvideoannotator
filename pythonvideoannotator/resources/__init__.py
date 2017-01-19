@@ -71,3 +71,12 @@ ANNOTATOR_ICON_IMAGE	= QtGui.QIcon(path('image.png'))
 ANNOTATOR_ICON_BACKGROUND	= QtGui.QIcon(path('background.png'))
 ANNOTATOR_ICON_MOVIE	= QtGui.QIcon(path('movie.png'))
 ANNOTATOR_ICON_MOVIES	= QtGui.QIcon(path('movies.png'))
+
+
+ANNOTATOR_ICON_NOTE	= QtGui.QIcon(path('note.png'))
+ANNOTATOR_ICON_GEOMETRY	= QtGui.QIcon(path('geometry.png'))
+
+ANNOTATOR_ICON_PATHMAP	= QtGui.QIcon(path('pathmap.png'))
+
+
+ANNOTATOR_ICON_DISTANCES	= QtGui.QIcon(path('distances.png'))

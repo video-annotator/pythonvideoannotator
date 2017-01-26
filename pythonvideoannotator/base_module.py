@@ -10,6 +10,7 @@ from pyforms.Controls import ControlEventTimeline
 from pyforms.Controls import ControlDockWidget
 
 from pythonvideoannotator_models_gui.models import Project
+from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
 
 def Exit(): exit()
 
@@ -22,7 +23,8 @@ class BaseModule(BaseWidget):
 
 		super(BaseModule, self).__init__('Video annotation editor')
 		
-		self._project = Project(parent=self)
+		self._project  = Project(parent=self)
+		Dialog.project = self._project
 
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')

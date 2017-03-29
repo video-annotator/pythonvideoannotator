@@ -26,10 +26,6 @@ ______________________
 | `Module page <track-objects.html>`_
 |
 |
-|
-|
-|
-|
 
 .. container:: separator
 	
@@ -51,9 +47,6 @@ _________________________________
 | This module extract the images of the objects using the contours contours or paths, also it calculates color properties of these datasets.
 |
 | `Module page <extract-images.html>`_
-|
-|
-|
 |
 |
 
@@ -81,8 +74,6 @@ ____________________________________________
 | `Module page <calc-background.html>`_
 |
 |
-|
-|
 
 .. container:: separator
 	
@@ -105,16 +96,10 @@ ____________________________________________
 | `Module page <generate-virtual-objects.html>`_
 |
 |
-|
-|
 
 .. container:: separator
 	
 	.
-
-
-
-
 
 
 
@@ -133,17 +118,85 @@ ______________________
 | `Module page <smooth.html>`_
 |
 |
+
+.. container:: separator
+	
+	.
+
+
+
+
+
+
+
+.. image:: /_static/user-docs/modules/path-map.png
+	:align: right
+	:class: right-image
+
 |
+
+Path map
+______________________
+
 |
+| This module can smooth paths or values.
 |
-|
-|
+| `Module page <pathmap.html>`_
 |
 |
 
 .. container:: separator
 	
 	.
+
+
+
+
+
+.. image:: /_static/user-docs/modules/distances.png
+	:align: right
+	:class: right-image
+
+|
+
+Distances
+______________________
+
+|
+| This module can smooth paths or values.
+|
+| `Module page <distances.html>`_
+|
+|
+
+.. container:: separator
+	
+	.
+
+
+
+
+.. image:: /_static/user-docs/modules/export-data.png
+	:align: right
+	:class: right-image
+
+
+|
+
+Export
+______________________
+
+|
+| This module can smooth paths or values.
+|
+| `Module page <export.html>`_
+|
+|
+
+.. container:: separator
+	
+	.
+
 
 
 
@@ -161,8 +214,6 @@ ___________
 | Calculate the motion property of a path or from the contours.
 |
 | `Module page <motion.html>`_
-|
-|
 |
 |
 

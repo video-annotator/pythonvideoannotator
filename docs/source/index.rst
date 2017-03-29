@@ -107,12 +107,12 @@ Source code							`Github <https://github.com/UmSenhorQualquer/pythonVideoAnnota
 Developers
 -------------------
 
-=================================	===========================================================================================================================================
-Ricardo Ribeiro						from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_
-Carlos Mão de Ferro					from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_
-Hugo Cachitas						from the `Innate Behavior Lab <http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/>`_
----------------------------------	-------------------------------------------------------------------------------------------------------------------------------------------
-=================================	===========================================================================================================================================
+=================================   ============================================================================================================================================    ===========================================
+Ricardo Ribeiro                     from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_       ricardo.ribeiro@research.fchampalimaud.org
+Carlos Mão de Ferro                 from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_       carlos.maodeferro@research.fchampalimaud.org
+Hugo Cachitas                       from the `Innate Behavior Lab <http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/>`_                   hugo.cachitas@research.fchampalimaud.org
+---------------------------------   --------------------------------------------------------------------------------------------------------------------------------------------    -------------------------------------------
+=================================   ============================================================================================================================================    ===========================================
 
 |
 |

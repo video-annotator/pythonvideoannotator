@@ -6,6 +6,9 @@ USER'S GUIDE
 |
 |
 
+Graphical interface
+____________________
+
 .. toctree::
 	:maxdepth: 2
 
@@ -15,3 +18,16 @@ USER'S GUIDE
 
 |
 |
+
+
+Examples of usage
+____________________
+
+.. toctree::
+	:maxdepth: 2
+
+	examples/index
+
+|
+|
+

@@ -1,6 +1,13 @@
+numpy
+PyOpenGL
+PyOpenGL_accelerate
+send2trash
+git+https://bitbucket.org/fchampalimaud/logging-bootstrap.git
+git+https://github.com/UmSenhorQualquer/pyforms.git
+git+https://github.com/UmSenhorQualquer/pysettings.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/mcv-api.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/mcv-gui.git
-git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator.git
+git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/geometry-designer.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-models.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-models-gui.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-backgroundfinder.git

@@ -3,7 +3,14 @@
 import os
 from pysettings import conf
 from pyforms import BaseWidget
-from PyQt4 import QtGui, QtCore
+
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import QtGui, QtCore
+
+else:
+	from PyQt4 import QtGui, QtCore
+
 from pyforms.Controls import ControlPlayer
 from pyforms.Controls import ControlFile
 from pyforms.Controls import ControlEventTimeline

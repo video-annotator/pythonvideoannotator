@@ -3,10 +3,14 @@ from PyInstaller.utils.hooks import collect_submodules, collect_data_files
 # pyforms import app settings.py dinamically so we need to inform pyinstaller
 
 hiddenimports = [
+	'pythonvideoannotator_models',
+	'pythonvideoannotator_models_gui',
 	'pythonvideoannotator.settings',
 	'pythonvideoannotator_models_gui.settings',
 	'pythonvideoannotator.resources',
 ] \
++ collect_submodules('pythonvideoannotator_models') \
++ collect_submodules('pythonvideoannotator_models_gui') \
 + collect_submodules('pythonvideoannotator_module_contoursimages') \
 + collect_submodules('pythonvideoannotator_module_tracking') \
 + collect_submodules('pythonvideoannotator_module_timeline') \
@@ -19,8 +23,6 @@ hiddenimports = [
 + collect_submodules('pythonvideoannotator_module_distances') \
 + collect_submodules('pythonvideoannotator_module_pathmap') \
 + collect_submodules('pythonvideoannotator_module_importexport') \
-+ collect_submodules('pythonvideoannotator_models') \
-+ collect_submodules('pythonvideoannotator_models_gui') \
 + collect_submodules('mcvapi') \
 + collect_submodules('mcvgui') \
 + collect_submodules('geometry_designer') \

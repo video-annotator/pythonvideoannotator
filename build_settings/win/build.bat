@@ -57,53 +57,9 @@ ECHO Removing old dist dir...
 
 :: install pip dependencies
 
-IF "%BUILD_DEPENDENCIES%"=="true" (
-
-   ECHO Installing dependencies with pip...
-
-   pip install pyserial --upgrade
-   pip install Send2Trash --upgrade
-
-   pip install https://github.com/UmSenhorQualquer/pysettings/archive/"%PYSETTINGS_GIT_BRANCH%".zip --upgrade
-   pip install https://github.com/UmSenhorQualquer/pyforms/archive/"%PYFORMS_GIT_BRANCH%".zip --upgrade
-
-   pip install https://bitbucket.org/fchampalimaud/logging-bootstrap/get/"%LOGGING_BOOTSTRAP_GIT_BRANCH%".zip --upgrade
-   pip install https://bitbucket.org/fchampalimaud/pybranch/get/"%PYBRANCH_GIT_BRANCH%".zip --upgrade
-
-   pip install https://bitbucket.org/fchampalimaud/pybpod-api/get/"%PYBPODAPI_GIT_BRANCH%".zip --upgrade
-   pip install https://bitbucket.org/fchampalimaud/pybpod-gui-plugin/get/"%PYBPODGUIPLUGIN_GIT_BRANCH%".zip --upgrade
-   pip install https://bitbucket.org/fchampalimaud/pybpod-gui-plugin-timeline/get/"%PYBPODGUIPLUGIN_TIMELINE_GIT_BRANCH%".zip --upgrade
-   pip install https://bitbucket.org/fchampalimaud/session-log-plugin/get/"%SESSIONLOGPLUGIN_GIT_BRANCH%".zip --upgrade
-)
-
 :: python setup.py sdist
 
 :: RUN PYINSTALLER
-
-ECHO Running pyinstaller now...
-
-IF /I "%GIT_BRANCH%" EQU "master" (
-   set "DISTJOBDIR=%PROJECTNAME%_v%DEV_VERSION%"
-   pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "!DISTJOBDIR!" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir  --noconsole --paths "%QT5_DLL_PATH%" "%MAINSCRIPT%"
-) ELSE (
-   set "DISTJOBDIR=%PROJECTNAME%_v%DEV_VERSION%.DEV"
-   pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "!DISTJOBDIR!" --exclude-module IPython --exclude-module sqlalchemy --exclude-module PIL --exclude-module matplotlib.backends --exclude-module matplotlib --exclude-module requests --exclude-module xml.dom.domreg --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --debug --onedir --paths "%QT5_DLL_PATH%" "%MAINSCRIPT%"
-)
-
-:: SAVE VARS ON FILE
-
-echo DEV_VERSION=%DEV_VERSION% > env.propsfile
-echo GIT_VERSION=%GIT_VERSION%  >> env.propsfile
-echo DISTOUTDIR=%DISTOUTDIR:\=\\%  >> env.propsfile
-echo PROJECTNAME=%PROJECTNAME% >> env.propsfile
-echo DISTJOBDIR=!DISTJOBDIR! >> env.propsfile
-
-SET "PATH=%ORIGINAL_PATH%"
-ECHO System path activated
-
-ECHO Copying user settings
-xcopy /Y "%WORKSPACE%\build_settings\win\bpod\pyforms_generic_editor_user_settings.py"  "%WORKSPACE%\dist\%DISTJOBDIR%"
-
 :: echo "Running pyinstaller --additional-hooks-dir %BUILDSETTINGSDIR%\hooks --name %PROJECTNAME% --icon %BUILDSETTINGSDIR%\%ICONNAME% --onefile %MAINSCRIPT%"
 IF %COMPILE_2_FOLDER% EQU true (
 	echo pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir --debug "%MAINSCRIPT%"

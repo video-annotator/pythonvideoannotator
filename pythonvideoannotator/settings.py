@@ -37,7 +37,6 @@ PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','th
 #MODULES += 'pythonvideoannotator_module_eventsstats'
 #MODULES += 'pythonvideoannotator_module_regionsfilter'
 
-"""
 MODULES += 'pythonvideoannotator_module_motioncounter'
 MODULES += 'pythonvideoannotator_module_importexport'
 MODULES += 'pythonvideoannotator_module_distances'
@@ -49,4 +48,4 @@ MODULES += 'pythonvideoannotator_module_backgroundfinder'
 MODULES += 'pythonvideoannotator_module_contoursimages'
 MODULES += 'pythonvideoannotator_module_tracking'
 MODULES += 'pythonvideoannotator_module_timeline'
-MODULES += 'pythonvideoannotator_module_patheditor'"""
+MODULES += 'pythonvideoannotator_module_patheditor'

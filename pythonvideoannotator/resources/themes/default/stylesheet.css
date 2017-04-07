@@ -89,6 +89,8 @@ QPlainTextEdit{
 
 
 QDockWidget {
+	margin: 0px;
+	padding: 0px;
 	border: 1px solid lightgray;
 	color: #333 !important;	
 }
@@ -96,7 +98,7 @@ QDockWidget {
 QDockWidget::title {
 	text-align: left; /* align the text to the left */
 	background-color: #F3F4F5;
-	padding: 10px 15px 10px 15px;    
+	padding: 10px 15px 10px 15px;
 }
 
 QDockWidget::close-button, QDockWidget::float-button {

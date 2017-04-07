@@ -3,7 +3,12 @@
 SETTINGS_PRIORITY = 10
 
 import os
-from PyQt4 import QtGui
+from pysettings import conf
+
+if conf.PYFORMS_USE_QT5:
+	from PyQt5 import QtGui
+else:
+	from PyQt4 import QtGui
 
 def path(filename): return os.path.join(os.path.dirname(__file__), 'icons', filename)
 

@@ -6,10 +6,11 @@ from pyforms import BaseWidget
 
 
 if conf.PYFORMS_USE_QT5:
-	from PyQt5 import QtGui, QtCore
-
+	from PyQt5 import QtGui, QtCore	
+	from PyQt5.QtWidgets import QApplication, QFileDialog
 else:
-	from PyQt4 import QtGui, QtCore
+	from PyQt4 import QtGui, QtCore	
+	from PyQt4.QtGui import QApplication, QFileDialog
 
 from pyforms.Controls import ControlPlayer
 from pyforms.Controls import ControlFile
@@ -18,6 +19,7 @@ from pyforms.Controls import ControlDockWidget
 
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
+
 
 def Exit(): exit()
 
@@ -53,11 +55,13 @@ class BaseModule(BaseWidget):
 				{'Save': self.__save_project_event , 'icon': conf.ANNOTATOR_ICON_SAVE},
 				{'Save as': self.__save_project_as_event, 'icon': conf.ANNOTATOR_ICON_SAVE},
 				'-',
-				{'Exit': QtGui.qApp.quit, 'icon': conf.ANNOTATOR_ICON_EXIT} 
+				{'Exit': QApplication.closeAllWindows, 'icon': conf.ANNOTATOR_ICON_EXIT} 
 			] }			
 		)
 		self.mainmenu.insert(1, {'Modules': []} )
 		self.mainmenu.insert(2, {'Windows': []} )
+
+
 
 	######################################################################################
 	#### FUNCTIONS #######################################################################
@@ -83,7 +87,7 @@ class BaseModule(BaseWidget):
 
 	def save_project(self, project_path=None):
 		if project_path is None:
-			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
+			project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
 
 		if project_path is not None and str(project_path)!='':
 			project_path = str(project_path)
@@ -91,7 +95,7 @@ class BaseModule(BaseWidget):
 
 	def load_project(self, project_path=None):
 		if project_path is None:
-			project_path = QtGui.QFileDialog.getExistingDirectory(self, "Select the project directory")
+			project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
 		if project_path is not None and str(project_path)!='':
 			self.load({}, str(project_path) )
 

@@ -27,8 +27,13 @@ import logging, loggingbootstrap; loggingbootstrap.create_double_logger("pyforms
 
 from pythonvideoannotator.base_module import BaseModule
 
+print()
+print('**************************************')
+print()
+
+
 VideoAnnotator = type(
 	'VideoAnnotator',
-	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),
+	tuple(conf.MODULES.find_class('module.Module', silent=False) + [BaseModule]),
 	{}
 )

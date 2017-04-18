@@ -3,9 +3,10 @@
 SETTINGS_PRIORITY = 10
 
 import logging, os
-from pyforms.utils.package_finder import PackageFinder
+from pyforms.utils.plugins_finder import PluginsFinder
 
-MODULES = PackageFinder()
+MODULES = PluginsFinder()
+
 
 APP_LOG_FILENAME = 'pythonvideoannotator.log'
 APP_LOG_HANDLER_FILE_LEVEL = logging.DEBUG
@@ -17,13 +18,13 @@ PYFORMS_LOG_HANDLER_CONSOLE_LEVEL = logging.INFO
 VIDEO_FILE_PATH = None
 CHART_FILE_PATH = None
 PROJECT_PATH    = None
-#PROJECT_PATH    = 'paolo'
+#PROJECT_PATH    = '/home/ricardo/Downloads/demo-project'
 
 SAVED_GRAPH_FILE_PATH = ""
 SAVED_BONSAI_FILE_PATH = ""
 
 MAIN_WINDOW_GEOMETRY = 50, 200, 1000, 700
-MAIN_WINDOW_GEOMETRY = 1700, 50, 1400, 1000
+#MAIN_WINDOW_GEOMETRY = 1700, 50, 1400, 1000
 
 
 #VIDEO_FILE_PATH = '/home/ricardo/Downloads/fc2_save_2013-10-29-124117-0001.avi'

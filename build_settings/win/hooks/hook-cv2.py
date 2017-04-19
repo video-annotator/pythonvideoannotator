@@ -21,8 +21,12 @@ from PyInstaller.compat import is_win
 
 # opencv_ffmpeg310.dll is available only for Windows.
 if is_win:
-    library = ctypes.util.find_library('opencv_ffmpeg320_64')
-    # :todo: Should be issue a warning-message, if the libary is not
-    # found?
-    if library:
-        datas = [(library, '')]
+	libraries = []
+	library = ctypes.util.find_library('opencv_ffmpeg320_64')
+	if library: libraries.append( (library, '') )
+	library = ctypes.util.find_library('opencv_ffmpeg320')
+	if library: libraries.append( (library, '') )
+	library = ctypes.util.find_library('opencv_ffmpeg320_32')
+	if library: libraries.append( (library, '') )
+	
+	datas = libraries

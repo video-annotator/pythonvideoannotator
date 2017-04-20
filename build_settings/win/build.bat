@@ -55,8 +55,7 @@ ECHO Removing old build dir...
 ECHO Removing old dist dir...
 @RD /S /Q %DISTOUTDIR%
 
-SET "PATH=%ORIGINAL_PATH%"
-ECHO System path activated
+
 
 :: install pip dependencies
 
@@ -70,7 +69,12 @@ IF %COMPILE_2_FOLDER% EQU true (
 	pyinstaller --additional-hooks-dir "%BUILDSETTINGSDIR%\hooks" --name "%PROJECTNAME%_v%DEV_VERSION%_DEV" --icon "%BUILDSETTINGSDIR%\%ICONNAME%" --onedir --debug "%MAINSCRIPT%" --exclude-module jinja2 --exclude-module matplotlib
 
 	IF %SOURCEFORGE_UPLOAD% EQU true (
+
+		SET "PATH=%ORIGINAL_PATH%"
+		ECHO System path activated
+
 		ECHO Zipping folder now...
+		ECHO jar -cMf "%DISTOUTDIR%\%PROJECTNAME%_v%DEV_VERSION%_DEV.zip" -C "%DISTOUTDIR%\%PROJECTNAME%_v%DEV_VERSION%_DEV" .
 		jar -cMf "%DISTOUTDIR%\%PROJECTNAME%_v%DEV_VERSION%_DEV.zip" -C "%DISTOUTDIR%\%PROJECTNAME%_v%DEV_VERSION%_DEV" .
 		
 		echo "Uploading to SourceForge..."

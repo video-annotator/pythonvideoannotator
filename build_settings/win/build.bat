@@ -55,6 +55,9 @@ ECHO Removing old build dir...
 ECHO Removing old dist dir...
 @RD /S /Q %DISTOUTDIR%
 
+SET "PATH=%ORIGINAL_PATH%"
+ECHO System path activated
+
 :: install pip dependencies
 
 :: python setup.py sdist

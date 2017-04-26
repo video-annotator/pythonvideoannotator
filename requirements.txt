@@ -3,6 +3,8 @@ PyOpenGL
 PyOpenGL_accelerate
 send2trash
 PyQt5
+scipy
+simplejson
 git+https://bitbucket.org/fchampalimaud/logging-bootstrap.git
 git+https://github.com/UmSenhorQualquer/pyforms.git
 git+https://github.com/UmSenhorQualquer/pysettings.git

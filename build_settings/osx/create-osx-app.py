@@ -1,46 +1,80 @@
 """
 Create a stand-alone Mac OS X app using py2app
 To be used like this:
-$: python setup.py build         (to update the docs)
+$: pyenv activate python-video-annotator-py3.5.3 # do this if you use pyenv virtualenv
 $: python create-osx-app.py py2app   (to build the app)
 $: hdiutil create dist/$PROJECT_NAME.dmg -srcfolder dist/$PROJECT_NAME.app/
 
-WARNING:
+DO NOT FORGET TO INSTALL THIS APP AND DEPENDENCIES ON PIP BEFORE RUNNING THIS SCRIPT!!!!
 
-py2app has a bug. On module build_app.py, line 178, put a try / except 
-(os.symlink(os.path.basename(dest), link_dest))
-https://bitbucket.org/ronaldoussoren/py2app/issues/159/fails-with-file-exists-while-copying
-
-DO NOT FORGET TO INSTALL THIS APP ON PIP BEFORE RUNNING THIS SCRIPT!!!!
+DO NOT FORGET TO UPDATE VERSION BEFORE RUNNING THIS SCRIPT!!!!
 
 """
 
 import os
 from setuptools import setup
+from shutil import copyfile
+import pythonvideoannotator as app_package
 
-BUILD_SETTINGS_PATH = os.path.dirname(os.path.realpath(__file__))
-PROJECT_NAME = 'pythonVideoAnnotator'
-MAIN_SCRIPT_PATH = os.path.join(BUILD_SETTINGS_PATH, '../../pythonvideoannotator/__main__.py')
-
-
-APP = [MAIN_SCRIPT_PATH]
+MAIN_SCRIPT_PATH = ['../../pythonvideoannotator/__main__.py']
 DATA_FILES = []
-PACKAGES = ['distutils', 'PyQt4', 'pyforms', 'visvis', 'pythonvideoannotator', 'pysettings', 'loggingbootstrap']
-INCLUDES= []
+PACKAGES = ['PyQt5',
+            'OpenGL',
+            'OpenGL_accelerate',
+            'loggingbootstrap',
+            'mcvapi',
+            'mcvgui',
+            'geometry_designer',
+            'pyforms',
+            'pythonvideoannotator',
+            'pythonvideoannotator_models',
+            'pythonvideoannotator_models_gui',
+            'pythonvideoannotator_module_backgroundfinder',
+            'pythonvideoannotator_module_backgroundfinder',
+            'pythonvideoannotator_module_contoursimages',
+            'pythonvideoannotator_module_createpaths',
+            'pythonvideoannotator_module_distances',
+            'pythonvideoannotator_module_eventsstats',
+            'pythonvideoannotator_module_importexport',
+            'pythonvideoannotator_module_motioncounter',
+            'pythonvideoannotator_module_patheditor',
+            'pythonvideoannotator_module_pathmap',
+            'pythonvideoannotator_module_regionsfilter',
+            'pythonvideoannotator_module_smoothpaths',
+            'pythonvideoannotator_module_timeline',
+            'pythonvideoannotator_module_tracking',
+            'pythonvideoannotator_module_virtualobjectgenerator',
+            ]
+INCLUDES = []
+EXCLUDES = ['PyQt4']
+
+APP_VERSION = app_package.__version__
+
+EXECUTABLE_NAME = "PythonVideoAnnotator-v{version}".format(version=APP_VERSION)
 
 OPTIONS = {
-   'argv_emulation': True,
-   'compressed' : False,
-   'optimize': 0,
-   'packages': ['distutils', 'PyQt4', 'pyforms', 'visvis', 'pysettings', 'pyforms_generic_editor', 'loggingbootstrap', 'pythonvideoannotator'],
-   'includes': INCLUDES,
-   'iconfile': os.path.join(BUILD_SETTINGS_PATH, 'cf_icon_128x128.icns'),
+	'argv_emulation': True,
+	'compressed': False,
+	'optimize': 0,
+	'packages': PACKAGES,
+	'includes': INCLUDES,
+	'excludes': EXCLUDES,
+	'iconfile': 'cf_icon_512x512.icns',
+	'strip': True,  # strip debug and local symbols from output (default is True for compatibility)
+	'plist': {
+		'CFBundleName': EXECUTABLE_NAME,
+		'CFBundleDisplayName': EXECUTABLE_NAME,
+		'CFBundleGetInfoString': "CF Scientific Software Platform",
+		'CFBundleIdentifier': "org.champalimaud.swp.pythonvideoannotator",
+		'CFBundleVersion': APP_VERSION,
+		'CFBundleShortVersionString': APP_VERSION,
+		'NSHumanReadableCopyright': u"Copyright (C) 2007 Free Software Foundation, Inc."
+	}
 }
 
 setup(
-   name=PROJECT_NAME,
-   app=APP,
-   options={'py2app': OPTIONS},
-   setup_requires=['py2app'],
+	name=EXECUTABLE_NAME,
+	app=MAIN_SCRIPT_PATH,
+	options={'py2app': OPTIONS},
+	setup_requires=['py2app'],
 )
-

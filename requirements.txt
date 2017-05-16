@@ -28,3 +28,4 @@ git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-mo
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-timeline.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-tracking.git
 git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-virtualobjectgenerator.git
+git+https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-regionsfilter.git

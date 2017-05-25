@@ -1,6 +1,6 @@
 |
 
-GENERATE A VIDEO WITH VIRTUAL OBJECTS
+Generate a video based on paths
 =======================================
 
 |

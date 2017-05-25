@@ -1,7 +1,7 @@
 |
 
-EXTRACT THE CONTOURS' IMAGES
-===============================
+Extract info from the contours' images
+===========================================
 
 |
 

@@ -1,6 +1,6 @@
-|
+.. _backgroundfinder-label:
 
-CALCULATE THE VIDEO BACKGROUND
+Calculate the background image
 ===============================
 
 |

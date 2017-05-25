@@ -1,9 +1,8 @@
-.. toctree::
-
+.. _datasets-label:
 
 |
 
-Objects' datasets
+Datasets
 ================================================
 
 |

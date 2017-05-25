@@ -90,9 +90,10 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-import sphinx_bootstrap_theme
-html_theme = 'bootstrap'
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+#import sphinx_bootstrap_theme
+#html_theme = 'bootstrap'
+#html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -209,6 +210,7 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.
+"""
 html_theme_options = {
 	# Navigation bar title. (Default: ``project`` value)
 	'navbar_title': "Home",
@@ -270,4 +272,4 @@ html_theme_options = {
 	# Choose Bootstrap version.
 	# Values: "3" (default) or "2" (in quotes)
 	'bootstrap_version': "3",
-}
+}"""

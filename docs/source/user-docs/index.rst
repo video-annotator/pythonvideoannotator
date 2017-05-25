@@ -6,6 +6,17 @@ USER'S GUIDE
 |
 |
 
+How to
+____________________
+
+.. toctree::
+	:maxdepth: 2
+
+	howto/index
+
+|
+|
+
 Graphical interface
 ____________________
 

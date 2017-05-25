@@ -4,7 +4,46 @@
    contain the root `toctree` directive.
 
 .. toctree::
+	:hidden:
 	:maxdepth: 2
+	:includehidden:
+	:caption: Introduction
+   
+	VIDEO ANNOTATOR <self>
+
+.. toctree::
+	:hidden:
+	:maxdepth: 2
+	:includehidden:
+	:caption: User guide
+
+	user-docs/howto/index
+
+.. toctree::
+	:hidden:
+	:maxdepth: 2
+	:includehidden:
+	:caption: Modules \ Plugins
+
+	modules/tracking
+	modules/regionsfilter	
+	modules/extract-images
+	modules/calc-background
+	modules/generate-virtual-objects
+	modules/smooth
+	modules/path-map
+	modules/distances
+	modules/export-data
+	modules/motion
+
+.. toctree::
+	:hidden:
+	:maxdepth: 2
+	:includehidden:
+	:caption: Concepts
+
+	concepts/project-tree/index
+
 
 |
 
@@ -27,68 +66,66 @@ PYTHON VIDEO ANNOTATOR
 	
 	.
 
-.. container:: left-text
+.. image:: _static/index/project.png
+	:align: left
 
-	.. image:: _static/index/project.png
-		:align: left
-		:class: left-image
+|
+|
+| Organize your data and work on multiple videos at the same time with the project tree.
+|
+| Import the output of your scripts, third party applications or external devices, into your project and follow its changes over the time.
+|
+| On each video you may have associated objects that you can track and compare properties.
+
+.. container:: clear-line
 	
-	|
-	|
-	|
-	|
-	| Organize your data and work on multiple videos at the same time with the project tree.
-	|
-	| Import the output of your scripts, third party applications or external devices, into your project and follow its changes over the time.
-	|
-	| On each video you may have associated objects that you can track and compare properties.
+	.
 
+|
+| Navigate in the video, annotate and modify events with the timeline bar.
+|
+| Plot the data on the timeline to compare values over the time.
+|
 
-.. container:: right-text
+.. image:: _static/index/timeline_small.png
+    
 
-	| Navigate in the video, annotate and modify events with the timeline bar.
-	|
-	| Plot the data on the timeline to compare values over the time.
+.. container:: clear-line
+	
+	.
 
-	.. image:: _static/index/timeline_small.png
-		:class: right-image
+|
+
+.. image:: _static/index/project-directories-tree.png
+	:align: left
+
+|
+| Access and modify easily the data with the open formats.
+| 
+| The project data is organized in a intuitive structure, and files are saved with open formats like json and csv to grarantee you the portability of the data.
+|
+| Modify the project structure by moving the folders around with your filesystem manager.
 
 
 .. container:: clear-line
 	
 	.
 
+|
+| The python video annotator is plugins based which allow to toggle the activation of the ones that are already included or add new ones developed by you.
+|
+| Validate automatically tracking mistakes and correct them using the tracking modules or the manual correction.
+|
 
-.. container:: right-text
+.. image:: _static/index/background-calculator.gif
 
-	.. image:: _static/index/project-directories-tree.png
-		:align: left
+.. image:: _static/index/player.png
+	:class: paddingleft18
 
-	| Access and modify easily the data with the open formats.
-	| 
-	| The project data is organized in a intuitive structure, and files are saved with open formats like json and csv to grarantee you the portability of the data.
-	|
-	| Modify the project structure by moving the folders around with your filesystem manager.
+|
+| Visualize the tracking information directly on the video player, smooth paths, calculate the videos' backgrounds and much more ...
+|
 
-.. container:: left-text
-
-	| The python video annotator is plugins based which allow to toggle the activation of the ones that are already included or add new ones developed by you.
-	|
-	| Validate automatically tracking mistakes and correct them using the tracking modules or the manual correction.
-	
-	.. image:: _static/index/background-calculator.gif
-
-	.. image:: _static/index/player.png
-		:class: paddingleft18
-
-	| Visualize the tracking information directly on the video player, smooth paths, calculate the videos' backgrounds and much more ...
-
-	
-
-
-.. container:: clear-line
-	
-	.
 
 .. container:: separator
 	
@@ -100,19 +137,20 @@ Downloads
 =================================	===========================================================================================================================================
 Windows binaries					`Bitbucket <https://bitbucket.org/fchampalimaud/pythonvideoannotator/downloads>`_
 Source code							`Github <https://github.com/UmSenhorQualquer/pythonVideoAnnotator/>`_ and `Bitbucket <https://bitbucket.org/account/user/fchampalimaud/projects/MCV>`_
----------------------------------	-------------------------------------------------------------------------------------------------------------------------------------------
 =================================	===========================================================================================================================================
 
 
 Developers
 -------------------
 
-=================================   ============================================================================================================================================    ===========================================
-Ricardo Ribeiro                     from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_       ricardo.ribeiro@research.fchampalimaud.org
-Carlos Mão de Ferro                 from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_       carlos.maodeferro@research.fchampalimaud.org
-Hugo Cachitas                       from the `Innate Behavior Lab <http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/>`_                   hugo.cachitas@research.fchampalimaud.org
----------------------------------   --------------------------------------------------------------------------------------------------------------------------------------------    -------------------------------------------
-=================================   ============================================================================================================================================    ===========================================
+=================================   ============================================================================================================================================
+Ricardo Ribeiro                     from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_
+									ricardo.ribeiro@research.fchampalimaud.org
+Carlos Mão de Ferro                 from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_
+									carlos.maodeferro@research.fchampalimaud.org
+Hugo Cachitas                       from the `Innate Behavior Lab <http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/>`_
+									hugo.cachitas@research.fchampalimaud.org
+=================================   ============================================================================================================================================
 
 |
 |

@@ -1,6 +1,6 @@
-|
+.. smoothpaths-label:
 
-SMOOTH
+Smooth
 ===============================
 
 |

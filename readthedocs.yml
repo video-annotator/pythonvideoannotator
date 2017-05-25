@@ -3,9 +3,6 @@
 python:
    version: 3
 
-#conda:
-#    file: docs/environment.yml
-
 # Build PDF & ePub
 formats:
     - epub

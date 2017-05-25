@@ -1,9 +1,8 @@
 # 3rd party dependencies
-pyserial>=3.1.1
 numpy
 
 # rtd dependencies
-sphinx>=1.5.5
+sphinx=1.5.6
 sphinx_rtd_theme>=0.2.4
 recommonmark
 

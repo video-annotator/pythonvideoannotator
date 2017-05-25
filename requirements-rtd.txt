@@ -1,0 +1,12 @@
+# 3rd party dependencies
+pyserial>=3.1.1
+numpy
+
+# rtd dependencies
+sphinx>=1.5.5
+sphinx_rtd_theme>=0.2.4
+recommonmark
+
+# swp dependencies
+https://github.com/UmSenhorQualquer/pysettings/archive/master.zip
+https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip

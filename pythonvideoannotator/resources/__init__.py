@@ -29,6 +29,7 @@ PYFORMS_ICON_EVENTTIMELINE_EXPORT = QtGui.QIcon(path('export.png'))
 
 PYFORMS_ICON_FILE_OPEN = QtGui.QIcon(path('link.png'))
 
+ANNOTATOR_ICON_REFRESH 	= QtGui.QIcon(path('refresh.png'))
 ANNOTATOR_ICON_PATH 	= QtGui.QIcon(path('path.png'))
 ANNOTATOR_ICON_DATASETS 	= QtGui.QIcon(path('datasets.png'))
 ANNOTATOR_ICON_OBJECT 	= QtGui.QIcon(path('object.png'))

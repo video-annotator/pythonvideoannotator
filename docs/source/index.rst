@@ -29,13 +29,13 @@
 	modules/regionsfilter	
 	modules/extract-images
 	modules/calc-background
-	modules/generate-virtual-objects
 	modules/smooth
 	modules/path-map
 	modules/distances
-	modules/export-data
 	modules/motion
-
+	modules/export-videos
+	modules/export-data
+	
 .. toctree::
 	:hidden:
 	:maxdepth: 2

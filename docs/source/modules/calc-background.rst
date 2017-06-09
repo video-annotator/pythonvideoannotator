@@ -1,13 +1,14 @@
 .. _backgroundfinder-label:
 
-Calculate the background image
+Calculate the video background
 ===============================
 
-|
+This module extracts the background image from the video.
 
+.. image:: /_static/modules/background-module.png
 
-.. image:: /_static/user-docs/modules/original-images/background-calculator.png
+The algorithm is described in the next workflow:
 
-|
-|
+.. image:: /_static/modules/background-module-workflow.png
+
 

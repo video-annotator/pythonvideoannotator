@@ -1,13 +1,16 @@
-|
 
-Calculate distances between paths
+Distances
 ==================================
 
-|
+This module calculate the distances between paths.
+
+.. image:: /_static/modules/distances-module.png
 
 
-.. image:: /_static/user-docs/modules/original-images/background-calculator.png
+------------------------
+Result
+------------------------
 
-|
-|
+After pressing apply a new value will be added to one of the selected objects.
 
+.. image:: /_static/modules/distances-module-result.png

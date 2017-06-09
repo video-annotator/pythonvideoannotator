@@ -87,11 +87,12 @@ class BaseModule(BaseWidget):
 
 	def save_project(self, project_path=None):
 		if project_path is None:
+			print(project_path)
 			project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
 
 		if project_path is not None and str(project_path)!='':
 			project_path = str(project_path)
-			self.save({}, project_path)
+			self.save({}, project_path)			
 
 	def load_project(self, project_path=None):
 		if project_path is None:
@@ -122,7 +123,7 @@ class BaseModule(BaseWidget):
 
 	def __open_project_event(self): self.load_project()
 
-	def __save_project_event(self): self.save_project()
+	def __save_project_event(self): self.save_project(self._project.directory)
 
 	def __save_project_as_event(self): self.save_project()
 	

@@ -9,9 +9,8 @@ __maintainer__ 	= ["Ricardo Ribeiro", "Carlos Mao de Ferro"]
 __email__ 		= ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ 		= "Development"
 
-from pysettings import conf; 
-conf += 'pyforms.gui.settings' #make sure pyforms settings are imported before, because of the PYFORMS_USE_QT5 variable
-conf += 'pythonvideoannotator.settings'
+import pyforms #make sure pyforms settings are imported before, because of the PYFORMS_USE_QT5 variable, which is used in the plugins
+from pysettings import conf; conf += 'pythonvideoannotator.settings'
 
 ####################################################
 ## Load the user settings in case the file exists ##

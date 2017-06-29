@@ -10,7 +10,7 @@ __email__ 		= ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ 		= "Development"
 
 from pysettings import conf; 
-conf += 'pyforms.gui.settings' #make sure pyforms settings are imported before, because of the PYFORMS_USE_QT5 variable
+
 conf += 'pythonvideoannotator.settings'
 
 ####################################################

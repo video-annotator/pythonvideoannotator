@@ -1,4 +1,4 @@
-# !/usr/bin/python2
+# !/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 __version__ 	= "2.1.1"
@@ -9,9 +9,7 @@ __maintainer__ 	= ["Ricardo Ribeiro", "Carlos Mao de Ferro"]
 __email__ 		= ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ 		= "Development"
 
-from pysettings import conf; 
-
-conf += 'pythonvideoannotator.settings'
+from pysettings import conf; conf += 'pythonvideoannotator.settings'
 
 ####################################################
 ## Load the user settings in case the file exists ##
@@ -23,6 +21,8 @@ except:
 	pass
 ####################################################
 ####################################################
+
+from pysettings import conf; conf += 'pythonvideoannotator.settings'
 
 import logging, loggingbootstrap; loggingbootstrap.create_double_logger("pyforms", logging.DEBUG, 'pythonvideoannotator.log',logging.DEBUG)
 

@@ -34,7 +34,7 @@ MAIN_WINDOW_GEOMETRY = 50, 200, 1000, 700
 #VIDEO_FILE_PATH = 'C:/Users/swp/Downloads/fc2_save_2013-10-29-124117-0001.avi'
 #CHART_FILE_PATH = '/home/ricardo/Desktop/01Apollo201403210900/01Apollo201403210900_out.csv', 0, 1
 
-PYFORMS_STYLESHEET 			= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet.css')
+PYFORMS_STYLESHEET 			= os.path.join( os.path.dirname(__file__), 'resources','themes', 'default', 'stylesheet.css')
 #PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet_darwin.css')
 
 

@@ -86,13 +86,16 @@ class BaseModule(BaseWidget):
 	def load(self, data, project_path=None): pass
 
 	def save_project(self, project_path=None):
-		if project_path is None:
-			print(project_path)
-			project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
+		try:
+			if project_path is None:
+				print(project_path)
+				project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
 
-		if project_path is not None and str(project_path)!='':
-			project_path = str(project_path)
-			self.save({}, project_path)			
+			if project_path is not None and str(project_path)!='':
+				project_path = str(project_path)
+				self.save({}, project_path)
+		except Exception as e:
+			QtGui.QMessageBox.critical(self, "Error", str(e))
 
 	def load_project(self, project_path=None):
 		if project_path is None:

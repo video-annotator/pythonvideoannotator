@@ -7,10 +7,11 @@ from pyforms import BaseWidget
 
 if conf.PYFORMS_USE_QT5:
 	from PyQt5 import QtGui, QtCore	
-	from PyQt5.QtWidgets import QApplication, QFileDialog
+	from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
 else:
 	from PyQt4 import QtGui, QtCore	
-	from PyQt4.QtGui import QApplication, QFileDialog
+	from PyQt4.QtGui import QApplication, QFileDialog, QMessageBox
+
 
 from pyforms.Controls import ControlPlayer
 from pyforms.Controls import ControlFile
@@ -95,7 +96,7 @@ class BaseModule(BaseWidget):
 				project_path = str(project_path)
 				self.save({}, project_path)
 		except Exception as e:
-			QtGui.QMessageBox.critical(self, "Error", str(e))
+			QMessageBox.critical(self, "Error", str(e))
 
 	def load_project(self, project_path=None):
 		if project_path is None:

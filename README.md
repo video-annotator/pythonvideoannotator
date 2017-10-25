@@ -1,6 +1,6 @@
 # Python Video Annotator
 
-[Binary downloads](https://bitbucket.org/fchampalimaud/pythonvideoannotator/downloads)
+[Documentation on ReadTheDocs](https://pythonvideoannotator.readthedocs.io)
 
 
 The software is an application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos.
@@ -21,8 +21,6 @@ Features:
 * Hugo Cachitas working - collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 * Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
-
-![Video annotator screenshot](/docs/screencapture.png?raw=true "Screen")
 
 ![Video annotator screenshot](/docs/screenshot.png?raw=true "Screen")
 

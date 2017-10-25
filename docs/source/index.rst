@@ -138,7 +138,7 @@ Installation & Running
 - Download [this repository](https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/v2.0.zip) and uncompress it to a folder.
 - Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
 
-For mac:
+for mac:
 ```
 conda env create -f environment-macosx.yml
 ```
@@ -160,7 +160,7 @@ python -m pythonvideoannotator
 ```
 for windows:
 ```
-source activate videoannotator
+activate videoannotator
 python -m pythonvideoannotator
 ```
 

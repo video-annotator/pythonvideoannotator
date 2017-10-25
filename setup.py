@@ -27,9 +27,9 @@ setup(
 	url='https://github.com/UmSenhorQualquer/pythonVideoAnnotator',
 	packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples', 'deploy', 'reports']),
 	# install_requires=requirements,
-	entry_points={
-		'console_scripts': [
-			'pythonVideoAnnotator=pythonvideoannotator.__main__',
-		],
-	}
+	#entry_points={
+	#	'console_scripts': [
+	#		'pythonVideoAnnotator=pythonvideoannotator.__main__',
+	#	],
+	#}
 )

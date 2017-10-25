@@ -131,13 +131,25 @@ PYTHON VIDEO ANNOTATOR
 	
 	.
 
-Downloads
--------------------
+Installation & Running
+-----------------------
 
-=================================	===========================================================================================================================================
-Windows binaries					`Bitbucket <https://bitbucket.org/fchampalimaud/pythonvideoannotator/downloads>`_
-Source code							`Github <https://github.com/UmSenhorQualquer/pythonVideoAnnotator/>`_ and `Bitbucket <https://bitbucket.org/account/user/fchampalimaud/projects/MCV>`_
-=================================	===========================================================================================================================================
+- Download & install [Anaconda](https://www.anaconda.com/download/)
+- Download [this repository](https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/v2.0.zip) and uncompress it to a folder.
+- Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
+```
+conda env create -f environment.yml
+```
+
+Run
+____
+
+In the Video Annotator folder in the Terminal run:
+
+```
+source activate videoannotator
+python -m pythonvideoannotator
+```
 
 
 Developers

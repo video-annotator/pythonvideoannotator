@@ -36,6 +36,7 @@ class BaseModule(BaseWidget):
 		self._project  = Project(parent=self)
 		Dialog.project = self._project
 
+		
 		self._player 	= ControlPlayer("Player")
 		self._time 		= ControlEventTimeline('Time')
 		self._dock 		= ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
@@ -73,8 +74,7 @@ class BaseModule(BaseWidget):
 		super(BaseModule, self).init_form()
 
 		if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
-		if conf.PROJECT_PATH: 
-			self.load_project(conf.PROJECT_PATH)
+		if conf.PROJECT_PATH: 	 self.load_project(conf.PROJECT_PATH)
 			
 
 
@@ -82,14 +82,17 @@ class BaseModule(BaseWidget):
 	#### IO FUNCTIONS ####################################################################
 	######################################################################################
 
-	def save(self, data, project_path=None): return data
+	def save(self, data, project_path=None):
+		self._project.save(data, project_path)
+		return data
 
-	def load(self, data, project_path=None): pass
+
+	def load(self, data, project_path=None):
+		self._project.load(data, project_path)
 
 	def save_project(self, project_path=None):
 		try:
 			if project_path is None:
-				print(project_path)
 				project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
 
 			if project_path is not None and str(project_path)!='':

@@ -33,7 +33,6 @@ print()
 print('**************************************')
 print()
 
-
 VideoAnnotator = type(
 	'VideoAnnotator',
 	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),

@@ -19,7 +19,17 @@ except ImportError as err:
 	logging.getLogger().critical(str(err), exc_info=True)
 	exit("Could not load pysettings! Is it installed?")
 
-from pythonvideoannotator import VideoAnnotator
+from pythonvideoannotator.base_module import BaseModule
+
+print()
+print('**************************************')
+print()
+
+VideoAnnotator = type(
+	'VideoAnnotator',
+	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),
+	{}
+)
 
 # setup different loggers but output to single file
 loggingbootstrap.create_double_logger("pythonvideoannotator", conf.APP_LOG_HANDLER_CONSOLE_LEVEL, conf.APP_LOG_FILENAME,

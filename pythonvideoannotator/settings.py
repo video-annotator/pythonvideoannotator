@@ -19,8 +19,8 @@ PYFORMS_SILENT_PLUGINS_FINDER = False
 VIDEO_FILE_PATH = None
 CHART_FILE_PATH = None
 PROJECT_PATH    = None
-PROJECT_PATH    = '/home/ricardo/Downloads/cecilia'
-PROJECT_PATH    = '/home/ricardo/Downloads/cecilia_movies/movies/20170526/video37_2017-05-26T10_23_51/video-annotator-prj'
+#PROJECT_PATH    = '/home/ricardo/Downloads/cecilia'
+#PROJECT_PATH    = '/home/ricardo/Downloads/cecilia_movies/movies/20170526/video37_2017-05-26T10_23_51/video-annotator-prj'
 
 SAVED_GRAPH_FILE_PATH 	= ""
 SAVED_BONSAI_FILE_PATH 	= ""

@@ -22,19 +22,4 @@ except:
 ####################################################
 ####################################################
 
-from pysettings import conf; conf += 'pythonvideoannotator.settings'
-
 import logging, loggingbootstrap; loggingbootstrap.create_double_logger("pyforms", logging.DEBUG, 'pythonvideoannotator.log',logging.DEBUG)
-
-
-from pythonvideoannotator.base_module import BaseModule
-
-print()
-print('**************************************')
-print()
-
-VideoAnnotator = type(
-	'VideoAnnotator',
-	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),
-	{}
-)

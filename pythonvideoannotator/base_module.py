@@ -1,17 +1,8 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
-import os
+import os, AnyQt
 from pysettings import conf
 from pyforms import BaseWidget
-
-
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import QtGui, QtCore	
-	from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
-else:
-	from PyQt4 import QtGui, QtCore	
-	from PyQt4.QtGui import QApplication, QFileDialog, QMessageBox
-
 
 from pyforms.Controls import ControlPlayer
 from pyforms.Controls import ControlFile
@@ -21,6 +12,10 @@ from pyforms.Controls import ControlDockWidget
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
 
+if conf.PYFORMS_MODE=='GUI':
+	from AnyQt import QtGui, QtCore	
+	from AnyQt.QtWidgets import QApplication, QFileDialog, QMessageBox
+	
 
 def Exit(): exit()
 

@@ -12,7 +12,7 @@ SUBMODULES_FOLDERS = [
     'mcv-gui-editor',
     'pyforms',
     'pysettings',
-    'pythonvideoannotator',
+    '.',
     'pythonvideoannotator-models',
     'pythonvideoannotator-models-gui',
     'pythonvideoannotator-module-backgroundfinder',

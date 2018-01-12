@@ -2,13 +2,11 @@
 # -*- coding: utf-8 -*-
 SETTINGS_PRIORITY = 10
 
-import os
+import os, AnyQt
 from pysettings import conf
 
-if conf.PYFORMS_USE_QT5:
-	from PyQt5 import QtGui
-else:
-	from PyQt4 import QtGui
+if conf.PYFORMS_MODE=='GUI':
+	from AnyQt import QtGui
 
 def path(filename): return os.path.join(os.path.dirname(__file__), 'icons', filename)
 

@@ -33,5 +33,8 @@ for n_video, video_file in enumerate(videofiles):
             contour = obj.create_contours()
             contour.name = 'contour-{0}'.format(obj_n)
 
+            contour = obj.create_contours()
+            contour.name = 'body-{0}'.format(obj_n)
+
 
         p.save({}, os.path.join(video_dir, 'video-annotator-prj') )

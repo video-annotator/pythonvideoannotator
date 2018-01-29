@@ -33,11 +33,15 @@ Features:
 for mac:
 ```
 conda env create -f environment-macosx.yml
+source activate videoannotator
+python install.py
 ```
 
 for windows:
 ```
 conda env create -f environment-windows.yml
+source activate videoannotator
+python install.py
 ```
 
 ### Run

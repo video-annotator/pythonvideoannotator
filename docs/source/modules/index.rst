@@ -1,13 +1,9 @@
-|
 
+**********
 MODULES
-===============
+**********
 
 |
-
-
-
-
 
 
 .. image:: /_static/user-docs/modules/track-objects.png

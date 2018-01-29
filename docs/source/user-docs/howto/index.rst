@@ -130,22 +130,39 @@ Value
 This property stores any arbitrary number that change overtime. It can be used to store external data like for example hardware triggers.
 
 
-** Import data from a CSV file **
+* 	**Import data from a CSV file**
 
-Right click over the value object in the project tree, and select the option **import**.
+	|
 
-.. image:: /_static/howto/import-value-from-csvfile-step1.png
+	Right click over the value object in the project tree, and select the option **import**.
 
-Choose the file, remove the file header (if it exists) using the starting row field and select the separator character.
-You will see a preview of the parsing of the file to import.
+	.. image:: /_static/howto/import-value-from-csvfile-step1.png
 
-After you have to select the column corresponding to the number of the frame and to the value you would like to import. If the field **Frame** has the value -1 then the it will be considered that the row number N corresponds to the N frame.
+	|
 
-.. image:: /_static/howto/import-value-from-csvfile-step2.png
+	Choose the file, remove the file header (if it exists) using the starting row field and select the separator character.
+	You will see a preview of the parsing of the file to import.
+
+	After you have to select the column corresponding to the number of the frame and to the value you would like to import. If the field **Frame** has the value -1 then the it will be considered that the row number N corresponds to the N frame.
+
+	|
+
+	.. image:: /_static/howto/import-value-from-csvfile-step2.png
+
+	|
+	|
 
 
-** Display the value in the timeline **
+* 	**Display the value in the timeline**
 
-Right click over the value in the timeline and select the option **view on the timeline**.
+	|
 
-.. image:: /_static/howto/send-value-to-timeline.png
+	Right click over the value in the timeline and select the option **view on the timeline**.
+
+	.. image:: /_static/howto/send-value-to-timeline.png
+
+	|
+
+	Result
+
+	.. image:: /_static/howto/send-value-to-timeline-result.png

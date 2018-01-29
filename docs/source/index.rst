@@ -139,32 +139,41 @@ Installation & Running
 - Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
 
 for mac:
-```
-conda env create -f environment-macosx.yml
-```
+
+.. code-block:: bash
+
+	conda env create -f environment-macosx.yml
+	source activate videoannotator
+	python install.py
+
 
 for windows:
-```
-conda env create -f environment-windows.yml
-```
+
+.. code-block:: bash
+
+	conda env create -f environment-windows.yml
+	source activate videoannotator
+	python install.py
+
 
 Run
 ____
 
 In the Video Annotator folder in the Terminal run:
 
-for mac:
-```
-source activate videoannotator  
-python install.py  
-python -m pythonvideoannotator  
-```
+for mac
+
+.. code-block:: bash
+
+	source activate videoannotator
+	python -m pythonvideoannotator
+
 for windows:
-```
-activate videoannotator  
-python install.py  
-python -m pythonvideoannotator  
-```
+
+.. code-block:: bash
+
+	source activate videoannotator
+	python -m pythonvideoannotator
 
 
 Developers

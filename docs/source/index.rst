@@ -155,13 +155,15 @@ In the Video Annotator folder in the Terminal run:
 
 for mac:
 ```
-source activate videoannotator
-python -m pythonvideoannotator
+source activate videoannotator  
+python install.py  
+python -m pythonvideoannotator  
 ```
 for windows:
 ```
-activate videoannotator
-python -m pythonvideoannotator
+activate videoannotator  
+python install.py  
+python -m pythonvideoannotator  
 ```
 
 

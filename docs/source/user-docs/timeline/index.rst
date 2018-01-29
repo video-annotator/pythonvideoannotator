@@ -1,6 +1,6 @@
 |
 
-TIMELINE
+Timeline
 ===============
 
 |
@@ -69,7 +69,33 @@ __________________________________________
 | Press the right mouse button and select the "Graphs" option to access the graphs properties window.
 | On these window it is possible to edit the graphs names and their display.
 | Also you can use this window to visualize the value of a graph in a certain time point. Just select the graph, mouse over it and you will see the values of the graph displayed on the window.
+|
 
 .. image:: /_static/user-docs/timeline/graphs-properties.png
 
 |
+
+Convert graphs to events
+__________________________________________
+
+|
+| Press the right mouse button and select option "Convert graphs to events".
+| A new window will be shown. On the left-side list, double click on the graph you would like to use for the equation, and write the rest of it.
+| Use the fields **Event name** to define the name of the new events, use the **row number** field to define the row where the events should be created, and the **Minimum number of frames** to define the necessary number of consecutive frames where the equation is verified to be create the events.
+|
+Equation example:
+
+.. code-block:: python
+
+	[Deeplearning result]>0.5 and [value(6)]<10
+|
+
+.. note:: Use spaces only on between logic operators: **and** or **or**.
+
+|
+
+.. image:: /_static/user-docs/timeline/convert-graphs-2-events.png
+
+|
+
+.. image:: /_static/user-docs/timeline/convert-graphs-2-events-window.png

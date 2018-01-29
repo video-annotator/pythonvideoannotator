@@ -18,6 +18,7 @@
 	:caption: User guide
 
 	user-docs/howto/index
+	user-docs/timeline/index
 
 .. toctree::
 	:hidden:

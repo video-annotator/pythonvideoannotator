@@ -88,7 +88,6 @@ Equation example:
 .. code-block:: python
 
 	[Deeplearning result]>0.5 and [value(6)]<10
-|
 
 .. note:: Use spaces only on between logic operators: **and** or **or**.
 

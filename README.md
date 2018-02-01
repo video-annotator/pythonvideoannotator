@@ -1,13 +1,16 @@
 # Python Video Annotator
 
-The software is a standalone application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos.
+[Documentation on ReadTheDocs](https://pythonvideoannotator.readthedocs.io)
+
+
+The software is an application written in python, which provides a GUI for users to analyse and to take notes of events occurred in the videos.
 
 Features:
 * Timeline for video navigation.
 * Multiple events edition in the timeline.
 * Graphs visualization over time.
 * Objects tracking path edition.
-
+* Plugins based app.
 
 [![Video](/docs/video.png)](https://www.youtube.com/watch?v=IE_mtCHc9bQ)
 
@@ -19,29 +22,40 @@ Features:
 * Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
 
-![Video annotator screenshot](/docs/screencapture.png?raw=true "Screen")
-
 ![Video annotator screenshot](/docs/screenshot.png?raw=true "Screen")
 
 ## Installation & Running
 
-The application was developed and tested with Ubuntu 12.04 and 14, OSX El Capitan, Windows 7.
+- Download & install [Anaconda](https://www.anaconda.com/download/)
+- Download [this repository](https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/v2.0.zip) and uncompress it to a folder.
+- Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
 
-### Dependencies
+for mac:
+```
+conda env create -f environment-macosx.yml
+source activate videoannotator
+python install.py
+```
 
-* Python 2.7
-* PyQt4: ```sudo apt-get install pyqt4-dev-tools python-qt4 python-qt4-gl```
-* Numpy: ```sudo apt-get install python-numpy```
-* PyOpenGL: ```sudo pip install pyopengl```
-* Python OpenCV: ```sudo apt-get install python-opencv```
-* Scipy: ```sudo apt-get install python-scipy```
-* PyForms: ```sudo pip install git+git://github.com/UmSenhorQualquer/pyforms.git```
+for windows:
+```
+conda env create -f environment-windows.yml
+source activate videoannotator
+python install.py
+```
 
 ### Run
 
-From the Terminal run:
+In the Video Annotator folder in the Terminal run:
 
+for mac:
 ```
+source activate videoannotator
+python -m pythonvideoannotator
+```
+for windows:
+```
+activate videoannotator
 python -m pythonvideoannotator
 ```
 

@@ -1,0 +1,11 @@
+# http://docs.readthedocs.io/en/latest/yaml-config.html
+
+python:
+   version: 3
+
+# Build PDF & ePub
+formats:
+    - epub
+    - pdf
+
+requirements_file: requirements-rtd.txt

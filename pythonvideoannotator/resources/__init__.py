@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 SETTINGS_PRIORITY = 10
 
-import os
-from PyQt4 import QtGui
+import os, AnyQt
+from pysettings import conf
+
+if conf.PYFORMS_MODE=='GUI':
+	from AnyQt import QtGui
 
 def path(filename): return os.path.join(os.path.dirname(__file__), 'icons', filename)
 
@@ -24,6 +27,7 @@ PYFORMS_ICON_EVENTTIMELINE_EXPORT = QtGui.QIcon(path('export.png'))
 
 PYFORMS_ICON_FILE_OPEN = QtGui.QIcon(path('link.png'))
 
+ANNOTATOR_ICON_REFRESH 	= QtGui.QIcon(path('refresh.png'))
 ANNOTATOR_ICON_PATH 	= QtGui.QIcon(path('path.png'))
 ANNOTATOR_ICON_DATASETS 	= QtGui.QIcon(path('datasets.png'))
 ANNOTATOR_ICON_OBJECT 	= QtGui.QIcon(path('object.png'))
@@ -50,3 +54,35 @@ ANNOTATOR_ICON_CONTOUR 	= QtGui.QIcon(path('contour.png'))
 ANNOTATOR_ICON_AREA 	= QtGui.QIcon(path('area.png'))
 ANNOTATOR_ICON_REGIONS 	= QtGui.QIcon(path('regions.png'))
 ANNOTATOR_ICON_VIDEO 	= QtGui.QIcon(path('video.png'))
+ANNOTATOR_ICON_COLORS 	= QtGui.QIcon(path('colors.png'))
+ANNOTATOR_ICON_COLOR_COMPONENT 	= QtGui.QIcon(path('color-component.png'))
+ANNOTATOR_ICON_CIRCLE 	= QtGui.QIcon(path('circle.png'))
+ANNOTATOR_ICON_ELLIPSE 	= QtGui.QIcon(path('ellipse.png'))
+ANNOTATOR_ICON_HULL 	= QtGui.QIcon(path('hull.png'))
+ANNOTATOR_ICON_BLACK_CIRCLE 	= QtGui.QIcon(path('black-circle.png'))
+ANNOTATOR_ICON_WIDTH 	= QtGui.QIcon(path('width.png'))
+ANNOTATOR_ICON_HEIGHT 	= QtGui.QIcon(path('height.png'))
+ANNOTATOR_ICON_ASPECT_RATIO 	= QtGui.QIcon(path('aspect-ratio.png'))
+ANNOTATOR_ICON_INFO 	= QtGui.QIcon(path('info.png'))
+ANNOTATOR_ICON_ANGLE 	= QtGui.QIcon(path('angle.png'))
+ANNOTATOR_ICON_POINT 	= QtGui.QIcon(path('point.png'))
+
+ANNOTATOR_ICON_PICTURE	= QtGui.QIcon(path('picture.png'))
+ANNOTATOR_ICON_SMOOTH	= QtGui.QIcon(path('smooth.png'))
+ANNOTATOR_ICON_NEW	= QtGui.QIcon(path('new.png'))
+ANNOTATOR_ICON_IMAGE	= QtGui.QIcon(path('image.png'))
+
+ANNOTATOR_ICON_BACKGROUND	= QtGui.QIcon(path('background.png'))
+ANNOTATOR_ICON_MOVIE	= QtGui.QIcon(path('movie.png'))
+ANNOTATOR_ICON_MOVIES	= QtGui.QIcon(path('movies.png'))
+
+
+ANNOTATOR_ICON_NOTE	= QtGui.QIcon(path('note.png'))
+ANNOTATOR_ICON_GEOMETRY	= QtGui.QIcon(path('geometry.png'))
+
+ANNOTATOR_ICON_PATHMAP	= QtGui.QIcon(path('pathmap.png'))
+
+
+ANNOTATOR_ICON_DISTANCES	= QtGui.QIcon(path('distances.png'))
+
+ANNOTATOR_ICON_DUPLICATE	= QtGui.QIcon(path('duplicate.png'))

@@ -1,0 +1,70 @@
+name: videoannotator
+
+channels:
+- anaconda
+- menpo
+- defaults
+dependencies:
+- cycler=0.10.0=py35hb89929e_0
+- freetype=2.8=h143eb01_0
+- libpng=1.6.32=hce72d48_2
+- matplotlib=2.1.0=py35hc2166d4_0
+- pyparsing=2.2.0=py35h31fab04_0
+- python-dateutil=2.6.1=py35h10515e0_1
+- pytz=2017.2=py35h9789cde_1
+- scipy=0.19.1=py35hf362045_3
+- six=1.11.0=py35h39a4c60_1
+- tornado=4.5.2=py35h4099233_0
+- ca-certificates=2017.08.26=ha1e5d58_0
+- certifi=2017.7.27.1=py35h0fdde5e_0
+- hdf5=1.8.18=h1edb405_0
+- intel-openmp=2018.0.0=h68bdfb3_7
+- libcxx=4.0.1=h579ed51_0
+- libcxxabi=4.0.1=hebd6815_0
+- libedit=3.1=hb4e282d_0
+- libgfortran=3.0.1=h93005f0_2
+- mkl=2018.0.0=h5ef208c_6
+- ncurses=6.0=ha932d30_1
+- numpy=1.13.3=py35hfd7066c_0
+- openssl=1.0.2l=h57f3a61_2
+- pip=9.0.1=py35he52dd69_3
+- python=3.5.0=1
+- readline=6.2=2
+- setuptools=36.5.0=py35h52cde6a_0
+- sqlite=3.20.1=h900c3b0_1
+- tk=8.5.18=0
+- wheel=0.29.0=py35ha7aa5c4_1
+- xz=5.0.5=1
+- zlib=1.2.11=h60db283_1
+- opencv3=3.1.0=py35_0
+- tbb=4.3_20141023=0
+- pip:
+  - https://bitbucket.org/fchampalimaud/geometry-designer/get/master.zip
+  - https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip
+  - https://bitbucket.org/fchampalimaud/mcv-api/get/master.zip
+  - https://bitbucket.org/fchampalimaud/mcv-gui/get/master.zip
+  - pyopengl==3.1.0
+  - pyopengl-accelerate==3.1.0
+  - pyqt5==5.9
+  - https://github.com/UmSenhorQualquer/pysettings/archive/master.zip
+  - https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-models/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-models-gui/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-backgroundfinder/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-contoursimages/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-createpaths/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-distances/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-eventsstats/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-importexport/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-motioncounter/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-patheditor/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-pathmap/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-regionsfilter/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-smoothpaths/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-timeline/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-tracking/get/master.zip
+  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-virtualobjectgenerator/get/master.zip
+  - send2trash==1.4.1
+  - simplejson==3.11.1
+  - sip==4.19.3
+  - https://github.com/UmSenhorQualquer/pyforms/archive/master.zip

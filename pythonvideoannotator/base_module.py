@@ -4,10 +4,10 @@ import os, AnyQt
 from pysettings import conf
 from pyforms import BaseWidget
 
-from pyforms.Controls import ControlPlayer
-from pyforms.Controls import ControlFile
-from pyforms.Controls import ControlEventTimeline
-from pyforms.Controls import ControlDockWidget
+from pyforms.controls import ControlPlayer
+from pyforms.controls import ControlFile
+from pyforms.controls import ControlEventTimeline
+from pyforms.controls import ControlDockWidget
 
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog

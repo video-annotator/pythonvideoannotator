@@ -11,7 +11,7 @@ SUBMODULES_FOLDERS = [
     'mcv-gui',
     'mcv-gui-editor',
     'pyforms',
-    'pysettings',
+    'pyforms',
     '.',
     'pythonvideoannotator-models',
     'pythonvideoannotator-models-gui',

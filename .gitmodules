@@ -61,9 +61,6 @@
 [submodule "logging-bootstrap"]
 	path = logging-bootstrap
 	url = https://UmSenhorQualquer@bitbucket.org/fchampalimaud/logging-bootstrap.git
-[submodule "pysettings"]
-	path = pysettings
-	url = https://github.com/UmSenhorQualquer/pysettings.git
 [submodule "pyforms"]
 	path = pyforms
 	url = https://github.com/UmSenhorQualquer/pyforms.git

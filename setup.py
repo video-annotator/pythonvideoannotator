@@ -11,7 +11,7 @@ with open('pythonvideoannotator/__init__.py', 'r') as fd: version = re.search(r'
 if not version: raise RuntimeError('Cannot find version information')
 
 requirements = [
-	'pysettings>=0.1',
+	'pyforms>=0.1',
 	'pyforms>=0.1.7.2',
 	'pyforms_generic_editor>=0.1',
 	'logging-bootstrap>=0.1',

@@ -7,8 +7,15 @@ dependencies:
   - ca-certificates=2018.1.18=0
   - git=2.14.2=3
   - openssl=1.0.2n=vc14_0
+  - pyopengl=3.1.1a1=np113py36_0
   - bzip2=1.0.6=vc14_intel_13
+  - icc_rt=2018.0.0=intel_1
   - intelpython=2018.0.0=3
+  - mkl=2018.0.1=intel_4
+  - mkl_fft=1.0.0=np113py36_intel_15
+  - mkl_random=1.0.0=np113py36_intel_6
+  - numpy=1.13.3=py36_intel_6
+  - openmp=2018.0.0=intel_8
   - pip=9.0.1=py36_intel_0
   - python=3.6.3=intel_3
   - setuptools=27.2.0=py36_intel_0
@@ -24,10 +31,7 @@ dependencies:
     - anyqt==0.0.8
     - cycler==0.10.0
     - matplotlib==2.1.2
-    - numpy==1.14.1
     - opencv-python==3.4.0.12
-    - pyopengl==3.1.0
-    - pyopengl-accelerate==3.1.0
     - pyparsing==2.2.0
     - pyqt5==5.10
     - python-dateutil==2.6.1

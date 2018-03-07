@@ -26,9 +26,16 @@ Features:
 
 ## Installation & Running
 
-- Download & install [Anaconda](https://www.anaconda.com/download/)
-- Download [this repository](https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/v2.0.zip) and uncompress it to a folder.
-- Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
+- Download & install [Anaconda](https://www.anaconda.com/download/) or  [Miniconda](https://conda.io/miniconda.html).
+- Download the environment configuration file [windows](https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml) / [mac](https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml).
+- Open an anaconda prompt, install and activate the environment by running the next commands in the terminal:
+
+for windows:
+```
+conda env create -f environment-windows.yml
+source activate videoannotator
+python install.py
+```
 
 for mac:
 ```
@@ -36,12 +43,23 @@ conda env create -f environment-macosx.yml
 source activate videoannotator
 python install.py
 ```
+- Clone the python video annotator repository by running the next command in the terminal: 
 
-for windows:
 ```
-conda env create -f environment-windows.yml
-source activate videoannotator
+git clone https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
+```
+
+- Install the code:
+
+```
+cd pythonVideoAnnotator
 python install.py
+```
+
+- Execute the code:
+
+```
+python -m pythonvideoannotator
 ```
 
 ### Run

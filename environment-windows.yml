@@ -12,6 +12,7 @@ dependencies:
 - vs2015_runtime=14.0.25420=0
 - wheel=0.30.0=py35_2
 - wincertstore=0.2=py35_0
+- git=2.16.1=0
 - pyqt5=5.6=py35_0
 - sip=4.18=py35_0
 - pip:
@@ -25,8 +26,10 @@ dependencies:
   - python-dateutil==2.6.1
   - pytz==2018.3
   - qscintilla==2.10.3
+  - scikit-learn==0.19.1
   - scipy==1.0.0
   - send2trash==1.5.0
   - simplejson==3.13.2
   - six==1.11.0
+  - sklearn==0.0
   - visvis==1.10.0

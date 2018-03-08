@@ -1,47 +1,32 @@
 name: videoannotator
 channels:
-  - conda-forge
-  - intel
-  - defaults
+- inso
+- conda-forge
+- defaults
 dependencies:
-  - ca-certificates=2018.1.18=0
-  - git=2.14.2=3
-  - openssl=1.0.2n=vc14_0
-  - pyopengl=3.1.1a1=np113py36_0
-  - bzip2=1.0.6=vc14_intel_13
-  - icc_rt=2018.0.0=intel_1
-  - intelpython=2018.0.0=3
-  - mkl=2018.0.1=intel_4
-  - mkl_fft=1.0.0=np113py36_intel_15
-  - mkl_random=1.0.0=np113py36_intel_6
-  - numpy=1.13.3=py36_intel_6
-  - openmp=2018.0.0=intel_8
-  - pip=9.0.1=py36_intel_0
-  - python=3.6.3=intel_3
-  - setuptools=27.2.0=py36_intel_0
-  - sqlite=3.20.1=vc14_intel_0
-  - tcl=8.6.4=vc14_intel_17
-  - tk=8.6.4=vc14_intel_26
-  - vc=14.0=2
-  - vs2015_runtime=14.0.25123=intel_4
-  - wheel=0.29.0=py36_intel_5
-  - xz=5.2.3=vc14_intel_0
-  - zlib=1.2.11=vc14_intel_3
-  - pip:
-    - anyqt==0.0.8
-    - cycler==0.10.0
-    - matplotlib==2.1.2
-    - opencv-python==3.4.0.12
-    - pyparsing==2.2.0
-    - pyqt5==5.10
-    - python-dateutil==2.6.1
-    - pytz==2018.3
-    - qscintilla==2.10.2
-    - scikit-learn==0.19.1
-    - scipy==1.0.0
-    - send2trash==1.5.0
-    - simplejson==3.13.2
-    - sip==4.19.7
-    - six==1.11.0
-    - sklearn==0.0
-    - visvis==1.10.0
+- certifi=2018.1.18=py35_0
+- pip=9.0.1=py35_1
+- pyopengl=3.1.1a1=py35_0
+- python=3.5.5=0
+- setuptools=38.5.2=py35_0
+- vs2015_runtime=14.0.25420=0
+- wheel=0.30.0=py35_2
+- wincertstore=0.2=py35_0
+- pyqt5=5.6=py35_0
+- sip=4.18=py35_0
+- pip:
+  - anyqt==0.0.8
+  - cycler==0.10.0
+  - kiwisolver==1.0.1
+  - matplotlib==2.2.0
+  - numpy==1.14.1
+  - opencv-python==3.4.0.12
+  - pyparsing==2.2.0
+  - python-dateutil==2.6.1
+  - pytz==2018.3
+  - qscintilla==2.10.3
+  - scipy==1.0.0
+  - send2trash==1.5.0
+  - simplejson==3.13.2
+  - six==1.11.0
+  - visvis==1.10.0

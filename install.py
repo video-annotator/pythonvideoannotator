@@ -35,7 +35,7 @@ SUBMODULES_FOLDERS = [
 
 def install():
     for submodule in SUBMODULES_FOLDERS:
-        pip.main(['install', '--upgrade', os.path.join(submodule,'.')])
+        pip.main(['install', '-e', os.path.join(submodule,'.')])
 
 def check_submodules():
     for submodule in SUBMODULES_FOLDERS:

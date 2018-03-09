@@ -1,70 +1,79 @@
-name: videoannotator
-
+name: d-track-environment
 channels:
-- anaconda
-- menpo
-- defaults
+  - kidzik
+  - conda-forge
+  - defaults
 dependencies:
-- cycler=0.10.0=py35hb89929e_0
-- freetype=2.8=h143eb01_0
-- libpng=1.6.32=hce72d48_2
-- matplotlib=2.1.0=py35hc2166d4_0
-- pyparsing=2.2.0=py35h31fab04_0
-- python-dateutil=2.6.1=py35h10515e0_1
-- pytz=2017.2=py35h9789cde_1
-- scipy=0.19.1=py35hf362045_3
-- six=1.11.0=py35h39a4c60_1
-- tornado=4.5.2=py35h4099233_0
-- ca-certificates=2017.08.26=ha1e5d58_0
-- certifi=2017.7.27.1=py35h0fdde5e_0
-- hdf5=1.8.18=h1edb405_0
-- intel-openmp=2018.0.0=h68bdfb3_7
-- libcxx=4.0.1=h579ed51_0
-- libcxxabi=4.0.1=hebd6815_0
-- libedit=3.1=hb4e282d_0
-- libgfortran=3.0.1=h93005f0_2
-- mkl=2018.0.0=h5ef208c_6
-- ncurses=6.0=ha932d30_1
-- numpy=1.13.3=py35hfd7066c_0
-- openssl=1.0.2l=h57f3a61_2
-- pip=9.0.1=py35he52dd69_3
-- python=3.5.0=1
-- readline=6.2=2
-- setuptools=36.5.0=py35h52cde6a_0
-- sqlite=3.20.1=h900c3b0_1
-- tk=8.5.18=0
-- wheel=0.29.0=py35ha7aa5c4_1
-- xz=5.0.5=1
-- zlib=1.2.11=h60db283_1
-- opencv3=3.1.0=py35_0
-- tbb=4.3_20141023=0
-- pip:
-  - https://bitbucket.org/fchampalimaud/geometry-designer/get/master.zip
-  - https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip
-  - https://bitbucket.org/fchampalimaud/mcv-api/get/master.zip
-  - https://bitbucket.org/fchampalimaud/mcv-gui/get/master.zip
-  - pyopengl==3.1.0
-  - pyopengl-accelerate==3.1.0
-  - pyqt5==5.9
-  - https://github.com/UmSenhorQualquer/pysettings/archive/master.zip
-  - https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-models/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-models-gui/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-backgroundfinder/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-contoursimages/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-createpaths/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-distances/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-eventsstats/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-importexport/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-motioncounter/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-patheditor/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-pathmap/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-regionsfilter/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-smoothpaths/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-timeline/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-tracking/get/master.zip
-  - https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-virtualobjectgenerator/get/master.zip
-  - send2trash==1.4.1
-  - simplejson==3.11.1
-  - sip==4.19.3
-  - https://github.com/UmSenhorQualquer/pyforms/archive/master.zip
+  - blas=1.1=openblas
+  - bzip2=1.0.6=1
+  - cairo=1.14.6=5
+  - ffmpeg=3.2.4=3
+  - fontconfig=2.12.1=6
+  - freetype=2.7=2
+  - gettext=0.19.8.1=0
+  - giflib=5.1.4=0
+  - glib=2.51.4=0
+  - harfbuzz=1.3.4=2
+  - hdf5=1.10.1=1
+  - icu=58.2=0
+  - jasper=1.900.1=4
+  - jpeg=9b=2
+  - libiconv=1.15=0
+  - libpng=1.6.28=2
+  - libtiff=4.0.7=1
+  - libwebp=0.5.2=7
+  - libxml2=2.9.7=0
+  - openblas=0.2.20=7
+  - opencv=3.3.0=py36_blas_openblas_203
+  - pcre=8.39=0
+  - pixman=0.34.0=1
+  - setuptools=38.4.0=py36_0
+  - x264=20131217=3
+  - ca-certificates=2017.08.26=ha1e5d58_0
+  - certifi=2018.1.18=py36_0
+  - expat=2.2.5=hb8e80ba_0
+  - git=2.16.1=h74bb3f6_0
+  - intel-openmp=2018.0.0=h8158457_8
+  - libcurl=7.58.0=hf30b1f0_0
+  - libcxx=4.0.1=h579ed51_0
+  - libcxxabi=4.0.1=hebd6815_0
+  - libedit=3.1=hb4e282d_0
+  - libffi=3.2.1=h475c297_4
+  - libgfortran=3.0.1=h93005f0_2
+  - libssh2=1.8.0=h322a93b_4
+  - mkl=2018.0.1=hfbd8650_4
+  - ncurses=6.0=hd04f020_2
+  - numpy=1.13.3=py36h8a80b8c_2
+  - openssl=1.0.2n=hdbc3d79_0
+  - perl=5.26.0=h5b8ca18_0
+  - pip=9.0.1=py36h1555ced_4
+  - pyopengl=3.1.1a1=np113py36_0
+  - python=3.6.4=hc167b69_1
+  - readline=7.0=hc1231fa_4
+  - scipy=1.0.0=py36h1de22e9_0
+  - sqlite=3.22.0=h3efe00b_0
+  - tk=8.6.7=h35a86e2_3
+  - wheel=0.30.0=py36h5eb2c71_1
+  - xz=5.2.3=h0278029_2
+  - zlib=1.2.11=hf3cbc9b_2
+  - freeglut=2.8.1=0
+  - pip:
+    - anyqt==0.0.8
+    - chardet==3.0.4
+    - cycler==0.10.0
+    - idna==2.6
+    - kiwisolver==1.0.1
+    - matplotlib==2.2.0
+    - pillow==5.0.0
+    - pyparsing==2.2.0
+    - pyqt5==5.10.1
+    - python-dateutil==2.6.1
+    - pytz==2018.3
+    - qscintilla==2.10.3
+    - requests==2.18.4
+    - simplejson==3.13.2
+    - sip==4.19.8
+    - six==1.11.0
+    - urllib3==1.22
+    - visvis==1.10.0
+

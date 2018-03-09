@@ -12,7 +12,7 @@ Features:
 * Objects tracking path edition.
 * Plugins based app.
 
-[![Video](/docs/video.png)](https://www.youtube.com/watch?v=IE_mtCHc9bQ)
+[![Video](docs/youtube.png)](https://www.youtube.com/watch?v=9C4Zr8fhqFo&t=63s)
 
 
 ### Developers
@@ -22,36 +22,33 @@ Features:
 * Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
 
-![Video annotator screenshot](/docs/screenshot.png?raw=true "Screen")
+![Video annotator screenshot](docs/screenshot.png "Screen")
 
 ## Installation & Running
 
 - Download & install [Anaconda](https://www.anaconda.com/download/) or  [Miniconda](https://conda.io/miniconda.html).
-- Download the environment configuration file [windows](https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml) / [mac](https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml).
-- Open an anaconda prompt, install and activate the environment by running the next commands in the terminal:
+- Download & install the environment configuration file.
 
-for windows:
+for windows:  
+**Note:** make sure you are using the Anaconda prompt to execute the next commands.
 ```
+conda install -c menpo wget
+wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml --no-check-certificate
 conda env create -f environment-windows.yml
-source activate videoannotator
-python install.py
+conda activate videoannotator
 ```
 
 for mac:
 ```
+wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
 conda env create -f environment-macosx.yml
 source activate videoannotator
-python install.py
-```
-- Clone the python video annotator repository by running the next command in the terminal: 
-
-```
-git clone https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
 ```
 
-- Install the code:
+- Activate the environment, download the source code and install it:
 
 ```
+git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
 cd pythonVideoAnnotator
 python install.py
 ```

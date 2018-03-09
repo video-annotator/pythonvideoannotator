@@ -142,6 +142,7 @@ for mac:
 
 .. code-block:: bash
 
+	conda install wget
 	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
 	conda env create -f environment-macosx.yml
 	source activate videoannotator
@@ -163,7 +164,7 @@ for windows:
 - Activate the environment, download the source code and install it:
 
 .. code-block:: bash
-
+	
 	git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
 	cd pythonVideoAnnotator
 	python install.py

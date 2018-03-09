@@ -40,6 +40,7 @@ conda activate videoannotator
 
 for mac:
 ```
+conda install wget
 wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
 conda env create -f environment-macosx.yml
 source activate videoannotator

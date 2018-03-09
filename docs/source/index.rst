@@ -135,26 +135,40 @@ PYTHON VIDEO ANNOTATOR
 Installation & Running
 -----------------------
 
-- Download & install [Anaconda](https://www.anaconda.com/download/)
-- Download [this repository](https://github.com/UmSenhorQualquer/pythonVideoAnnotator/archive/v2.0.zip) and uncompress it to a folder.
-- Enter in the folder that you just uncompressed using the Terminal, and execute the next command: 
+- Download & install [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html).
+- Download & install the environment configuration file.
 
 for mac:
 
 .. code-block:: bash
 
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
 	conda env create -f environment-macosx.yml
 	source activate videoannotator
-	python install.py
 
 
 for windows:
 
 .. code-block:: bash
 
+	conda install -c menpo wget
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml --no-check-certificate
 	conda env create -f environment-windows.yml
-	source activate videoannotator
+	conda activate videoannotator
+
+- Activate the environment, download the source code and install it:
+
+.. code-block:: bash
+
+	git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
+	cd pythonVideoAnnotator
 	python install.py
+
+- Execute the code:
+
+.. code-block:: bash
+
+	python -m pythonvideoannotator
 
 
 Run

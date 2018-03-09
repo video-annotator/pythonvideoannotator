@@ -149,6 +149,10 @@ for mac:
 
 for windows:
 
+.. note :: 
+
+	Make sure you are using the Anaconda prompt to execute the next commands.
+
 .. code-block:: bash
 
 	conda install -c menpo wget

@@ -61,6 +61,3 @@
 [submodule "pyforms-gui"]
 	path = libraries/pyforms-gui
 	url = https://github.com/UmSenhorQualquer/pyforms-gui.git
-[submodule "geometry-designer"]
-	path = libraries/geometry-designer
-	url = https://UmSenhorQualquer@bitbucket.org/fchampalimaud/geometry-designer.git

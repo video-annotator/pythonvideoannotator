@@ -21,7 +21,7 @@ setup(
 	version=version,
 	description=""" Python Video Annotator is a standalone application written in python, which provides a GUI for users to analyze and to take notes of events occurred in the videos. """,
 	author=['Ricardo Ribeiro', 'Carlos Mão de Ferro'],
-	author_email=['ricardojvr@gmail.com', 'cajomferro@gmail.com'],
+	author_email='ricardojvr@gmail.com, cajomferro@gmail.com',
 	license='Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>',
 	url='https://github.com/UmSenhorQualquer/pythonVideoAnnotator',
 	packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples', 'deploy', 'reports']),

@@ -9,7 +9,7 @@ setup(
 	version=0.0,
 	description="""""",
 	author=['Ricardo Ribeiro'],
-	author_email=['ricardojvr@gmail.com'],
+	author_email='ricardojvr@gmail.com',
 	url='https://bitbucket.org/fchampalimaud/pythonvideoannotator-models',
 	packages=find_packages(),
 	install_requires=[

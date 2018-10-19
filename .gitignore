@@ -39,3 +39,14 @@ uninstall-requirements-dev-*.txt
 **/*.sc
 **/*.spec
 **/*.propsfile
+
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+sdist/
+var/
+wheels/
+*.egg-info/
+*.egg

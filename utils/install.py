@@ -5,45 +5,36 @@ import pip, os
 from subprocess import call
 
 SUBMODULES_FOLDERS = [
-    'geometry-designer',
-    'logging-bootstrap',
-    'mcv-api',
-    'mcv-gui',
-    'mcv-gui-editor',
-    'pyforms-gui',
-    '.',
-    'pythonvideoannotator-models',
-    'pythonvideoannotator-models-gui',
-    'pythonvideoannotator-module-backgroundfinder',
-    'pythonvideoannotator-module-contoursimages',
-    'pythonvideoannotator-module-createpaths',
-    'pythonvideoannotator-module-distances',
-    'pythonvideoannotator-module-eventsstats',
-    'pythonvideoannotator-module-findorientation',
-    'pythonvideoannotator-module-importexport',
-    'pythonvideoannotator-module-motioncounter',
-    'pythonvideoannotator-module-patheditor',
-    'pythonvideoannotator-module-regionsfilter',
-    'pythonvideoannotator-module-smoothpaths',
-    'pythonvideoannotator-module-timeline',
-    'pythonvideoannotator-module-tracking',
-    'pythonvideoannotator-module-virtualobjectgenerator'
+    'libraries/geometry-designer',
+    'libraries/logging-bootstrap',
+    'libraries/mcv-api',
+    'libraries/mcv-gui',
+    'libraries/mcv-gui-editor',
+    'libraries/pyforms-gui',
+    'base/pythonvideoannotator',
+    'base/pythonvideoannotator-models',
+    'base/pythonvideoannotator-models-gui',
+    'plugins/pythonvideoannotator-module-backgroundfinder',
+    'plugins/pythonvideoannotator-module-contoursimages',
+    'plugins/pythonvideoannotator-module-createpaths',
+    'plugins/pythonvideoannotator-module-distances',
+    'plugins/pythonvideoannotator-module-eventsstats',
+    'plugins/pythonvideoannotator-module-findorientation',
+    'plugins/pythonvideoannotator-module-importexport',
+    'plugins/pythonvideoannotator-module-motioncounter',
+    'plugins/pythonvideoannotator-module-patheditor',
+    'plugins/pythonvideoannotator-module-regionsfilter',
+    'plugins/pythonvideoannotator-module-smoothpaths',
+    'plugins/pythonvideoannotator-module-timeline',
+    'plugins/pythonvideoannotator-module-tracking',
+    'plugins/pythonvideoannotator-module-virtualobjectgenerator'
 ]
 
 
 
 def install():
     for submodule in SUBMODULES_FOLDERS:
-        pip.main(['install', '-e', os.path.join(submodule,'.')])
-
-def check_submodules():
-    for submodule in SUBMODULES_FOLDERS:
-        if not os.path.exists(os.path.join(submodule,'setup.py')):
-            call(["git", "submodule", "update", "--init", "--recursive"])
-            break
-
-
+        call(['pip', 'install', '-e', os.path.join(submodule,'.')])
 
 if __name__=='__main__': 
-    check_submodules()
     install()

@@ -3,7 +3,7 @@
 SETTINGS_PRIORITY = 10
 
 import os, AnyQt
-from pyforms import conf
+from confapp import conf
 
 if conf.PYFORMS_MODE=='GUI':
 	from AnyQt import QtGui

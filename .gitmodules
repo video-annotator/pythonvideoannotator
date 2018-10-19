@@ -61,6 +61,6 @@
 [submodule "logging-bootstrap"]
 	path = logging-bootstrap
 	url = https://UmSenhorQualquer@bitbucket.org/fchampalimaud/logging-bootstrap.git
-[submodule "pyforms"]
-	path = pyforms
-	url = https://github.com/UmSenhorQualquer/pyforms.git
+[submodule "pyforms-gui"]
+	path = pyforms-gui
+	url = https://github.com/UmSenhorQualquer/pyforms-gui.git

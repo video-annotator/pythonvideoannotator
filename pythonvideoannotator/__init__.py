@@ -9,7 +9,7 @@ __maintainer__ 	= ["Ricardo Ribeiro", "Carlos Mao de Ferro"]
 __email__ 		= ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ 		= "Development"
 
-from pyforms import conf; conf += 'pythonvideoannotator.settings'
+from confapp import conf; conf += 'pythonvideoannotator.settings'
 
 ####################################################
 ## Load the user settings in case the file exists ##

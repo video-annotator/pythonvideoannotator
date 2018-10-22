@@ -1,4 +1,4 @@
-name: videoannotator-environment
+name: videoannotator
 channels:
 - conda-forge
 - anaconda
@@ -73,28 +73,16 @@ dependencies:
   - opencv-python==3.4.2.17
   - pathtools==0.1.2
   - port-for==0.3.1
-  - pybpod-api==1.5.4
-  - pybpod-gui-api==1.0
-  - pybpod-gui-plugin==1.4.0
-  - pybpod-gui-plugin-session-history==1.3.0b0
-  - pybpod-gui-plugin-timeline==1.0.1
-  - pybpod-rotaryencoder-module==0
-  - pybranch==1.4.0
-  - pyforms (/home/ricardo/bitbucket/pythonVideoAnnotator/pyforms)==3.0.1
-  - pyforms-generic-editor==1.4.6
   - pygments==2.2.0
   - pyopengl==3.1.0
   - pyopengl-accelerate==3.1.0
   - pyparsing==2.2.0
   - pyqt5==5.10
   - python-dateutil==2.6.1
-  - python-video-annotator-models (/home/ricardo/bitbucket/pythonVideoAnnotator/pythonvideoannotator-models)==0.0
-  - pythonvideoannotator (/home/ricardo/bitbucket/pythonVideoAnnotator)==2.2.0
   - pytz==2018.3
   - pyyaml==3.12
   - qscintilla==2.10.2
   - requests==2.18.4
-  - safe-and-collaborative-architecture==0
   - send2trash==1.4.2
   - simplejson==3.13.2
   - sip==4.19.7

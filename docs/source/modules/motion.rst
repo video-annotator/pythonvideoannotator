@@ -3,7 +3,7 @@
 Motion
 ===============================
 
-This module count the number of pixels that change from frame to frame for a path or contours.
+This module counts the number of pixels that change from frame to frame for a path or contours.
 
 The comparison between frames can be done with:
 

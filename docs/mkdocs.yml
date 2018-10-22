@@ -1,10 +1,7 @@
 site_name: PythonVideoAnnotator
 site_url: https://pythonvideoannotator.readthedocs.io/
-site_description: GUI for analyse and annotation of events occurred in the videos.
+site_description: GUI for analysis and annotation of events occurred in the videos.
 site_author: Champalimaud Foundation
-
-#theme: cinder
-theme_dir: docs/cinder
 
 repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
 

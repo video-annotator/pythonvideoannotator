@@ -5,7 +5,7 @@ Timeline
 
 |
 
-.. image:: /_static/user-docs/timeline/timeline.png
+.. image:: /_static/timeline/timeline.png
 	:align: center
 
 |
@@ -18,8 +18,8 @@ __________________________________________
 |
 
 - Create a new event:
-	- double-click on the track an time it wish to add a new event.
-- Edit the event label:
+	- double-click on the track and time you wish to add a new event.
+- Rename the event label:
 	- double-click over the event.
 - Resize the event:
 	- drag the left and right side of the box until you reach the desired size.
@@ -29,6 +29,13 @@ __________________________________________
 	- right click over the event and choose the option "lock".
 - Remove an event:
 	- right click over the event and choose the option "remove".
+	
+|
+
+**Example:** Creating, editing and deleting a note
+
+.. image:: /_static/timeline/add-and-edit-note.gif
+
 |
 
 Edit the properties of a track
@@ -38,7 +45,7 @@ __________________________________________
 | With the mouse over a track, click on the right button of mouse and choose the option "Track properties". A new window will appear.
 | On this window you can set the label of the track and the color which that the new events will have.
 
-.. image:: /_static/user-docs/timeline/track-properties.png
+.. image:: /_static/timeline/track-properties.png
 
 |
 
@@ -48,7 +55,7 @@ __________________________________________
 |
 | On the project tree select the dataset property, press the right button of the mouse and select the option "View on the timeline". The graph of property will be then shown on the timeline.
 
-.. image:: /_static/user-docs/timeline/send-2-timeline.png
+.. image:: /_static/timeline/send-2-timeline.png
 
 |
 
@@ -71,7 +78,7 @@ __________________________________________
 | Also you can use this window to visualize the value of a graph in a certain time point. Just select the graph, mouse over it and you will see the values of the graph displayed on the window.
 |
 
-.. image:: /_static/user-docs/timeline/graphs-properties.png
+.. image:: /_static/timeline/graphs-properties.png
 
 |
 
@@ -83,6 +90,7 @@ __________________________________________
 | A new window will be shown. On the left-side list, double click on the graph you would like to use for the equation, and write the rest of it.
 | Use the fields **Event name** to define the name of the new events, use the **row number** field to define the row where the events should be created, and the **Minimum number of frames** to define the necessary number of consecutive frames where the equation is verified to be create the events.
 |
+
 Equation example:
 
 .. code-block:: python
@@ -93,8 +101,8 @@ Equation example:
 
 |
 
-.. image:: /_static/user-docs/timeline/convert-graphs-2-events.png
+.. image:: /_static/timeline/convert-graphs-2-events.png
 
 |
 
-.. image:: /_static/user-docs/timeline/convert-graphs-2-events-window.png
+.. image:: /_static/timeline/convert-graphs-2-events-window.png

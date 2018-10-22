@@ -1,4 +1,3 @@
-
 **********
 MODULES
 **********
@@ -19,7 +18,7 @@ ______________________
 
 | This module can be used to track objects in a video.
 |
-| `Module page <track-objects.html>`_
+| `Module page <track-objects.html>`__
 |
 |
 
@@ -42,7 +41,7 @@ _________________________________
 |
 | This module extract the images of the objects using the contours contours or paths, also it calculates color properties of these datasets.
 |
-| `Module page <extract-images.html>`_
+| `Module page <extract-images.html>`__
 |
 |
 
@@ -67,7 +66,7 @@ ____________________________________________
 |
 | Calculate the background image of a video.
 |
-| `Module page <calc-background.html>`_
+| `Module page <calc-background.html>`__
 |
 |
 
@@ -89,7 +88,7 @@ ____________________________________________
 |
 | This module can be used to generate a new video where the path or contour of an object is replaced by a circle.
 |
-| `Module page <generate-virtual-objects.html>`_
+| `Module page <generate-virtual-objects.html>`__
 |
 |
 
@@ -111,7 +110,7 @@ ______________________
 |
 | This module can smooth paths or values.
 |
-| `Module page <smooth.html>`_
+| `Module page <smooth.html>`__
 |
 |
 
@@ -137,7 +136,7 @@ ______________________
 |
 | This module can smooth paths or values.
 |
-| `Module page <pathmap.html>`_
+| `Module page <pathmap.html>`__
 |
 |
 
@@ -161,7 +160,7 @@ ______________________
 |
 | This module can smooth paths or values.
 |
-| `Module page <distances.html>`_
+| `Module page <distances.html>`__
 |
 |
 
@@ -185,7 +184,7 @@ ______________________
 |
 | This module can smooth paths or values.
 |
-| `Module page <export.html>`_
+| `Module page <export.html>`__
 |
 |
 
@@ -209,7 +208,7 @@ ___________
 |
 | Calculate the motion property of a path or from the contours.
 |
-| `Module page <motion.html>`_
+| `Module page <motion.html>`__
 |
 |
 

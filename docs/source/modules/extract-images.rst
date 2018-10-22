@@ -1,6 +1,6 @@
 |
 
-Extract info from the contours' images
+Extract the contours' images
 ===========================================
 
 |

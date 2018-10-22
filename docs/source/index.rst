@@ -7,9 +7,11 @@
 	:hidden:
 	:maxdepth: 2
 	:includehidden:
-	:caption: Introduction
+	:caption: Getting Started
    
-	VIDEO ANNOTATOR <self>
+	Introduction <self>
+	user-docs/install_and_run/installing
+	user-docs/install_and_run/running
 
 .. toctree::
 	:hidden:
@@ -19,6 +21,7 @@
 
 	user-docs/howto/index
 	user-docs/timeline/index
+	user-docs/examples/index
 
 .. toctree::
 	:hidden:
@@ -46,13 +49,16 @@
 	concepts/project-tree/index
 
 
+Welcome to Python Video Annotator's documentation!
+=====================================================
+
 |
 
-PYTHON VIDEO ANNOTATOR
-================================================
+What is the Python Video Annotator?
+------------------------------------
 
 | 
-| The python video annotator is a graphical application written in python, to analyse videos and mark events notes. It was developed with the aim of helping neuroscience and ethology researchers indentifing animals behaviours based on the information extracted from the video.
+| The python video annotator is a graphical application written in python, to analyse videos and create notes for events in the video. It was developed with the aim of helping neuroscience and ethology researchers indentify animals' behaviours based on the information extracted from the video.
 | 
 | Paths, contours and outputs of external devices, like accelerometers, sound recorders, pokes, pressure devices and other sensors can be combined to find classes of events to identify behaviours.
 | 
@@ -63,9 +69,7 @@ PYTHON VIDEO ANNOTATOR
 	<iframe width="100%" height="315" src="https://www.youtube.com/embed/9C4Zr8fhqFo?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
 	</center>
 
-.. container:: separator
-	
-	.
+|
 
 .. image:: _static/index/project.png
 	:align: left
@@ -76,12 +80,8 @@ PYTHON VIDEO ANNOTATOR
 |
 | Import the output of your scripts, third party applications or external devices, into your project and follow its changes over the time.
 |
-| On each video you may have associated objects that you can track and compare properties.
-
-.. container:: clear-line
-	
-	.
-
+| On each video you may have associated objects that you can track and compare their properties.
+|
 |
 | Navigate in the video, annotate and modify events with the timeline bar.
 |
@@ -91,27 +91,18 @@ PYTHON VIDEO ANNOTATOR
 .. image:: _static/index/timeline_small.png
     
 
-.. container:: clear-line
-	
-	.
-
 |
 
 .. image:: _static/index/project-directories-tree.png
 	:align: left
 
 |
-| Access and modify easily the data with the open formats.
+| Access and modify the data easily with the open formats.
 | 
-| The project data is organized in a intuitive structure, and files are saved with open formats like json and csv to grarantee you the portability of the data.
+| The project data is organized in an intuitive structure, and files are saved with open formats like json and csv to garantee the portability of the data.
 |
 | Modify the project structure by moving the folders around with your filesystem manager.
-
-
-.. container:: clear-line
-	
-	.
-
+|
 |
 | The python video annotator is plugins based which allow to toggle the activation of the ones that are already included or add new ones developed by you.
 |
@@ -128,74 +119,6 @@ PYTHON VIDEO ANNOTATOR
 |
 
 
-.. container:: separator
-	
-	.
-
-Installation & Running
------------------------
-
-- Download & install [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html).
-- Download & install the environment configuration file.
-
-for mac:
-
-.. code-block:: bash
-
-	conda install wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
-	conda env create -f environment-macosx.yml
-	source activate videoannotator
-
-
-for windows:
-
-.. note :: 
-
-	Make sure you are using the Anaconda prompt to execute the next commands.
-
-.. code-block:: bash
-
-	conda install -c menpo wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml --no-check-certificate
-	conda env create -f environment-windows.yml
-	conda activate videoannotator
-
-- Activate the environment, download the source code and install it:
-
-.. code-block:: bash
-	
-	git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
-	cd pythonVideoAnnotator
-	python install.py
-
-- Execute the code:
-
-.. code-block:: bash
-
-	python -m pythonvideoannotator
-
-
-Run
-____
-
-In the Video Annotator folder in the Terminal run:
-
-for mac
-
-.. code-block:: bash
-
-	source activate videoannotator
-	python -m pythonvideoannotator
-
-for windows:
-
-.. code-block:: bash
-
-	source activate videoannotator
-	python -m pythonvideoannotator
-
-
 Developers
 -------------------
 
@@ -206,6 +129,9 @@ Carlos Mão de Ferro                 from the `Champalimaud Scientific Software 
 									carlos.maodeferro@research.fchampalimaud.org
 Hugo Cachitas                       from the `Innate Behavior Lab <http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/>`_
 									hugo.cachitas@research.fchampalimaud.org
+
+Manuel Manso                        from the `Champalimaud Scientific Software Platform <http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/>`_
+									manel.manso@research.fchampalimaud.org
 =================================   ============================================================================================================================================
 
 |

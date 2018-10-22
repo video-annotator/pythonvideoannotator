@@ -1,45 +1,29 @@
 |
 
-EXAMPLES OF USAGE
-===============
+Examples of usage
+=================
 
 |
 
+Find subtle light intensity changes in a video
+______________________________________________
 
-
-
-|
-
-Find subtil light intensity changes in a video
-______________________
-
-|
-
-| This module can be used to track objects in a video.
-|
-| `Module page <track-objects.html>`_
-|
-|
-
-.. container:: separator
-	
-	.
 
 Calculate the distance between 2 objects
-______________________
+________________________________________
 
 
 Synchronize the video with the hardware
-______________________
+_______________________________________
 
 
 Use the Python video annotation with the scientific board
-______________________
+_________________________________________________________
 
 
 Find the diferences between 2 objects
-______________________
+_____________________________________
 
 
 Search for interesting moments of action
-______________________
+________________________________________

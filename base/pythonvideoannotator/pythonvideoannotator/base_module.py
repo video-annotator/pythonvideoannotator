@@ -83,7 +83,10 @@ class BaseModule(BaseWidget):
 
 
 	def load(self, data, project_path=None):
-		self._project.load(data, project_path)
+		try:
+			self._project.load(data, project_path)
+		except FileNotFoundError as e:
+			QMessageBox.critical(self, "Error", str(e))
 
 	def save_project(self, project_path=None):
 		try:

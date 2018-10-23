@@ -10,8 +10,7 @@
 	:caption: Getting Started
    
 	Introduction <self>
-	user-docs/install_and_run/installing
-	user-docs/install_and_run/running
+	user-docs/install_and_run/install_and_run
 
 .. toctree::
 	:hidden:

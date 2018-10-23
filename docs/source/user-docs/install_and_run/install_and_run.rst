@@ -1,13 +1,17 @@
 .. _installing-label:
 
-*************
-Installing
-*************
+****************
+Install and Run
+****************
 
 |
 
 Quickest installation
 ______________________
+
+
+Installing
+-----------
 
 
 1. Install Python 3.6 from  [python.org](https://www.python.org/)
@@ -20,7 +24,11 @@ ______________________
 
 	pip install python-video-annotator
 
-4. Execute pythonvideoannotator:
+
+Running
+-----------
+
+1. Execute pythonvideoannotator:
 
 .. code-block:: bash
 
@@ -32,10 +40,16 @@ For developers
 ______________
 
 
+Installing
+-----------
+
+
 - Download & install [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html).
 - Download & install the environment configuration file.
 
-for ubuntu:
+|
+
+**for ubuntu:**
 
 .. code-block:: bash
 
@@ -44,7 +58,7 @@ for ubuntu:
 	conda env create -f environment-ubuntu17.yml
 	source activate videoannotator
 
-for mac:
+**for mac:**
 
 .. code-block:: bash
 
@@ -54,7 +68,7 @@ for mac:
 	source activate videoannotator
 
 
-for windows:
+**for windows:**
 
 .. note :: 
 
@@ -67,7 +81,11 @@ for windows:
 	conda env create -f environment-windows.yml
 	conda activate videoannotator
 
+|
+
 - Activate the environment, download the source code and install it:
+
+**for ubuntu, mac and windows:**
 
 .. code-block:: bash
 	
@@ -75,8 +93,15 @@ for windows:
 	cd pythonVideoAnnotator
 	python install.py
 
-- Execute the code:
+|
+
+
+Running
+-----------
+
+**for ubuntu, mac and windows:**
 
 .. code-block:: bash
 
+	source activate videoannotator
 	python -m pythonvideoannotator

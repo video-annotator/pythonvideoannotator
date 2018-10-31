@@ -6,7 +6,7 @@ import re
 
 setup(
     name='Python video annotator',
-    version=0.5,
+    version=0.5.1,
     description="""""",
     author=['Ricardo Ribeiro'],
     author_email='ricardojvr@gmail.com',
@@ -40,7 +40,8 @@ setup(
         'python-video-annotator-module-path-editor',
         'python-video-annotator-module-distances',
         'python-video-annotator-module-find-orientation',
-        'python-video-annotator-module-contours-images'
+        'python-video-annotator-module-contours-images',
+        'python-video-annotator-module-path-map'
     ],
     entry_points={
         'console_scripts': [

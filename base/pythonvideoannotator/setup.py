@@ -6,7 +6,7 @@ import re
 
 setup(
     name='Python video annotator',
-    version=0.4,
+    version=0.5,
     description="""""",
     author=['Ricardo Ribeiro'],
     author_email='ricardojvr@gmail.com',

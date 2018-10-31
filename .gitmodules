@@ -64,3 +64,6 @@
 [submodule "libraries/geometry-designer"]
 	path = libraries/geometry-designer
 	url = https://bitbucket.org/fchampalimaud/geometry-designer.git
+[submodule "plugins/pythonvideoannotator-module-pathmap"]
+	path = plugins/pythonvideoannotator-module-pathmap
+	url = https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-pathmap.git

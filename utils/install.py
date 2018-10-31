@@ -27,7 +27,8 @@ SUBMODULES_FOLDERS = [
     'plugins/pythonvideoannotator-module-smoothpaths',
     'plugins/pythonvideoannotator-module-timeline',
     'plugins/pythonvideoannotator-module-tracking',
-    'plugins/pythonvideoannotator-module-virtualobjectgenerator'
+    'plugins/pythonvideoannotator-module-virtualobjectgenerator',
+    'plugins/pythonvideoannotator-module-pathmap'
 ]
 
 

@@ -54,7 +54,7 @@ Installing
 .. code-block:: bash
 
 	conda install wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-ubuntu17.yml --no-check-certificate
 	conda env create -f environment-ubuntu17.yml
 	source activate videoannotator
 

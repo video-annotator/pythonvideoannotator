@@ -2,7 +2,7 @@
 Distances
 ==================================
 
-This module calculate the distances between paths.
+This module calculates the distances between paths.
 
 .. image:: /_static/modules/distances-module.png
 

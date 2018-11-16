@@ -35,6 +35,8 @@ c. Check the datasets you want to use to store the result.
 	* You can hide the datasets field by pressing the top button "Hide datasets list".
 	* To pre-visualize the video in player, you can right click in the video and select the option "Select video".
 
+|
+
 Restrict the analysis to a period
 --------------------------------------
 

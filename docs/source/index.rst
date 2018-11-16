@@ -20,7 +20,6 @@
 
 	user-docs/howto/index
 	user-docs/timeline/index
-	user-docs/examples/index
 
 .. toctree::
 	:hidden:
@@ -36,6 +35,7 @@
 	modules/path-map
 	modules/distances
 	modules/motion
+	modules/estimate-contour-orientation
 	modules/export-videos
 	modules/export-data
 	
@@ -46,6 +46,8 @@
 	:caption: Concepts
 
 	concepts/project-tree/index
+	concepts/project-tree/datasets
+	concepts/project-tree/project-files
 
 
 Welcome to Python Video Annotator's documentation!
@@ -57,7 +59,7 @@ What is the Python Video Annotator?
 ------------------------------------
 
 | 
-| The python video annotator is a graphical application written in python, to analyse videos and create notes for events in the video. It was developed with the aim of helping neuroscience and ethology researchers indentify animals' behaviours based on the information extracted from the video.
+| The **PythonVideoAnnotator** is a graphical application written in python, to analyse videos and create notes for events in the video. It was developed with the aim of helping neuroscience and ethology researchers indentify animals' behaviours based on the information extracted from the video.
 | 
 | Paths, contours and outputs of external devices, like accelerometers, sound recorders, pokes, pressure devices and other sensors can be combined to find classes of events to identify behaviours.
 | 
@@ -65,7 +67,7 @@ What is the Python Video Annotator?
 .. raw:: html
 
 	<center>
-	<iframe width="100%" height="315" src="https://www.youtube.com/embed/9C4Zr8fhqFo?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
+	<iframe width="100%" height="315" src="https://www.youtube.com/embed/lQEy8kc-3w0?theme=light&modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
 	</center>
 
 |

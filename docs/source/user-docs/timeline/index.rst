@@ -9,7 +9,6 @@ Timeline
 	:align: center
 
 |
-|
 
 
 The timeline events
@@ -38,14 +37,17 @@ __________________________________________
 
 |
 
-Edit the properties of a track
+Add and edit the properties of a row
 __________________________________________
 
 |
-| With the mouse over a track, click on the right button of mouse and choose the option "Track properties". A new window will appear.
-| On this window you can set the label of the track and the color which that the new events will have.
+| With the mouse over a row, click on the right mouse button and choose the option **"Row properties"**. A new window will appear.
+| On this window you can set the label for the row and the color that the new events will have.
+|
 
-.. image:: /_static/timeline/track-properties.png
+**Example:** Adding and editing rows
+
+.. image:: /_static/timeline/add-and-edit-rows.gif
 
 |
 
@@ -53,29 +55,31 @@ Show a dataset property on the timeline
 __________________________________________
 
 |
-| On the project tree select the dataset property, press the right button of the mouse and select the option "View on the timeline". The graph of property will be then shown on the timeline.
+| On the project's tree select the dataset property you want to graph on the timeline, press the right button of the mouse and select the option **"View on the timeline"**. The graph of the property will then be shown on the timeline.
 
 .. image:: /_static/timeline/send-2-timeline.png
 
-|
+**Result**:
 
+.. image:: /_static/timeline/graph-on-timeline.png
+
+|
 
 Import & export events
 __________________________________________
-
-|
 
 Use the buttons on the bottom right side to export events to a csv file or import graphs, events or bonsai events files.
 
 |
 
-Edit the graphs properties
+Edit the graph's properties
 __________________________________________
 
 |
-| Press the right mouse button and select the "Graphs" option to access the graphs properties window.
-| On these window it is possible to edit the graphs names and their display.
-| Also you can use this window to visualize the value of a graph in a certain time point. Just select the graph, mouse over it and you will see the values of the graph displayed on the window.
+| Press the right mouse button and select the **"Graphs"** option to access the graphs' properties windows.
+| On this windows it's possible to edit the graphs' names and their displays.
+|
+| Also, you can use this window to visualize the value of a graph at a certain point in time. Just select the graph and as you pass the mouse over the timeline, the value of the graph at a certain frame will be displayed on the window.
 |
 
 .. image:: /_static/timeline/graphs-properties.png
@@ -86,9 +90,11 @@ Convert graphs to events
 __________________________________________
 
 |
-| Press the right mouse button and select option "Convert graphs to events".
+| Right click the timeline and select the option **"Convert graphs to events"**.
+|
 | A new window will be shown. On the left-side list, double click on the graph you would like to use for the equation, and write the rest of it.
-| Use the fields **Event name** to define the name of the new events, use the **row number** field to define the row where the events should be created, and the **Minimum number of frames** to define the necessary number of consecutive frames where the equation is verified to be create the events.
+|
+| Use the fields **Event name** to define the name of the new events, use the **row number** field to define the row where the events should be created, and the **Minimum number of frames** to define the necessary number of consecutive frames where the equation is verified to create the events.
 |
 
 Equation example:
@@ -97,12 +103,17 @@ Equation example:
 
 	[Deeplearning result]>0.5 and [value(6)]<10
 
-.. note:: Use spaces only on between logic operators: **and** or **or**.
+.. note:: Use spaces only between logic operators: **and** or **or**.
 
 |
+
+**1.** Right click the timeline and choose the option **"Convert graphs to events"**
 
 .. image:: /_static/timeline/convert-graphs-2-events.png
 
-|
+**2.** Write the equation
+
+
+**3.** Choose the name for the events, the minimum number of frames and the row they will be displayed in
 
 .. image:: /_static/timeline/convert-graphs-2-events-window.png

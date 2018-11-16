@@ -7,15 +7,17 @@ Filter by regions
 This module calculates the distance between an object and a geometry's closest border. 
 
 
-To use the module, open the **"Modules"** tab and then choose the **"Filter by regions"** module.
-On the top part you have to select first the video, then the object and finally the object's **path or contours**. On the bottom part you select the geometry you want to calculate the distance to. Then click **"Apply"**.
+To use the module, first you have to create a geometry, :ref:`here's how <addgeometry-label>`.
+Then, open the **"Modules"** tab and choose the **"Filter by regions"** module.
+On the top part you have to first select the video, then the object and finally the object's **path or contour**. On the bottom part you select the geometry you want to calculate the distance to. Then click **"Apply"**.
 
 
 .. figure:: /_static/modules/regionsfilter-module.png
 	:scale: 100%
 
+|
 
-**Results:**
+**Result:**
 
 After running the module, a value with the name **"regions-filter"** will appear under the object to which the path or contour belongs to.
 If we plot this value into the timeline we can see the variation of the rat distance to the border of the selected geometry.

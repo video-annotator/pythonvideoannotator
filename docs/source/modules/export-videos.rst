@@ -3,10 +3,20 @@
 Export videos
 =======================================
 
-This module allow the user to generate new videos with the annotations drawn directly in the image.
+This module allows the user to generate new videos with the annotations and the object's paths or contours directly drawn on the video.
+
+To use the module, first open the **"Modules"** tab and choose the **"Export Videos"** module.
+Then, for each tab, choose the settings accordingly to what you want to include in the generated video.
+Each tab is explained in detail further down this page.
+
+After going through every tab, choose the directory you want to save the video in by clicking the **"Open"** button on the bottom right side and then write the name you want the video to have in the **"Output file name"** textbox. Finally, clicking **"Export Video(s)"** will generate the video.
+
+.. note:: You can preview the generated video by double clicking the video you selected and then clicking on the *'Play'* button under the video player
+
 
 .. image:: /_static/modules/exportvideos-module.png
 
+|
 
 ------------------------
 Tabs
@@ -15,44 +25,53 @@ Tabs
 PATH
 --------------------------------------
 
-In the tab PATH the user should select the video and path which the module should based on to generate a new video.
-If the "Draw paths" checkbox is checked the path history of the object will be drawn in the video.
+In this tab, the user should select the video over which the annotations and/or the paths will be drawn.
+
+By checking the **"Draw paths"** checkbox, all the selected paths and contours will be drawn in the generated video.
+
+With the blue slider or the left and right textboxes, the user can also select a start and an end time for the video.
+The video will then only be generated for the interval between the start and end time.
 
 CIRCLE
 --------------------------------------
 
-If any dataset is selected or the checkbox "Use a fixed size" is selected, a circle will be drawn in the position of object for the correspondent frame.
-In case you select the dataset and the checkbox "Use a fixed size" is unselected the area of the circle will be based on the are of the dataset for each frame (the dataset has to be of contours type) .
+To use this tab, you must have selected a dataset(path or contour) in the PATH tab.
 
-- The user can export paths, posititions, and events.
-- It can also use a fixed image as background.
+If a contour was selected in the previous tab, a circle will be drawn in the position of the object for the corresponding frame using the contour's area.
+
+In case you select the checkbox **"Use a fixed size"**, which is mandatory if the selected dataset is a path, a circle with a fixed size will be drawn every frame over the object's position. Use the slider to change the size of the circle.
 
 CIRCLE COLOR
 --------------------------------------
 
-If any dataset is selected the drawn circle will use the color of this dataset for each frame.
-If the checkbox "Use a fixed color" is selected, then the drawn circle will assume the configured color.
+If any dataset is selected, the drawn circle will use the color of this dataset for each frame.
+If instead the checkbox **"Use a fixed color"** is selected, the drawn circle will use the chosen color.
+To change the color, simply change the numbers, beware it is in the BGR format (0-255).
 
 BACKGROUND
 --------------------------------------
 
-If any image is selected the video will be generated with the image in background instead of the frames of the video.
+If any image is selected, the video will be generated with the image in the background instead of the frames of the video.
 
 DRAW EVENTS
 --------------------------------------
 
 Select the events to be drawn in the exported video.
-If the "Draw titles" checkbox is select, the titles of the events will be also drawn.
+If the **"Draw titles"** checkbox is select, the titles of the events will be also drawn.
 
-SPIT FILES BY EVENTS
+SPLIT FILES BY EVENTS
 --------------------------------------
 
-With this tab the user can export only the moments where the selected events occur.
+| In this tab, the user can select to only generate the video during certain moments.
+| If no events are selected, the whole video will be generated.
+| If one or more events are selected, the video will only be generated during those events.
+| The generated video will also be split in multiple videos, where each video will correspond to one of the selected events.
+|
 
 ------------------------
 Results
 ------------------------
 
-Screenshot of a video generated with this module.
+Screenshot of a video generated with this module:
 
 .. image:: /_static/modules/exportvideos-module-result.png 

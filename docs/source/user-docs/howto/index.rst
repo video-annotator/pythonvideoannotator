@@ -68,6 +68,8 @@ You can right click a video to be able to add objects, geomtries, notes and imag
 
 |
 
+.. _addgeometry-label:
+
 Add & edit a geometry
 ==============================
 

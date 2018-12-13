@@ -51,6 +51,8 @@ __________________________________________
 
 |
 
+.. _show_dataset_timeline-label:
+
 Show a dataset property on the timeline
 __________________________________________
 

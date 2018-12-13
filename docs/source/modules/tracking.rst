@@ -1,12 +1,15 @@
 .. trackingmodule-label:
 
-************************
 Track objects
-************************
+===============================
 
 This module allows the use of simple tracking algorithms to track objects in a video.
 
 .. image:: /_static/modules/tracking-module.png
+
+------------------------
+How to use
+------------------------
 
 To use the module the user has to go over 4 steps:
 
@@ -119,3 +122,12 @@ After you configure all the workflows just press the Apply button, wait for the 
 
 
 .. image:: /_static/modules/tracking-module-result.png
+
+
+------------------------
+Result
+------------------------
+
+------------------------
+Example
+------------------------

@@ -44,17 +44,16 @@ Installing
 -----------
 
 
-- Download & install [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html).
-- Download & install the environment configuration file.
-
+| 1. Download & install [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html).
 |
+| 2. Download & install the environment configuration file:
 
 **for ubuntu:**
 
 .. code-block:: bash
 
 	conda install wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-ubuntu17.yml --no-check-certificate
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/utils/environment-ubuntu17.yml --no-check-certificate
 	conda env create -f environment-ubuntu17.yml
 	source activate videoannotator
 
@@ -63,7 +62,7 @@ Installing
 .. code-block:: bash
 
 	conda install wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/utils/environment-macosx.yml --no-check-certificate
 	conda env create -f environment-macosx.yml
 	source activate videoannotator
 
@@ -77,13 +76,12 @@ Installing
 .. code-block:: bash
 
 	conda install -c menpo wget
-	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml --no-check-certificate
+	wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/utils/environment-windows.yml --no-check-certificate
 	conda env create -f environment-windows.yml
 	conda activate videoannotator
 
 |
-
-- Activate the environment, download the source code and install it:
+| 3. Activate the environment, download the source code and install it:
 
 **for ubuntu, mac and windows:**
 

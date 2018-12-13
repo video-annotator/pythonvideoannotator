@@ -97,6 +97,8 @@ The **polygon points can be moved**, by dragging and dropping the selected point
 
 |
 
+.. _captureframe-label:
+
 Capture a frame
 ===============
 
@@ -117,10 +119,12 @@ An object is something in the video whose properties change over time.
 
 .. image:: /_static/howto/add-object.png
 
+.. _add_dataset-label:
+
 Add a dataset
 ------------------------
 
-A datasets is an object's property that changes over time. There are 3 types of properties that you can add: **Paths**, **Countours** or **Values**.
+A dataset is an object's property that changes over time. There are 3 types of properties that you can add: **Paths**, **Countours** or **Values**.
 
 .. seealso:: Find more information about the datasets in the :ref:`Objects’ datasets <datasets-label>` section.
 

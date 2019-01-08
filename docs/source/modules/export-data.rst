@@ -36,5 +36,5 @@ The module will create a csv file in the chosen directory.
 Example
 ------------------------
 
-.. image:: /_static/modules/exportdata-module.png
+.. image:: /_static/modules/export-data.gif
 

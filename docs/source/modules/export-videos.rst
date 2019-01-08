@@ -81,8 +81,4 @@ The module will generate a video or videos in the chosen directory.
 Example
 ------------------------
 
-.. image:: /_static/modules/exportvideos-module.png
-
-Screenshot of a video generated with this module:
-
-.. image:: /_static/modules/exportvideos-module-result.png 
+.. image:: /_static/modules/export-videos.gif

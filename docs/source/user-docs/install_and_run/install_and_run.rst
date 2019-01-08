@@ -88,7 +88,7 @@ Installing
 .. code-block:: bash
 	
 	git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
-	cd pythonVideoAnnotator
+	cd pythonVideoAnnotator/utils
 	python install.py
 
 |

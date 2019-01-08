@@ -33,5 +33,4 @@ Result
 Example
 ------------------------
 
-
-.. image:: /_static/user-docs/modules/original-images/background-calculator.png
+.. image:: /_static/modules/pathmap.gif

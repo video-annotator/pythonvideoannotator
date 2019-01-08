@@ -48,8 +48,4 @@ Result
 Example
 ------------------------
 
-.. image:: /_static/modules/motion-module.png
-
-The result of the motion will be added to the contours or path dataset.
-
-.. image:: /_static/modules/motion-module-result.png
+.. image:: /_static/modules/motion.gif

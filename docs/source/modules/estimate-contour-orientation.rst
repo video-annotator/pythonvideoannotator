@@ -37,3 +37,5 @@ The contour's value **"angle"** will be automatically updated after running the 
 ------------------------
 Example
 ------------------------
+
+.. image:: /_static/modules/est-contours-orientation.gif

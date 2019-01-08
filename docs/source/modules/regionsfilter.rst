@@ -44,11 +44,5 @@ Result
 ------------------------
 Example
 ------------------------
-.. figure:: /_static/modules/regionsfilter-module.png
-	:scale: 100%
 
-
-**Result:**
-
-.. figure:: /_static/modules/regionsfilter-module-result.png
-	:scale: 100%
+.. image:: /_static/modules/filter-by-regions.gif

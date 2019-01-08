@@ -112,6 +112,8 @@ The next step can be used to capture the current frame into an image.
 
 |
 
+.. _add_objects-label:
+
 Add an object
 ===============
 

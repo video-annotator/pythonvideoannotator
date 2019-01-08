@@ -5,31 +5,31 @@ import pip, os
 from subprocess import call
 
 SUBMODULES_FOLDERS = [
-    'libraries/geometry-designer',
-    'libraries/logging-bootstrap',
-    'libraries/mcv-api',
-    'libraries/mcv-gui',
-    'libraries/mcv-gui-editor',
-    'libraries/pyforms-gui',
-    'base/pythonvideoannotator',
-    'base/pythonvideoannotator-models',
-    'base/pythonvideoannotator-models-gui',
-    'plugins/pythonvideoannotator-module-backgroundfinder',
-    'plugins/pythonvideoannotator-module-contoursimages',
-    'plugins/pythonvideoannotator-module-createpaths',
-    'plugins/pythonvideoannotator-module-distances',
-    'plugins/pythonvideoannotator-module-eventsstats',
-    'plugins/pythonvideoannotator-module-findorientation',
-    'plugins/pythonvideoannotator-module-importexport',
-    'plugins/pythonvideoannotator-module-motioncounter',
-    'plugins/pythonvideoannotator-module-patheditor',
-    'plugins/pythonvideoannotator-module-regionsfilter',
-    'plugins/pythonvideoannotator-module-smoothpaths',
-    'plugins/pythonvideoannotator-module-timeline',
-    'plugins/pythonvideoannotator-module-tracking',
-    'plugins/pythonvideoannotator-module-virtualobjectgenerator',
-    'plugins/pythonvideoannotator-module-pathmap'
-]
+    os.path.join('..','libraries','geometry-designer'),
+    os.path.join('..','libraries','logging-bootstrap'),
+    os.path.join('..','libraries','mcv-api'),
+    os.path.join('..','libraries','mcv-gui'),
+    os.path.join('..','libraries','mcv-gui-editor'),
+    os.path.join('..','libraries','pyforms-gui'),
+    os.path.join('..','base','pythonvideoannotator'),
+    os.path.join('..','base','pythonvideoannotator-models'),
+    os.path.join('..','base','pythonvideoannotator-models-gui'),
+    os.path.join('..','plugins','pythonvideoannotator-module-backgroundfinder'),
+    os.path.join('..','plugins','pythonvideoannotator-module-contoursimages'),
+    os.path.join('..','plugins','pythonvideoannotator-module-createpaths'),
+    os.path.join('..','plugins','pythonvideoannotator-module-distances'),
+    os.path.join('..','plugins','pythonvideoannotator-module-eventsstats'),
+    os.path.join('..','plugins','pythonvideoannotator-module-findorientation'),
+    os.path.join('..','plugins','pythonvideoannotator-module-importexport'),
+    os.path.join('..','plugins','pythonvideoannotator-module-motioncounter'),
+    os.path.join('..','plugins','pythonvideoannotator-module-patheditor'),
+    os.path.join('..','plugins','pythonvideoannotator-module-regionsfilter'),
+    os.path.join('..','plugins','pythonvideoannotator-module-smoothpaths'),
+    os.path.join('..','plugins','pythonvideoannotator-module-timeline'),
+    os.path.join('..','plugins','pythonvideoannotator-module-tracking'),
+    os.path.join('..','plugins','pythonvideoannotator-module-virtualobjectgenerator'),
+    os.path.join('..','plugins','pythonvideoannotator-module-pathmap')
+    ]
 
 
 

@@ -33,8 +33,4 @@ The calculated distance will appear under one of the two objects as a new value 
 Example
 ------------------------
 
-.. image:: /_static/modules/distances-module.png
-
-After pressing apply a new value will be added to one of the selected objects.
-
-.. image:: /_static/modules/distances-module-result.png
+.. image:: /_static/modules/distances.gif

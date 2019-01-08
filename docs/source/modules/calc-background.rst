@@ -52,4 +52,4 @@ The algorithm used to calculate the background is described in the next workflow
 Example
 ------------------------
 
-.. image:: /_static/modules/background-module.png
+.. image:: /_static/modules/calc-background.gif

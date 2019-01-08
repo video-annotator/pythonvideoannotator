@@ -47,4 +47,4 @@ Result
 Example
 ------------------------
 
-.. image:: /_static/user-docs/modules/original-images/smooth.png
+.. image:: /_static/modules/smooth.gif

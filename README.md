@@ -26,56 +26,28 @@ Features:
 
 ## Installation & Running
 
-- Download & install [Anaconda](https://www.anaconda.com/download/) or  [Miniconda](https://conda.io/miniconda.html).
-- Download & install the environment configuration file.
+How to install:
 
-for windows:  
-**Note:** make sure you are using the Anaconda prompt to execute the next commands.
-```
-conda install -c menpo wget
-wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-windows.yml --no-check-certificate
-conda env create -f environment-windows.yml
-conda activate videoannotator
-```
+1. Install Python 3.6 from  [python.org](https://www.python.org/)
 
-for mac:
+2. Install pypi from [pypi.org](https://pypi.org/)
+
+3. Install PythonVideoAnnotator from Pypi:
 ```
-conda install wget
-wget https://raw.githubusercontent.com/UmSenhorQualquer/pythonVideoAnnotator/master/environment-macosx.yml --no-check-certificate
-conda env create -f environment-macosx.yml
-source activate videoannotator
+pip install python-video-annotator
 ```
 
-- Activate the environment, download the source code and install it:
+How to run:
 
 ```
-git clone --recursive https://github.com/UmSenhorQualquer/pythonVideoAnnotator.git
-cd pythonVideoAnnotator
-python install.py
+start-video-annotator
 ```
 
-- Execute the code:
+### For developers:
 
-```
-python -m pythonvideoannotator
-```
-
-### Run
-
-In the Video Annotator folder in the Terminal run:
-
-for mac:
-```
-source activate videoannotator
-python -m pythonvideoannotator
-```
-for windows:
-```
-activate videoannotator
-python -m pythonvideoannotator
-```
+[Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/install_and_run.html#for-developers)
 
 
-### Collaboration
+## Collaboration
 
 This project was initially developed in collaboration with the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) to correct the result of a Computer Vision software to track flies in an arena

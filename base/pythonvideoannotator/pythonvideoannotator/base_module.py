@@ -137,7 +137,9 @@ class BaseModule(BaseWidget):
 
 	def __open_project_event(self): self.load_project()
 
-	def __save_project_event(self): self.save_project(self._project.directory)
+	def __save_project_event(self):
+		print('Project saved')
+		self.save_project(self._project.directory)
 
 	def __save_project_as_event(self): self.save_project()
 	
@@ -147,6 +149,8 @@ class BaseModule(BaseWidget):
 		"""
 		if event.key() == QtCore.Qt.Key_Space:
 			self._player.stop() if self._player.is_playing else _player._video.play()
+
+
 		
 
 

@@ -10,7 +10,8 @@
 	:caption: Getting Started
    
 	Introduction <self>
-	user-docs/install_and_run/install_and_run
+	user-docs/install_and_run/index
+	user-docs/update/index
 
 .. toctree::
 	:hidden:
@@ -20,6 +21,7 @@
 
 	user-docs/howto/index
 	user-docs/timeline/index
+	user-docs/shortcuts/index
 
 .. toctree::
 	:hidden:

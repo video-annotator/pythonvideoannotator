@@ -51,3 +51,5 @@ wheels/
 *.egg-info/
 *.egg
 test-project/
+
+base/pythonvideoannotator/pythonvideoannotator/trackingsettings\.txt

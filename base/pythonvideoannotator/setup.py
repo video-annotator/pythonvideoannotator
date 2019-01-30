@@ -4,9 +4,14 @@
 from setuptools import setup, find_packages
 import re
 
+with open('pythonvideoannotator/__init__.py', 'r') as fd:
+    content = fd.read()
+    version = re.search(
+        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', content, re.MULTILINE).group(1)
+
 setup(
     name='Python video annotator',
-    version="0.5.1",
+    version=version,
     description="""""",
     author=['Ricardo Ribeiro'],
     author_email='ricardojvr@gmail.com',

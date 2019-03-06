@@ -25,7 +25,7 @@ setup(
         'sklearn',
         'confapp',
         'logging-bootstrap',
-        'pyforms-gui==4.1',
+        'pyforms-gui',
         'mcv-gui==0.1',
         'geometry-designer==0.1',
         'modular-computer-vision-api==0.1',

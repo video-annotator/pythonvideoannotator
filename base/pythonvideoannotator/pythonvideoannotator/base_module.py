@@ -1,6 +1,8 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
 import pypi_xmlrpc
+import pip, sys, subprocess
+
 from .__init__ import __version__
 from pyforms.basewidget import BaseWidget
 
@@ -74,18 +76,27 @@ class BaseModule(BaseWidget):
                 version_numbers = [int(x) for x in __version__.split('.')]
                 for new_n, n in zip(new_version_numbers, version_numbers):
                     if new_n > n:
-                        self.message(
+                        response = self.question(
                             "<h2>New version <b>[{0}]</b> available</h2>"
-                            "<p>To update the software run the next command in the terminal:</p>"
-                            "<i>pip install python-video-annotator --upgrade</i>".format(new_version),
+                            "<p>Do you wish to update the software?</p>"
+                            "<p>The software can be updated later by running the next command in the terminal:</p>"
+                            "<i>pip install python-video-annotator --force-reinstall</i>".format(new_version),
                             'New version [{0}]'.format(new_version)
                         )
+
+                        if response == 'yes':
+                            #subprocess.call([sys.executable, "-m", "pip", "install", 'python-video-annotator', '--force-reinstall'])
+                            subprocess.call(
+                                [sys.executable, "-m", "pip", "install", 'django', '--force-reinstall'])
+
+                            self.message('The software was updated and this session will be closed. Please execute the software again.', 'Restart required')
+                            exit()
                         break
             else:
                 print('Enabled to check new versions')
 
-        except:
-            print('Enabled to check new versions')
+        except Exception as e:
+            print('Enabled to check new versions:')
 
 
 

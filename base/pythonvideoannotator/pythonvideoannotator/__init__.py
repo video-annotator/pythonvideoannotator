@@ -1,7 +1,7 @@
 # !/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-__version__ 	= "2.5.7"
+__version__ 	= "2.5.9"
 __author__ 		= ["Ricardo Ribeiro", "Carlos Mao de Ferro", "Hugo Cachitas"]
 __credits__ 	= ["Ricardo Ribeiro", "Carlos Mao de Ferro", "Hugo Cachitas"]
 __license__ 	= "Attribution-NonCommercial-ShareAlike 4.0 International"

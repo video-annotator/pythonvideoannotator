@@ -14,7 +14,7 @@ __________________________________________
 
 |
 
-- Space: Play / Pause video.
+- **Space**: Play / Pause video.
 
 More short keys here ControlTimeline_.
 

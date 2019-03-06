@@ -7,9 +7,20 @@ Timeline
 
 .. image:: /_static/timeline/timeline.png
 	:align: center
+|
+
+Short keys
+__________________________________________
 
 |
 
+- Space: Play / Pause video.
+
+More short keys here ControlTimeline_.
+
+.. _ControlTimeline: https://pyforms-gui.readthedocs.io/en/v4/api-reference/controls.html#controleventtimeline
+
+|
 
 The timeline events
 __________________________________________

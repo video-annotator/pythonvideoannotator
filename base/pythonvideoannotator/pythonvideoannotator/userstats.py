@@ -62,7 +62,7 @@ def get_num_user():
 def user_stats_question():
 
     title = "User tracking"
-    msg = "Do you give us permission to track what country you are from and how many times you use this application? (We will not track your IP)"
+    msg = "Do you give us permission to track what country you are from and how many times you use this application? This will contribute to the support of this software."
     
     btns = QMessageBox.Yes | QMessageBox.No | QMessageBox.NoRole
 

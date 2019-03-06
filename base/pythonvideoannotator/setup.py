@@ -19,6 +19,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'simplejson',
+        'pypi-xmlrpc',
         'pyforms-gui',
         'send2trash',
         'scipy',

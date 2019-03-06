@@ -1,11 +1,10 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
-import os, AnyQt
-from confapp import conf
+import pypi_xmlrpc
+from __init__ import __version__
 from pyforms.basewidget import BaseWidget
 
 from pyforms.controls import ControlPlayer
-from pyforms.controls import ControlFile
 from pyforms.controls import ControlEventTimeline
 from pyforms.controls import ControlDockWidget
 
@@ -14,10 +13,12 @@ from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
 
 from .userstats import track_user_stats
 
+from confapp import conf
 if conf.PYFORMS_MODE=='GUI':
-    from AnyQt import QtGui, QtCore 
+    from AnyQt import QtCore
     from AnyQt.QtWidgets import QApplication, QFileDialog, QMessageBox
     
+
 
 def Exit(): exit()
 
@@ -29,10 +30,10 @@ class BaseModule(BaseWidget):
         conf += 'pythonvideoannotator.resources'  # Resources can only be loaded after pyqt is running
 
         super(BaseModule, self).__init__('Video annotation editor')
-        
+
         self._project  = Project(parent=self)
         Dialog.project = self._project
-        
+
         self._player    = ControlPlayer("Player")
         self._time      = ControlEventTimeline('Time')
         self._dock      = ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
@@ -53,13 +54,38 @@ class BaseModule(BaseWidget):
                 {'Save': self.__save_project_event , 'icon': conf.ANNOTATOR_ICON_SAVE},
                 {'Save as': self.__save_project_as_event, 'icon': conf.ANNOTATOR_ICON_SAVE},
                 '-',
-                {'Exit': QApplication.closeAllWindows, 'icon': conf.ANNOTATOR_ICON_EXIT} 
-            ] }         
+                {'Exit': QApplication.closeAllWindows, 'icon': conf.ANNOTATOR_ICON_EXIT}
+            ] }
         )
         self.mainmenu.insert(1, {'Modules': []} )
         self.mainmenu.insert(2, {'Windows': []} )
 
         track_user_stats()
+
+        ########################################################################
+        ###### CHECK NEW VERSIONS RELEASES #####################################
+        ########################################################################
+        try:
+            versions = pypi_xmlrpc.package_releases('Python-video-annotator')
+
+            if versions is not None:
+                new_version = versions[0]
+                new_version_numbers = [int(x) for x in new_version.split('.')]
+                version_numbers = [int(x) for x in __version__.split('.')]
+                for new_n, n in zip(new_version_numbers, version_numbers):
+                    if new_n > n:
+                        self.message(
+                            "<h2>New version <b>[{0}]</b> available</h2>"
+                            "<p>To update the software run the next command in the terminal:</p>"
+                            "<i>pip install python-video-annotator --upgrade</i>".format(new_version),
+                            'New version [{0}]'.format(new_version)
+                        )
+                        break
+            else:
+                print('Enabled to check new versions')
+
+        except:
+            print('Enabled to check new versions')
 
 
 

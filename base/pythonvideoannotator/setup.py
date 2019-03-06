@@ -24,7 +24,6 @@ setup(
         'scipy',
         'sklearn',
         'confapp',
-        'logging-bootstrap',
         'pyforms-gui',
         'mcv-gui==0.1',
         'geometry-designer==0.1',

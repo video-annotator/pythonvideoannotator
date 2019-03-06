@@ -21,5 +21,3 @@ except:
 	pass
 ####################################################
 ####################################################
-
-import logging, loggingbootstrap; loggingbootstrap.create_double_logger("pyforms", logging.DEBUG, 'pythonvideoannotator.log',logging.DEBUG)

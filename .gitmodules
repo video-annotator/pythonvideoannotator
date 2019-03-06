@@ -55,9 +55,6 @@
 [submodule "plugins/pythonvideoannotator-module-virtualobjectgenerator"]
 	path = plugins/pythonvideoannotator-module-virtualobjectgenerator
 	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-virtualobjectgenerator.git
-[submodule "libraries/logging-bootstrap"]
-	path = libraries/logging-bootstrap
-	url = https://bitbucket.org/fchampalimaud/logging-bootstrap.git
 [submodule "libraries/pyforms-gui"]
 	path = libraries/pyforms-gui
 	url = https://github.com/UmSenhorQualquer/pyforms-gui.git

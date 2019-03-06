@@ -1,7 +1,7 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
 import pypi_xmlrpc
-from __init__ import __version__
+from .__init__ import __version__
 from pyforms.basewidget import BaseWidget
 
 from pyforms.controls import ControlPlayer

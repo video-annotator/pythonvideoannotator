@@ -50,6 +50,15 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 
 		os.chdir(dir_path)
 
+		try:
+			shutil.rmtree(os.path.join(dir_path, 'build'))
+		except Exception as e:
+			print(e)
+		try:
+			shutil.rmtree(os.path.join(dir_path, 'dist'))
+		except Exception as e:
+			print(e)
+
 		version = Popen(["python", setup_filepath, '--version'], stdout=PIPE).stdout.read()
 		version = version.strip().decode()
 		

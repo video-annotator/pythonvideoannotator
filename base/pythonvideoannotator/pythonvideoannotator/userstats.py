@@ -2,7 +2,7 @@ import json, urllib.request, os, AnyQt
 from uuid import getnode as get_mac
 from AnyQt.QtWidgets import QApplication, QFileDialog, QMessageBox
 
-USERSTATS_URL="http://34.250.45.38:7999/userstats/"
+USERSTATS_URL="http://stats.cf-sw.org/userstats/"
 
 
 def user_file_exists():
@@ -125,5 +125,5 @@ def register_new_access():
 
         urllib.request.urlopen("{}/register/{}".format(USERSTATS_URL, num_user))
 
-    except:
-        print("Could not register new access")
+    except Exception as e:
+        print("Could not register new access", e)

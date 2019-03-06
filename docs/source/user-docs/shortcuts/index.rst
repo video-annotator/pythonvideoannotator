@@ -1,8 +1,8 @@
 .. _shortcuts-label:
 
-************
-Shortcuts
-************
+***************
+Shortcuts keys
+***************
 
 This is a list of useful shortcuts for the application.
 
@@ -17,27 +17,10 @@ These shortcuts can only be used if you have the timeline widget selected, meani
 
 - **Space** - Stops/Starts the video
 
-- **A** - Moves backward 1 frame
+More short keys here ControlTimeline_.
 
-- **D** - Moves forward 1 frame
+.. _ControlTimeline: https://pyforms-gui.readthedocs.io/en/v4/api-reference/controls.html#controleventtimeline
 
-- **S** - Starts creating an event with the current frame as the start frame. You can then use **D** to keep moving forward 1 frame at a time, and then press **S** again to set the end frame for the event and create it.
-
-- **Z** - Moves backward 20 seconds
-
-- **C** - Moves forward 20 seconds
-
-- **Delete** - Deletes the currently selected event
-
-- **L** - Locks/Unlocks the currently selected event
-
-- **Left Arrow** - Moves the timeline window to the left
-
-- **Right Arrow** - Moves the timeline window to the right
-
-- **Up Arrow** - Moves the timeline window up
-
-- **Down Arrow** - Moves the timeline window down
 
 
 ---------------

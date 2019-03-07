@@ -85,9 +85,7 @@ class BaseModule(BaseWidget):
                         )
 
                         if response == 'yes':
-                            #subprocess.call([sys.executable, "-m", "pip", "install", 'python-video-annotator', '--force-reinstall'])
-                            subprocess.call(
-                                [sys.executable, "-m", "pip", "install", 'django', '--force-reinstall'])
+                            subprocess.call([sys.executable, "-m", "pip", "install", 'python-video-annotator', '--force-reinstall'])
 
                             self.message('The software was updated and this session will be closed. Please execute the software again.', 'Restart required')
                             exit()

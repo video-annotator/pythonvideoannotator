@@ -6,7 +6,6 @@ from subprocess import call
 
 SUBMODULES_FOLDERS = [
     os.path.join('..','libraries','geometry-designer'),
-    os.path.join('..','libraries','logging-bootstrap'),
     os.path.join('..','libraries','mcv-api'),
     os.path.join('..','libraries','mcv-gui'),
     os.path.join('..','libraries','mcv-gui-editor'),
@@ -28,8 +27,9 @@ SUBMODULES_FOLDERS = [
     os.path.join('..','plugins','pythonvideoannotator-module-timeline'),
     os.path.join('..','plugins','pythonvideoannotator-module-tracking'),
     os.path.join('..','plugins','pythonvideoannotator-module-virtualobjectgenerator'),
-    os.path.join('..','plugins','pythonvideoannotator-module-pathmap')
-    ]
+    os.path.join('..','plugins','pythonvideoannotator-module-pathmap'),
+    os.path.join('..','plugins','pythonvideoannotator-module-idtrackerai')
+]
 
 
 

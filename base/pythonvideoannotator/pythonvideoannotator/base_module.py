@@ -9,6 +9,7 @@ from pyforms.basewidget import BaseWidget
 from pyforms.controls import ControlPlayer
 from pyforms.controls import ControlEventTimeline
 from pyforms.controls import ControlDockWidget
+from pyforms.controls import ControlProgress
 
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
@@ -39,8 +40,9 @@ class BaseModule(BaseWidget):
         self._player    = ControlPlayer("Player")
         self._time      = ControlEventTimeline('Time')
         self._dock      = ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
+        self._progress  = ControlProgress('Progress', visible=False)
 
-        self.formset    = ['_player']
+        self.formset    = ['_player', '_progress']
 
         self._dock.value                    = self._time
         self._player.process_frame_event    = self.process_frame_event

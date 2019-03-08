@@ -53,3 +53,7 @@ wheels/
 test-project/
 
 base/pythonvideoannotator/pythonvideoannotator/trackingsettings\.txt
+
+base/pythonvideoannotator/pythonvideoannotator/\.track\.cnf
+
+\.idea/

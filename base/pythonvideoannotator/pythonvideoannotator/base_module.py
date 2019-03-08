@@ -151,7 +151,7 @@ class BaseModule(BaseWidget):
         """
         Code to select a blob with the mouse
         """
-        super(VideoAnnotationEditor, self).on_player_click_event(event, x, y)
+        super().on_player_click_event(event, x, y)
         self._player.refresh()
 
     def process_frame_event(self, frame):

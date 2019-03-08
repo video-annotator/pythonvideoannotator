@@ -1,129 +1,95 @@
-import json, urllib.request, os, AnyQt
+import os, time, datetime
 from uuid import getnode as get_mac
-from AnyQt.QtWidgets import QApplication, QFileDialog, QMessageBox
+from AnyQt.QtWidgets import QMessageBox
 
-USERSTATS_URL="http://stats.cf-sw.org/userstats/"
+from confapp import conf
+from .__init__ import __version__
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 
-def user_file_exists():
-    return os.path.isfile(os.path.join(os.path.dirname(os.path.realpath(__file__)),"trackingsettings.txt"))
 
-
-def user_allowed_tracking():
+def get_usage_track_conf():
     try:
-        filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),"trackingsettings.txt")
-        num_user = open(filename).read().splitlines()[0]
+        filepath = os.path.join(
+            os.path.dirname(
+                os.path.realpath(__file__)
+            ),
+            '.track.cnf'
+        )
 
-        if num_user!=str(-1):
-            return True
-        else:
-            return False
-    except:
-        return False
+        modified = datetime.datetime.fromtimestamp(os.path.getmtime(filepath))
+        now = datetime.datetime.now()
 
+        if (now - modified).total_seconds() > conf.USERSTATS_TIMEOUT_DAYS*60*24:
+            return 'ask later'
 
-def mac_address_matches():
-    try:
-        filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),"trackingsettings.txt")
-        mac_address = open(filename).read().splitlines()[1]
-
-        if mac_address==str(get_mac()):
-            return True
-        else:
-            return False
-    except:
-        return False
-
-
-def create_user_file(num_user):
-    try:
-        filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),"trackingsettings.txt")
-        s=open(filename, "w")
-
-        s.write(str(num_user)+"\n")
-        s.write(str(get_mac())+"\n")
-
-        s.close()
-
-    except:
-        return False
-
-def get_num_user():
-    try:
-        filename = os.path.join(os.path.dirname(os.path.realpath(__file__)),"trackingsettings.txt")
-        num_user = open(filename).read().splitlines()[0]
-
-        return num_user
-
-    except:
-        return -1
-
-
-def user_stats_question():
-
-    title = "User tracking"
-    msg = "Do you give us permission to track what country you are from and how many times you use this application? This will contribute to the support of this software."
-    
-    btns = QMessageBox.Yes | QMessageBox.No | QMessageBox.NoRole
-
-    m = QMessageBox(QMessageBox.Question, title, msg, btns)
-    ask_later_button = m.addButton("Ask me later", QMessageBox.NoRole)
-    m.setEscapeButton(ask_later_button)
-
-    reply = m.exec_()
-    
-    if reply==QMessageBox.No:   
-        return 'no'
-    elif reply==QMessageBox.Yes:  
-        return 'yes'
-    elif reply==QMessageBox.NoButton:
+        with open(filepath, "r") as infile:
+            return infile.read()
+    except Exception as e:
+        print(e)
         return 'ask later'
 
+def set_usage_track_conf(config):
+    """
+    Configure the usage track type.
+    :param str config: Configuration ( it can be 'track','ask-later' or 'no-track'.
+    :return:
+    """
+    try:
+        filepath = os.path.join(
+            os.path.dirname(
+                os.path.realpath(__file__)
+            ),
+            '.track.cnf'
+        )
+        with open(filepath, "w") as outfile:
+            outfile.write(config)
+
+    except:
+        pass
 
 
 def track_user_stats():
 
-    if user_file_exists():
+    reply = get_usage_track_conf()
 
-        if mac_address_matches():
+    if reply=='ask later':
 
-            if user_allowed_tracking():
+        m = QMessageBox(
+            QMessageBox.Question,
+            "User tracking",
+            "Do you give us permission to track what country you are from and how many times you use this application? " \
+            "This will contribute to the support of this software.",
+            QMessageBox.Yes | QMessageBox.No | QMessageBox.NoRole
+        )
+        ask_later_btn = m.addButton("Ask me later", QMessageBox.NoRole)
+        m.setEscapeButton(ask_later_btn)
+        reply = m.exec_()
 
-                register_new_access()
-            
-            return
+        if reply == QMessageBox.No:
+            set_usage_track_conf('no-track')
 
-    answer=user_stats_question()
+        elif reply == QMessageBox.Yes:
+            set_usage_track_conf('track')
+            reply = 'track'
 
-    if answer=='yes':
-        num_user=register_new_user()
-        create_user_file(num_user)
+        elif reply == QMessageBox.NoButton:
+            set_usage_track_conf('ask later')
 
-    elif answer=='no':
-        create_user_file(-1)
+    if reply=='track':
+        register_access()
 
-    elif answer=='ask later':
-        pass
 
-    return
-    
-
-def register_new_user():
+def register_access():
     try:
-        num_user = json.loads(urllib.request.urlopen("{}/register".format(USERSTATS_URL)).read().decode())
-        return num_user
+        app_id  = conf.USERSTATS_APP_ID
+        reg_id  = get_mac()
+        version = __version__
 
-    except:
-        print("Could not register new user")
-
-def register_new_access():
-    try:
-        num_user = get_num_user()
-
-        if num_user==-1:
-            raise Exception
-
-        urllib.request.urlopen("{}/register/{}".format(USERSTATS_URL, num_user))
-
+        data = {'app-id': app_id, 'reg-id': reg_id, 'version': version}
+        url = "{}/register".format(conf.USERSTATS_URL)
+        request = Request(url, urlencode(data).encode())
+        urlopen(request).read().decode()
     except Exception as e:
         print("Could not register new access", e)

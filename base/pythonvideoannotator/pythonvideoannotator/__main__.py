@@ -1,7 +1,7 @@
 # !/usr/bin/python2
 # -*- coding: utf-8 -*-
 
-import logging, traceback, pythonvideoannotator, sys
+import logging, traceback, pythonvideoannotator, sys, platform
 
 from confapp import conf
 from urllib.parse import urlencode
@@ -61,9 +61,10 @@ def start():
 			try:
 				app_id = conf.USERSTATS_APP_ID
 				reg_id = get_mac()
+				os_name = platform.platform()
 				version = pythonvideoannotator.__version__
 
-				data = {'app-id': app_id, 'reg-id': reg_id, 'version': version, 'report': report}
+				data = {'app-id': app_id, 'reg-id': reg_id, 'os-name' : os_name, 'version': version, 'report': report}
 				url = "{}/register-bug".format(conf.USERSTATS_URL)
 				request = Request(url, urlencode(data).encode())
 				urlopen(request).read().decode()

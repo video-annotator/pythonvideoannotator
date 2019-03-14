@@ -1,4 +1,4 @@
-import os, time, datetime
+import os, time, datetime, platform
 from uuid import getnode as get_mac
 from AnyQt.QtWidgets import QMessageBox
 
@@ -85,9 +85,10 @@ def register_access():
     try:
         app_id  = conf.USERSTATS_APP_ID
         reg_id  = get_mac()
+        os_name = platform.platform()
         version = __version__
 
-        data = {'app-id': app_id, 'reg-id': reg_id, 'version': version}
+        data = {'app-id': app_id, 'reg-id': reg_id, 'os-name' : os_name ,'version': version}
         url = "{}/register".format(conf.USERSTATS_URL)
         request = Request(url, urlencode(data).encode())
         urlopen(request).read().decode()

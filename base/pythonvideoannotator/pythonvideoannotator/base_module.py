@@ -107,8 +107,10 @@ class BaseModule(BaseWidget):
     def init_form(self):
         super(BaseModule, self).init_form()
 
-        if conf.CHART_FILE_PATH: self._time.import_chart(*conf.CHART_FILE_PATH)
-        if conf.PROJECT_PATH:    self.load_project(conf.PROJECT_PATH)
+        if conf.CHART_FILE_PATH:
+            self._time.import_chart(*conf.CHART_FILE_PATH)
+        if conf.VIDEOANNOTATOR_PROJECTPATH:
+            self.load_project(conf.VIDEOANNOTATOR_PROJECTPATH)
 
 
     ######################################################################################
@@ -141,7 +143,9 @@ class BaseModule(BaseWidget):
         if project_path is None:
             project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
         if project_path is not None and str(project_path)!='':
+
             self.load({}, str(project_path) )
+            print('open project', project_path)
 
 
 

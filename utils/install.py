@@ -4,7 +4,7 @@
 import pip, os
 from subprocess import call
 
-SUBMODULES_FOLDERS = [
+SUBVIDEOANNOTATOR_MODULES_FOLDERS = [
     os.path.join('..','libraries','geometry-designer'),
     os.path.join('..','libraries','mcv-api'),
     os.path.join('..','libraries','mcv-gui'),
@@ -34,7 +34,7 @@ SUBMODULES_FOLDERS = [
 
 
 def install():
-    for submodule in SUBMODULES_FOLDERS:
+    for submodule in SUBVIDEOANNOTATOR_MODULES_FOLDERS:
         call(['pip', 'install', '-e', os.path.join(submodule,'.')])
 
 if __name__=='__main__': 

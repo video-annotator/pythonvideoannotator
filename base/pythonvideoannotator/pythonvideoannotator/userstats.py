@@ -59,7 +59,7 @@ def track_user_stats():
         m = QMessageBox(
             QMessageBox.Question,
             "User tracking",
-            "Do you give us permission to track what country you are from and how many times you use this application? " \
+            "Do you give us permission to track which country you are from and how many times you use this application? " \
             "This will contribute to the support of this software.",
             QMessageBox.Yes | QMessageBox.No | QMessageBox.NoRole
         )

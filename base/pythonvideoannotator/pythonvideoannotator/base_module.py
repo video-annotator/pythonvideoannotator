@@ -186,6 +186,19 @@ class BaseModule(BaseWidget):
         if event.key() == QtCore.Qt.Key_Space:
             self._player.stop() if self._player.is_playing else _player._video.play()
 
+    def keyReleaseEvent(self, event):
+
+        if event.key() == QtCore.Qt.Key_L:
+            # objeto que esta escolhido
+            obj = self.project.tree.selected_item.win
+            """
+            if obj is video:
+                #escolher path do primeiro objeto
+            elif obj is objeto:
+                #escolher path do objeto seguinte se existir
+            """
+                
+
 
 
     ######################################################################################

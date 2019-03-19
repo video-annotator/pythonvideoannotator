@@ -62,5 +62,6 @@ MODULES += 'pythonvideoannotator_module_regionsfilter'
 MODULES += 'pythonvideoannotator_module_tracking'
 MODULES += 'pythonvideoannotator_module_timeline'
 MODULES += 'pythonvideoannotator_module_patheditor'
+MODULES += 'pythonvideoannotator_module_pathmap'
 MODULES += 'pythonvideoannotator_module_deeplab'
 

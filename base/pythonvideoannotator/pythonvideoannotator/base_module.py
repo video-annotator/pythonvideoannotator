@@ -12,6 +12,7 @@ from pyforms.controls import ControlDockWidget
 
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
+from pythonvideoannotator_models.models.video.objects.object2d.datasets.path import Path
 
 from .userstats import track_user_stats
 
@@ -188,16 +189,35 @@ class BaseModule(BaseWidget):
 
     def keyReleaseEvent(self, event):
 
+        #Select the path of the next object
         if event.key() == QtCore.Qt.Key_L:
-            # objeto que esta escolhido
-            obj = self.project.tree.selected_item.win
-            """
-            if obj is video:
-                #escolher path do primeiro objeto
-            elif obj is objeto:
-                #escolher path do objeto seguinte se existir
-            """
-                
+
+            selected = self.project.tree.selected_item
+
+            if isinstance(selected.win, Path):
+
+                parent_object = selected.parent()
+                parent_video = parent_object.parent()
+
+                parent_object_index = parent_video.indexOfChild(parent_object)
+
+                if parent_object_index < parent_video.childCount() -1 :
+                    next_object = parent_video.child(parent_video.indexOfChild(parent_object)+1)
+
+                    if next_object.childCount() > 0:
+                        next_path = next_object.child(0)
+                        self.project.tree.selected_item = next_path
+
+        #"Click" the Mark Point button in the current Path
+        elif event.key() == QtCore.Qt.Key_K:
+
+            selected = self.project.tree.selected_item
+
+            if isinstance(selected.win, Path):
+                path = selected.win
+
+                path.mark_point_button.click()
+
 
 
 

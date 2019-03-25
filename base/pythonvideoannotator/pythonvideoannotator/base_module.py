@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import pypi_xmlrpc
 import pip, sys, subprocess
+from AnyQt.QtCore import QTimer
 
 from .__init__ import __version__
 from pyforms.basewidget import BaseWidget
@@ -48,6 +49,7 @@ class BaseModule(BaseWidget):
         self._player.process_frame_event    = self.process_frame_event
         self._player.click_event            = self.on_player_click_event
         self._time.key_release_event        = self.__timeline_key_release_event
+
 
         self.load_order = []
 
@@ -98,6 +100,9 @@ class BaseModule(BaseWidget):
         except Exception as e:
             print('Enabled to check new versions:')
 
+    def keyReleaseEvent(self, evt):
+        super().keyReleaseEvent(evt)
+        self._player.key_release_evt(evt)
 
 
     ######################################################################################
@@ -111,6 +116,10 @@ class BaseModule(BaseWidget):
             self._time.import_chart(*conf.CHART_FILE_PATH)
         if conf.VIDEOANNOTATOR_PROJECTPATH:
             self.load_project(conf.VIDEOANNOTATOR_PROJECTPATH)
+
+        if len(sys.argv)>1:
+            QTimer.singleShot(1000, self.__load_project_from_argv)
+
 
 
     ######################################################################################
@@ -142,10 +151,9 @@ class BaseModule(BaseWidget):
     def load_project(self, project_path=None):
         if project_path is None:
             project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
-        if project_path is not None and str(project_path)!='':
 
+        if project_path is not None and str(project_path)!='':
             self.load({}, str(project_path) )
-            print('open project', project_path)
 
 
 
@@ -190,13 +198,18 @@ class BaseModule(BaseWidget):
         Control video playback using the space bar to Play/Pause
         """
         if event.key() == QtCore.Qt.Key_Space:
-            self._player.stop() if self._player.is_playing else _player._video.play()
+            self._player.stop() if self._player.is_playing else self._player._video.play()
 
-
+    def __load_project_from_argv(self):
+        self.load_project(sys.argv[-1])
 
     ######################################################################################
     #### PROPERTIES ######################################################################
     ######################################################################################
+
+    @property
+    def progress_bar(self):
+        return self._progress
 
     @property
     def timeline(self): return self._time

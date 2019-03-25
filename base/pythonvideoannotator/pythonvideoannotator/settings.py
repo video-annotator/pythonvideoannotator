@@ -50,7 +50,7 @@ PYFORMS_STYLESHEET 			= os.path.join( os.path.dirname(__file__), 'resources','th
 
 VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_importexport'
 VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_virtualobjectgenerator'
-#VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_idtrackerai'
+VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_idtrackerai'
 VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_findorientation'
 VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_motioncounter'
 VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_distances'

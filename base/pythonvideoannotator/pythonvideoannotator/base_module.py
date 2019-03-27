@@ -11,6 +11,7 @@ from pyforms.controls import ControlPlayer
 from pyforms.controls import ControlEventTimeline
 from pyforms.controls import ControlDockWidget
 from pyforms.controls import ControlProgress
+from pyforms.controls import ControlButton
 
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
@@ -42,6 +43,12 @@ class BaseModule(BaseWidget):
         self._time      = ControlEventTimeline('Time')
         self._dock      = ControlDockWidget("Timeline", side='bottom', order=1, margin=5)
         self._progress  = ControlProgress('Progress', visible=False)
+
+        # define the application toolbar
+        self.toolbar = [
+            ControlButton('Open', icon=conf.ANNOTATOR_ICON_OPEN, default=self.__open_project_event),
+            ControlButton('Save', icon=conf.ANNOTATOR_ICON_SAVE, default=self.__save_project_event)
+        ]
 
         self.formset    = ['_player', '_progress']
 
@@ -102,7 +109,7 @@ class BaseModule(BaseWidget):
 
     def keyReleaseEvent(self, evt):
         super().keyReleaseEvent(evt)
-        self._player.key_release_evt(evt)
+        self._player.key_release_event(evt)
 
 
     ######################################################################################

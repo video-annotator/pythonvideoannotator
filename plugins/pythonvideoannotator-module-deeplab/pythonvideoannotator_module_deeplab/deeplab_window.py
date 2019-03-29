@@ -9,7 +9,7 @@ from pyforms_gui.controls.control_file import ControlFile
 
 from os import listdir
 from os.path import isfile, join, splitext, abspath, dirname
-
+import csv
 #from deeplabcut import extract_frames
 
 import re, yaml
@@ -44,6 +44,11 @@ class DeepLabWindow(BaseWidget):
         self.setMinimumHeight(400)
         self.setMinimumWidth(800)
 
+        self.scorer = ""
+        self.videos = []
+        self.bodyparts = []
+        self.crop = []
+
     ###########################################################################
     ### EVENTS ################################################################
     ###########################################################################
@@ -60,14 +65,16 @@ class DeepLabWindow(BaseWidget):
                 return
 
         self.scorer = dict_yaml.get("scorer")
-        self.videos = dict_yaml.get("video_sets").keys()
+        videos = dict_yaml.get("video_sets").keys()
         self.bodyparts = dict_yaml.get("bodyparts")
         self.crop = dict_yaml.get("crop")
 
-        for video in self.videos:
+        for video in videos:
 
             v = self.mainwindow.project.create_video()
             v.filepath = abspath(video)
+
+            self.videos.append(v)
 
             for part in self.bodyparts:
                 obj = v.create_object()
@@ -77,7 +84,6 @@ class DeepLabWindow(BaseWidget):
             track = self.mainwindow.timeline.add_track(title=v.name)
 
 
-            """
             extract_frames(config_path, userfeedback=False)
     
             frames_directory = join(abspath(dirname(config_path)), "labeled-data", v.name)
@@ -85,14 +91,20 @@ class DeepLabWindow(BaseWidget):
             frames = self.get_frames_from_directory_with_images(frames_directory)
             for frame in frames:
                 self.mainwindow.timeline.add_event(begin=frame, end=frame+1, track=track)
-            """
 
 
     def __exportToCSVFile(self):
 
         for video in self.videos:
-            #export paths
-            pass
+            with open('res.csv', mode='w') as res:
+                writer = csv.writer(res, delimiter=',')
+
+                columns = self.bodyparts*2 + 1
+
+                currentRow = []
+
+
+
 
     ###########################################################################
     ### HELPER FUNCTIONS ######################################################

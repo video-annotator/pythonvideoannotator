@@ -194,7 +194,7 @@ class BaseModule(BaseWidget):
 
             selected = self.project.tree.selected_item
 
-            if isinstance(selected.win, Path):
+            if selected is not None and isinstance(selected.win, Path):
 
                 parent_object = selected.parent()
                 parent_video = parent_object.parent()
@@ -213,7 +213,7 @@ class BaseModule(BaseWidget):
 
             selected = self.project.tree.selected_item
 
-            if isinstance(selected.win, Path):
+            if selected is not None and isinstance(selected.win, Path):
                 path = selected.win
 
                 path.mark_point_button.click()

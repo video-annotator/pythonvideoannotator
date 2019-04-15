@@ -7,10 +7,13 @@ from pyforms_gui.controls.control_text import ControlText
 from pyforms_gui.controls.control_dir import ControlDir
 from pyforms_gui.controls.control_file import ControlFile
 
+from pythonvideoannotator_models.models.video.objects.object2d.datasets.path import Path
+from pythonvideoannotator_models.models.video import Video
+
 from os import listdir
-from os.path import isfile, join, splitext, abspath, dirname
+from os.path import isfile, join, splitext, abspath, dirname, basename
 import csv
-#from deeplabcut import extract_frames
+import deeplabcut
 
 import re, yaml
 
@@ -44,10 +47,10 @@ class DeepLabWindow(BaseWidget):
         self.setMinimumHeight(400)
         self.setMinimumWidth(800)
 
-        self.scorer = ""
-        self.videos = []
-        self.bodyparts = []
-        self.crop = []
+        self._scorer = ""
+        self._videos = []
+        self._bodyparts = []
+        self._crop = []
 
     ###########################################################################
     ### EVENTS ################################################################
@@ -65,26 +68,32 @@ class DeepLabWindow(BaseWidget):
                 return
 
         self.scorer = dict_yaml.get("scorer")
-        videos = dict_yaml.get("video_sets").keys()
+        self.videos = dict_yaml.get("video_sets")
         self.bodyparts = dict_yaml.get("bodyparts")
         self.crop = dict_yaml.get("crop")
 
-        for video in videos:
+        if len(self.videos) != len(set(self.videos)):
+            print("Two videos can't have the same name!")
+            return
+
+        if len(self.bodyparts) != len(set(self.bodyparts)):
+            print("Two bodyparts can't have the same name!")
+            return
+
+        for video in self.videos.keys():
 
             v = self.mainwindow.project.create_video()
             v.filepath = abspath(video)
-
-            self.videos.append(v)
 
             for part in self.bodyparts:
                 obj = v.create_object()
                 obj.name = part
                 obj.create_path()
-
+            
+            #adds the pair video and track to the videos dictionary
             track = self.mainwindow.timeline.add_track(title=v.name)
 
-
-            extract_frames(config_path, userfeedback=False)
+            deeplabcut.extract_frames(config_path, userfeedback=False)
     
             frames_directory = join(abspath(dirname(config_path)), "labeled-data", v.name)
     
@@ -95,15 +104,96 @@ class DeepLabWindow(BaseWidget):
 
     def __exportToCSVFile(self):
 
-        for video in self.videos:
-            with open('res.csv', mode='w') as res:
-                writer = csv.writer(res, delimiter=',')
+        video_names = []
+        for video_path in self.videos.keys():
+            video_names.append(splitext(basename(video_path))[0])
+    
+        for video in self.mainwindow.project.videos:
 
-                columns = self.bodyparts*2 + 1
+            if video.name not in video_names:
+                continue
 
+            csv_file_name = "res" + video.name + ".csv"
+            with open(csv_file_name, mode='w') as csv_file:
+
+                writer = csv.writer(csv_file, delimiter=',')
+
+                # write row with the name of the scorer(person labeling the frames)
                 currentRow = []
+                currentRow.append("scorer")
+                for _ in range(len(self.bodyparts)*2):
+                    currentRow.append(self.scorer)
+                writer.writerow(currentRow)
 
 
+                # write row with the name of the bodyparts
+                currentRow = []
+                currentRow.append("bodyparts")
+                for bodypart in self.bodyparts:
+                    currentRow.append(bodypart)
+                    currentRow.append(bodypart)
+                writer.writerow(currentRow)
+
+
+                # write row with just x and y
+                currentRow = []
+                currentRow.append("coords")
+                for _ in range((len(self.bodyparts))):
+                    currentRow.append("x")
+                    currentRow.append("y")
+                writer.writerow(currentRow)
+
+
+                #order the video objects to match the order of the bodyparts
+                ordered_objects = []
+                for bodypart in self.bodyparts:
+                    for obj in video.objects:
+                        if obj.name==bodypart:
+                            ordered_objects.append(obj)
+                            break
+
+                print(len(ordered_objects))
+
+                #write the coords of each bodypart for every labeled frame
+                track = self.mainwindow.timeline.get_track(video.name)
+                if track==None:
+                    print("No track was found with the name: "+ video.name)
+                    print("Stopped exporting to CSV file")
+                    return
+
+                for event in track.events:
+                    currentRow = []
+
+                    frame=event.begin
+                    currentRow.append("labeled-data/"+video.name+"/img"+str(frame)+".png")
+
+                    for obj in ordered_objects:
+                        for path in obj.paths:
+
+                            data = path.data
+
+                            if data[frame] is not None:
+                                currentRow.append(data[frame][0])
+                                currentRow.append(data[frame][1])
+
+                            break #there should only be one path for each object
+                        
+                        else:
+                            print("Object has no path")
+
+                    writer.writerow(currentRow)
+
+    
+    def save_form(self, data, folder):
+
+        return {"scorer" : self.scorer, "videos" : self.videos, "bodyparts" : self.bodyparts, "crop" : self.crop}
+
+    def load_form(self, data, folder):
+
+        self.scorer = data["scorer"]
+        self.videos = data["videos"]
+        self.bodyparts = data["bodyparts"]
+        self.crop = data["crop"]
 
 
     ###########################################################################

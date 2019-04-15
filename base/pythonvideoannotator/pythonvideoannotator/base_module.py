@@ -13,6 +13,8 @@ from pyforms.controls import ControlDockWidget
 from pythonvideoannotator_models_gui.models import Project
 from pythonvideoannotator_models_gui.dialogs.dialog import Dialog
 from pythonvideoannotator_models.models.video.objects.object2d.datasets.path import Path
+from pythonvideoannotator_models.models.video import Video
+from pythonvideoannotator_models.models.video.objects.object2d import  Object2D
 
 from .userstats import track_user_stats
 
@@ -194,19 +196,42 @@ class BaseModule(BaseWidget):
 
             selected = self.project.tree.selected_item
 
-            if selected is not None and isinstance(selected.win, Path):
+            if selected is not None:
 
-                parent_object = selected.parent()
-                parent_video = parent_object.parent()
+                #If it's a video, try to select the its first object and the object's first child 
+                if isinstance(selected.win, Video):
 
-                parent_object_index = parent_video.indexOfChild(parent_object)
+                    if selected.childCount() > 0:
+                        child_object = selected.child(0)
 
-                if parent_object_index < parent_video.childCount() -1 :
-                    next_object = parent_video.child(parent_video.indexOfChild(parent_object)+1)
+                        if child_object.childCount() > 0:
+                            self.project.tree.selected_item = child_object.child(0)
 
-                    if next_object.childCount() > 0:
-                        next_path = next_object.child(0)
-                        self.project.tree.selected_item = next_path
+                #If it's an object, try to select it's first child
+                elif isinstance(selected.win, Object2D):
+                    if selected.childCount() > 0:
+                        self.project.tree.selected_item = selected.child(0)
+
+                #If it's a path try to select the first child of the next object of their parent video
+                elif isinstance(selected.win, Path):
+
+                    parent_object = selected.parent()
+                    parent_video = parent_object.parent()
+
+                    parent_object_index = parent_video.indexOfChild(parent_object)
+
+                    if parent_object_index < parent_video.childCount() -1 :
+                        next_object = parent_video.child(parent_video.indexOfChild(parent_object)+1)
+
+                        if next_object.childCount() > 0:
+                            self.project.tree.selected_item = next_object.child(0)
+
+                    #If it's the last object of the video, go back to the path of the first one
+                    else:
+                        next_object = parent_video.child(0)
+
+                        if next_object.childCount() > 0:
+                            self.project.tree.selected_item = next_object.child(0)
 
         #"Click" the Mark Point button in the current Path
         elif event.key() == QtCore.Qt.Key_K:

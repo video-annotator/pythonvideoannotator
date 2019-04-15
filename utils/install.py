@@ -6,7 +6,6 @@ from subprocess import call
 
 SUBMODULES_FOLDERS = [
     os.path.join('..','libraries','geometry-designer'),
-    os.path.join('..','libraries','logging-bootstrap'),
     os.path.join('..','libraries','mcv-api'),
     os.path.join('..','libraries','mcv-gui'),
     os.path.join('..','libraries','mcv-gui-editor'),

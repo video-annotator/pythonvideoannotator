@@ -111,6 +111,9 @@ class BaseModule(BaseWidget):
         super().keyReleaseEvent(evt)
         self._player.key_release_event(evt)
 
+        if self.project:
+            self.project.key_release_event(evt)
+
 
     ######################################################################################
     #### FUNCTIONS #######################################################################

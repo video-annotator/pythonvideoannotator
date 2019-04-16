@@ -22,7 +22,7 @@ VIDEOANNOTATOR_PROJECTPATH    = None
 
 USERSTATS_TIMEOUT_DAYS = 30
 USERSTATS_APP_ID = 'TPYg57bdaMLFlC8c0XHVjKnvDqSzRJrZoQ'
-USERSTATS_URL = "http://stats.cf-sw.org"
+USERSTATS_URL = "https://stats.cf-sw.org"
 #USERSTATS_URL = "http://localhost:8000"
 
 #VIDEOANNOTATOR_PROJECTPATH    = '/media/ricardo/PEN/project_bad_tracking'

@@ -67,6 +67,7 @@ class BaseModule(BaseWidget):
 
         track_user_stats()
 
+        """
         ########################################################################
         ###### CHECK NEW VERSIONS RELEASES #####################################
         ########################################################################
@@ -98,7 +99,7 @@ class BaseModule(BaseWidget):
 
         except Exception as e:
             print('Enabled to check new versions:')
-
+        """
 
 
     ######################################################################################
@@ -190,7 +191,6 @@ class BaseModule(BaseWidget):
             self._player.stop() if self._player.is_playing else _player._video.play()
 
     def keyReleaseEvent(self, event):
-
         #Select the path of the next object
         if event.key() == QtCore.Qt.Key_L:
 

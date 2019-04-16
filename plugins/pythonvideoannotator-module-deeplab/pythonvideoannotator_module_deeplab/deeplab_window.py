@@ -2,10 +2,10 @@ import pyforms
 from confapp import conf
 from pyforms.basewidget import BaseWidget
 
-from pyforms_gui.controls.control_button import ControlButton
-from pyforms_gui.controls.control_text import ControlText
-from pyforms_gui.controls.control_dir import ControlDir
-from pyforms_gui.controls.control_file import ControlFile
+from pyforms.controls import ControlButton
+from pyforms.controls import ControlText
+from pyforms.controls import ControlDir
+from pyforms.controls import ControlFile
 
 from pythonvideoannotator_models.models.video.objects.object2d.datasets.path import Path
 from pythonvideoannotator_models.models.video import Video
@@ -16,6 +16,9 @@ import csv
 import deeplabcut
 
 import re, yaml
+
+if conf.PYFORMS_MODE=='GUI':
+    from AnyQt.QtWidgets import QMessageBox
 
 class DeepLabWindow(BaseWidget):
 
@@ -102,6 +105,9 @@ class DeepLabWindow(BaseWidget):
                 self.mainwindow.timeline.add_event(begin=frame, end=frame+1, track=track)
 
 
+        QMessageBox.information(self, "Import finished", "Completed import from YAML file")
+
+
     def __exportToCSVFile(self):
 
         video_names = []
@@ -182,6 +188,8 @@ class DeepLabWindow(BaseWidget):
                             print("Object has no path")
 
                     writer.writerow(currentRow)
+
+        QMessageBox.information(self, "Export finished", "Completed export to CSV file")
 
     
     def save_form(self, data, folder):

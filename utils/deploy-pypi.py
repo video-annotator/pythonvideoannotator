@@ -66,8 +66,7 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 		package_name = package_name.strip().decode().replace(' ', '-')
 
 		remote_version = pypi.package_releases(package_name)
-		
-		print( dir_name, version, remote_version )
+
 
 		
 		if len(remote_version)==0 or version_compare(version, remote_version[0])<0:

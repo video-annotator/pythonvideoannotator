@@ -48,7 +48,8 @@ class BaseModule(BaseWidget):
         self._dock.value                    = self._time
         self._player.process_frame_event    = self.process_frame_event
         self._player.click_event            = self.on_player_click_event
-        self._time.key_release_event        = self.__timeline_key_release_event
+        self._time.key_release_event        = lambda x: x
+        self._player.key_release_event      = lambda x: x
 
         self.load_order = []
 
@@ -182,15 +183,12 @@ class BaseModule(BaseWidget):
         self.save_project(self._project.directory)
 
     def __save_project_as_event(self): self.save_project()
-    
-    def __timeline_key_release_event(self, event):
-        """
-        Control video playback using the space bar to Play/Pause
-        """
-        if event.key() == QtCore.Qt.Key_Space:
-            self._player.stop() if self._player.is_playing else _player._video.play()
 
     def keyReleaseEvent(self, event):
+
+        ######################################################################################
+        #### DOCK SHORTCUTS ##################################################################
+        ######################################################################################
         #Select the path of the next object
         if event.key() == QtCore.Qt.Key_L:
 
@@ -243,7 +241,203 @@ class BaseModule(BaseWidget):
 
                 path.mark_point_button.click()
 
+        ######################################################################################
+        #### TIMELINE SHORTCUTS ##############################################################
+        ######################################################################################
 
+        if self.timeline.timeline_widget.selected is not None:
+            modifier = int(event.modifiers())
+
+            # Move the event (or the pointer) left
+            if modifier == QtCore.Qt.ControlModifier and event.key() == QtCore.Qt.Key_Left:
+                self.timeline.timeline_widget.selected.move(-1, 0)
+                event.ignore()
+                self.timeline.timeline_widget.repaint()
+
+            # Move the event (or the pointer) right
+            if modifier == QtCore.Qt.ControlModifier and event.key() == QtCore.Qt.Key_Right:
+                self.timeline.timeline_widget.selected.move(1, 0)
+                event.ignore()
+                self.timeline.timeline_widget.repaint()
+
+            if self.timeline.timeline_widget.selected != self.timeline.timeline_widget.pointer:
+                # Delete the selected event
+                if event.key() == QtCore.Qt.Key_Delete:
+                    self.timeline.timeline_widget.remove_selected_event()
+
+                # Lock or unlock an event
+                if event.key() == QtCore.Qt.Key_L:
+                    self.timeline.timeline_widget.toggle_selected_event_lock()
+
+                # Move to the next event
+                if event.key() == QtCore.Qt.Key_E:
+                    index = self.timeline.timeline_widget.selected_row.events.index(self.timeline.timeline_widget.selected)
+                    if index < len(self.timeline.timeline_widget.selected_row.events)-1:
+                        self.timeline.timeline_widget.selected = self.timeline.timeline_widget.selected_row.events[index+1]
+                        self.timeline.timeline_widget.position = self.timeline.timeline_widget.selected.begin
+
+                # Move to the previous event
+                if event.key() == QtCore.Qt.Key_Q:
+                    index = self.timeline.timeline_widget.selected_row.events.index(self.timeline.timeline_widget.selected)
+                    if index > 0:
+                        self.timeline.timeline_widget.selected = self.timeline.timeline_widget.selected_row.events[index - 1]
+                        self.timeline.timeline_widget.position = self.timeline.timeline_widget.selected.begin
+
+                # Move the event up
+                if modifier == QtCore.Qt.ControlModifier and event.key() == QtCore.Qt.Key_Up:
+                    self.timeline.timeline_widget.selected.move(0, self.timeline.timeline_widget.selected.top_coordinate - self.timeline.timeline_widget.TRACK_HEIGHT)
+                    self.timeline.timeline_widget.repaint()
+
+                # Move the event down
+                if modifier == QtCore.Qt.ControlModifier and event.key() == QtCore.Qt.Key_Down:
+                    self.timeline.timeline_widget.selected.move(0, self.timeline.timeline_widget.selected.top_coordinate + self.timeline.timeline_widget.TRACK_HEIGHT)
+                    self.timeline.timeline_widget.repaint()
+
+                # Move the event end left
+                if modifier == int(
+                        QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Left:
+                    self.timeline.timeline_widget.selected.move_end(-1)
+                    self.timeline.timeline_widget.repaint()
+
+                # Move the event end right
+                if modifier == int(
+                        QtCore.Qt.ShiftModifier | QtCore.Qt.ControlModifier) and event.key() == QtCore.Qt.Key_Right:
+                    self.timeline.timeline_widget.selected.move_end(1)
+                    self.timeline.timeline_widget.repaint()
+
+                # Move the event begin left
+                if modifier == QtCore.Qt.ShiftModifier and event.key() == QtCore.Qt.Key_Left:
+                    self.timeline.timeline_widget.selected.move_begin(-1)
+                    self.timeline.timeline_widget.repaint()
+
+                # Move the event begin right
+                if modifier == QtCore.Qt.ShiftModifier and event.key() == QtCore.Qt.Key_Right:
+                    self.timeline.timeline_widget.selected.move_begin(1)
+                    self.timeline.timeline_widget.repaint()
+
+        else:
+            # Keybinds to create an event at current frame
+            if event.key() == QtCore.Qt.Key_S and not self.timeline.timeline_widget.creating_event:
+                # Start
+                self.timeline.timeline_widget.creating_event_start = self.timeline.timeline_widget.pointer.frame
+                self.timeline.timeline_widget.creating_event = True
+
+                # TODO Add some indicator that an event is being recorded, like
+                # using the track selector circle to become red
+
+                return
+
+            elif event.key() == QtCore.Qt.Key_S and self.timeline.timeline_widget.creating_event:
+                # End, must be followed right after Start key and have no
+                # effect otherwise
+                self.timeline.timeline_widget.creating_event_end = self.timeline.timeline_widget.pointer.frame
+
+                start = self.timeline.timeline_widget.creating_event_start
+                end = self.timeline.timeline_widget.creating_event_end
+                comment = ""
+
+                if end > start:
+                    track = self.timeline.timeline_widget.row
+                    if track is None and len(self.timeline.timeline_widget.tracks)>0:
+                        track = self.timeline.timeline_widget.tracks[0]
+                    if track is None:
+                        track = self.timeline.timeline_widget.add_track()
+
+                    self.timeline.timeline_widget.add_event(start, end, comment, track=track )
+                    self.timeline.timeline_widget.repaint()
+                    self.timeline.timeline_widget.creating_event = False
+                else:
+                    self.timeline.timeline_widget.creating_event = False
+
+            # walk backwards 1 step
+            elif event.key() == QtCore.Qt.Key_A:
+                self.timeline.timeline_widget.position = self.timeline.timeline_widget.position - 1
+
+            # forward 1 step
+            elif event.key() == QtCore.Qt.Key_D:
+                self.timeline.timeline_widget.position = self.timeline.timeline_widget.position + 1
+
+            # Move to the first event
+            elif event.key() == QtCore.Qt.Key_E:
+                if self.timeline.timeline_widget.selected_row is not None and len(self.timeline.timeline_widget.selected_row)>0:
+                    self.timeline.timeline_widget.selected = self.timeline.timeline_widget.selected_row.events[0]
+                    self.timeline.timeline_widget.position = self.timeline.timeline_widget.selected.begin
+
+            # Move to the last event
+            elif event.key() == QtCore.Qt.Key_Q:
+                if self.timeline.timeline_widget.selected_row is not None and len(self.timeline.timeline_widget.selected_row)>0:
+                    self.timeline.timeline_widget.selected = self.timeline.timeline_widget.selected_row.events[len(self.timeline.timeline_widget.selected_row)-1]
+                    self.timeline.timeline_widget.position = self.timeline.timeline_widget.selected.begin
+
+        ######################################################################################
+        #### PLAYER SHORTCUTS ################################################################
+        ######################################################################################
+
+        # Control video playback using the space bar to Play/Pause
+        if event.key() == QtCore.Qt.Key_Space:
+
+            if self.player.video_widget.control.is_playing:
+                self.player.video_widget.control.stop()
+            else:
+                self.player.video_widget.control.play()
+
+        # Jumps 1 frame backwards
+        elif event.key() == QtCore.Qt.Key_A:
+            self.player.video_widget.control.video_index -= 2
+            self.player.video_widget.control.call_next_frame()
+
+        # Jumps 1 frame forward
+        elif event.key() == QtCore.Qt.Key_D:
+            self.player.video_widget.control.call_next_frame()
+
+        # Jumps 20 seconds backwards
+        elif event.key() == QtCore.Qt.Key_Z:
+            self.player.video_widget.control.jump_backward()
+            self.player.video_widget.control.call_next_frame()
+
+        # Jumps 20 seconds forward
+        elif event.key() == QtCore.Qt.Key_C:
+            self.player.video_widget.control.jump_forward()
+            self.player.video_widget.control.call_next_frame()
+
+        elif event.key() == QtCore.Qt.Key_M:
+            self._move_img = False
+
+        elif event.key() == QtCore.Qt.Key_1:
+            self.player.video_widget.control.next_frame_step = 1
+            self.player.video_widget.show_tmp_msg('Speed: 1x')
+
+        elif event.key() == QtCore.Qt.Key_2:
+            self.player.video_widget.control.next_frame_step = 2
+            self.player.video_widget.show_tmp_msg('Speed: 2x')
+
+        elif event.key() == QtCore.Qt.Key_3:
+            self.player.video_widget.control.next_frame_step = 3
+            self.player.video_widget.show_tmp_msg('Speed: 3x')
+
+        elif event.key() == QtCore.Qt.Key_4:
+            self.player.video_widget.control.next_frame_step = 4
+            self.player.video_widget.show_tmp_msg('Speed: 4x')
+
+        elif event.key() == QtCore.Qt.Key_5:
+            self.player.video_widget.control.next_frame_step = 5
+            self.player.video_widget.show_tmp_msg('Speed: 5x')
+
+        elif event.key() == QtCore.Qt.Key_6:
+            self.player.video_widget.control.next_frame_step = 6
+            self.player.video_widget.show_tmp_msg('Speed: 6x')
+
+        elif event.key() == QtCore.Qt.Key_7:
+            self.player.video_widget.control.next_frame_step = 7
+            self.player.video_widget.show_tmp_msg('Speed: 7x')
+
+        elif event.key() == QtCore.Qt.Key_8:
+            self.player.video_widget.control.next_frame_step = 8
+            self.player.video_widget.show_tmp_msg('Speed: 8x')
+
+        elif event.key() == QtCore.Qt.Key_9:
+            self.player.video_widget.control.next_frame_step = 9
+            self.player.video_widget.show_tmp_msg('Speed: 9x')
 
 
     ######################################################################################

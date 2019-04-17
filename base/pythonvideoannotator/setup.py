@@ -45,7 +45,8 @@ setup(
         'python-video-annotator-module-distances==0.1',
         'python-video-annotator-module-find-orientation==0.1',
         'python-video-annotator-module-contours-images==0.1',
-        'python-video-annotator-module-path-map==0.1'
+        'python-video-annotator-module-path-map==0.1',
+        'python-video-annotator-module-path-map==0.10'
     ],
     entry_points={
         'console_scripts': [

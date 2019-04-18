@@ -6,6 +6,10 @@ import shutil
 
 pypi = xmlrpc.client.ServerProxy('https://pypi.org')
 
+
+MAIN_PATH = os.path.join('base', 'pythonvideoannotator')
+MAIN_REPO = 'python-video-annotator'
+
 DIRECTORIES_TO_SEARCH_FORM = [
 	os.path.join('libraries'),
 	os.path.join('base'),
@@ -17,11 +21,10 @@ CURRENT_DIRECTORY = os.getcwd()
 
 Popen(['pip','install','--upgrade','setuptools','wheel','twine'])
 
-def version_compare(a, b):
 
+def version_compare(a, b):
 	a = a.split('.')
 	b = b.split('.')
-
 	for a_value, b_value in zip(a, b):
 		a_value = int(a_value)
 		b_value = int(b_value)
@@ -38,67 +41,97 @@ def version_compare(a, b):
 
 	return 0
 
+def check_version_and_upload(dir_path):
+	os.chdir(dir_path)
 
+	try:
+		shutil.rmtree(os.path.join(dir_path, 'build'))
+	except OSError:
+		pass
+	except Exception as e:
+		print(e)
+	try:
+		shutil.rmtree(os.path.join(dir_path, 'dist'))
+	except OSError:
+		pass
+	except Exception as e:
+		print(e)
+
+	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
+	version = version.strip().decode()
+
+	package_name = Popen(["python", 'setup.py', '--name'], stdout=PIPE).stdout.read()
+	package_name = package_name.strip().decode().replace(' ', '-')
+	package_name = package_name.replace('---', '-').lower()
+
+	remote_version = pypi.package_releases(package_name)
+
+	print(
+		"{:<65} {:<10} {:<10}".format(package_name, version, remote_version[0])
+	)
+
+	updated = False
+
+	if len(remote_version) == 0 or version_compare(version, remote_version[0]) < 0:
+		print('----- UPLOADING PYPI -----', package_name)
+
+		if os.path.isdir('./dist'): shutil.rmtree('./dist')
+		Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'], stdout=PIPE).communicate()
+		Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
+		updated = True
+
+	os.chdir(CURRENT_DIRECTORY)
+
+	return updated, package_name, version
+
+
+requirements = []
+
+should_update = False
 
 for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 	for dir_name in os.listdir(search_dir):
 		dir_path = os.path.abspath(os.path.join(search_dir, dir_name))
-		if not os.path.isdir(dir_path): continue
+
+		# is not a directory or is the main repository
+		if not os.path.isdir(dir_path) or MAIN_PATH==dir_path: continue
 
 		setup_filepath = os.path.join(dir_path, 'setup.py')
 		if not os.path.isfile(setup_filepath): continue
 
-		os.chdir(dir_path)
+		updated, package_name, version = check_version_and_upload(dir_path)
 
-		try:
-			shutil.rmtree(os.path.join(dir_path, 'build'))
-		except Exception as e:
-			print(e)
-		try:
-			shutil.rmtree(os.path.join(dir_path, 'dist'))
-		except Exception as e:
-			print(e)
+		if updated:
+			should_update = True
 
-		version = Popen(["python", setup_filepath, '--version'], stdout=PIPE).stdout.read()
-		version = version.strip().decode()
-		
-		package_name = Popen(["python", setup_filepath, '--name'], stdout=PIPE).stdout.read()
-		package_name = package_name.strip().decode().replace(' ', '-')
-
-		remote_version = pypi.package_releases(package_name)
-		
-		print( dir_name, version, remote_version )
-
-		
-		if len(remote_version)==0 or version_compare(version, remote_version[0])<0:
-			print('----- UPLOADING PYPI -----', package_name)
-
-			if os.path.isdir('./dist'): shutil.rmtree('./dist')
-			Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'], stdout=PIPE).communicate()
-			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
-
-		
-		os.chdir(CURRENT_DIRECTORY)
+		if package_name != MAIN_REPO:
+			requirements.append("{module}=={version}".format(module=package_name, version=version))
 
 
+with open( os.path.join(MAIN_PATH, 'setup.py') ) as infile:
+	text = infile.read()
 
-"""
+begin = text.index('# REQUIREMENTS BEGIN')
+end = text.index('# REQUIREMENTS END', begin)+len('# REQUIREMENTS END')
+new_text = """# REQUIREMENTS BEGIN
+REQUIREMENTS = [
+    "{}"
+]
+# REQUIREMENTS END""".format( '",\n    "'.join(requirements) )
 
+text = text.replace(text[begin:end], new_text)
 
+if should_update:
+	os.chdir(MAIN_PATH)
+	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
+	version = float(version.strip().decode())
+	os.chdir(CURRENT_DIRECTORY)
 
+	begin = text.index('VERSION')
+	end = text.index('\n', begin)
+	text = text.replace(text[begin:end], 'VERSION = {0}'.format(version+0.1))
 
-    def get_pypi_distribution(self, name):
+with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile:
+	outfile.write(text)
 
-        new_version = self.pypi.package_releases(name)
-        if not new_version:
-            new_version = self.pypi.package_releases(name.capitalize())
-
-        if new_version is None: return new_version
-
-        new_version  = new_version[0]
-        all_versions = self.pypi.package_releases(name, True)
-        data = self.pypi.release_data(name, new_version)
-
-
-        return new_version, all_versions, data.get('summary', '')
-"""
+updated, package_name, version = check_version_and_upload(MAIN_PATH)

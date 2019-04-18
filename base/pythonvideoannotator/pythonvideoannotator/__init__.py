@@ -10,14 +10,3 @@ __email__ 		= ["ricardojvr at gmail.com", "cajomferro at gmail.com"]
 __status__ 		= "Development"
 
 from confapp import conf; conf += 'pythonvideoannotator.settings'
-
-####################################################
-## Load the user settings in case the file exists ##
-####################################################
-try:
-	import user_settings
-	conf += user_settings
-except:
-	pass
-####################################################
-####################################################

@@ -86,3 +86,5 @@ ANNOTATOR_ICON_PATHMAP	= QtGui.QIcon(path('pathmap.png'))
 ANNOTATOR_ICON_DISTANCES	= QtGui.QIcon(path('distances.png'))
 
 ANNOTATOR_ICON_DUPLICATE	= QtGui.QIcon(path('duplicate.png'))
+
+ANNOTATOR_ICON_DEEPLAB	= QtGui.QIcon(path('distances.png'))

@@ -97,7 +97,14 @@ Installing
 Running
 -----------
 
-**for ubuntu, mac and windows:**
+Run this command:
+
+.. code-block:: bash
+
+	start-video-annotator
+
+Or these commands:
+
 
 .. code-block:: bash
 

@@ -29,6 +29,7 @@
 	:includehidden:
 	:caption: Modules \ Plugins
 
+	modules/label-deeplabcut
 	modules/path-map
 	modules/tracking
 	modules/regionsfilter	

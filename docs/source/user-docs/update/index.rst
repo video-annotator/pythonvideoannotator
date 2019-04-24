@@ -4,6 +4,8 @@
 Update
 ****************
 
+If there is a newer version of Pythonvideoannotator available, a window like this one will appear when you run the application:
 
+.. image:: /_static/howto/update.png
 
-This is how to update pythonvideoannotator:
+Simply click the **"Yes"** button and wait for the update to complete.

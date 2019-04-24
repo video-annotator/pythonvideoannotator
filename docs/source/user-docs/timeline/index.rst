@@ -7,7 +7,6 @@ Timeline
 
 .. image:: /_static/timeline/timeline.png
 	:align: center
-|
 
 The timeline events
 __________________________________________

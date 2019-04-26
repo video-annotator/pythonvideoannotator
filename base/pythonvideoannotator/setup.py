@@ -22,7 +22,7 @@ REQUIREMENTS = [
     "python-video-annotator-module-timeline==0.3",
     "python-video-annotator-module-eventstats==0.2",
     "python-video-annotator-module-virtual-object-generator==0.3",
-    "python-video-annotator-module-deeplab==0.3",
+    "python-video-annotator-module-deeplab==0.4",
     "python-video-annotator-module-contours-images==0.2",
     "python-video-annotator-module-tracking==0.3",
     "python-video-annotator-module-smooth-paths==0.2",

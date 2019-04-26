@@ -128,14 +128,17 @@ new_text = """# REQUIREMENTS BEGIN
 REQUIREMENTS = [
     "{}"
 ]
-# REQUIREMENTS END""".format( '",\n    "'.join(requirements) )
+# REQUIREMENTS END"""
 
 text = text.replace(text[begin:end], new_text)
+
+with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile:
+	outfile.write(text)
 
 with open( os.path.join(MAIN_PATH, MAIN_NAME, '__init__.py') ) as infile:
 	text = infile.read()
 
-if should_update or True:
+if should_update:
 	os.chdir(MAIN_PATH)
 	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
 	version = float(version.strip().decode())

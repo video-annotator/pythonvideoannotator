@@ -132,17 +132,21 @@ REQUIREMENTS = [
 
 text = text.replace(text[begin:end], new_text)
 
-if should_update:
+with open( os.path.join(MAIN_PATH, MAIN_NAME, '__init__.py') ) as infile:
+	text = infile.read()
+
+if should_update or True:
 	os.chdir(MAIN_PATH)
 	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
 	version = float(version.strip().decode())
 	os.chdir(CURRENT_DIRECTORY)
 
-	begin = text.index('VERSION')
-	end = text.index('\n', begin)
-	text = text.replace(text[begin:end], 'VERSION = {0}'.format( round(version+0.001,3) ))
+	begin = text.index('__version__')
+	end   = text.index('\n', begin)
+	text  = text.replace(text[begin:end], '__version__ = "{0}"'.format(round(version + 0.001, 3)))
 
-with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile:
+with open( os.path.join(MAIN_PATH, MAIN_NAME, '__init__.py'), 'w' ) as outfile:
 	outfile.write(text)
+
 
 updated, package_name, version = check_version_and_upload(MAIN_PATH)

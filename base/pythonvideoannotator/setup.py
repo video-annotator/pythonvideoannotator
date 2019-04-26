@@ -4,7 +4,11 @@
 from setuptools import setup, find_packages
 import re
 
-VERSION = 3.106
+with open('pythonvideoannotator/__init__.py', 'r') as fd:
+    content = fd.read()
+    version = re.search(
+        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', content, re.MULTILINE).group(1)
+
 
 # REQUIREMENTS BEGIN
 REQUIREMENTS = [
@@ -36,7 +40,7 @@ REQUIREMENTS = [
 
 setup(
     name='Python video annotator',
-    version=VERSION,
+    version=version,
     description="""""",
     author=['Ricardo Ribeiro'],
     author_email='ricardojvr@gmail.com',

@@ -76,24 +76,21 @@ class BaseModule(BaseWidget):
 
             if versions is not None:
                 new_version = versions[0]
-                new_version_numbers = [int(x) for x in new_version.split('.')]
-                version_numbers = [int(x) for x in __version__.split('.')]
-                for new_n, n in zip(new_version_numbers, version_numbers):
-                    if new_n > n:
-                        response = self.question(
-                            "<h2>New version <b>[{0}]</b> available</h2>"
-                            "<p>Do you wish to update the software?</p>"
-                            "<p>The software can be updated later by running the next command in the terminal:</p>"
-                            "<i>pip install python-video-annotator --force-reinstall</i>".format(new_version),
-                            'New version [{0}]'.format(new_version)
-                        )
+                if float(new_version) > float(__version__):
+                    response = self.question(
+                        "<h2>New version <b>[{0}]</b> available</h2>"
+                        "<p>Do you wish to update the software?</p>"
+                        "<p>The software can be updated later by running the next command in the terminal:</p>"
+                        "<i>pip install python-video-annotator --force-reinstall</i>".format(new_version),
+                        'New version [{0}]'.format(new_version)
+                    )
 
-                        if response == 'yes':
-                            subprocess.call([sys.executable, "-m", "pip", "install", 'python-video-annotator', '--force-reinstall'])
+                    if response == 'yes':
+                        subprocess.call([sys.executable, "-m", "pip", "install", 'python-video-annotator', '--force-reinstall'])
 
-                            self.message('The software was updated and this session will be closed. Please execute the software again.', 'Restart required')
-                            exit()
-                        break
+                        self.message('The software was updated and this session will be closed. Please execute the software again.', 'Restart required')
+                        exit()
+
             else:
                 print('Enabled to check new versions')
 

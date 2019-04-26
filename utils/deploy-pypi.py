@@ -6,8 +6,8 @@ import shutil
 
 pypi = xmlrpc.client.ServerProxy('https://pypi.org')
 
-
-MAIN_PATH = os.path.join('base', 'pythonvideoannotator')
+MAIN_NAME = 'pythonvideoannotator'
+MAIN_PATH = os.path.join('base', MAIN_NAME)
 MAIN_REPO = 'python-video-annotator'
 
 DIRECTORIES_TO_SEARCH_FORM = [
@@ -23,6 +23,12 @@ Popen(['pip','install','--upgrade','setuptools','wheel','twine'])
 
 
 def version_compare(a, b):
+	try:
+		a = float(a)
+		b = float(b)
+	except:
+		return -1
+	"""
 	a = a.split('.')
 	b = b.split('.')
 	for a_value, b_value in zip(a, b):
@@ -40,6 +46,10 @@ def version_compare(a, b):
 		return 1
 
 	return 0
+	"""
+	if a==b: return 0
+	if a<b: return 1
+	if a>b: return -1
 
 def check_version_and_upload(dir_path):
 	os.chdir(dir_path)
@@ -93,8 +103,9 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 	for dir_name in os.listdir(search_dir):
 		dir_path = os.path.abspath(os.path.join(search_dir, dir_name))
 
+
 		# is not a directory or is the main repository
-		if not os.path.isdir(dir_path) or MAIN_PATH==dir_path: continue
+		if not os.path.isdir(dir_path) or MAIN_NAME==dir_name: continue
 
 		setup_filepath = os.path.join(dir_path, 'setup.py')
 		if not os.path.isfile(setup_filepath): continue
@@ -129,7 +140,7 @@ if should_update:
 
 	begin = text.index('VERSION')
 	end = text.index('\n', begin)
-	text = text.replace(text[begin:end], 'VERSION = {0}'.format(version+0.1))
+	text = text.replace(text[begin:end], 'VERSION = {0}'.format( round(version+0.001,3) ))
 
 with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile:
 	outfile.write(text)

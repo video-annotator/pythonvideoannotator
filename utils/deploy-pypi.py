@@ -128,7 +128,7 @@ new_text = """# REQUIREMENTS BEGIN
 REQUIREMENTS = [
     "{}"
 ]
-# REQUIREMENTS END"""
+# REQUIREMENTS END""".format('",\n\t"'.join(requirements))
 
 text = text.replace(text[begin:end], new_text)
 

@@ -14,7 +14,7 @@ with open('pythonvideoannotator/__init__.py', 'r') as fd:
 REQUIREMENTS = [
     "geometry_designer==0.3",
 	"modular-computer-vision-api-gui==0.2",
-	"pyforms-gui==4.9",
+	"pyforms-gui==4.901",
 	"modular-computer-vision-api==0.2",
 	"mcv-gui==0.1",
 	"python-video-annotator-models-gui==0.4",

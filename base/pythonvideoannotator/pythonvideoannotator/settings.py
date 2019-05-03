@@ -29,7 +29,7 @@ USERSTATS_URL = "https://stats.cf-sw.org"
 #VIDEOANNOTATOR_PROJECTPATH    = '/home/ricardo/Downloads/cecilia_movies/movies/20170526/video37_2017-05-26T10_23_51/video-annotator-prj'
 #VIDEOANNOTATOR_PROJECTPATH = '/media/ricardo/b4d07af6-a493-42cb-8f15-9a5d71a0a78a/cecilia_movies/movies/20170518/video21_2017-05-18T10_40_09/video-annotator-prj'
 
-VIDEOANNOTATOR_PROJECTPATH = '/home/ricardo/bitbucket/idtracker-project/session_session0'
+#VIDEOANNOTATOR_PROJECTPATH = '/home/ricardo/bitbucket/idtracker-project/session_session0'
 
 #VIDEOANNOTATOR_PROJECTPATH = '/home/ricardo/Downloads/to-delete'
 

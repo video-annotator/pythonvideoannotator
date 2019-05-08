@@ -32,7 +32,7 @@ REQUIREMENTS = [
 	"python-video-annotator-module-virtual-object-generator==0.3",
 	"python-video-annotator-module-regions-filter==0.2",
 	"python-video-annotator-module-contours-images==0.2",
-	"python-video-annotator-module-deeplab==0.5",
+	"python-video-annotator-module-deeplab==0.6",
 	"python-video-annotator-module-background-finder==0.2",
 	"python-video-annotator-module-find-orientation==0.2"
 ]

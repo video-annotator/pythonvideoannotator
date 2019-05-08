@@ -189,13 +189,10 @@ class BaseModule(BaseWidget):
                 self.move_to_next_event()
                 self.mark_point()
 
-        ######################################################################################
-        #### DOCK SHORTCUTS ##################################################################
-        ######################################################################################
-
-        #Select the path of the next object
+        #Select the path of the next object and click the mark the point button
         if event.key() == QtCore.Qt.Key_U:
             self.select_next_path()
+            self.mark_point()
 
         #"Click" the Mark Point button in the current Path
         elif event.key() == QtCore.Qt.Key_O:
@@ -392,7 +389,8 @@ class BaseModule(BaseWidget):
         if selected is not None and isinstance(selected.win, Path):
             path = selected.win
 
-            path.mark_point_button.click()
+            if not path.mark_point_button.checked:
+                path.mark_point_button.click()
 
 
     def move_to_next_event(self):

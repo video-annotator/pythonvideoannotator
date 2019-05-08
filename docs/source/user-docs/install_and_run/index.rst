@@ -129,9 +129,13 @@ Run the following commands:
 	pip install -U wxPython
 	pip install --ignore-installed tensorflow==1.10
 
-**for ubuntu:**
+**for linux:**
 
-Run the following commands:
+| Go to this link: https://extras.wxpython.org/wxPython4/extras/linux/gtk3/.
+| There you will have to choose your linux distribution and the wheel for Python 3.6.
+| Then run the commands under, but replace the middle command with whatever fits your linux distribution.
+|
+| For example, if you have ubuntu 18.04, you will have to run the following commands:
 
 .. code-block:: bash
 

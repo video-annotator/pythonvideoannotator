@@ -9,6 +9,9 @@ with open('pythonvideoannotator/__init__.py', 'r') as fd:
     version = re.search(
         r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', content, re.MULTILINE).group(1)
 
+with open('../../README.md', 'r') as fd:
+    long_description = fd.read()
+
 
 # REQUIREMENTS BEGIN
 REQUIREMENTS = [
@@ -45,6 +48,8 @@ setup(
     author=['Ricardo Ribeiro'],
     author_email='ricardojvr@gmail.com',
     url='https://bitbucket.org/fchampalimaud/pythonvideoannotator-models',
+    long_description = long_description,
+    long_description_content_type = 'text/markdown',
     packages=find_packages(),
     install_requires=[
         'simplejson',

@@ -128,6 +128,14 @@ What is the Python Video Annotator?
 |
 
 
+Funding
+-------------------
+
+.. image:: _static/index/funding.png
+
+|
+|
+
 Developers
 -------------------
 

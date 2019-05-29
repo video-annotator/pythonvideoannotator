@@ -133,7 +133,8 @@ Funding
 
 .. image:: _static/index/funding.png
 
-|
+Thank you!!
+
 |
 
 Developers

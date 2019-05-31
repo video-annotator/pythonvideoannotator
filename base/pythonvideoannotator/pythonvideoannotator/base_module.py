@@ -92,10 +92,10 @@ class BaseModule(BaseWidget):
                         exit()
 
             else:
-                print('Enabled to check new versions')
+                print('Unable to check new versions')
 
         except Exception as e:
-            print('Enabled to check new versions:')
+            print('Unable to check new versions:')
 
     ######################################################################################
     #### FUNCTIONS #######################################################################

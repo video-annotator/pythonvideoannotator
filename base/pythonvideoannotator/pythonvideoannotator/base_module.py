@@ -296,10 +296,8 @@ class BaseModule(BaseWidget):
                 self.player.video_widget.control.stop()
             else:
                 self.player.video_widget.control.play()
-    def __load_project_from_argv(self):
-        self.load_project(sys.argv[-1])
 
-        # Jumps 1 frame backwards
+                # Jumps 1 frame backwards
         elif event.key() == QtCore.Qt.Key_A:
             self.player.video_widget.control.video_index -= 2
             self.player.video_widget.control.call_next_frame()
@@ -356,6 +354,11 @@ class BaseModule(BaseWidget):
         elif event.key() == QtCore.Qt.Key_9:
             self.player.video_widget.control.next_frame_step = 9
             self.player.video_widget.show_tmp_msg('Speed: 9x')
+
+    def __load_project_from_argv(self):
+        self.load_project(sys.argv[-1])
+
+
 
     ######################################################################################
     #### EVENT FUNCTIONS #################################################################

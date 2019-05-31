@@ -5,7 +5,7 @@ SETTINGS_PRIORITY = 10
 import logging, os
 from pyforms_gui.utils.plugins_finder import PluginsFinder
 
-VIDEOANNOTATOR_MODULES = PluginsFinder()
+
 
 APP_LOG_FILENAME 				= 'pythonvideoannotator.log'
 APP_LOG_HANDLER_FILE_LEVEL 		= logging.DEBUG
@@ -14,7 +14,7 @@ APP_LOG_HANDLER_CONSOLE_LEVEL 	= logging.INFO
 PYFORMS_LOG_HANDLER_FILE_LEVEL 		= logging.DEBUG
 PYFORMS_LOG_HANDLER_CONSOLE_LEVEL 	= logging.INFO
 
-PYFORMS_SILENT_PLUGINS_FINDER = True
+PYFORMS_SILENT_PLUGINS_FINDER = False
 
 VIDEO_FILE_PATH = None
 CHART_FILE_PATH = None
@@ -47,9 +47,12 @@ MAIN_WINDOW_GEOMETRY = 0, 0, 1000, 800
 PYFORMS_STYLESHEET 			= os.path.join( os.path.dirname(__file__), 'resources','themes', 'default', 'stylesheet.css')
 #PYFORMS_STYLESHEET_LINUX 	= os.path.join('pythonvideoannotator', 'resources','themes', 'default', 'stylesheet_darwin.css')
 
+######################################################################
+##### MODULES CONFIG #################################################
+######################################################################
+MODULES = PluginsFinder()
 
 #VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_eventsstats'
-
 MODULES += 'pythonvideoannotator_module_importexport'
 MODULES += 'pythonvideoannotator_module_virtualobjectgenerator'
 MODULES += 'pythonvideoannotator_module_idtrackerai'

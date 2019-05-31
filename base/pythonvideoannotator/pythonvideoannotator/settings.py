@@ -36,7 +36,7 @@ USERSTATS_URL = "https://stats.cf-sw.org"
 SAVED_GRAPH_FILE_PATH 	= ""
 SAVED_BONSAI_FILE_PATH 	= ""
 
-MAIN_WINDOW_GEOMETRY = 50, 200, 1000, 700
+MAIN_WINDOW_GEOMETRY = 0, 0, 1000, 800
 #MAIN_WINDOW_GEOMETRY = 1700, 50, 1400, 1000
 
 
@@ -50,18 +50,20 @@ PYFORMS_STYLESHEET 			= os.path.join( os.path.dirname(__file__), 'resources','th
 
 #VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_eventsstats'
 
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_importexport'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_virtualobjectgenerator'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_idtrackerai'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_findorientation'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_motioncounter'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_distances'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_smoothpaths'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_createpaths'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_backgroundfinder'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_contoursimages'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_regionsfilter'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_tracking'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_timeline'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_patheditor'
-VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_pathmap'
+MODULES += 'pythonvideoannotator_module_importexport'
+MODULES += 'pythonvideoannotator_module_virtualobjectgenerator'
+MODULES += 'pythonvideoannotator_module_idtrackerai'
+MODULES += 'pythonvideoannotator_module_findorientation'
+MODULES += 'pythonvideoannotator_module_motioncounter'
+MODULES += 'pythonvideoannotator_module_distances'
+MODULES += 'pythonvideoannotator_module_smoothpaths'
+MODULES += 'pythonvideoannotator_module_createpaths'
+MODULES += 'pythonvideoannotator_module_backgroundfinder'
+MODULES += 'pythonvideoannotator_module_contoursimages'
+MODULES += 'pythonvideoannotator_module_regionsfilter'
+MODULES += 'pythonvideoannotator_module_tracking'
+MODULES += 'pythonvideoannotator_module_timeline'
+MODULES += 'pythonvideoannotator_module_patheditor'
+MODULES += 'pythonvideoannotator_module_pathmap'
+MODULES += 'pythonvideoannotator_module_deeplab'
+

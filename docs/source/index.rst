@@ -29,6 +29,7 @@
 	:includehidden:
 	:caption: Modules \ Plugins
 
+	modules/label-deeplabcut
 	modules/path-map
 	modules/tracking
 	modules/regionsfilter	
@@ -126,6 +127,15 @@ What is the Python Video Annotator?
 | Visualize the tracking information directly on the video player, smooth paths, calculate the videos' backgrounds and much more ...
 |
 
+
+Funding
+-------------------
+
+.. image:: _static/index/funding.png
+
+Thank you!!
+
+|
 
 Developers
 -------------------

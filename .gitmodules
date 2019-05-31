@@ -67,3 +67,6 @@
 [submodule "plugins/pythonvideoannotator-module-idtrackerai"]
 	path = plugins/pythonvideoannotator-module-idtrackerai
 	url = https://github.com/UmSenhorQualquer/pythonvideoannotator-module-idtrackerai.git
+[submodule "plugins/pythonvideoannotator-module-deeplab"]
+	path = plugins/pythonvideoannotator-module-deeplab
+	url = https://manuelmanso@bitbucket.org/fchampalimaud/pythonvideoannotator-module-deeplab.git

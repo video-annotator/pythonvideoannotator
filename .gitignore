@@ -57,3 +57,9 @@ base/pythonvideoannotator/pythonvideoannotator/trackingsettings\.txt
 base/pythonvideoannotator/pythonvideoannotator/\.track\.cnf
 
 \.idea/
+
+local_settings\.py
+
+docs/source/_static/index/\.DS_Store
+
+docs/source/_static/\.DS_Store

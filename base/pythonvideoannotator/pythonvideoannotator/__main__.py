@@ -24,6 +24,8 @@ except ImportError as err:
 
 from pythonvideoannotator.base_module import BaseModule
 
+logging.getLogger('PyQt5').setLevel(logging.INFO)
+
 print()
 print('**************************************')
 print()

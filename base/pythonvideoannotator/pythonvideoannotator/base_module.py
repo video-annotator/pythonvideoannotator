@@ -1,5 +1,7 @@
 #! /usr/bin/python2
 # -*- coding: utf-8 -*-
+import traceback
+
 import pypi_xmlrpc
 import pip, sys, subprocess
 from AnyQt.QtCore import QTimer
@@ -58,6 +60,9 @@ class BaseModule(BaseWidget):
         self._dock.value                    = self._time
         self._player.process_frame_event    = self.process_frame_event
         self._player.click_event            = self.on_player_click_event
+        self._player.double_click_event     = self.on_player_double_click_event
+        self._player.drag_event             = self.on_player_drag_event
+        self._player.end_drag_event         = self.on_player_end_drag_event
         self._time.key_release_event        = lambda x: x
         self._player.key_release_event      = lambda x: x
 
@@ -149,6 +154,7 @@ class BaseModule(BaseWidget):
                 project_path = str(project_path)
                 self.save({}, project_path)
         except Exception as e:
+            traceback.print_exc()
             QMessageBox.critical(self, "Error", str(e))
 
     def load_project(self, project_path=None):
@@ -164,11 +170,32 @@ class BaseModule(BaseWidget):
     #### EVENTS ##########################################################################
     ######################################################################################
 
+
+    def on_player_drag_event(self, p1, p2):
+        if self._project:
+            self._project.player_on_drag(p1, p2)
+        self._player.refresh()
+
+    def on_player_end_drag_event(self, p1, p2):
+        if self._project:
+            self._project.player_on_end_drag(p1, p2)
+        self._player.refresh()
+
     def on_player_click_event(self, event, x, y):
         """
         Code to select a blob with the mouse
         """
-        super().on_player_click_event(event, x, y)
+        if self._project:
+            self._project.player_on_click(event, x, y)
+        self._player.refresh()
+
+
+    def on_player_double_click_event(self, event, x, y):
+        """
+        Code to select a blob with the mouse
+        """
+        if self._project:
+            self._project.player_on_double_click(event, x, y)
         self._player.refresh()
 
     def process_frame_event(self, frame):

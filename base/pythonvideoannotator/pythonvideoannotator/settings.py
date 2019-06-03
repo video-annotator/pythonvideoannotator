@@ -55,7 +55,6 @@ MODULES = PluginsFinder()
 #VIDEOANNOTATOR_MODULES += 'pythonvideoannotator_module_eventsstats'
 MODULES += 'pythonvideoannotator_module_importexport'
 MODULES += 'pythonvideoannotator_module_virtualobjectgenerator'
-MODULES += 'pythonvideoannotator_module_idtrackerai'
 MODULES += 'pythonvideoannotator_module_findorientation'
 MODULES += 'pythonvideoannotator_module_motioncounter'
 MODULES += 'pythonvideoannotator_module_distances'
@@ -69,4 +68,5 @@ MODULES += 'pythonvideoannotator_module_timeline'
 MODULES += 'pythonvideoannotator_module_patheditor'
 MODULES += 'pythonvideoannotator_module_pathmap'
 MODULES += 'pythonvideoannotator_module_deeplab'
+#MODULES += 'pythonvideoannotator_module_idtrackerai'
 

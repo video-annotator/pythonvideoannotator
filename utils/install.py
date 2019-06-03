@@ -34,7 +34,7 @@ SUBMODULES_FOLDERS = [
 
 
 def install():
-    for submodule in SUBMODULES_FOLDERS:
+    for submodule in SUBVIDEOANNOTATOR_MODULES_FOLDERS:
         call(['pip', 'install', '-e', os.path.join(submodule,'.')])
 
 if __name__=='__main__': 

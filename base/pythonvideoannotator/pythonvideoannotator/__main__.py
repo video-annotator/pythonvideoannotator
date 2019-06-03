@@ -24,24 +24,28 @@ except ImportError as err:
 
 from pythonvideoannotator.base_module import BaseModule
 
+logging.getLogger('PyQt5').setLevel(logging.INFO)
+
 print()
 print('**************************************')
 print()
 
 VideoAnnotator = type(
 	'VideoAnnotator',
-	tuple(conf.MODULES.find_class('module.Module') + [BaseModule]),
+	tuple(conf.VIDEOANNOTATOR_MODULES.find_class('module.Module') + [BaseModule]),
 	{}
 )
 
 
-def start():
+def start(parent_win=None):
 
 	try:
-		pyforms.start_app(
+		res = pyforms.start_app(
 			VideoAnnotator,
-			geometry=conf.MAIN_WINDOW_GEOMETRY
+			geometry=conf.MAIN_WINDOW_GEOMETRY,
+			parent_win=parent_win
 		)
+		return res
 
 	except Exception as e:
 		report = traceback.format_exc()

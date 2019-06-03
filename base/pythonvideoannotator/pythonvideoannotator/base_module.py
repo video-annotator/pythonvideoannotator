@@ -317,14 +317,12 @@ class BaseModule(BaseWidget):
 
         # Control video playback using the space bar to Play/Pause
         if event.key() == QtCore.Qt.Key_Space:
-            self._player.stop() if self._player.is_playing else self._player._video.play()
-
-            if self.player.video_widget.control.is_playing:
-                self.player.video_widget.control.stop()
+            if self.player.is_playing:
+                self.player.stop()
             else:
-                self.player.video_widget.control.play()
+                self.player.play()
 
-                # Jumps 1 frame backwards
+        # Jumps 1 frame backwards
         elif event.key() == QtCore.Qt.Key_A:
             self.player.video_widget.control.video_index -= 2
             self.player.video_widget.control.call_next_frame()

@@ -1,0 +1,20 @@
+site_name: PythonVideoAnnotator
+site_url: https://pythonvideoannotator.readthedocs.io/
+site_description: GUI for analysis and annotation of events occurred in the videos.
+site_author: Champalimaud Foundation
+
+repo_url: https://github.com/UmSenhorQualquer/pythonVideoAnnotator/
+
+pages:
+- Home: index.md
+
+#extra_css:
+#    - css/extra.css
+
+#markdown_extensions:
+#    - toc:
+#        permalink: 
+#    - admonition:
+
+copyright: Copyright &copy; 2016 <a href="/release-notes/">Champalimaud Foundation</a>, Maintained by the <a href="/about/release-notes/#maintenance-team">Scientific Software Platform</a>.
+#google_analytics: ['UA-27795084-5', 'mkdocs.org']

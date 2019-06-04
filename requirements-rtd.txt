@@ -1,0 +1,10 @@
+# 3rd party dependencies
+numpy
+
+# rtd dependencies
+sphinx==1.5.6
+sphinx_rtd_theme>=0.2.4
+recommonmark
+
+# swp dependencies
+https://bitbucket.org/fchampalimaud/logging-bootstrap/get/master.zip

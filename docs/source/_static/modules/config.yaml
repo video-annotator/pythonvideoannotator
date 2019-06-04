@@ -1,0 +1,26 @@
+# Set these according to your project, your name and the current date
+Task: project_name
+scorer: your_name
+date: current_date
+
+# Project path (change when moving around)
+project_path: path/to/project/directory
+
+# Annotation data set configuration (and individual video cropping parameters)
+# If you only want to label one video, you can simply remove the path of the second video
+video_sets:
+  path/to/video1:
+    crop: 0, 2000, 0, 200
+  path/to/video2:
+    crop: 0, 2000, 0, 200
+bodyparts:
+- Left Hand
+- Head
+- Right Leg
+
+# You can just leave start=0 and stop=1
+start: 0
+stop: 1
+
+# This parameter sets how many frames will be generated for you to label
+numframes2pick: 10

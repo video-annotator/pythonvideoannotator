@@ -1,0 +1,59 @@
+table.roadshow-table{
+	border: none;
+}
+
+table.roadshow-table tr, table.roadshow-table td, table.roadshow-table hr, table.roadshow-table th{
+	border: none !important; 
+}
+
+.left-image{
+	padding: 20px;
+	padding-left: 0px;
+}
+
+.right-image{
+	padding: 20px;
+	padding-right: 0px;
+}
+
+.center-image{
+	padding: 20px;
+}
+
+
+.left-text{
+	float: left;
+	width: 50% !important;
+	padding: 0px !important;
+	/*border-right: 1px solid #dddddd;*/
+	padding-right: 20px !important;
+}
+
+.right-text{
+	text-align: right;
+	float: right;
+	width: 50% !important;
+	padding: 0px !important;
+	padding-left: 20px !important;
+}
+
+.clear-line{
+	clear: both;
+	font-size: 0px;
+	color: white;
+}
+
+.separator{
+	margin-top: 60px !important;
+	margin-bottom: 60px !important;
+	clear: both !important;
+	font-size: 0px !important;
+	max-width: 33% !important;
+	padding-left: 33% !important;
+	border: none !important;
+	border-bottom: 1px dashed #dddddd !important;
+}
+
+.paddingleft18{
+	padding-left: 18px;
+}

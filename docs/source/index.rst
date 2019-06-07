@@ -73,10 +73,11 @@ What is the Python Video Annotator?
 ------------------------------------
 
 | 
-| The **PythonVideoAnnotator** is a graphical application written in python, to analyse videos and create notes for events in the video. It was developed with the aim of helping neuroscience and ethology researchers indentify animals' behaviours based on the information extracted from the video.
+| The **PythonVideoAnnotator** is a graphical application written in python, to analyze videos and create notes for events in the video. It was developed with the aim of helping neuroscience and ethology researchers identify animals’ behaviors based on the information extracted from the video.
 | 
-| Paths, contours and outputs of external devices, like accelerometers, sound recorders, pokes, pressure devices and other sensors can be combined to find classes of events to identify behaviours.
+| Paths, contours and outputs of external devices, like accelerometers, sound recorders, pokes, pressure devices and other sensors can be combined to find classes of events to identify behaviors.
 |
+
 
 |
 

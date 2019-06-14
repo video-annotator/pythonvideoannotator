@@ -134,3 +134,35 @@ Result
 The result will be a csv file for each labeled video. The csv file will look like this:
 
 .. image:: /_static/modules/deeplabcut-csv-result.png
+
+
+
+
+
+*******************
+Install DeepLabCut
+*******************
+
+**for windows and mac:**
+
+Run the following commands:
+
+.. code-block:: bash
+
+	pip install deeplabcut
+	pip install -U wxPython
+	pip install --ignore-installed tensorflow==1.10
+
+**for linux:**
+
+| Go to this link: https://extras.wxpython.org/wxPython4/extras/linux/gtk3/.
+| There you will have to choose your linux distribution and the wheel for Python 3.6.
+| Then run the commands under, but replace the middle command with whatever fits your linux distribution.
+|
+| For example, if you have ubuntu 18.04, you will have to run the following commands:
+
+.. code-block:: bash
+
+	pip install deeplabcut
+	pip install https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04/wxPython-4.0.4-cp36-cp36m-linux_x86_64.whl
+	pip install --ignore-installed tensorflow==1.10

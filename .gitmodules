@@ -18,7 +18,7 @@
 	url = https://bitbucket.org/fchampalimaud/mcv-gui-editor.git
 [submodule "libraries/confapp"]
 	path = libraries/confapp
-	url = git@github.com:UmSenhorQualquer/confapp.git
+	url = https://github.com/UmSenhorQualquer/confapp.git
 [submodule "plugins/pythonvideoannotator-module-contoursimages"]
 	path = plugins/pythonvideoannotator-module-contoursimages
 	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-contoursimages.git

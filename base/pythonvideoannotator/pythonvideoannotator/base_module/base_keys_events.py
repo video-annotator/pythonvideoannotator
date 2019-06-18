@@ -1,4 +1,7 @@
+import logging
+
 from AnyQt.QtGui import QKeySequence
+from AnyQt.QtCore import Qt
 from pythonvideoannotator_models_gui.models.video.objects.object2d.datasets.path import Path
 
 from .base_io import BaseIO
@@ -7,6 +10,7 @@ from confapp import conf
 if conf.PYFORMS_MODE == 'GUI':
     from AnyQt import QtCore
 
+logger = logging.getLogger(__name__)
 
 class BaseKeysEvents(BaseIO):
 
@@ -28,18 +32,19 @@ class BaseKeysEvents(BaseIO):
                 path.mark_point_button.click()
 
     def keyReleaseEvent(self, event):
+        super().keyReleaseEvent(event)
 
-        event.ignore()
+        selected = self.project.tree.selected_item
 
-        modifier = event.modifiers()
+        if selected is not None:
+            selected.win.key_release_event(event)
+
+        key = QKeySequence( event.modifiers() | event.key()).toString().encode("ascii", "ignore").decode()
+        logger.debug(key)
 
         ######################################################################################
         #### TIMELINE SHORTCUTS ##############################################################
         ######################################################################################
-
-        key = QKeySequence(event.modifiers() | event.key()).toString()
-
-        print(key.encode("ascii", "ignore"))
 
         # Move the end of the selected event to the left.
         if key == conf.SHORT_KEYS['Move the end of the selected event to the left.']:
@@ -106,19 +111,19 @@ class BaseKeysEvents(BaseIO):
         ######################################################################################
 
         # Go to the next event and then click the mark the point button.
-        elif key == conf.SHORT_KEYS['Go to the next event and then click the mark the point button.']:
+        elif key == conf.SHORT_KEYS.get('Go to the next event and then click the mark the point button.', None):
             if self.timeline.timeline_widget.selected is not None and \
                     self.timeline.timeline_widget.selected != self.timeline.timeline_widget.pointer:
                 self.move_to_next_event()
                 self.mark_point()
 
         # Select the path of the next object and click the mark the point button.
-        elif key == conf.SHORT_KEYS['Select the path of the next object and click the mark the point button.']:
+        elif key == conf.SHORT_KEYS.get('Select the path of the next object and click the mark the point button.', None):
             self.select_next_path()
             self.mark_point()
 
         # "Click" the Mark Point button in the current Path.
-        elif key == conf.SHORT_KEYS['"Click" the Mark Point button in the current Path.']:
+        elif key == conf.SHORT_KEYS.get('"Click" the Mark Point button in the current Path.', None):
             self.mark_point()
 
         ######################################################################################
@@ -127,22 +132,27 @@ class BaseKeysEvents(BaseIO):
 
         # Play or pause the video.
         elif key == conf.SHORT_KEYS['Play or pause the video.']:
+            logger.debug('Play or pause the video')
             self.player.toggle_playing()
 
         # Jumps 1 frame backwards.
         elif key == conf.SHORT_KEYS['Jumps 1 frame backward.']:
+            logger.debug('Jumps 1 frame backward.')
             self.player.back_one_frame()
 
         # Jumps 1 frame forward.
         elif key == conf.SHORT_KEYS['Jumps 1 frame forward.']:
+            logger.debug('Jumps 1 frame forward.')
             self.player.forward_one_frame()
 
         # Jumps 20 seconds backward.
         elif key == conf.SHORT_KEYS['Jumps 20 seconds backward.']:
+            logger.debug('Jumps 20 seconds backward.')
             self.player.jump_backward()
 
         # Jumps 20 seconds forward.
         elif key == conf.SHORT_KEYS['Jumps 20 seconds forward.']:
+            logger.debug('Jumps 20 seconds forward.')
             self.player.jump_forward()
 
         # Set player speed to 1x.

@@ -62,6 +62,8 @@ class Base(BaseWidget):
         self._player.double_click_event = self.on_player_double_click_event
         self._player.drag_event = self.on_player_drag_event
         self._player.end_drag_event = self.on_player_end_drag_event
+
+        # ignore these controls key release event
         self._time.key_release_event = lambda x: x
         self._player.key_release_event = lambda x: x
 

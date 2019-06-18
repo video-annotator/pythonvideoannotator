@@ -1,26 +1,29 @@
 # !/usr/bin/python2
 # -*- coding: utf-8 -*-
 
+from confapp import conf
 import logging, traceback, pythonvideoannotator, sys, platform
 
-from confapp import conf
 from urllib.parse import urlencode
-from uuid import getnode as get_mac
+from uuid 		  import getnode as get_mac
 from AnyQt.QtWidgets import QMessageBox
-from urllib.request import Request, urlopen
+from urllib.request  import Request, urlopen
 from AnyQt.QtWidgets import QApplication
+
+logger = logging.getLogger(__name__)
 
 try:
 	import pyforms
 except ImportError as err:
-	logging.getLogger().critical(str(err), exc_info=True)
+	logger.critical(str(err), exc_info=True)
 	exit("Could not load pyforms! Is it installed?")
 
 try:
 	from confapp import conf
 except ImportError as err:
-	logging.getLogger().critical(str(err), exc_info=True)
-	exit("Could not load pyforms! Is it installed?")
+	logger.critical(str(err), exc_info=True)
+	exit("Could not load confapp! Is it installed?")
+
 
 from pythonvideoannotator.base_module import BaseModule
 
@@ -48,6 +51,7 @@ def start(parent_win=None):
 		return res
 
 	except Exception as e:
+		logger.error(e, exc_info=True)
 		report = traceback.format_exc()
 
 		app = QApplication(sys.argv)

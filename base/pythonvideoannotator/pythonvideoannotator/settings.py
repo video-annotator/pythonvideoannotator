@@ -2,19 +2,15 @@
 # -*- coding: utf-8 -*-
 SETTINGS_PRIORITY = 10
 
-import logging, os
+import os
 from pyforms_gui.utils.plugins_finder import PluginsFinder
 
-
-
-APP_LOG_FILENAME 				= 'pythonvideoannotator.log'
-APP_LOG_HANDLER_FILE_LEVEL 		= logging.DEBUG
-APP_LOG_HANDLER_CONSOLE_LEVEL 	= logging.INFO
-
-PYFORMS_LOG_HANDLER_FILE_LEVEL 		= logging.DEBUG
-PYFORMS_LOG_HANDLER_CONSOLE_LEVEL 	= logging.INFO
-
-PYFORMS_SILENT_PLUGINS_FINDER = True
+# LOGGING CONFIGURATION #################################
+import logging
+APP_LOG_HANDLER_LEVEL      = logging.INFO
+APP_LOG_HANDLER_FILE       = None
+APP_LOG_HANDLER_FILE_LEVEL = logging.INFO
+#########################################################
 
 VIDEO_FILE_PATH = None
 CHART_FILE_PATH = None
@@ -85,23 +81,23 @@ SHORT_KEYS = {
     'Select the previous event.':                           'Alt+A',
 
     # PLAYER
-    'Play or pause the video.':                             'Meta+Space',
-    'Jumps 1 frame backward.':                              'Meta+Alt+Num+Left',
-    'Jumps 1 frame forward.':                               'Meta+Alt+Num+Right',
-    'Jumps 20 seconds backward.':                           'Meta+Shift+Num+Left',
-    'Jumps 20 seconds forward.':                            'Meta+Shift+Num+Right',
-    'Set player speed to 1x.':                              'Meta+1',
-    'Set player speed to 2x.':                              'Meta+2',
-    'Set player speed to 3x.':                              'Meta+3',
-    'Set player speed to 4x.':                              'Meta+4',
-    'Set player speed to 5x.':                              'Meta+5',
-    'Set player speed to 6x.':                              'Meta+6',
-    'Set player speed to 7x.':                              'Meta+7',
-    'Set player speed to 8x.':                              'Meta+8',
-    'Set player speed to 9x.':                              'Meta+9',
+    'Play or pause the video.':                             'Ctrl+P',
+    'Jumps 1 frame backward.':                              'Ctrl+I',
+    'Jumps 1 frame forward.':                               'Ctrl+O',
+    'Jumps 20 seconds backward.':                           'Ctrl+K',
+    'Jumps 20 seconds forward.':                            'Ctrl+L',
+    'Set player speed to 1x.':                              'Ctrl+1',
+    'Set player speed to 2x.':                              'Ctrl+2',
+    'Set player speed to 3x.':                              'Ctrl+3',
+    'Set player speed to 4x.':                              'Ctrl+4',
+    'Set player speed to 5x.':                              'Ctrl+5',
+    'Set player speed to 6x.':                              'Ctrl+6',
+    'Set player speed to 7x.':                              'Ctrl+7',
+    'Set player speed to 8x.':                              'Ctrl+8',
+    'Set player speed to 9x.':                              'Ctrl+9',
 
     # SPECIAL KEYS
-    'Go to the next event and then click the mark the point button.':           'Ctrl+I',
-    'Select the path of the next object and click the mark the point button.':  'Ctrl+U',
-    '"Click" the Mark Point button in the current Path.':                       'Ctrl+O'
+    #'Go to the next event and then click the mark the point button.':           'Ctrl+I',
+    #'Select the path of the next object and click the mark the point button.':  'Ctrl+U',
+    #'"Click" the Mark Point button in the current Path.':                       'Ctrl++'
 }

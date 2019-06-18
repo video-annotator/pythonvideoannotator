@@ -29,7 +29,7 @@
 	:includehidden:
 	:caption: Modules \ Plugins
 
-    modules/idtrackerai
+	modules/idtrackerai
 	modules/label-deeplabcut
 	modules/path-map
 	modules/tracking

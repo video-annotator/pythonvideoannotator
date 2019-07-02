@@ -8,7 +8,7 @@ from pyforms_gui.utils.plugins_finder import PluginsFinder
 # LOGGING CONFIGURATION #################################
 import logging
 APP_LOG_HANDLER_LEVEL      = logging.INFO
-APP_LOG_HANDLER_FILE       = None
+APP_LOG_HANDLER_FILE       = 'video-annotator.log'
 APP_LOG_HANDLER_FILE_LEVEL = logging.INFO
 #########################################################
 

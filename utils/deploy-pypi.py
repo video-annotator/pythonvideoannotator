@@ -67,6 +67,8 @@ def check_version_and_upload(dir_path):
 	except Exception as e:
 		print(e)
 
+
+
 	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
 	version = version.strip().decode()
 
@@ -76,8 +78,9 @@ def check_version_and_upload(dir_path):
 
 	remote_version = pypi.package_releases(package_name)
 
+
 	print(
-		"{:<65} {:<10} {:<10}".format(package_name, version, remote_version[0])
+		"{:<65} {:<10} {:<10}".format(package_name, version, remote_version[0] if remote_version else 'None')
 	)
 
 	updated = False

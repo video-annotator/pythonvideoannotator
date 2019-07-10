@@ -91,6 +91,6 @@ def register_access():
         data = {'app-id': app_id, 'reg-id': reg_id, 'os-name' : os_name ,'version': version}
         url = "{}/register".format(conf.USERSTATS_URL)
         request = Request(url, urlencode(data).encode())
-        urlopen(request).read().decode()
+        urlopen(request, timeout=1).read().decode()
     except Exception as e:
         print("Could not register new access", e)

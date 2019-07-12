@@ -1,55 +1,85 @@
 import os
 import xmlrpc.client
 from subprocess import Popen, PIPE
+from setuptools import find_packages
+from natsort import natsorted
 import shutil
 
+###### CONFIGURATIONS #############################
+DEBUG = True
+PYPI_URL = 'https://test.pypi.org'
 
-pypi = xmlrpc.client.ServerProxy('https://pypi.org')
+PACKAGES = {
+	'pyforms-gui': 'pyforms_gui'
+}
 
-MAIN_NAME = 'pythonvideoannotator'
-MAIN_PATH = os.path.join('base', MAIN_NAME)
-MAIN_REPO = 'python-video-annotator'
-
+# sub packages directories to look for updates
 DIRECTORIES_TO_SEARCH_FORM = [
 	os.path.join('libraries'),
 	os.path.join('base'),
 	os.path.join('plugins'),
 ]
 
-CURRENT_DIRECTORY = os.getcwd()
+MAIN_NAME = 'pythonvideoannotator' 			# main package name
+MAIN_PATH = os.path.join('base', MAIN_NAME) # main package path
+MAIN_REPO = 'python-video-annotator' 		# name of the main package on pypi
 
+APP_DIRECTORY = os.getcwd() # current directory
 
-Popen(['pip','install','--upgrade','setuptools','wheel','twine'])
+####################################################
+
+HEADER = '\033[95m'
+OKBLUE = '\033[94m'
+OKGREEN = '\033[92m'
+WARNING = '\033[93m'
+FAIL = '\033[91m'
+ENDC = '\033[0m'
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
+
+pypi = xmlrpc.client.ServerProxy(PYPI_URL)
+
+# make sure all the packages required to deploy to pypi are installed
+Popen(['pip','install','--upgrade','setuptools','wheel','twine']).communicate()
 
 
 def version_compare(a, b):
+	"""
+	Compare versions
+	:param a: Version a
+	:param b: Version b
+	:return: Returns 0 if equal, returns 1 if a>b, returns -1 if b>a
+	"""
+
+	if a == b: return 0
+	versions = natsorted([a, b])
+	if a==versions[-1]: return -1
+	if b==versions[-1]: return 1
+	raise Exception('Error when comparing versions')
+
+def update_package_version(package_name, setup_path, new_version):
+
+	if package_name in PACKAGES:
+		package = PACKAGES[package_name]
+	else:
+		packages = find_packages(where=setup_path)
+		print(package_name, setup_path, packages)
+		package  = packages[0]
+
+	package_path = os.path.join(setup_path, package)
+	init_path = os.path.join(package_path, '__init__.py')
+
+	with open(init_path) as infile: text = infile.read()
 	try:
-		a = float(a)
-		b = float(b)
-	except:
-		return -1
-	"""
-	a = a.split('.')
-	b = b.split('.')
-	for a_value, b_value in zip(a, b):
-		a_value = int(a_value)
-		b_value = int(b_value)
-		
-		if a_value>b_value:
-			return -1
-		elif a_value<b_value:
-			return 1
+		begin = text.index('__version__')
+		end   = text.index('\n', begin)
+		text  = text.replace( text[begin:end], f'__version__ = "{new_version}"')
+	except ValueError:
+		text = text + f'\n__version__ = "{new_version}"'
 
-	if len(a)>len(b):
-		return -1
-	elif len(a)<len(b):
-		return 1
+	with open(init_path, 'w') as outfile: outfile.write(text)
 
-	return 0
-	"""
-	if a==b: return 0
-	if a<b: return 1
-	if a>b: return -1
+
 
 def check_version_and_upload(dir_path):
 	os.chdir(dir_path)
@@ -67,8 +97,6 @@ def check_version_and_upload(dir_path):
 	except Exception as e:
 		print(e)
 
-
-
 	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
 	version = version.strip().decode()
 
@@ -77,25 +105,37 @@ def check_version_and_upload(dir_path):
 	package_name = package_name.replace('---', '-').lower()
 
 	remote_version = pypi.package_releases(package_name)
+	remote_version_str = remote_version[0] if remote_version else 'None'
 
+	commits_count = Popen(["git", "rev-list", "--all", "--count"], stdout=PIPE).stdout.read()
+	versions = version.split('.')
+	if len(versions)==0: versions.append('0')
+	while len(versions)<=2: versions.append('0')
+	versions[-1] = commits_count.strip().decode()
+	new_version = '.'.join(versions)
 
 	print(
-		"{:<65} {:<10} {:<10}".format(package_name, version, remote_version[0] if remote_version else 'None')
+		f"{OKGREEN}{package_name:<65} {version:<10} {new_version:<10} {remote_version_str:<10}{ENDC}"
 	)
 
 	updated = False
 
-	if len(remote_version) == 0 or version_compare(version, remote_version[0]) < 0:
-		print('----- UPLOADING PYPI -----', package_name)
+	if len(remote_version) == 0 or version_compare(new_version, remote_version[0]) < 0:
+		print(OKBLUE+f'\tUPLOADING TO PYPI\t\t[{package_name}]', ENDC)
+
+		update_package_version(package_name, dir_path, new_version)
 
 		if os.path.isdir('./dist'): shutil.rmtree('./dist')
 		Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'], stdout=PIPE).communicate()
-		Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
+		if not DEBUG:
+			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
+		else:
+			Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
 		updated = True
 
-	os.chdir(CURRENT_DIRECTORY)
+	os.chdir(APP_DIRECTORY)
 
-	return updated, package_name, version
+	return updated, package_name, new_version
 
 
 requirements = []
@@ -103,6 +143,11 @@ requirements = []
 should_update = False
 
 for search_dir in DIRECTORIES_TO_SEARCH_FORM:
+
+	print(
+		BOLD+HEADER+"\n{:<65} {:<10} {:<10} {:<10}".format('PACKAGE', 'LOCAL', 'NEW', 'REMOTE')+ENDC
+	)
+
 	for dir_name in os.listdir(search_dir):
 		dir_path = os.path.abspath(os.path.join(search_dir, dir_name))
 
@@ -122,37 +167,18 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 			requirements.append("{module}=={version}".format(module=package_name, version=version))
 
 
-with open( os.path.join(MAIN_PATH, 'setup.py') ) as infile:
-	text = infile.read()
-
-begin = text.index('# REQUIREMENTS BEGIN')
-end = text.index('# REQUIREMENTS END', begin)+len('# REQUIREMENTS END')
+#### UPDATE REQUIREMENTS IN THE MAIN SETUP.PY ##################
+with open( os.path.join(MAIN_PATH, 'setup.py') ) as infile: text = infile.read()
+begin    = text.index('# REQUIREMENTS BEGIN')
+end      = text.index('# REQUIREMENTS END', begin)+len('# REQUIREMENTS END')
 new_text = """# REQUIREMENTS BEGIN
 REQUIREMENTS = [
     "{}"
 ]
 # REQUIREMENTS END""".format('",\n\t"'.join(requirements))
-
 text = text.replace(text[begin:end], new_text)
+with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile: outfile.write(text)
+#### END UPDATE REQUIREMENTS ###################################
 
-with open( os.path.join(MAIN_PATH, 'setup.py'), 'w' ) as outfile:
-	outfile.write(text)
-
-with open( os.path.join(MAIN_PATH, MAIN_NAME, '__init__.py') ) as infile:
-	text = infile.read()
-
-if should_update:
-	os.chdir(MAIN_PATH)
-	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
-	version = float(version.strip().decode())
-	os.chdir(CURRENT_DIRECTORY)
-
-	begin = text.index('__version__')
-	end   = text.index('\n', begin)
-	text  = text.replace(text[begin:end], '__version__ = "{0}"'.format(round(version + 0.001, 3)))
-
-with open( os.path.join(MAIN_PATH, MAIN_NAME, '__init__.py'), 'w' ) as outfile:
-	outfile.write(text)
-
-
-updated, package_name, version = check_version_and_upload(MAIN_PATH)
+#### UPDATE THE MAIN PACKAGE ##################
+updated, package_name, version = check_version_and_upload(os.path.abspath(MAIN_PATH))

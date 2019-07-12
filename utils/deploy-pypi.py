@@ -7,7 +7,11 @@ import shutil
 
 ###### CONFIGURATIONS #############################
 DEBUG = True
-PYPI_URL = 'https://test.pypi.org'
+
+if DEBUG:
+	PYPI_URL = 'https://test.pypi.org'
+else:
+	PYPI_URL = 'https://pypi.org'
 
 PACKAGES = {
 	'pyforms-gui': 'pyforms_gui'
@@ -63,7 +67,6 @@ def update_package_version(package_name, setup_path, new_version):
 		package = PACKAGES[package_name]
 	else:
 		packages = find_packages(where=setup_path)
-		print(package_name, setup_path, packages)
 		package  = packages[0]
 
 	package_path = os.path.join(setup_path, package)
@@ -113,10 +116,16 @@ def check_version_and_upload(dir_path):
 	while len(versions)<=2: versions.append('0')
 	versions[-1] = commits_count.strip().decode()
 	new_version = '.'.join(versions)
+	versions[-1] = str(int(commits_count.strip().decode()) + 1)
+	new_version_ = '.'.join(versions)
 
 	print(
 		f"{OKGREEN}{package_name:<65} {version:<10} {new_version:<10} {remote_version_str:<10}{ENDC}"
 	)
+
+	git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
+	if git_tag == f'v{new_version_}':
+		return
 
 	updated = False
 
@@ -131,6 +140,13 @@ def check_version_and_upload(dir_path):
 			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
 		else:
 			Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
+
+		remote_version = pypi.package_releases(package_name)
+		if version_compare(new_version, remote_version[0])==0:
+			Popen(['git', 'add', '--all']).communicate()
+			Popen(['git', 'commit', '-m', '"upload to pypi"']).communicate()
+			Popen(['git', 'tag', '-a', f'v{new_version}', '-m', 'generated with deploy-pypi.py script']).communicate()
+
 		updated = True
 
 	os.chdir(APP_DIRECTORY)
@@ -151,7 +167,6 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 	for dir_name in os.listdir(search_dir):
 		dir_path = os.path.abspath(os.path.join(search_dir, dir_name))
 
-
 		# is not a directory or is the main repository
 		if not os.path.isdir(dir_path) or MAIN_NAME==dir_name: continue
 
@@ -165,6 +180,7 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 
 		if package_name != MAIN_REPO:
 			requirements.append("{module}=={version}".format(module=package_name, version=version))
+
 
 
 #### UPDATE REQUIREMENTS IN THE MAIN SETUP.PY ##################

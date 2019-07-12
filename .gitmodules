@@ -13,9 +13,6 @@
 [submodule "libraries/mcv-gui"]
 	path = libraries/mcv-gui
 	url = https://bitbucket.org/fchampalimaud/mcv-gui.git
-[submodule "libraries/mcv-gui-editor"]
-	path = libraries/mcv-gui-editor
-	url = https://bitbucket.org/fchampalimaud/mcv-gui-editor.git
 [submodule "libraries/confapp"]
 	path = libraries/confapp
 	url = https://github.com/UmSenhorQualquer/confapp.git
@@ -73,4 +70,3 @@
 [submodule "plugins/pythonvideoannotator-module-idtrackerai"]
 	path = plugins/pythonvideoannotator-module-idtrackerai
 	url = https://github.com/UmSenhorQualquer/pythonvideoannotator-module-idtrackerai.git
-

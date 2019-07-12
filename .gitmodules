@@ -70,3 +70,4 @@
 [submodule "plugins/pythonvideoannotator-module-idtrackerai"]
 	path = plugins/pythonvideoannotator-module-idtrackerai
 	url = https://github.com/UmSenhorQualquer/pythonvideoannotator-module-idtrackerai.git
+

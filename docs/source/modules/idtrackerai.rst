@@ -1,33 +1,22 @@
-===========
-Idtrackerai
-===========
+idtracker.ai
+============
 
-This plugin adds functions to correct the tracking and manipulate Idtrackerai projects.
+This plugin adds functions to correct the trajetories from idtracker.ai sessions.
 You can visit the project @ `idtracker.ai <https://www.idtracker.ai/>`_
+
+Load an idtracker.ai tracking session
+_____________________________________
+
+If you finished tracking a video using the GUI from `idtracker.ai <https://www.idtracker.ai/>`_, you can press the **Validate trajectories** button on the bottom left corner to open the validation GUI. The current tracking session will be automatically loaded into the video annotator.
+
+To load an idtracker.ai session from scratch, run the video annotator (see :doc:`../_static/install_and_run/index`), press the button **Open** and open the session folder you want to load. This will automatically read the necessary files from the session folder and create an "Idtrackerai object".
 
 Correct the tracking
 ____________________
 
-Select the Idtrackerai object in the project tree.
+To visualize the trajectories and start validating them, make sure that an "Idtrackerai object" is selected (highligthed in blue in the "Video list" panel).
 
 .. image:: /_static/modules/idtrackerai_1_select_obj.png
-
-On the details section will see the options available to manipulate the tracking.
-
-**Interpolate trajectories** - You can interpolate trajectories for all the objects IDs or just for a single ID.
-To interpolate the trajectory of a single ID you should select the Its centroid first.
-
-**Clear updates** - You can interpolate trajectories of all the objects at the same time or just for a single ID.
-To do the interpolation just for a single ID you should select its centroid first.
-
-**Update a centroid ID** - Double click over a centroid and sets the new centroid ID in the window that will popup.
-
-**Update a centroid position** - Select the centroid and drag it the the new position.
-
-**Delete centroid** - The button is only available when you select a centroid from a single blob that has multiple centroids associated to it.
-
-**Add centroid** - Adds a new centroid to the selected blob. The function is only available if the user selects a blob's centroid. To add a new centroid the user should first check the checkbox "Add centroid" and click in a position of the video.
-
 
 Select a centroid
 ____________________
@@ -45,4 +34,3 @@ EVENT                                                                       SHOR
 Go to the next crossing.                                                     Ctrl+M
 Go to the previous crossing.                                                 Ctrl+N
 ==========================================================================  =================================
-

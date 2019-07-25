@@ -130,10 +130,10 @@ In some situations, you might want to modify the position of the centroid for a 
 
 To interpolate the positions for a given identity follow these steps.
 
-1.- Modify the centroid of a given identity for a set of frames. You do not need to modify it for all the frame, just when the animals is changing orientation.
-2.- Make sure that the identity is unique for the interval where you want to interpolate the centroids.
-3.- Click the button "Local interpolation for X".
-4.- Add the initial and ending frames of the interval where you want the interplation to run. Note that the first and last frame must include a user generated centroid (i.e. a centroid with the prefix 'u-')
+1. Modify the centroid of a given identity for a set of frames. You do not need to modify it for all the frame, just when the animals is changing orientation.
+2. Make sure that the identity is unique for the interval where you want to interpolate the centroids.
+3. Click the button "Local interpolation for X".
+4. Add the initial and ending frames of the interval where you want the interplation to run. Note that the first and last frame must include a user generated centroid (i.e. a centroid with the prefix 'u-')
 
 
 *********************************
@@ -153,7 +153,7 @@ To save the results of your validation, press the button "Save" on the top of th
 Keys events
 -----------
 
-A part form the :doc:`../user-docs/shortcuts/index` of the video annotator, we added two new shortcuts to automatically advance to the next and previous crossings (or frames where an animal is missing). 
+A part form the :doc:`../user-docs/shortcuts/index` of the video annotator, we added two new shortcuts to automatically advance to the next and previous crossings (or frames where an animal is missing).
 
 ==========================================================================  =================================
 EVENT                                                                       SHORT KEYS

@@ -32,7 +32,6 @@ class BaseKeysEvents(BaseIO):
                 path.mark_point_button.click()
 
     def keyReleaseEvent(self, event):
-        super().keyReleaseEvent(event)
 
         selected = self.project.tree.selected_item
 

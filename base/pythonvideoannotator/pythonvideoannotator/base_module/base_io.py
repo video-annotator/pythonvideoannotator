@@ -20,13 +20,15 @@ class BaseIO(Base):
     def load(self, data, project_path=None):
         try:
             self._project.load(data, project_path)
-        except FileNotFoundError as e:
+        except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
 
     def save_project(self, project_path=None):
         try:
             if project_path is None:
-                project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
+                dialog = QFileDialog()
+                dialog.setLabelText(QFileDialog.Accept, 'Save')
+                project_path = dialog.getExistingDirectory(self, caption="Select the project directory to save")
 
             if project_path is not None and str(project_path) != '':
                 project_path = str(project_path)
@@ -37,7 +39,7 @@ class BaseIO(Base):
 
     def load_project(self, project_path=None):
         if project_path is None:
-            project_path = QFileDialog.getExistingDirectory(self, "Select the project directory")
+            project_path = QFileDialog.getExistingDirectory(self, caption="Select the project directory to open")
 
         if project_path is not None and str(project_path) != '':
             self.load({}, str(project_path))

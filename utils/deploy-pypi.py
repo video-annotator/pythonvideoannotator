@@ -10,6 +10,7 @@ DEBUG = True
 
 if DEBUG:
 	PYPI_URL = 'https://test.pypi.org'
+	#PYPI_URL = 'http://localhost:8080'
 else:
 	PYPI_URL = 'https://pypi.org'
 
@@ -135,11 +136,15 @@ def check_version_and_upload(dir_path):
 		update_package_version(package_name, dir_path, new_version)
 
 		if os.path.isdir('./dist'): shutil.rmtree('./dist')
+
 		Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'], stdout=PIPE).communicate()
+
 		if not DEBUG:
 			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
 		else:
-			Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
+			Popen(['twine', 'upload', '--repository', 'pypilocal', os.path.join('dist', '*'), '--verbose']).communicate()
+			#Popen(
+			#	['python', 'setup.py', 'sdist', 'upload', '-r', 'pypilocal']).communicate()
 
 		remote_version = pypi.package_releases(package_name)
 		if version_compare(new_version, remote_version[0])==0:

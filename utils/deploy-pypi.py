@@ -4,13 +4,13 @@ from subprocess import Popen, PIPE
 from setuptools import find_packages
 from natsort import natsorted
 import shutil
+from datetime import datetime
 
 ###### CONFIGURATIONS #############################
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
 	PYPI_URL = 'https://test.pypi.org'
-	#PYPI_URL = 'http://localhost:8080'
 else:
 	PYPI_URL = 'https://pypi.org'
 
@@ -113,15 +113,29 @@ def check_version_and_upload(dir_path):
 
 	commits_count = Popen(["git", "rev-list", "--all", "--count"], stdout=PIPE).stdout.read()
 	versions = version.split('.')
-	if len(versions)==0: versions.append('0')
-	while len(versions)<=2: versions.append('0')
-	versions[-1] = commits_count.strip().decode()
-	new_version = '.'.join(versions)
+
+	if len(versions)==0:
+		versions.append('0')
+
+	# make sure the version has 3 numbers
+	while len(versions)<=2:
+		versions.append('0')
+
+	if len(versions)>3:
+		versions = versions[:3]
+
+	versions[2] = commits_count.strip().decode()
+
+	if DEBUG:
+		if len(versions)==3: versions.append('')
+		versions[3] = str(int(datetime.timestamp(datetime.now())))
+
+	new_version  = '.'.join(versions)
 	versions[-1] = str(int(commits_count.strip().decode()) + 1)
 	new_version_ = '.'.join(versions)
 
 	print(
-		f"{OKGREEN}{package_name:<65} {version:<10} {new_version:<10} {remote_version_str:<10}{ENDC}"
+		f"{OKGREEN}{package_name:<65} {version:<25} {new_version:<25} {remote_version_str:<25}{ENDC}"
 	)
 
 	git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
@@ -142,16 +156,15 @@ def check_version_and_upload(dir_path):
 		if not DEBUG:
 			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
 		else:
-			Popen(['twine', 'upload', '--repository', 'pypilocal', os.path.join('dist', '*'), '--verbose']).communicate()
-			#Popen(
-			#	['python', 'setup.py', 'sdist', 'upload', '-r', 'pypilocal']).communicate()
+			Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
 
+		"""
 		remote_version = pypi.package_releases(package_name)
 		if version_compare(new_version, remote_version[0])==0:
 			Popen(['git', 'add', '--all']).communicate()
 			Popen(['git', 'commit', '-m', '"upload to pypi"']).communicate()
 			Popen(['git', 'tag', '-a', f'v{new_version}', '-m', 'generated with deploy-pypi.py script']).communicate()
-
+		"""
 		updated = True
 
 	os.chdir(APP_DIRECTORY)
@@ -166,10 +179,11 @@ should_update = False
 for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 
 	print(
-		BOLD+HEADER+"\n{:<65} {:<10} {:<10} {:<10}".format('PACKAGE', 'LOCAL', 'NEW', 'REMOTE')+ENDC
+		BOLD+HEADER+"\n{:<65} {:<25} {:<25} {:<25}".format('PACKAGE', 'LOCAL', 'NEW', 'REMOTE')+ENDC
 	)
 
 	for dir_name in os.listdir(search_dir):
+
 		dir_path = os.path.abspath(os.path.join(search_dir, dir_name))
 
 		# is not a directory or is the main repository

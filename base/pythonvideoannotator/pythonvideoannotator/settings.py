@@ -58,6 +58,7 @@ MODULES += 'pythonvideoannotator_module_patheditor'
 MODULES += 'pythonvideoannotator_module_pathmap'
 MODULES += 'pythonvideoannotator_module_deeplab'
 MODULES += 'pythonvideoannotator_module_idtrackerai'
+MODULES += 'pythonvideoannotator_module_gitsync'
 
 
 

@@ -7,7 +7,7 @@ import shutil
 from datetime import datetime
 
 ###### CONFIGURATIONS #############################
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
 	PYPI_URL = 'https://test.pypi.org'
@@ -126,25 +126,26 @@ def check_version_and_upload(dir_path):
 
 	versions[2] = commits_count.strip().decode()
 
-	if DEBUG:
-		if len(versions)==3: versions.append('')
-		versions[3] = str(int(datetime.timestamp(datetime.now())))
+	#if DEBUG:
+	#	if len(versions)==3: versions.append('')
+	#	versions[3] = str(int(datetime.timestamp(datetime.now())))
 
-	new_version  = '.'.join(versions)
+	current_version = '.'.join(versions)
 	versions[-1] = str(int(commits_count.strip().decode()) + 1)
-	new_version_ = '.'.join(versions)
+
+	new_version = '.'.join(versions)
 
 	print(
-		f"{OKGREEN}{package_name:<65} {version:<25} {new_version:<25} {remote_version_str:<25}{ENDC}"
+		f"{OKGREEN}{package_name:<65} {current_version:<25} {new_version:<25} {remote_version_str:<25}{ENDC}"
 	)
 
 	git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
-	if git_tag == f'v{new_version_}':
+	if git_tag == f'v{new_version}':
 		return
 
 	updated = False
 
-	if len(remote_version) == 0 or version_compare(new_version, remote_version[0]) < 0:
+	if len(remote_version) == 0 or version_compare(current_version, remote_version[0]) < 0:
 		print(OKBLUE+f'\tUPLOADING TO PYPI\t\t[{package_name}]', ENDC)
 
 		update_package_version(package_name, dir_path, new_version)

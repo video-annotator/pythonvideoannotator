@@ -7,7 +7,7 @@ import shutil
 from datetime import datetime
 
 ###### CONFIGURATIONS #############################
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
 	PYPI_URL = 'https://test.pypi.org'
@@ -170,7 +170,10 @@ def check_version_and_upload(dir_path):
 
 	os.chdir(APP_DIRECTORY)
 
-	return updated, package_name, new_version
+	remote_version = pypi.package_releases(package_name)
+	remote_version_str = remote_version[0] if remote_version else 'None'
+
+	return updated, package_name, remote_version_str
 
 
 requirements = []

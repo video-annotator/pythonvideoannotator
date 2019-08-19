@@ -14,7 +14,7 @@ ENDC 	  = '\033[0m'
 BOLD 	  = '\033[1m'
 UNDERLINE = '\033[4m'
 
-DEBUG  = False
+DEBUG  = True
 DEPLOY = True
 
 if DEBUG:
@@ -116,7 +116,7 @@ def check_version_and_upload(dir_path):
 		print(e)
 
 	local_version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
-	local_version = local_version.strip().decode()
+	local_version = local_version.strip().decode().strip()
 
 	package_name = Popen(["python", 'setup.py', '--name'], stdout=PIPE).stdout.read()
 	package_name = package_name.strip().decode().replace(' ', '-')
@@ -129,26 +129,11 @@ def check_version_and_upload(dir_path):
 	tmp = pypi.package_releases(package_name)
 	remote_version = tmp[0] if tmp else 'None'
 
-	commits_count = Popen(["git", "rev-list", "--all", "--count"], stdout=PIPE).stdout.read()
+	tagged_version = Popen(["git", "describe", "--tags"], stdout=PIPE).stdout.read()
+	tagged_version = tagged_version.strip().decode().replace(' ', '-')
+	tagged_version = tagged_version.replace('---', '-').lower().strip()
 
-	# Find the new version ##############################
-	versions = local_version.split('.')
-	if len(versions)==0: versions.append('0')
-	# make sure the version has 3 numbers
-	while len(versions)<=2:
-		versions.append('0')
-	if len(versions)>3: versions = versions[:3]
-
-	#if DEBUG:
-	#	if len(versions)==3: versions.append('')
-	#	versions[3] = str(int(datetime.timestamp(datetime.now())))
-
-	versions[-1] = str(int(commits_count.strip().decode()) + 1)
-	new_version  = '.'.join(versions)
-	versions[-1] = str(int(commits_count.strip().decode()))
-	current_version = '.'.join(versions)
-
-	print(f"{OKGREEN}{package_name:<65} {local_version:<25} {new_version:<25} {current_version:<25} {remote_version:<25}{ENDC}")
+	print(f"{OKGREEN}{package_name:<65} {local_version:<25} {tagged_version:<25} {remote_version:<25}{ENDC}")
 
 	#git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
 	#if git_tag == f'v{new_version}':
@@ -156,10 +141,10 @@ def check_version_and_upload(dir_path):
 
 	updated = False
 
-	if remote_version=='None' or version_compare(current_version, remote_version) < 0:
+	if remote_version=='None' or version_compare(tagged_version, remote_version) < 0:
 		print(OKBLUE+f'\tUPLOADING TO PYPI\t\t[{package_name}]', ENDC)
 
-		update_package_version(package_name, dir_path, new_version)
+		update_package_version(package_name, dir_path, tagged_version)
 
 		if os.path.isdir('./dist'): shutil.rmtree('./dist')
 
@@ -192,14 +177,12 @@ def check_version_and_upload(dir_path):
 	return updated, package_name, remote_version_str
 
 
+# List of requirements
 requirements = []
 
-should_update = False
-
 for search_dir in DIRECTORIES_TO_SEARCH_FORM:
-
 	print(
-		BOLD+HEADER+"\n{:<65} {:<25} {:<25} {:<25} {:<25}".format('PACKAGE', 'LOCAL', 'NEW', 'CURRENT VERSION', 'REMOTE')+ENDC
+		BOLD+HEADER+"\n{:<65} {:<25} {:<25} {:<25}".format('PACKAGE', 'LOCAL', 'TAGGED VERSION', 'REMOTE')+ENDC
 	)
 
 	for dir_name in os.listdir(search_dir):
@@ -213,9 +196,6 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 		if not os.path.isfile(setup_filepath): continue
 
 		updated, package_name, version = check_version_and_upload(dir_path)
-
-		if updated:
-			should_update = True
 
 		if package_name != MAIN_REPO and package_name not in PACKAGES_TO_IGNORE:
 			requirements.append("{module}=={version}".format(module=package_name, version=version))

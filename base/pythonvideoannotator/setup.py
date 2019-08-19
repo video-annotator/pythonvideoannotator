@@ -22,7 +22,7 @@ REQUIREMENTS = [
 	"modular-computer-vision-api-gui==0.3.31",
 	"pyforms-gui==4.904.151",
 	"modular-computer-vision-api==0.3.28",
-	"python-video-annotator-models-gui==0.7.63",
+	"python-video-annotator-models-gui==0.7.62",
 	"python-video-annotator-models==0.8.82",
 	"python-video-annotator-module-timeline==0.6.26",
 	"python-video-annotator-module-eventstats==0.5.15",

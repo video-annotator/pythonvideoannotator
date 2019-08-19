@@ -4,6 +4,7 @@
 from setuptools import setup, find_packages
 import re, os
 
+
 PACKAGE_PATH = os.path.dirname(os.path.realpath(__file__))
 
 with open(os.path.join(PACKAGE_PATH, 'pythonvideoannotator','__init__.py'), 'r') as fd:

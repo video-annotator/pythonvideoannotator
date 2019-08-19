@@ -1,22 +1,33 @@
-import os
+import os, shutil
 import xmlrpc.client
 from subprocess import Popen, PIPE
 from setuptools import find_packages
 from natsort import natsorted
-import shutil
-from datetime import datetime
 
 ###### CONFIGURATIONS #############################
-DEBUG = False
+HEADER    = '\033[95m'
+OKBLUE    = '\033[94m'
+OKGREEN   = '\033[92m'
+WARNING   = '\033[93m'
+FAIL 	  = '\033[91m'
+ENDC 	  = '\033[0m'
+BOLD 	  = '\033[1m'
+UNDERLINE = '\033[4m'
+
+DEBUG  = False
+DEPLOY = True
 
 if DEBUG:
 	PYPI_URL = 'https://test.pypi.org'
 else:
 	PYPI_URL = 'https://pypi.org'
 
-PACKAGES = {
-	'pyforms-gui': 'pyforms_gui'
-}
+# Dictionary with the correspondence of the libraries and folders.
+PACKAGES = { 'pyforms-gui': 'pyforms_gui' }
+PACKAGES_TO_IGNORE = [
+	'confapp',
+	'python-video-annotator-module-idtrackerai'
+]
 
 # sub packages directories to look for updates
 DIRECTORIES_TO_SEARCH_FORM = [
@@ -33,15 +44,6 @@ APP_DIRECTORY = os.getcwd() # current directory
 
 ####################################################
 
-HEADER = '\033[95m'
-OKBLUE = '\033[94m'
-OKGREEN = '\033[92m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-UNDERLINE = '\033[4m'
-
 pypi = xmlrpc.client.ServerProxy(PYPI_URL)
 
 # make sure all the packages required to deploy to pypi are installed
@@ -55,15 +57,23 @@ def version_compare(a, b):
 	:param b: Version b
 	:return: Returns 0 if equal, returns 1 if a>b, returns -1 if b>a
 	"""
-
 	if a == b: return 0
 	versions = natsorted([a, b])
 	if a==versions[-1]: return -1
 	if b==versions[-1]: return 1
 	raise Exception('Error when comparing versions')
 
-def update_package_version(package_name, setup_path, new_version):
 
+
+def update_package_version(package_name, setup_path, new_version):
+	"""
+	Update the version of the package
+
+	:param str package_name: Package name.
+	:param str setup_path: Path of the setup.py file.
+	:param str new_version: The new version to update.
+	:return:
+	"""
 	if package_name in PACKAGES:
 		package = PACKAGES[package_name]
 	else:
@@ -86,6 +96,10 @@ def update_package_version(package_name, setup_path, new_version):
 
 
 def check_version_and_upload(dir_path):
+	"""
+	Check the package version and decide if should be updated or not.
+	:param str dir_path: Path of the package.
+	"""
 	os.chdir(dir_path)
 
 	try:
@@ -101,51 +115,48 @@ def check_version_and_upload(dir_path):
 	except Exception as e:
 		print(e)
 
-	version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
-	version = version.strip().decode()
+	local_version = Popen(["python", 'setup.py', '--version'], stdout=PIPE).stdout.read()
+	local_version = local_version.strip().decode()
 
 	package_name = Popen(["python", 'setup.py', '--name'], stdout=PIPE).stdout.read()
 	package_name = package_name.strip().decode().replace(' ', '-')
 	package_name = package_name.replace('---', '-').lower()
 
-	remote_version = pypi.package_releases(package_name)
-	remote_version_str = remote_version[0] if remote_version else 'None'
+	if package_name in PACKAGES_TO_IGNORE:
+		os.chdir(APP_DIRECTORY)
+		return False, package_name, local_version
+
+	tmp = pypi.package_releases(package_name)
+	remote_version = tmp[0] if tmp else 'None'
 
 	commits_count = Popen(["git", "rev-list", "--all", "--count"], stdout=PIPE).stdout.read()
-	versions = version.split('.')
 
-	if len(versions)==0:
-		versions.append('0')
-
+	# Find the new version ##############################
+	versions = local_version.split('.')
+	if len(versions)==0: versions.append('0')
 	# make sure the version has 3 numbers
 	while len(versions)<=2:
 		versions.append('0')
-
-	if len(versions)>3:
-		versions = versions[:3]
-
-	versions[2] = commits_count.strip().decode()
+	if len(versions)>3: versions = versions[:3]
 
 	#if DEBUG:
 	#	if len(versions)==3: versions.append('')
 	#	versions[3] = str(int(datetime.timestamp(datetime.now())))
 
-	current_version = '.'.join(versions)
 	versions[-1] = str(int(commits_count.strip().decode()) + 1)
+	new_version  = '.'.join(versions)
+	versions[-1] = str(int(commits_count.strip().decode()))
+	current_version = '.'.join(versions)
 
-	new_version = '.'.join(versions)
+	print(f"{OKGREEN}{package_name:<65} {local_version:<25} {new_version:<25} {current_version:<25} {remote_version:<25}{ENDC}")
 
-	print(
-		f"{OKGREEN}{package_name:<65} {current_version:<25} {new_version:<25} {remote_version_str:<25}{ENDC}"
-	)
-
-	git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
-	if git_tag == f'v{new_version}':
-		return
+	#git_tag = Popen(["git", 'tag'], stdout=PIPE).stdout.read()
+	#if git_tag == f'v{new_version}':
+	#	return
 
 	updated = False
 
-	if len(remote_version) == 0 or version_compare(current_version, remote_version[0]) < 0:
+	if remote_version=='None' or version_compare(current_version, remote_version) < 0:
 		print(OKBLUE+f'\tUPLOADING TO PYPI\t\t[{package_name}]', ENDC)
 
 		update_package_version(package_name, dir_path, new_version)
@@ -154,10 +165,15 @@ def check_version_and_upload(dir_path):
 
 		Popen(['python', 'setup.py', 'sdist', 'bdist_wheel'], stdout=PIPE).communicate()
 
-		if not DEBUG:
-			Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
-		else:
-			Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
+		######################################################################################
+		# DEPLOY TO PYPI #####################################################################
+		######################################################################################
+		if DEPLOY:
+			if not DEBUG:
+				Popen(['twine', 'upload', os.path.join('dist','*')]).communicate()
+			else:
+				Popen(['twine', 'upload', '--repository', 'pypitest', os.path.join('dist', '*'), '--verbose']).communicate()
+		######################################################################################
 
 		"""
 		remote_version = pypi.package_releases(package_name)
@@ -183,7 +199,7 @@ should_update = False
 for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 
 	print(
-		BOLD+HEADER+"\n{:<65} {:<25} {:<25} {:<25}".format('PACKAGE', 'LOCAL', 'NEW', 'REMOTE')+ENDC
+		BOLD+HEADER+"\n{:<65} {:<25} {:<25} {:<25} {:<25}".format('PACKAGE', 'LOCAL', 'NEW', 'CURRENT VERSION', 'REMOTE')+ENDC
 	)
 
 	for dir_name in os.listdir(search_dir):
@@ -201,9 +217,8 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 		if updated:
 			should_update = True
 
-		if package_name != MAIN_REPO:
+		if package_name != MAIN_REPO and package_name not in PACKAGES_TO_IGNORE:
 			requirements.append("{module}=={version}".format(module=package_name, version=version))
-
 
 
 #### UPDATE REQUIREMENTS IN THE MAIN SETUP.PY ##################

@@ -14,7 +14,7 @@ ENDC 	  = '\033[0m'
 BOLD 	  = '\033[1m'
 UNDERLINE = '\033[4m'
 
-DEBUG  = True
+DEBUG  = False
 DEPLOY = True
 
 if DEBUG:
@@ -130,8 +130,8 @@ def check_version_and_upload(dir_path):
 	remote_version = tmp[0] if tmp else 'None'
 
 	tagged_version = Popen(["git", "describe", "--tags"], stdout=PIPE).stdout.read()
-	tagged_version = tagged_version.strip().decode().replace(' ', '-')
-	tagged_version = tagged_version.replace('---', '-').lower().strip()
+	tagged_version = tagged_version.strip().decode().split('-')
+	tagged_version = tagged_version[0]
 
 	print(f"{OKGREEN}{package_name:<65} {local_version:<25} {tagged_version:<25} {remote_version:<25}{ENDC}")
 
@@ -174,7 +174,7 @@ def check_version_and_upload(dir_path):
 	remote_version = pypi.package_releases(package_name)
 	remote_version_str = remote_version[0] if remote_version else 'None'
 
-	return updated, package_name, remote_version_str
+	return updated, package_name, tagged_version
 
 
 # List of requirements

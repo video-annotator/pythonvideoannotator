@@ -25,9 +25,14 @@ else:
 # Dictionary with the correspondence of the libraries and folders.
 PACKAGES = { 'pyforms-gui': 'pyforms_gui' }
 PACKAGES_TO_IGNORE = [
+	'confapp'
+]
+
+PACKAGES_TO_IGNORE_FOR_REQUIREMENTS = [
 	'confapp',
 	'python-video-annotator-module-idtrackerai'
 ]
+
 
 # sub packages directories to look for updates
 DIRECTORIES_TO_SEARCH_FORM = [
@@ -197,7 +202,7 @@ for search_dir in DIRECTORIES_TO_SEARCH_FORM:
 
 		updated, package_name, version = check_version_and_upload(dir_path)
 
-		if package_name != MAIN_REPO and package_name not in PACKAGES_TO_IGNORE:
+		if package_name != MAIN_REPO and package_name not in PACKAGES_TO_IGNORE_FOR_REQUIREMENTS:
 			requirements.append("{module}=={version}".format(module=package_name, version=version))
 
 

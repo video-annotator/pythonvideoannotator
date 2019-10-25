@@ -63,7 +63,7 @@
 	url = https://github.com/video-annotator/geometry-designer.git
 [submodule "plugins/pythonvideoannotator-module-pathmap"]
 	path = plugins/pythonvideoannotator-module-pathmap
-	url = https://github.com/video-annotator/fchampalimaud/pythonvideoannotator-module-pathmap.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-pathmap.git
 [submodule "plugins/pythonvideoannotator-module-deeplab"]
 	path = plugins/pythonvideoannotator-module-deeplab
 	url = https://github.com/video-annotator/pythonvideoannotator-module-deeplab.git

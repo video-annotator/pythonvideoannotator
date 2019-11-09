@@ -1,73 +1,73 @@
 [submodule "base/pythonvideoannotator-models"]
 	path = base/pythonvideoannotator-models
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-models.git
+	url = https://github.com/video-annotator/pythonvideoannotator-models.git
 [submodule "base/pythonvideoannotator-models-gui"]
 	path = base/pythonvideoannotator-models-gui
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-models-gui.git
+	url = https://github.com/video-annotator/pythonvideoannotator-models-gui.git
 [submodule "plugins/pythonvideoannotator-module-backgroundfinder"]
 	path = plugins/pythonvideoannotator-module-backgroundfinder
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-backgroundfinder.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-backgroundfinder.git
 [submodule "libraries/mcv-api"]
 	path = libraries/mcv-api
-	url = https://bitbucket.org/fchampalimaud/mcv-api.git
+	url = https://github.com/video-annotator/mcv-api.git
 [submodule "libraries/mcv-gui"]
 	path = libraries/mcv-gui
-	url = https://bitbucket.org/fchampalimaud/mcv-gui.git
+	url = https://github.com/video-annotator/mcv-gui.git
 [submodule "libraries/confapp"]
 	path = libraries/confapp
 	url = https://github.com/UmSenhorQualquer/confapp.git
 [submodule "plugins/pythonvideoannotator-module-contoursimages"]
 	path = plugins/pythonvideoannotator-module-contoursimages
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-contoursimages.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-contoursimages.git
 [submodule "plugins/pythonvideoannotator-module-createpaths"]
 	path = plugins/pythonvideoannotator-module-createpaths
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-createpaths.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-createpaths.git
 [submodule "plugins/pythonvideoannotator-module-distances"]
 	path = plugins/pythonvideoannotator-module-distances
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-distances.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-distances.git
 [submodule "plugins/pythonvideoannotator-module-eventsstats"]
 	path = plugins/pythonvideoannotator-module-eventsstats
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-eventsstats.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-eventsstats.git
 [submodule "plugins/pythonvideoannotator-module-findorientation"]
 	path = plugins/pythonvideoannotator-module-findorientation
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-findorientation.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-findorientation.git
 [submodule "plugins/pythonvideoannotator-module-importexport"]
 	path = plugins/pythonvideoannotator-module-importexport
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-importexport.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-importexport.git
 [submodule "plugins/pythonvideoannotator-module-motioncounter"]
 	path = plugins/pythonvideoannotator-module-motioncounter
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-motioncounter.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-motioncounter.git
 [submodule "plugins/pythonvideoannotator-module-patheditor"]
 	path = plugins/pythonvideoannotator-module-patheditor
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-patheditor.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-patheditor.git
 [submodule "plugins/pythonvideoannotator-module-regionsfilter"]
 	path = plugins/pythonvideoannotator-module-regionsfilter
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-regionsfilter.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-regionsfilter.git
 [submodule "plugins/pythonvideoannotator-module-smoothpaths"]
 	path = plugins/pythonvideoannotator-module-smoothpaths
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-smoothpaths.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-smoothpaths.git
 [submodule "plugins/pythonvideoannotator-module-timeline"]
 	path = plugins/pythonvideoannotator-module-timeline
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-timeline.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-timeline.git
 [submodule "plugins/pythonvideoannotator-module-tracking"]
 	path = plugins/pythonvideoannotator-module-tracking
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-tracking.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-tracking.git
 [submodule "plugins/pythonvideoannotator-module-virtualobjectgenerator"]
 	path = plugins/pythonvideoannotator-module-virtualobjectgenerator
-	url = https://bitbucket.org/fchampalimaud/pythonvideoannotator-module-virtualobjectgenerator.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-virtualobjectgenerator.git
 [submodule "libraries/pyforms-gui"]
 	path = libraries/pyforms-gui
 	url = https://github.com/UmSenhorQualquer/pyforms-gui.git
 [submodule "libraries/geometry-designer"]
 	path = libraries/geometry-designer
-	url = https://bitbucket.org/fchampalimaud/geometry-designer.git
+	url = https://github.com/video-annotator/geometry-designer.git
 [submodule "plugins/pythonvideoannotator-module-pathmap"]
 	path = plugins/pythonvideoannotator-module-pathmap
-	url = https://UmSenhorQualquer@bitbucket.org/fchampalimaud/pythonvideoannotator-module-pathmap.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-pathmap.git
 [submodule "plugins/pythonvideoannotator-module-deeplab"]
 	path = plugins/pythonvideoannotator-module-deeplab
-	url = https://manuelmanso@bitbucket.org/fchampalimaud/pythonvideoannotator-module-deeplab.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-deeplab.git
 [submodule "plugins/pythonvideoannotator-module-idtrackerai"]
 	path = plugins/pythonvideoannotator-module-idtrackerai
-	url = https://github.com/UmSenhorQualquer/pythonvideoannotator-module-idtrackerai.git
+	url = https://github.com/video-annotator/pythonvideoannotator-module-idtrackerai.git
 

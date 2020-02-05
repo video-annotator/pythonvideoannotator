@@ -101,3 +101,6 @@ SHORT_KEYS = {
     #'Select the path of the next object and click the mark the point button.':  'Ctrl+U',
     #'"Click" the Mark Point button in the current Path.':                       'Ctrl++'
 }
+
+from AnyQt.QtWidgets import QColorDialog, QFileDialog
+PYFORMS_COLORDIALOGS_OPTIONS = QColorDialog.ShowAlphaChannel

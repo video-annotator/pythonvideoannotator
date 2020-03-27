@@ -18,7 +18,7 @@ Features:
 ### Developers
 
 * Ricardo Ribeiro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
-* Hugo Cachitas working - collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
+* Hugo Cachitas - working collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 * Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
 
@@ -45,7 +45,7 @@ start-video-annotator
 
 ### For developers:
 
-[Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/install_and_run.html#for-developers)
+[Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/index.html)
 
 
 ## Collaboration

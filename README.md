@@ -30,9 +30,7 @@ How to install:
 
 1. Install Python 3.6 from  [python.org](https://www.python.org/)
 
-2. Install pypi from [pypi.org](https://pypi.org/)
-
-3. Install PythonVideoAnnotator from Pypi:
+2. Install PythonVideoAnnotator from Pypi:
 ```
 pip install python-video-annotator
 ```

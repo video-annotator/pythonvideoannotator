@@ -25,9 +25,38 @@ How to install:
 
     ```bash
     conda create -n videoannotator python=3.6
+
+    ...
+
+    conda activate videoannotator
     ```
 
 2. Make sure you are in the just created virtual environment and install PythonVideoAnnotator with pip:
+
+    ```bash
+    pip install python-video-annotator
+    ```
+
+If you are having issues (e.g., MacOS Catalina):
+
+1. Start with a fresh Virtual Environment (highly recommended) on your preferred Python distribution with Python 3.6:
+   * example with Anaconda in Anaconda Prompt
+
+    ```bash
+    conda create -n videoannotator python=3.6
+
+    ...
+
+    conta activate videoannotator
+    ```
+
+2. Install some of the dependencies that might present issues as:
+
+    ```bash
+    pip install opencv-python-headless pyqt5==5.14.1 pyqtwebengine==5.14.0
+    ```
+
+3. Install Python Video Annotator
 
     ```bash
     pip install python-video-annotator
@@ -41,7 +70,7 @@ How to run:
     start-video-annotator
     ```
 
-### For developers:
+### For developers
 
 [Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/index.html#for-developers)
 

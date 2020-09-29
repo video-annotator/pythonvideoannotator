@@ -14,37 +14,73 @@ Features:
 
 [![Video](docs/youtube.png)](https://www.youtube.com/watch?v=9C4Zr8fhqFo&t=63s)
 
-
-### Developers
-
-* Ricardo Ribeiro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
-* Hugo Cachitas - working collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
-* Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
-
-
 ![Video annotator screenshot](docs/screenshot.png "Screen")
 
 ## Installation & Running
 
 How to install:
 
-1. Install Python 3.6 from  [python.org](https://www.python.org/)
+1. Create a Virtual Environment (highly recommended) on your preferred Python distribution with Python 3.6:
+   * example with Anaconda in Anaconda Prompt
 
-2. Install PythonVideoAnnotator from Pypi:
-```
-pip install python-video-annotator
-```
+    ```bash
+    conda create -n videoannotator python=3.6
+
+    ...
+
+    conda activate videoannotator
+    ```
+
+2. Make sure you are in the just created virtual environment and install PythonVideoAnnotator with pip:
+
+    ```bash
+    pip install python-video-annotator
+    ```
+
+If you are having issues (e.g., MacOS Catalina):
+
+1. Start with a fresh Virtual Environment (highly recommended) on your preferred Python distribution with Python 3.6:
+   * example with Anaconda in Anaconda Prompt
+
+    ```bash
+    conda create -n videoannotator python=3.6
+
+    ...
+
+    conta activate videoannotator
+    ```
+
+2. Install some of the dependencies that might present issues as:
+
+    ```bash
+    pip install opencv-python-headless pyqt5==5.14.1 pyqtwebengine==5.14.0
+    ```
+
+3. Install Python Video Annotator
+
+    ```bash
+    pip install python-video-annotator
+    ```
 
 How to run:
 
-```
-start-video-annotator
-```
+1. After the installation completes, you can start Python Video Annotator with:
 
-### For developers:
+    ```bash
+    start-video-annotator
+    ```
 
-[Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/index.html)
+### For developers
 
+[Follow the steps described here](https://pythonvideoannotator.readthedocs.io/en/master/user-docs/install_and_run/index.html#for-developers)
+
+
+## Developers
+
+* Ricardo Ribeiro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
+* Hugo Cachitas working - collaborator of the [Innate Behavior Lab](http://neuro.fchampalimaud.org/en/research/investigators/research-groups/group/Vasconcelos/) of the [Champalimaud Foundation](http://fchampalimaud.org).
+* Carlos Mão de Ferro - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
+* Luís Teixeira - collaborator of the [Scientific Software Platform](http://neuro.fchampalimaud.org/en/research/platforms/staff/Scientific%20Software/) of the [Champalimaud Foundation](http://fchampalimaud.org).
 
 ## Collaboration
 

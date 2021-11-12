@@ -37,7 +37,8 @@ How to install:
     pip install python-video-annotator
     ```
 
-If you are having issues (e.g., MacOS Catalina):
+## Intel Mac installation
+### MacOS Catalina
 
 1. Start with a fresh Virtual Environment (highly recommended) on your preferred Python distribution with Python 3.6:
    * example with Anaconda in Anaconda Prompt
@@ -60,6 +61,49 @@ If you are having issues (e.g., MacOS Catalina):
 
     ```bash
     pip install python-video-annotator
+    ```
+
+### MacOS Mojave
+
+1. Start with a fresh Virtual Environment (highly recommended) on your preferred Python distribution with Python 3.8:
+   * example with Anaconda in Anaconda Prompt
+
+    ```bash
+    conda create -n videoannotator python=3.8
+
+    ...
+
+    conta activate videoannotator
+    ```
+
+2. Install PyFormsGUI 5 first
+
+    ```bash
+    pip install pyforms-gui==5
+    ```
+
+3. Downgrade PyQt5 and QScintilla:
+
+    ```bash
+    pip install --upgrade qscintilla==2.11.4 pyqt5==5.14.1 pyqtwebengine==5.14.0
+    ```
+
+4. Install missing packages
+
+    ```bash 
+    pip install opencv-python-headless PyOpenGL_accelerate
+    ```
+
+5. Install Python Video Annotator, ignoring dependencies (will be installed afterwards since it has a conflict with opencv version)
+
+    ```bash
+    pip install python-video-annotator==3.306 --no-deps
+    ```
+
+6. Install python-video-annotator dependencies except the one that created conflicts (older version of opencv-python)
+
+    ```bash
+    pip install geometry-designer modular-computer-vision-api modular-computer-vision-api-gui pypi-xmlrpc python-video-annotator-models python-video-annotator-models-gui python-video-annotator-module-background-finder python-video-annotator-module-contours-images python-video-annotator-module-create-paths python-video-annotator-module-deeplab python-video-annotator-module-distances python-video-annotator-module-eventstats python-video-annotator-module-find-orientation python-video-annotator-module-import-export python-video-annotator-module-motion-counter python-video-annotator-module-path-editor python-video-annotator-module-path-map python-video-annotator-module-regions-filter python-video-annotator-module-smooth-paths python-video-annotator-module-timeline python-video-annotator-module-tracking python-video-annotator-module-virtual-object-generator scipy send2trash simplejson sklearn
     ```
 
 How to run:
